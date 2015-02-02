@@ -35,7 +35,7 @@ def commands(bot, trigger):
     ordres = """=, admins, ban, bots, choose, commands, countdown, d, debug_print, deop, devoice, diec, drae, ety, frase, g, galeta, gc, gcs, help, ip, isup, kick, kickban, length, link, lmgtfy, movie, op, pastis, pregaria, privs, py, quiet, recomana, ves, \x02join, part, quit, anunci, msg, me, recover\x02"""
     #names = ', '.join(sorted(bot.doc.iterkeys()))
     bot.reply('Ordres que entenc: ' + ordres)
-    bot.reply("Per obtenir ajuda sobre una ordre en concret, escriu .ajuda <ordre>")
+    bot.reply("Per obtenir ajuda sobre una ordre en concret, escriu .ajuda <ordre>.")
 
 
 @rule('$nick' r'(?i)ajuda(?:[?!]+)?$')
@@ -43,7 +43,7 @@ def commands(bot, trigger):
 def help2(bot, trigger):
     response = (
         u'Hola, Sóc un bot (Per si no ho sabies encara ;)). Escriu ".ordres" per una llista d\'ordres ' +
-        u'o segueix el següent enllaç per més detalls: http://willie.dftba.net El meu propietari és el gran %s.'
+        u'o segueix el següent enllaç per més detalls: https://github.com/NeoMahler/Granota El meu propietari és el gran %s.'
     ) % bot.config.owner
     bot.reply(response)
 

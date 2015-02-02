@@ -1,0 +1,25 @@
+build/
+dist/
+MANIFEST
+doc/build/*
+logs/*
+tests
+willie.wiki/*
+*.db
+*.pyc
+*.pyo
+*.txt
+*~
+*.rpm
+*.spec
+.*.sw*
+.pid-*
+
+# IntelliJ idea
+.idea
+*.iml
+
+# Eclipse/PyDev
+.settings
+.project
+.pydevproject

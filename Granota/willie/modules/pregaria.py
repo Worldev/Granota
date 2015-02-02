@@ -17,15 +17,16 @@ def pregaria(bot, trigger):
         return
     else:
         bot.say("Programador nostre,")
-        bot.say(u"que est‡s tranquil a casa teva:")
+        bot.say(u"que est√†s tranquil a casa teva:")
         bot.say(u"Sigui informatitzat el vostre nom.")
         bot.say(u"Vinguin a nosaltres els vostres codis.")
         bot.say(u"Faci's la vostra voluntat,")
-        bot.say(u"aixÌ a la terra com es fa a l'irc.")
-        bot.say(u"Els nostres mÚduls de cada dia,")
-        bot.say(u"doneu-nos, Programador, la connexiÛ d'avui")
+        bot.say(u"aix√≠ a la terra com es fa a l'irc.")
+        bot.say(u"Els nostres m√≤duls de cada dia,")
+        bot.say(u"doneu-nos, Programador, la connexi√≥ d'avui")
         bot.say(u"I perdoneu quan t'hem ignorat o quan hem tingut errors,")
-        bot.say(u"aixÌ com nosaltres perdonem el serra_marc1 o l'adriaesc quan abusen de nosaltres.")
-        bot.say(u"I no permeteu que nosaltres caiguem a la temptaciÛ del baneig,")
-        bot.say(u"ans deslliureu-nos del ChanServ (que no ens deixaria se ops), dels trolls i de moltes coses mÈs que no dic per no allargar-me.")    
+        bot.say(u"aix√≠ com nosaltres perdonem els trolls que ens visiten.")
+        bot.say(u"I no permeteu que nosaltres caiguem a la temptaci√≥ del baneig,")
+        bot.say(u"ans deslliureu-nos dels trolls i de moltes coses m√©s que no dic per no allargar-me.")  
+        bot.say(u"Am√©n.py")
         return

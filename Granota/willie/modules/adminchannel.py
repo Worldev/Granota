@@ -9,7 +9,6 @@ http://willie.dftba.net/
 
 """
 
-opers = ['NeoMahler','adriaesc','serra_marc1','mikicat']
 import re
 from willie.module import commands, priority, OP
 
@@ -25,7 +24,7 @@ def op(bot, trigger):
     u"""
     Dóna l'estatus d'operador al nick indicat.
     """
-    if trigger.nick in opers:
+    if trigger.admin:
         if not trigger.group(2):
             channel = trigger.sender
             nick = trigger.nick
@@ -45,7 +44,7 @@ def deop(bot, trigger):
     """
     Treu l'estatus d'operador al nick indicat.
     """
-    if trigger.nick in opers:
+    if trigger.admin:
         if not trigger.group(2):
             channel = trigger.sender
             nick = trigger.nick
@@ -65,7 +64,7 @@ def voice(bot, trigger):
     u"""
     Dóna l'estatus veu al nick indicat.
     """
-    if trigger.nick in opers:
+    if trigger.admin:
         if not trigger.group(2):
             channel = trigger.sender
             nick = trigger.nick
@@ -86,7 +85,7 @@ def devoice(bot, trigger):
     """
     Treu l'estatus de veu al nick indicat.
     """
-    if trigger.nick in opers:
+    if trigger.admin:
         if not trigger.group(2):
             channel = trigger.sender
             nick = trigger.nick
@@ -173,11 +172,7 @@ def ban(bot, trigger):
     banmask = configureHostMask(banmask)
     if banmask == '':
         return
-    if trigger.sender.startswith('##cafe'):
-        bot.write(['mode', '##wowthisban +b ' + banmask])
-        bot.reply(trigger.group(2) + ' is banned on ##wowthisban')
-    else:
-        bot.write(['MODE', channel, '+b', banmask])
+    bot.write(['MODE', channel, '+b', banmask])
 
 
 @commands('unban')
@@ -202,11 +197,7 @@ def unban(bot, trigger):
     banmask = configureHostMask(banmask)
     if banmask == '':
         return
-    if trigger.sender.startswith('##cafe'):
-        bot.write(['mode', '##wowthisban -b ' + banmask])
-        bot.reply(trigger.group(2) + ' is unbanned on ##wowthisban')
-    else:
-        bot.write(['MODE', channel, '-b', banmask])
+    bot.write(['MODE', channel, '-b', banmask])
 
 
 @commands('quiet')
@@ -287,7 +278,7 @@ def kickban(bot, trigger):
     mask = configureHostMask(mask)
     if mask == '':
         return
-    bot.write(['MODE', '##wowthisban +b', mask])
+    bot.write(['MODE', '+b', mask])
     bot.write(['KICK', channel, nick, ' :', reason])
 
 @commands('topic')
@@ -354,7 +345,7 @@ def show_mask(bot, trigger):
 @commands('m', 'moderat')
 def moderat(bot, trigger):
     """Posa el canal en moderat. Només els administradors."""
-    if trigger.nick in ops:
+    if trigger.admin:
         channel = trigger.sender
         bot.write(["MODE", channel, "+m"])
     else:
@@ -364,7 +355,7 @@ def moderat(bot, trigger):
 @commands('dm', 'nomoderat')
 def dmoderat(bot, trigger):
     """Posa el canal en moderat. Només els administradors."""
-    if trigger.nick in ops:
+    if trigger.admin:
         channel = trigger.sender
         bot.write(["MODE", channel + " -m"])
     else:
@@ -394,7 +385,7 @@ def recover(bot, trigger):
 @commands('i')
 def i(bot, trigger):
     u"""Posa el canal en +i."""
-    if trigger.nick in opers:
+    if trigger.admin:
         channel = trigger.sender
         bot.write(['MODE', channel + ' +i'])
         return
@@ -404,7 +395,7 @@ def i(bot, trigger):
 @commands('-i')
 def di(bot, trigger):
     u"""Posa el canal en -i."""
-    if trigger.nick in opers:
+    if trigger.admin:
         channel = trigger.sender
         bot.write(['MODE', channel + ' -i'])
         return
@@ -414,15 +405,9 @@ def di(bot, trigger):
 @commands('invite')
 def invite(bot, trigger):
     u"""Convida un usuari al canal."""
-    if trigger.nick in opers:
+    if trigger.admin:
         channel = trigger.sender
         bot.write(['INVITE', trigger.group(2)])
         return
     else:
         return
-
-@commands('ops')
-def ops(bot, trigger):
-    u"""Retorna la llista d'operadors del bot."""
-    bot.say(u"Llista d'operadors (No és el mateix que administradors): " + str(opers))
-    return

@@ -219,7 +219,7 @@ class Config(object):
                 if ispass:
                     value = getpass.getpass(prompt + ': ')
                 else:
-                    value = raw_input(prompt + ': ')
+                    value = raw_input(prompt + u': ')
             self.parser.set(section, option, value)
 
     def add_list(self, section, option, message, prompt):

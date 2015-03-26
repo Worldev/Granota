@@ -274,16 +274,16 @@ class Config(object):
         return (ans is 'y' or ans is 'Y')
 
     def _core(self):
-        self.interactive_add('core', 'nick', 'Quin ha de ser el nom del teu bot?',
+        self.interactive_add('core', 'nick', u'Quin ha de ser el nom del teu bot?',
                              'Willie')
-        self.interactive_add('core', 'host', 'A quin servidor s\'ha de connectar?',
+        self.interactive_add('core', 'host', u'A quin servidor s\'ha de connectar?',
                              'irc.freenode.net')
-        self.add_option('core', 'use_ssl', 'El bot s\'ha de connectar amb SSL?')
+        self.add_option('core', 'use_ssl', u'El bot s\'ha de connectar amb SSL?')
         if self.use_ssl == 'True':
             default_port = '6697'
         else:
             default_port = '6667'
-        self.interactive_add('core', 'port', 'A quin port s\'ha de connectar?',
+        self.interactive_add('core', 'port', u'A quin port s\'ha de connectar?',
                              default_port)
         self.interactive_add(
             'core', 'owner',

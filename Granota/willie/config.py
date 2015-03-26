@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 """
 *Availability: 3+ for all functions; attributes may vary.*
 
@@ -78,21 +78,21 @@ class Config(object):
             if not ignore_errors:
                 #Sanity check for the configuration file:
                 if not self.parser.has_section('core'):
-                    raise ConfigurationError(u'La secció "core" falta!')
+                    raise ConfigurationError('Core section missing!')
                 if not self.parser.has_option('core', 'nick'):
                     raise ConfigurationError(
-                        u'El nick del bot no està definit,'
-                        u' no hi ha cap opció "nick" a la secció [core].'
+                        'Bot IRC nick not defined,'
+                        ' expected option `nick` in [core] section'
                     )
                 if not self.parser.has_option('core', 'owner'):
                     raise ConfigurationError(
-                        u'El propietari del bot no està definit,'
-                        u' no hi ha cap opció "owner" a la secció [core]'
+                        'Bot owner not defined,'
+                        ' expected option `owner` in [core] section'
                     )
                 if not self.parser.has_option('core', 'host'):
                     raise ConfigurationError(
-                        u'L\'adreça del servidor IRC no està definida,'
-                        u' no hi ha l\'opció "host" a la secció [core]'
+                        'IRC server address not defined,'
+                        ' expceted option `host` in [core] section'
                     )
 
             #Setting defaults:
@@ -219,7 +219,7 @@ class Config(object):
                 if ispass:
                     value = getpass.getpass(prompt + ': ')
                 else:
-                    value = raw_input(prompt + u': ')
+                    value = raw_input(prompt + ': ')
             self.parser.set(section, option, value)
 
     def add_list(self, section, option, message, prompt):
@@ -274,24 +274,24 @@ class Config(object):
         return (ans is 'y' or ans is 'Y')
 
     def _core(self):
-        self.interactive_add('core', 'nick', u'Quin ha de ser el nom del teu bot?',
+        self.interactive_add('core', 'nick', 'Enter the nickname for your bot',
                              'Willie')
-        self.interactive_add('core', 'host', u'A quin servidor s\'ha de connectar?',
-                             'irc.freenode.net')
-        self.add_option('core', 'use_ssl', u'El bot s\'ha de connectar amb SSL?')
+        self.interactive_add('core', 'host', 'Enter the server to connect to',
+                             'irc.dftba.net')
+        self.add_option('core', 'use_ssl', 'Should the bot connect with SSL')
         if self.use_ssl == 'True':
             default_port = '6697'
         else:
             default_port = '6667'
-        self.interactive_add('core', 'port', u'A quin port s\'ha de connectar?',
+        self.interactive_add('core', 'port', 'Enter the port to connect on',
                              default_port)
         self.interactive_add(
             'core', 'owner',
-            u"Quin és el teu nick a Freenode (O el del propietari del bot)?"
+            "Enter your own IRC name (or that of the bot's owner)"
         )
-        c = u'A quins canals s\'ha de connectar de manera automàtica?' + \
-            u' Quan els hagis posat tots torna a prèmer a "Enter".'
-        self.add_list('core', 'channels', c, 'Canal:')
+        c = 'Enter the channels to connect to by default, one at a time.' + \
+            ' When done, hit enter again.'
+        self.add_list('core', 'channels', c, 'Channel:')
 
     def _db(self):
         db.configure(self)
@@ -306,7 +306,7 @@ class Config(object):
             try:
                 module = imp.load_source(name, filename)
             except Exception, e:
-                print >> sys.stderr, ("Error carregant %s: %s (a config.py)"
+                print >> sys.stderr, ("Error loading %s: %s (in config.py)"
                                       % (name, e))
             else:
                 if hasattr(module, 'configure'):
@@ -387,16 +387,16 @@ def wizard(section, config=None):
     elif section == 'db':
         check_dir(False)
         if not os.path.isfile(configpath):
-            print u"No he trobat cap arxiu de configuració." + \
-                u" Si us plau, fes-ne un abans de configurar aquestes opcions."
+            print "No config file found." + \
+                " Please make one before configuring these options."
             sys.exit(1)
         config = Config(configpath, True)
         config._db()
     elif section == 'mod':
         check_dir(False)
         if not os.path.isfile(configpath):
-            print u"No he trobat cap arxiu de configuració." + \
-                u" Si us plau, fes-ne un abans de configurar aquestes opcions."
+            print "No config file found." + \
+                " Please make one before configuring these options."
             sys.exit(1)
         config = Config(configpath, True)
         config._modules()
@@ -406,39 +406,39 @@ def check_dir(create=True):
     dotdir = os.path.join(os.path.expanduser('~'), '.willie')
     if not os.path.isdir(dotdir):
         if create:
-            print u'Creant la carpeta de configuració a ~/.willie...'
+            print 'Creating a config directory at ~/.willie...'
             try:
                 os.makedirs(dotdir)
             except Exception, e:
                 print >> sys.stderr, \
-                    u'Hi ha un problema creant %s:' % dotdir
+                    'There was a problem creating %s:' % dotdir
                 print >> sys.stderr, e.__class__, str(e)
                 print >> sys.stderr, \
-                    u'Si us plau, intenta arreglar això i torna a executar el Willie.'
+                    'Please fix this and then run Willie again.'
                 sys.exit(1)
         else:
-            print u"No he trobat l'arxiu de configuració. Si us plau, creeu-lo abans de configurar aquestes opcions."
+            print "No config file found. Please make one before configuring these options."
             sys.exit(1)
 
 
 def create_config(configpath):
     check_dir()
-    print u"Si us plau, contesti les següents preguntes" + \
-        u" per crear l'arxiu de configuració\n"
+    print "Please answer the following questions" + \
+        " to create your configuration file:\n"
     try:
         config = Config(configpath, os.path.isfile(configpath))
         config._core()
-        if config.option("Vols configurar la base de dades?"):
+        if config.option("Would you like to set up a settings database now"):
             config._db()
         if config.option(
-            u'Vols configurar els mòduls que' + \
-            u' ho necessiten?'
+            'Would you like to see if there are any modules'
+            ' that need configuring'
         ):
             config._modules()
         config.save()
     except Exception, e:
-        print u"He trobat un error al fer el fitxer de configuració." + \
-            u" Això no hagués hagut de passar. Comprova els permisos de la carpeta .willie."
+        print "Encountered an error while writing the config file." + \
+            " This shouldn't happen. Check permissions."
         raise
         sys.exit(1)
-    print u"Fitxer de configuració escrit correctament!"
+    print "Config file written sucessfully!"

@@ -33,8 +33,14 @@ def commands(bot, trigger):
     """Retorna una llista de les ordres disponibles en un missatge privat"""
     #ordres = """=, admins, ban, bots, choose, commands, countdown, d, debug_print, deop, devoice, diec, drae, ety, frase, g, galeta, gc, gcs, help, ip, isup, kick, kickban, length, link, lmgtfy, movie, op, pastis, pregaria, privs, py, quiet, recomana, ves, \x02join, part, quit, anunci, msg, me, recover\x02"""
     names = ', '.join(sorted(bot.doc.iterkeys()))
-    bot.msg(trigger.sender, 'Ordres que entenc: ' + names + '.', max_messages=10)
-    bot.reply("Per obtenir ajuda sobre una ordre en concret, escriu .ajuda <ordre>")
+    listnames = names.split()
+    num = len(listnames)
+    if trigger.group(1).startswith('commands'):
+	bot.msg(trigger.sender, '\x02' + str(num) + ' avaiable commands:\x02 ' + names + '.', max_messages=10)
+	return
+    else:
+        bot.msg(trigger.sender, '\x02' + str(num) + ' ordres disponibles:\x02 ' + names + '.', max_messages=10)
+        bot.reply("Per obtenir ajuda sobre una ordre en concret, escriu .ajuda <ordre>")
 
 @rule('$nick' r'(?i)ajuda(?:[?!]+)?$')
 @priority('low')

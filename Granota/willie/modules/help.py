@@ -37,6 +37,7 @@ def commands(bot, trigger):
     num = len(listnames)
     if trigger.group(1).startswith('commands'):
 	bot.msg(trigger.sender, '\x02' + str(num) + ' avaiable commands:\x02 ' + names + '.', max_messages=10)
+	bot.reply("For help on a specific command (in catalan), type .help <command>")
 	return
     else:
         bot.msg(trigger.sender, '\x02' + str(num) + ' ordres disponibles:\x02 ' + names + '.', max_messages=10)

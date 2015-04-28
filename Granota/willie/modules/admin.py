@@ -44,26 +44,33 @@ def join(bot, trigger):
         else:
             bot.join(channel, key)
     if not trigger.admin:
-        bot.reply(u"No tens permisos")
+        if trigger.group(1) == 'join':
+            bot.reply(u"You need admin rights.")
+        else:
+            bot.reply(u"No ets admin")
         return
 
-@willie.module.commands('part', 'surt')
+@willie.module.commands('part', 'surt', 'sal')
 @willie.module.priority('low')
 @willie.module.example('.surt #exemple')
 def part(bot, trigger):
     if trigger.sender.startswith('#'):
         return
     if not trigger.admin:
+        if trigger.group(1) == 'join':
+            bot.reply(u"You don't have admin rights")
+        elif trigger.group(1) = 'sal':
+            bot.reply(u"No eres admin")
+        else:
+            bot.reply(u"No ets admin")
         return
     """Deixa el canal especificat. Només els administrdors del bot."""
     # Can only be done in privmsg by an admin
 
     channel, _sep, part_msg = trigger.group(2).partition(' ')
     if part_msg:
-        bot.msg(channel, u"Adéu... us enyoraré molt!")
         bot.part(channel, part_msg)
     else:
-        bot.msg(channel, u"Adéu... us enyoraré molt!")
         bot.part(channel)
 
 
@@ -77,10 +84,9 @@ def quit(bot, trigger):
     """Es desconnecta del servidor. Només els administradors del bt"""
     # Can only be done in privmsg by the owner
 
-    quit_message = trigger.group(2)
+    quit_message = trigger.group(2) + "[by " + trigger.nick + "]"
     if not quit_message:
-        quit_message = u"En %s m\'ho ha demanat. Els seus desitjos són ordres per a mi!" % trigger.nick
-    bot.msg('##neobot', u"Em desconnecto. Buààààààà!")
+        quit_message = u"Command "quit" performed by %s" % trigger.nick
     bot.quit(quit_message)
 
 
@@ -224,48 +230,7 @@ def save_config(bot, trigger):
         return
     bot.config.save()
 
-@module.rule('Fora')
-def quit2(bot, trigger):
-    if not trigger.owner:
-        return
-
-    quit_message = u"En %s m\'ho ha demanat. Els seus desitjos són ordres per a mi!" % trigger.nick
-
-    bot.msg('##botifler', u"Em desconnecto. Buààààààà!")
-    bot.quit(quit_message)
-
-@module.rule('marxa')
-def part2(bot, trigger):
-    if not trigger.admin:
-        return
-
-    channel = trigger.sender
-    part_msg = u'A reveure! Que us ho passeu bé!'
-    if part_msg:
-        bot.msg(channel, u"Adéu, us enyoraré molt... :'(")
-        bot.part(channel, part_msg)
-    else:
-        bot.msg(channel, u"Adéu, us enyoraré molt... :'(")
-        bot.part(channel)
-
-@module.rule('entra')
-def join2(bot, trigger):
-
-    if trigger.admin:
-        bot.join('##botifler')                      
-    elif not trigger.admin:
-        return(u'Sisi, em sembla molt bé, pero no tens permisos ;)')
-
-@commands('ignora', 'ignore', 'ign')
-def ignora(bot, trigger):
-    if trigger.admin:
-        bot.write(("IGNORE", trigger.group(2), "ALL"))
-        bot.reply(u"Ignorant " + trigger.group(2))
-    if not trigger.admin:
-        bot.reply(u"Necessites ser administrador. Si necessites una intervenció ràpida, escriu '.la' per una llista d'adminstradors")
-        return
-
-@commands('nick', 'nom')
+@commands('nick', 'nom', 'nombre')
 def nick(bot, trigger):
     if trigger.admin:
         bot.write(("NICK", trigger.group(2)))

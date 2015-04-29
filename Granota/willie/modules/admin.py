@@ -59,7 +59,7 @@ def part(bot, trigger):
     if not trigger.admin:
         if trigger.group(1) == 'join':
             bot.reply(u"You don't have admin rights")
-        elif trigger.group(1) = 'sal':
+        elif trigger.group(1) == 'sal':
             bot.reply(u"No eres admin")
         else:
             bot.reply(u"No ets admin")

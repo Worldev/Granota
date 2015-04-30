@@ -7,7 +7,7 @@ import re
 ligns = []
 rmencionormal = [u"Et penses que et repondré? Bah!",u"Digues, amor meu!",
                  u"Dieu algo?",u"Vigila amb el que dius, que no saps qui sóc jo!",
-                 u"Bah",u"%s, per què dius això? No m'ofenguis!",u"Aquí la bot-central. Digui?",
+                 u"Bah",u"Per què dius això? No m'ofenguis!",u"Aquí la bot-central. Digui?",
                  u"pssss (faig pipi)",u"hola!",u"Calla, que estic ocupat!",u"No siguis burro!",
                  u"mmmmmhhh",u"Tu creus?",u"un segon",u"hi hi hi",
                  u"Al món hi ha 10 tipus de bot: els que saben binari i els que no.",
@@ -41,26 +41,19 @@ rllengua = [u'Ets més maleducat que jo (i mira que és difícil) XD',
 rperfect = [u'Com jo XD', u'Ai que m\'emociono...', u'Com ha de ser!',
             u'Me\'n alegro!!']
 
-@module.rule(u'adéu')
-def adeu(bot, trigger):
-    if trigger.nick in ligns:
-        return
-    else:
-        bot.say(random.choice(radeu))
+##@module.rule(u'adéu', 'adios', 'bye')
+##def adeu(bot, trigger):
+##    if trigger.nick in ligns:
+##        return
+##    else:
+##        bot.say(random.choice(radeu))
 
 #@module.rule('hola')
 #def hola(bot, trigger):
 #    hola = random.choice(rhola)
 #    bot.say(hola % trigger.nick)
 
-@module.rule(u':P')
-def llengua(bot, trigger):
-    if trigger.nick in ligns:
-        return
-    else:
-        bot.say(random.choice(rllengua))
-
-@module.rule('.*$nickname.*')
+@module.rule(r'.*$nickname')
 def mencio(bot, trigger):
     if trigger.nick in ligns:
         return
@@ -74,48 +67,6 @@ def mencio(bot, trigger):
                 bot.say(random.choice(rmencionormal))
         else:
             bot.say(random.choice(rmencionormal))
-
-@module.rule(u'perfect')
-def perfecte(bot, trigger):
-    if trigger.nick in ligns:
-        return
-    else:
-        bot.say(random.choice(rperfect))
-
-@module.rule(u'tonto')
-def tonto(bot, trigger):
-    if trigger.nick in ligns:
-        return
-    else:
-        bot.say(random.choice(rtonto))
-
-@module.rule(u'visca')
-def visca(bot, trigger):
-    if trigger.nick in ligns:
-        return
-    else:
-        bot.say(u'VISCAAAAA!!!!!!!!!!!!!!!')
-
-@module.rule(u'mor')
-def mor(bot, trigger):
-    if trigger.nick in ligns:
-        return
-    else:
-        bot.say(u"No!!!! No sóc un assassí en sèrie, si vols alguna mort more't tu, " + trigger.nick)
-
-@module.rule('Bot')
-def bot(bot, trigger):
-    if trigger.nick in ligns:
-        return
-    else:
-        bot.say(u'Això tu, tros d\'humà!!')
-
-@module.rule(r'(?i).*(Fuck|Screw|shit|mierda|ilipoll|merda|puta|puto).*')
-def rude(bot, trigger):
-    if trigger.nick in ligns:
-        return
-    else:
-        bot.say('Vigilem aquesta boqueta...')
 
 @commands('ign')
 def ign(bot, trigger):

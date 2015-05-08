@@ -34,6 +34,7 @@ def translate(text, input='auto', output='en'):
             text = text.encode("utf-8")
     except:
         pass
+    ## La API de Google Translator añadió un Captcha, por lo tanto el traductor ya no funciona.
     text = urllib2.quote(text)
     result = opener.open('http://translate.google.com/translate_a/t?' +
         ('client=t&sl=%s&tl=%s' % (input, output)) +
@@ -115,7 +116,8 @@ def tr2(bot, trigger):
             msg = msg.decode('utf-8')
         if msg:
             msg = web.decode(msg)  # msg.replace('&#39;', "'")
-            msg = '"%s" (De %s a %s, translate.google.com)' % (msg, src, dest)
+##            msg = '"%s" (De %s a %s, translate.google.com)' % (msg, src, dest)
+            msg = 'Google ha añadido un Captcha a su API de Translate, por lo tanto, no hay traducción de %s' % src    
         else:
             msg = u'La traducció de %s a %s ha fallat!' % (src, dest)
 

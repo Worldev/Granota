@@ -17,7 +17,7 @@ def do_setup():
 
         setup(name='willie',
               version=__version__,
-              description=u'Un Bot IRC senzill',
+              description=u'An easy (and multilingual) IRC Bot',
               author='Edward Powell',
               author_email='powell.518@gmail.com',
               url='http://willie.dftba.net/',

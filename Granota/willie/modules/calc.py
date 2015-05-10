@@ -16,7 +16,7 @@ import string
 import HTMLParser
 
 
-@commands('=', 'calcula')
+@commands('=', 'calcula', 'calc')
 @example('.c 5 + 3', '8')
 def c(bot, trigger):
     """Google calculator."""

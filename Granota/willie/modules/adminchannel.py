@@ -99,23 +99,9 @@ def kick(bot, trigger):
     """
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         return
-    text = trigger.group().split()
-    argc = len(text)
-    if argc < 2:
+    if not trigger.admin:
         return
-    opt = text[1]
-    nick = opt
-    channel = trigger.sender
-    reasonidx = 2
-    if opt.startswith('#'):
-        if argc < 3:
-            return
-        nick = text[2]
-        channel = opt
-        reasonidx = 3
-    reason = ' '.join(text[reasonidx:])
-    if nick != bot.config.nick:
-        bot.write(['KICK', channel, nick, reason])
+    bot.write(['KICK', trigger.group(2)])
 
 
 def configureHostMask(mask):

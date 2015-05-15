@@ -14,7 +14,12 @@ import HTMLParser
 def c(bot, trigger):
     """Google calculator."""
     if not trigger.group(2):
-        return bot.reply("Nothing to calculate.")
+        if bot.config.lang == 'ca':
+            return bot.reply("Res a calcular.")
+        elif bot.config.lang == 'es':
+            return bot.reply(u"Nada a calcular.")
+        else:
+            return bot.reply("Nothing to calculate.")
     try:
         result = str(eval_equation(trigger.group(2)))
     except ZeroDivisionError:

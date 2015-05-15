@@ -1,11 +1,4 @@
 # coding=utf-8
-"""
-debug.py - Willie Debugging Module
-Copyright 2013, Dimitri "Tyrope" Molenaars, Tyrope.nl
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net
-"""
 
 from willie.module import commands, example
 
@@ -17,7 +10,12 @@ def privileges(bot, trigger):
         try:
             bot.say(str(bot.privileges[trigger.group(2)]))
         except Exception:
-            bot.say("Channel not found.")
+            if bot.config.lang == 'ca':
+                bot.reply("Canal desconegut.")
+            elif bot.config.lang == 'es':
+                bot.reply("Canal desconocido.")
+            else:
+                bot.reply("Channel not found.")
     else:
         bot.say(str(bot.privileges))
 
@@ -36,7 +34,12 @@ def debug_print(bot, trigger):
     try:
         willie.modules.version.version(bot, trigger)
     except Exception as e:
-        bot.say('An error occured trying to get the current version.')
+        if bot.config.lang == 'ca':
+            bot.reply(u"Error al intentar obtenir la versio actual")
+        elif bot.config.lang == 'es':
+            bot.reply(u"Error al intentar obtener la version actual.")
+        else:
+            bot.say('An error occured trying to get the current version.')
     admins(bot, trigger)
     privileges(bot, trigger)
 

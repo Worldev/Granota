@@ -116,9 +116,9 @@ def wa(bot, trigger):
         waOutputArray = []
     else:
         if bot.config.lang == 'ca':
-            bot.reply(u"sense resultats.")
+            bot.reply(u"Sense resultats.")
         elif bot.config.lang == 'es':
-            bot.repy(u"sin resultados.")
+            bot.repy(u"Sin resultados.")
         else:
             bot.reply('Sorry, no result.')
 

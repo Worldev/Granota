@@ -1,11 +1,3 @@
-"""
-dice.py - Dice Module
-Copyright 2010-2013, Dimitri "Tyrope" Molenaars, TyRope.nl
-Copyright 2013, Ari Koivula, <ari@koivu.la>
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net/
-"""
 import random
 import re
 
@@ -144,7 +136,7 @@ def _roll_dice(dice_expression):
 
 
 @willie.module.commands("roll")
-@willie.module.commands("dice")
+@willie.module.commands("dice", 'dau', 'dado')
 @willie.module.commands("d")
 @willie.module.priority("medium")
 @willie.module.example(".roll 3d1+1", 'You roll 3d1+1: (1+1+1)+1 = 4')
@@ -174,7 +166,12 @@ def roll(bot, trigger):
     arg_str = re.sub(dice_regexp, "%s", arg_str)
     dice = map(_roll_dice, dice_expressions)
     if None in dice:
-        bot.reply("I only have 1000 dice. =(")
+        if bot.config.lang == 'ca':
+            bot.reply(u"Només tinc 1000 daus.")
+        elif bot.config.lang == 'es':
+            bot.reply(u"Solo tengo 1000 dados.")
+        else:
+            bot.reply(u"I only have 1000 dices.")
         return
 
     def _get_eval_str(dice):
@@ -203,19 +200,27 @@ def roll(bot, trigger):
             trigger.group(2), pretty_str, result))
 
 
-@willie.module.commands("choice")
-@willie.module.commands("ch")
-@willie.module.commands("choose")
+@willie.module.commands("choice", 'tria', 'escoge', 'triar', 'escoger')
 @willie.module.priority("medium")
 def choose(bot, trigger):
     """
     .choice option1|option2|option3 - Makes a difficult choice easy.
     """
     if not trigger.group(2):
-        return bot.reply('I\'d choose an option, but you didn\'t give me any.')
+        if bot.config.lang == 'ca':
+            return bot.reply(u"No m'has donat cap opció per triar!")
+        elif bot.config.lang == 'es':
+            return bot.reply(u"No me has dado ninguna opción para escojer!")
+        else:
+            return bot.reply('I\'d choose an option, but you didn\'t give me any.')
     choices = re.split('[\|\\\\\/]', trigger.group(2))
     pick = random.choice(choices)
-    return bot.reply('Your options: %s. My choice: %s' % (', '.join(choices), pick))
+    if bot.config.lang == 'ca':
+        return bot.reply('Les teves opcions: %s. La meva tria: %s' % (', '.join(choices), pick))
+    elif bot.config.lang == 'es':
+        return bot.reply(u"Tus opciones: %s. Mi eleccion: %s" % (', '.join(choices), pick))
+    else:
+        return bot.reply('Your options: %s. My choice: %s' % (', '.join(choices), pick))
 
 
 if __name__ == "__main__":

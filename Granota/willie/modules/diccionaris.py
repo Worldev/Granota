@@ -9,7 +9,7 @@ from HTMLParser import HTMLParser
 def diec(bot, trigger):
     """Busca una paraula al DIEC"""
     if trigger.group(2):
-        bot.say('http://dlc.iec.cat/results.asp?txtEntrada=%s' % (trigger.group(2)))
+        bot.reply('http://dlc.iec.cat/results.asp?txtEntrada=%s' % (trigger.group(2)))
     if trigger.group(2) == None:
         if bot.config.lang == 'ca':
             bot.reply(u"Digue'm que vols buscar, però!")
@@ -24,7 +24,22 @@ def diec(bot, trigger):
 def drae(bot, trigger):
     """Busca una paraula al DRAE"""
     if trigger.group(2):
-        bot.say('http://lema.rae.es/drae/?val=%s' % (trigger.group(2)))
+        bot.reply('http://lema.rae.es/drae/?val=%s' % (trigger.group(2)))
+    if trigger.group(2) == None:
+        if bot.config.lang == 'ca':
+            bot.reply(u"Digue'm que vols buscar, però!")
+        elif bot.config.lang == 'es':
+            bot.reply(u"Pero dime que quieres buscar!")
+        else:
+            bot.reply(u"But tell me what I have to search!")
+        return
+
+@commands('wordreference', 'define')
+@example('.define hello')
+def diec(bot, trigger):
+    """Busca una paraula al DIEC"""
+    if trigger.group(2):
+        bot.reply('http://www.wordreference.com/definition/%s' % (trigger.group(2)))
     if trigger.group(2) == None:
         if bot.config.lang == 'ca':
             bot.reply(u"Digue'm que vols buscar, però!")

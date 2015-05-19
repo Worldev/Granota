@@ -11,7 +11,12 @@ def diec(bot, trigger):
     if trigger.group(2):
         bot.say('http://dlc.iec.cat/results.asp?txtEntrada=%s' % (trigger.group(2)))
     if trigger.group(2) == None:
-        bot.reply(u"Digue'm que vols buscar, però!!")
+        if bot.config.lang == 'ca':
+            bot.reply(u"Digue'm que vols buscar, perÃ²!")
+        elif bot.config.lang == 'es':
+            bot.reply(u"Pero dime que quieres buscar!")
+        else:
+            bot.reply(u"But tell me what I have to search!")
         return
 
 @commands('drae')
@@ -21,5 +26,10 @@ def drae(bot, trigger):
     if trigger.group(2):
         bot.say('http://lema.rae.es/drae/?val=%s' % (trigger.group(2)))
     if trigger.group(2) == None:
-        bot.reply(u"No et dic que no, però... que vols buscar, exactament? XD")
+        if bot.config.lang == 'ca':
+            bot.reply(u"Digue'm que vols buscar, perÃ²!")
+        elif bot.config.lang == 'es':
+            bot.reply(u"Pero dime que quieres buscar!")
+        else:
+            bot.reply(u"But tell me what I have to search!")
         return

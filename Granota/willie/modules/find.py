@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 from willie.tools import Nick, WillieMemory
 from willie.module import rule, priority

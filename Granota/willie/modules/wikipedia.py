@@ -22,7 +22,10 @@ def mw_search(server, query, num):
     search_url = ('http://%s/w/api.php?format=json&action=query'
                   '&list=search&srlimit=%d&srprop=timestamp&srwhat=text'
                   '&srsearch=') % (server, num)
-    search_url += web.quote(query.encode('utf-8'))
+    if bot.config.lang == 'ca' or bot.config.lang == 'es':
+        search_url += web.quote(query.encode('utf-8'))
+    else:
+        search_url += web.quote(query.encode('cp1252'))
     query = json.loads(web.get(search_url))
     query = query['query']['search']
     return [r['title'] for r in query]
@@ -33,10 +36,22 @@ def mw_snippet(server, query):
     Retrives a snippet of the specified length from the given page on the given
     server.
     """
-    snippet_url = ('https://ca.wikipedia.org/w/api.php?format=json'
-                   '&action=query&prop=extracts&exintro&explaintext'
-                   '&exchars=300&redirects&titles=')
-    snippet_url += web.quote(query.encode('utf-8'))
+    if bot.config.lang == 'ca':
+        snippet_url = ('https://ca.wikipedia.org/w/api.php?format=json'
+                '&action=query&prop=extracts&exintro&explaintext'
+                '&exchars=300&redirects&titles=')
+    elif bot.config.lang == 'es':
+        snippet_url = ('https://es.wikipedia.org/w/api.php?format=json'
+                '&action=query&prop=extracts&exintro&explaintext'
+                '&exchars=300&redirects&titles=')
+    else:
+        snippet_url = ('https://en.wikipedia.org/w/api.php?format=json'
+                '&action=query&prop=extracts&exintro&explaintext'
+                '&exchars=300&redirects&titles=')
+    if bot.config.lang == 'ca' or bot.config.lang == 'es':
+        snippet_url += web.quote(query.encode('utf-8'))
+    else:
+        snippet_url += web.quote(query.encode('cp1252'))
     snippet = json.loads(web.get(snippet_url))
     snippet = snippet['query']['pages']
 
@@ -52,16 +67,36 @@ def mw_snippet(server, query):
 def wikipedia(bot, trigger):
     query = trigger.group(2)
     if not query:
-        bot.reply('Mmmmhhh... sóc un bot però no et puc llegir el pensament...')
+        if bot.config.lang == 'ca':
+            bot.reply('Mmmmhhh... sÃ³c un bot perÃ² no et puc llegir el pensament...')
+        if bot.config.lang == 'es':
+            bot.reply('Mmmmhhh... soy un bot pero no puedo leerte el pensamiento...')
+        else:
+            bot.reply('Mmmmhhh... I\'m a bot but I can\'t read your thoughts...'
         return NOLIMIT
-    server = 'ca.wikipedia.org'
+    if bot.config.lang == 'ca':
+        server = 'ca.wikipedia.org'
+    elif bot.config.lang == 'es':
+        server = 'es.wikipedia.org'
+    else:
+        server = 'en.wikipedia.org'
     query = mw_search(server, query, 1)
     if not query:
-        bot.reply("No he trobat res, encara no sóc perfecte ;)")
+        if bot.config.lang == 'ca':
+            bot.reply("No he trobat res, encara no sÃ³c perfecte ;)")
+        elif bot.config.lang == 'es':
+            bot.reply("No he encontrado nada, aun no soy perfecto ;)")
+        else:
+            bot.reply("I haven't found anything, I'm not perfect yet ;)")
         return NOLIMIT
     else:
         query = query[0]
     snippet = mw_snippet(server, query)
 
     query = query.replace(' ', '_')
-    bot.say('"%s" - http://ca.wikipedia.org/wiki/%s' % (snippet, query))
+    if bot.config.lang == 'ca':
+        bot.say('"%s" - http://ca.wikipedia.org/wiki/%s' % (snippet, query))
+    elif bot.config.lang == 'es':
+        bot.say('"%s" - http://es.wikipedia.org/wiki/%s' % (snippet, query))
+    else:
+        bot.say('"%s" - http://en.wikipedia.org/wiki/%s' % (snippet, query))

@@ -1,10 +1,3 @@
-"""
-lmgtfy.py - Willie Let me Google that for you module
-Copyright 2013, Dimitri Molenaars http://tyrope.nl/
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net/
-"""
 from willie.module import commands
 
 

@@ -1,11 +1,4 @@
 # -*- coding: utf8 -*-
-"""
-meetbot.py - Willie meeting logger module
-Copyright © 2012, Elad Alfassa, <elad@fedoraproject.org>
-Licensed under the Eiffel Forum License 2.
-
-This module is an attempt to implement at least some of the functionallity of Debian's meetbot
-"""
 import time
 import os
 import urllib2
@@ -23,8 +16,15 @@ def configure(config):
     | meeting_log_baseurl | http://example.com/~willie/meetings | Base URL for the meeting logs directory |
     """
     if config.option('Configure meetbot', False):
-        config.interactive_add('meetbot', 'meeting_log_path', u"Directori on guardar els registres de la reunió")
-        config.interactive_add('meetbot', 'meeting_log_baseurl', "URL on desar els logs de la reunió (ex. http://example.com/logs)")
+        if bot.config.lang == 'ca':
+            config.interactive_add('meetbot', 'meeting_log_path', u"Directori on guardar els registres de la reunió.")
+            config.interactive_add('meetbot', 'meeting_log_baseurl', "URL on desar els registres de la reunió (ex. http://example.com/logs).")
+        elif bot.config.lang == 'es':
+            config.interactive_add('meetbot', 'meeting_log_path', u"Directorio donde guardar el registro de las reuniones.")
+            config.interactive_add('meetbot', 'meeting_log_baseurl', u"URL donde guardar los registros de la reunion".)
+        else:
+            config.interactive_add('meetbot', 'meeting_log_path', u"Path where you want to save the meeting log.")
+            config.interactive_add('meetbot', 'meeting_log_baseurl', u"URL where you want to save the meeting log.")
 
 meetings_dict = Ddict(dict)  # Saves metadata about currently running meetings
 """
@@ -121,7 +121,7 @@ def ischair(nick, channel):
 
 
 #Start meeting (also preforms all required sanity checks)
-@commands('startmeeting')
+@commands('startmeeting', 'reunio', 'reunion')
 @example('.startmeeting title or .startmeeting')
 def startmeeting(bot, trigger):
     """
@@ -129,13 +129,28 @@ def startmeeting(bot, trigger):
     https://github.com/embolalia/willie/wiki/Using-the-meetbot-module
     """
     if ismeetingrunning(trigger.sender):
-        bot.say('Can\'t do that, there is already a meeting in progress here!')
+        if bot.config.lang == 'ca':
+            bot.say(u'Ja hi ha una reunió aquí!')
+        elif bot.config.lang == 'es':
+            bot.say(u'Ya hay una reunión en progreso aqui!')
+        else:
+            bot.say(u'There is already a meeting here!')
         return
     if not trigger.sender.startswith('#'):
-        bot.say('Can only start meetings in channels')
+        if bot.config.lang == 'ca':
+            bot.say(u'Només puc començar reunions en canals')
+        elif bot.config.lang == 'es':
+            bot.say(u'Solo puedo comenzar una reunion en un canal')
+        else:
+            bot.say('Can only start meetings in channels')
         return
     if not bot.config.has_section('meetbot'):
-        bot.say('Meetbot not configured, make sure meeting_log_path and meeting_log_baseurl are defined')
+        if bot.config.lang == 'ca':
+            bot.say(u'El meetbot no està configurat. Assegura\'t de tenir el meeting_log_path i el meeting_log_baseurl definits.')
+        elif bot.config.lang == 'es':
+            bot.say(u'Meetbot no está configurado. Asegurate de tener el meeting_log_path y el meeting_log_baseurl definidos.')
+        else:
+            bot.say('Meetbot not configured, make sure meeting_log_path and meeting_log_baseurl are defined')
         return
     #Start the meeting
     meetings_dict[trigger.sender]['start'] = time.time()
@@ -159,16 +174,34 @@ def startmeeting(bot, trigger):
         try:
             os.makedirs(meeting_log_path + trigger.sender)
         except Exception as e:
-            bot.say("Can't create log directory for this channel, meeting not started!")
+            if bot.config.lang == 'ca':
+                bot.say(u"No puc crear un directori pel registre d'aquest canal. La reunió no pot començar!")
+            elif bot.config.lang == 'es':
+                bot.say(u"No puedo crear un directorio para el registro de este canal. La reunión no puede empezar!")
+            else:
+                bot.say("Can't create log directory for this channel, meeting not started!")
             meetings_dict[trigger.sender] = Ddict(dict)
             raise
             return
     #Okay, meeting started!
-    logplain('Meeting started by ' + trigger.nick.lower(), trigger.sender)
-    logHTML_start(trigger.sender)
-    meeting_actions[trigger.sender] = []
-    bot.say('Meeting started! use .action, .agreed, .info, .chairs, .subject and .comments to control the meeting. to end the meeting, type .endmeeting')
-    bot.say('Users without speaking permission can use .comment '+trigger.sender+' followed by their comment in a PM with me to vocalize themselves.')
+    if bot.config.lang == 'ca':
+        logplain(u'Reunió iniciada per ' + trigger.nick.lower(), trigger.sender)
+        logHTML_start(trigger.sender)
+        meeting_actions[trigger.sender] = []
+        bot.say(u'La reunió ha començat! utilitza .action, .agreed, .info, .chairs, .subject i .comments per controlar la reunio. Al final, escriu .endmeeting')
+        bot.say(u'Els usuaris sense permís per parlar poden utilitzar .comment '+trigger.sender+' seguit del comentari que volen fer en un missatge privat amb mi.')
+    elif bot.config.lang == 'es':
+        logplain(u'Reunión empezada por ' + trigger.nick.lower(), trigger.sender)
+        logHTML_start(trigger.sender)
+        meeting_actions[trigger.sender] = []
+        bot.say(u'La reunion ha empezado! usa .action, .agreed, .info, .chairs, .subject y .comments para controlar la reunion. Al final, escribe .endmeeting')
+        bot.say(u'Los usuarios sin permiso de hablar pueden usar .comment '+trigger.sender+' seguido de su comentario en un privado conmigo.')
+    else:
+        logplain('Meeting started by ' + trigger.nick.lower(), trigger.sender)
+        logHTML_start(trigger.sender)
+        meeting_actions[trigger.sender] = []
+        bot.say('Meeting started! use .action, .agreed, .info, .chairs, .subject and .comments to control the meeting. to end the meeting, type .endmeeting')
+        bot.say('Users without speaking permission can use .comment '+trigger.sender+' followed by their comment in a PM with me to vocalize themselves.')
 
 
 #Change the current subject (will appear as <h3> in the HTML log)
@@ -180,20 +213,42 @@ def meetingsubject(bot, trigger):
     https://github.com/embolalia/willie/wiki/Using-the-meetbot-module
     """
     if not ismeetingrunning(trigger.sender):
-        bot.say('Can\'t do that, start meeting first')
+        if bot.config.lang == 'ca':
+            bot.say(u'Abans has de començar la reunió')
+        elif bot.config.lang == 'es':
+            bot.say(u"Antes tienes que empezar la reunión')
+        else:
+            bot.say('Can\'t do that, start meeting first')
         return
     if not trigger.group(2):
-        bot.say('what is the subject?')
+        if bot.config.lang == 'ca':
+            bot.say(u"Sintaxi incorrecte! Utilitza .subject <tema de la reunió>")
+        elif bot.config.lang == 'es':
+            bot.say(u"Sintaxis incorrecta! Utiliza .subject <tema de la reunión>")
+        else:
+            bot.say('Bad syntax! Use .subject <meeting subject> instead.')
         return
     if not ischair(trigger.nick, trigger.sender):
-        bot.say('Only meeting head or chairs can do that')
+        if bot.config.lang == 'ca':
+            bot.say(u'No tens permisos per canviar el tema de la reunió')
+        elif bot.config.lang == 'es':
+            bot.say(u"No tienes permisos para cambiar el tema de la runión.')
+        else:
+            bot.say('Only meeting head or chairs can do that')
         return
     meetings_dict[trigger.sender]['current_subject'] = trigger.group(2)
     logfile = open(meeting_log_path + trigger.sender + '/' + figure_logfile_name(trigger.sender) + '.html', 'a')
     logfile.write('</ul><h3>' + trigger.group(2) + '</h3><ul>')
     logfile.close()
-    logplain('Current subject: ' + trigger.group(2) + ', (set by ' + trigger.nick + ')', trigger.sender)
-    bot.say('Current subject: ' + trigger.group(2))
+    if bot.config.lang == 'ca':
+        logplain('Tema actual: ' + trigger.group(2) + ', (posat per ' + trigger.nick + ')', trigger.sender)
+        bot.say('Tema actual: ' + trigger.group(2))
+    elif bot.config.lang == 'es':
+        logplain('Tema actual: ' + trigger.group(2) + ', (puesto por ' + trigger.nick + ')', trigger.sender)
+        bot.say('Current subject: ' + trigger.group(2))
+    else:
+        logplain('Current subject: ' + trigger.group(2) + ', (set by ' + trigger.nick + ')', trigger.sender)
+        bot.say('Current subject: ' + trigger.group(2))
 
 
 #End the meeting
@@ -205,20 +260,43 @@ def endmeeting(bot, trigger):
     https://github.com/embolalia/willie/wiki/Using-the-meetbot-module
     """
     if not ismeetingrunning(trigger.sender):
-        bot.say('Can\'t do that, start meeting first')
+        if bot.config.lang == 'ca':
+            bot.say(u"Inicia la reunió abans amb .startmeeting")
+        elif bot.config.lang == 'es':
+            bot.say(u"Empieza la reunión antes con .startmeeting")
+        else:
+            bot.say('Can\'t do that, start meeting first')
         return
     if not ischair(trigger.nick, trigger.sender):
-        bot.say('Only meeting head or chairs can do that')
+        if bot.config.lang == 'ca':
+            bot.say(u"No tens permisos per finalitzar la reunió.")
+        elif bot.config.lang == 'es':
+            bot.say(u"No tienes permisos para finalizar la reunión.")
+        else:
+            bot.say('Only meeting head or chairs can do that')
         return
     meeting_length = time.time() - meetings_dict[trigger.sender]['start']
     #TODO: Humanize time output
-    bot.say("Meeting ended! total meeting length %d seconds" % meeting_length)
-    logHTML_end(trigger.sender)
-    htmllog_url = meeting_log_baseurl + urllib2.quote(trigger.sender + '/' + figure_logfile_name(trigger.sender) + '.html')
-    logplain('Meeting ended by %s, total meeting length %d seconds' % (trigger.nick, meeting_length), trigger.sender)
-    bot.say('Meeting minutes: ' + htmllog_url)
-    meetings_dict[trigger.sender] = Ddict(dict)
-    del meeting_actions[trigger.sender]
+    if bot.config.lang == 'ca':
+        bot.say(u"Reunió finalitzada! La reunió ha durat %d segons" % meeting_length)
+        logHTML_end(trigger.sender)
+        htmllog_url = meeting_log_baseurl + urllib2.quote(trigger.sender + '/' + figure_logfile_name(trigger.sender) + '.html')
+        logplain(u'Reunió finalitzada per %s, segons totals: %d' % (trigger.nick, meeting_length), trigger.sender)
+        bot.say(u'URL de la reunió: ' + htmllog_url)
+    elif bot.config.lang == 'es':
+        bot.say(u"Reunión acabada! ha durado %d segundos" % meeting_length)
+        logHTML_end(trigger.sender)
+        htmllog_url = meeting_log_baseurl + urllib2.quote(trigger.sender + '/' + figure_logfile_name(trigger.sender) + '.html')
+        logplain(u'Reunión acabada por %s, y ha durado %d segundos' % (trigger.nick, meeting_length), trigger.sender)
+        bot.say(u'URL de la reunión: ' + htmllog_url)
+    else:    
+        bot.say("Meeting ended! total meeting length %d seconds" % meeting_length)
+        logHTML_end(trigger.sender)
+        htmllog_url = meeting_log_baseurl + urllib2.quote(trigger.sender + '/' + figure_logfile_name(trigger.sender) + '.html')
+        logplain('Meeting ended by %s, total meeting length %d seconds' % (trigger.nick, meeting_length), trigger.sender)
+        bot.say('Meeting minutes: ' + htmllog_url)
+        meetings_dict[trigger.sender] = Ddict(dict)
+        del meeting_actions[trigger.sender]
 
 
 #Set meeting chairs (people who can control the meeting)
@@ -230,10 +308,15 @@ def chairs(bot, trigger):
     https://github.com/embolalia/willie/wiki/Using-the-meetbot-module
     """
     if not ismeetingrunning(trigger.sender):
-        bot.say('Can\'t do that, start meeting first')
+        if bot.config.lang == 'ca':
+            bot.say(u"Comença la reunió abans.")
+        elif bot.config.lang == 'es':
+            bot.say(u"Empieza la reunión antes.")
+        else:
+            bot.say('Can\'t do that, start meeting first')
         return
     if not trigger.group(2):
-        bot.say('Who are the chairs?')
+        bot.say('Syntax: .chair <nick>')
         return
     if trigger.nick.lower() == meetings_dict[trigger.sender]['head']:
         meetings_dict[trigger.sender]['chairs'] = trigger.group(2).lower().split(' ')

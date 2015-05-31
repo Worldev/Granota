@@ -1,17 +1,11 @@
 # -*- coding: utf8 -*-
-"""
-imdb.py - Willie Movie Information Module
-Copyright © 2012-2013, Elad Alfassa, <elad@fedoraproject.org>
-Licensed under the Eiffel Forum License 2.
 
-This module relies on imdbapi.com
-"""
 import json
 import willie.web as web
 import willie.module
 
 
-@willie.module.commands('movie', 'imdb')
+@willie.module.commands('movie', 'imdb', 'peli', 'pelicula', 'film')
 @willie.module.example('.movie Movie Title')
 def movie(bot, trigger):
     """
@@ -31,11 +25,29 @@ def movie(bot, trigger):
         else:
             bot.debug(__file__, 'Got an error from the imdb api, search phrase was %s' % word, 'warning')
             bot.debug(__file__, str(data), 'warning')
-            message = '[MOVIE] Got an error from imdbapi'
+            if bot.config.lang == 'ca':
+                message = u'[Pel·lícula] Error de l\'API d\'imdb'
+            elif bot.config.lang == 'es':
+                message = u'[Película] Error de la API de imdb'
+            else:
+                message = '[MOVIE] Error from the imdb API'
     else:
-        message = '[MOVIE] Title: ' + data['Title'] + \
-                  ' | Year: ' + data['Year'] + \
-                  ' | Rating: ' + data['imdbRating'] + \
-                  ' | Genre: ' + data['Genre'] + \
-                  ' | IMDB Link: http://imdb.com/title/' + data['imdbID']
+        if bot.config.lang == 'ca':
+            message = u'[Pel·lícula] Títol: ' + data['Title'] + \
+                    ' | Any: ' + data['Year'] + \
+                    u' | Valoració: ' + data['imdbRating'] + \
+                    u' | Gènere: ' + data['Genre'] + \
+                    ' | Link a IMDB: http://imdb.com/title/' + data['imdbID']
+        elif bot.config.lang == 'es':
+            message = u'[Película] Título: ' + data['Title'] + \
+                    u' | Año: ' + data['Year'] + \
+                    u' | Valoración: ' + data['imdbRating'] + \
+                    u' | Género: ' + data['Genre'] + \
+                    ' | Link a IMDB: http://imdb.com/title/' + data['imdbID']
+        else:
+            message = '[MOVIE] Title: ' + data['Title'] + \
+                      ' | Year: ' + data['Year'] + \
+                      ' | Rating: ' + data['imdbRating'] + \
+                      ' | Genre: ' + data['Genre'] + \
+                      ' | IMDB Link: http://imdb.com/title/' + data['imdbID']
     bot.say(message)

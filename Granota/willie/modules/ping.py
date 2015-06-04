@@ -66,7 +66,7 @@ normal_ping_en = [u"Do you think that I'll answer you? Bah!",u"Oh, my love! What
                  u"I never forget a nick... but I will make an exception for you.",
                  #u"[<Espacio reservado para publicidad>]"
                  ]            
-owner_ping_es = [u"I agree with you!",u"Our lord guides us very well...",
+owner_ping_en = [u"I agree with you!",u"Our lord guides us very well...",
                u"Yes, my lord, I'll follow you.",
                #u"para servirlo",u"servidor",
                u"My lord, I'm very glad to listen my name in your great discourse.",
@@ -75,7 +75,7 @@ owner_ping_es = [u"I agree with you!",u"Our lord guides us very well...",
                u"My owner is crazy, kick him!!! >:D",
                u"One favour... give your owner rights to someone else!"]     
                                 
-@module.rule(r'.*$nickname')
+@module.rule(r'(.*)?$nickname')
 def mention(bot, trigger):
     if trigger.owner:
         dice = random.choice(['owner','nowner'])

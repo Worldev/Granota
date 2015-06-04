@@ -1,11 +1,4 @@
 # -*- coding: cp1252 -*-
-"""
-reload.py - Willie Module Reloader Module
-Copyright 2008, Sean B. Palmer, inamidst.com
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net
-"""
 
 import sys
 import os.path
@@ -18,13 +11,16 @@ import subprocess
 @willie.module.priority("low")
 @willie.module.thread(False)
 def f_reload(bot, trigger):
-    """Reloads a module, for use by admins only."""
     if not trigger.admin:
-        return bot.reply(u'sí home!')
+        if bot.config.lang == 'ca':
+            bot.reply(u'No tens permisos d\'administrador')
+        elif bot.config.lang == 'es':
+            bot.reply(u"No tienes permisos de administrador")
+        else:
+            bot.reply(u"You aren't an admin")
+        return
 
     name = trigger.group(2)
-    if name == bot.config.owner:
-        return bot.reply(u'Què??')
 
     if (not name) or (name == '*') or (name.upper() == 'ALL THE THINGS'):
         bot.callables = None
@@ -33,7 +29,13 @@ def f_reload(bot, trigger):
         return bot.reply('done')
 
     if not name in sys.modules:
-        return bot.reply(u'No trobo el mòdul %s!' % name)
+        if bot.config.lang == 'ca':
+            bot.reply(u"No hi ha cap mÃ²dul anomenat " + name)
+        elif bot.config.lang == 'es':
+            bot.reply(u"No hay ningÃºn module nombrado " + name)
+        else:
+            bot.reply(name + ": no such module!")
+        return
 
     old_module = sys.modules[name]
 
@@ -66,12 +68,12 @@ def f_reload(bot, trigger):
         module.setup(bot)
 
     mtime = os.path.getmtime(module.__file__)
-    modified = time.strftime(u'Dia %Y-%m-%d hora %H:%M:%S', time.gmtime(mtime))
+    modified = time.strftime(u'%Y-%m-%d, %H:%M:%S', time.gmtime(mtime))
 
     bot.register(vars(module))
     bot.bind_commands()
 
-    bot.reply(u'%r (versió: %s)' % (module, modified))
+    bot.reply(u'%r (version: %s)' % (module, modified))
 
 
 if sys.version_info >= (2, 7):
@@ -103,8 +105,6 @@ def f_load(bot, trigger):
 
     module_name = trigger.group(2)
     path = ''
-    if module_name == bot.config.owner:
-        return bot.reply('Ehem... segur?')
 
     if module_name in sys.modules:
         return bot.reply('Module already loaded, use reload')
@@ -124,7 +124,7 @@ def f_load(bot, trigger):
     bot.register(vars(module))
     bot.bind_commands()
 
-    bot.reply(u'%r (versió: %s)' % (module, modified))
+    bot.reply(u'%r (version: %s)' % (module, modified))
 
 
 if __name__ == '__main__':

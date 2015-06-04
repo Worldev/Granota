@@ -77,24 +77,23 @@ owner_ping_es = [u"I agree with you!",u"Our lord guides us very well...",
                                 
 @module.rule(r'.*$nickname')
 def mention(bot, trigger):
-    else:
-        if trigger.owner:
-            dice = random.choice(['owner','nowner'])
-            if dice == 'owner':
-                if bot.config.lang == 'ca':
-                    bot.say(random.choice(owner_ping_ca))
-                elif bot.config.lang == 'es':
-                    bot.say(random.choice(owner_ping_es))
-                else:
-                    bot.say(random.choice(owner_ping_en))
-                return
-        else:
+    if trigger.owner:
+        dice = random.choice(['owner','nowner'])
+        if dice == 'owner':
             if bot.config.lang == 'ca':
-                bot.say(random.choice(normal_ping_ca))
+                bot.say(random.choice(owner_ping_ca))
             elif bot.config.lang == 'es':
-                bot.say(random.choice(normal_ping_es))
+                bot.say(random.choice(owner_ping_es))
             else:
-                bot.say(random.choice(normal_ping_en))
+                bot.say(random.choice(owner_ping_en))
+            return
+    else:
+        if bot.config.lang == 'ca':
+            bot.say(random.choice(normal_ping_ca))
+        elif bot.config.lang == 'es':
+            bot.say(random.choice(normal_ping_es))
+        else:
+            bot.say(random.choice(normal_ping_en))
 
 @commands("ping")
 def normal_ping(bot, trigger):

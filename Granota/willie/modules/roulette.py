@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 from willie.module import commands, priority
 import random
 from datetime import datetime, timedelta

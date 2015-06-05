@@ -1,11 +1,3 @@
-"""
-roulette.py - Willie Roulette Game Module
-Copyright 2010, Kenneth Sham
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net
-"""
-
 from willie.module import commands, priority
 import random
 from datetime import datetime, timedelta
@@ -20,38 +12,43 @@ ROULETTE_SETTINGS = {
     'INACTIVE_TIMEOUT': 1,
 }
 
-# edit this setting for text displays
-ROULETTE_STRINGS = {
-    'TICK': '...',
-    'KICK_REASON': 'Has perdut!!',
-    'GAME_END': 'Joc aturat.',
-    'GAME_END_FAIL': "%s: Si us plau, espera %s segins per aturar el joc.",
-}
-
 ## do not edit below this line unless you know what you're doing
 ROULETTE_TMP = {
-    'LAST-PLAYER': None,
     'NUMBER': None,
     'TIMEOUT': timedelta(minutes=ROULETTE_SETTINGS['INACTIVE_TIMEOUT']),
     'LAST-ACTIVITY': None,
 }
 
 
-@commands('roulette')
+@commands('roulette', 'ruleta')
 @priority('low')
 def roulette(bot, trigger):
-    """Juga a la ruleta russa"""
-    global ROULETTE_SETTINGS, ROULETTE_STRINGS, ROULETTE_TMP
+    global ROULETTE_SETTINGS, ROULETTE_TMP
+    if bot.config.lang == 'ca':
+        ROULETTE_STRINGS = {
+            'TICK': '*tick*',
+            'KICK_REASON': u'Oh, no! Has perdut i estàs mort D:',
+            'GAME_END': 'Joc aturat.',
+            'GAME_END_FAIL': "%s: Si us plau, espera %s segons per aturar el joc.",
+        }
+    elif bot.config.lang == 'es':
+        ROULETTE_STRINGS = {
+            'TICK': '*tick*',
+            'KICK_REASON': u'Oh, no! Has perdido y estás muerto D:',
+            'GAME_END': 'Juego parado.',
+            'GAME_END_FAIL': "%s: Por favor, espera %s segundos para parar el juego.",
+        }
+    else:
+        ROULETTE_STRINGS = {
+            'TICK': '*tick*',
+            'KICK_REASON': u'Oh, no! You lose and you are dead D:',
+            'GAME_END': 'Game stopped.',
+            'GAME_END_FAIL': "%s: Please, wait %s seconds to stop the game.",
+        }        
     if ROULETTE_TMP['NUMBER'] is None:
         ROULETTE_TMP['NUMBER'] = random.randint(0, ROULETTE_SETTINGS['MAX_RANGE'])
-        ROULETTE_TMP['LAST-PLAYER'] = trigger.nick
-        ROULETTE_TMP['LAST-ACTIVITY'] = datetime.now()
         bot.say(ROULETTE_STRINGS['TICK'])
         return
-    if ROULETTE_TMP['LAST-PLAYER'] == trigger.nick:
-        return
-    ROULETTE_TMP['LAST-ACTIVITY'] = datetime.now()
-    ROULETTE_TMP['LAST-PLAYER'] = trigger.nick
     if ROULETTE_TMP['NUMBER'] == random.randint(0, ROULETTE_SETTINGS['MAX_RANGE']):
         bot.write(['KICK', '%s %s :%s' % (trigger.sender, trigger.nick, ROULETTE_STRINGS['KICK_REASON'])])
         ROULETTE_TMP['LAST-PLAYER'] = None
@@ -59,23 +56,6 @@ def roulette(bot, trigger):
         ROULETTE_TMP['LAST-ACTIVITY'] = None
     else:
         bot.say(ROULETTE_STRINGS['TICK'])
-
-
-@commands('roulette-stop')
-@priority('low')
-def rouletteStop(bot, trigger):
-    """Reset a game of Russian Roulette"""
-    global ROULETTE_TMP, ROULETTE_STRINGS
-    if ROULETTE_TMP['LAST-PLAYER'] is None:
-        return
-    if datetime.now() - ROULETTE_TMP['LAST-ACTIVITY'] > ROULETTE_TMP['TIMEOUT']:
-        bot.say(ROULETTE_STRINGS['GAME_END'])
-        ROULETTE_TMP['LAST-ACTIVITY'] = None
-        ROULETTE_TMP['LAST-PLAYER'] = None
-        ROULETTE_TMP['NUMBER'] = None
-    else:
-        bot.say(ROULETTE_STRINGS['GAME_END_FAIL'] % (trigger.nick, ROULETTE_TMP['TIMEOUT'].seconds - (datetime.now() - ROULETTE_TMP['LAST-ACTIVITY']).seconds))
-
 
 if __name__ == '__main__':
     print __doc__.strip()

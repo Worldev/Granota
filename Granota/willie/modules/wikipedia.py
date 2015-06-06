@@ -1,11 +1,5 @@
 # -*- coding: cp1252 -*-
-"""
-wikipedia.py - Willie Wikipedia Module
-Copyright 2013 Edward Powell - embolalia.net
-Licensed under the Eiffel Forum License 2.
 
-http://willie.dftba.net
-"""
 from willie import web
 from willie.module import NOLIMIT, commands, example
 import json
@@ -72,7 +66,7 @@ def wikipedia(bot, trigger):
         if bot.config.lang == 'es':
             bot.reply('Mmmmhhh... soy un bot pero no puedo leerte el pensamiento...')
         else:
-            bot.reply('Mmmmhhh... I\'m a bot but I can\'t read your thoughts...'
+            bot.reply('Mmmmhhh... I\'m a bot but I can\'t read your thoughts...')
         return NOLIMIT
     if bot.config.lang == 'ca':
         server = 'ca.wikipedia.org'

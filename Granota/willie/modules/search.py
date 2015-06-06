@@ -245,7 +245,7 @@ def suggest(bot, trigger):
 	    bot.say(answer)
 	else:
 	    if bot.config.lang == 'ca':
-	        bot.reply("No hi han resultats")
+	        bot.reply("No hi ha resultats")
 	    elif bot.config.lang == 'es':
 	        bot.reply("No hay resultados")
 	    else:

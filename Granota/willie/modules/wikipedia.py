@@ -8,7 +8,7 @@ import re
 REDIRECT = re.compile(r'^REDIRECT (.*)')
 
 
-def mw_search(server, query, num):
+def mw_search(server, query, num, bot):
     """
     Searches the specified MediaWiki server for the given query, and returns
     the specified number of results.
@@ -25,7 +25,7 @@ def mw_search(server, query, num):
     return [r['title'] for r in query]
 
 
-def mw_snippet(server, query):
+def mw_snippet(server, query, bot):
     """
     Retrives a snippet of the specified length from the given page on the given
     server.
@@ -74,7 +74,7 @@ def wikipedia(bot, trigger):
         server = 'es.wikipedia.org'
     else:
         server = 'en.wikipedia.org'
-    query = mw_search(server, query, 1)
+    query = mw_search(server, query, 1, bot)
     if not query:
         if bot.config.lang == 'ca':
             bot.reply("No he trobat res, encara no sóc perfecte ;)")
@@ -85,7 +85,7 @@ def wikipedia(bot, trigger):
         return NOLIMIT
     else:
         query = query[0]
-    snippet = mw_snippet(server, query)
+    snippet = mw_snippet(server, query, bot)
 
     query = query.replace(' ', '_')
     if bot.config.lang == 'ca':

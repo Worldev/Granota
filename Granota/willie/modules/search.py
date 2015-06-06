@@ -226,3 +226,27 @@ def search(bot, trigger):
         result = '%s (g), %s (b), %s (d)' % (gu, bu, du)
 
     bot.reply(result)
+
+@commands('suggest', 'sggereix', 'sugiere')
+def suggest(bot, trigger):
+    """Suggest terms starting with given input"""
+	if not trigger.group(2):
+	    if bot.config.lang == 'ca':
+	        bot.reply("Error de sintaxi. Escriu .suggereix <paraula>")
+	    elif bot.config.lang == 'es':
+	        bot.reply("Error de sintaxis. Escribe .sugiere <palabra>")
+	    else:
+	        bot.reply("Syntax error. User .suggest <word>")
+	    return
+	query = trigger.group(2)
+	uri = 'http://websitedev.de/temp-bin/suggest.pl?q='
+	answer = web.get(uri + web.quote(query).replace('+', '%2B'))
+	if answer:
+	    bot.say(answer)
+	else:
+	    if bot.config.lang == 'ca':
+	        bot.reply("No hi han resultats")
+	    elif bot.config.lang == 'es':
+	        bot.reply("No hay resultados")
+	    else:
+	        bot.reply('Sorry, no result.')

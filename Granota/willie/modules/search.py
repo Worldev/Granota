@@ -227,7 +227,7 @@ def search(bot, trigger):
 
     bot.reply(result)
 
-@commands('suggest', 'sggereix', 'sugiere')
+@commands('suggest', 'suggereix', 'sugiere')
 def suggest(bot, trigger):
     """Suggest terms starting with given input"""
 	if not trigger.group(2):

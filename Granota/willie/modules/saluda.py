@@ -20,4 +20,5 @@ def helloworld(bot, trigger):
             nick = trigger.group(2)
         else:
             nick = "everybody!"
+    bot.say(hi + nick)
     return

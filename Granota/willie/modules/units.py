@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 from willie.module import commands, example, NOLIMIT
 import re
@@ -31,6 +31,14 @@ def temperature(bot, trigger):
     """
     Convert temperatures
     """
+    if not trigger.group(2):
+        if bot.config.lang == 'ca':
+            bot.reply(u"Error de sintaxi. Escriu .temp <número><unitat de mesura>")
+        elif bot.config.lang == 'es':
+            bot.repy(u"Error de sintaxis. Escribe .temp <número><unidad de mesura>")
+        else:
+            bot.reply(u"Syntax error. User .temp <number><measure unit>")
+        return
     try:
         source = find_temp.match(trigger.group(2)).groups()
     except AttributeError:
@@ -67,6 +75,14 @@ def distance(bot, trigger):
     """
     Convert distances
     """
+    if not trigger.group(2):
+        if bot.config.lang == 'ca':
+            bot.reply(u"Error de sintaxi. Escriu .temp <número><unitat de mesura>")
+        elif bot.config.lang == 'es':
+            bot.repy(u"Error de sintaxis. Escribe .temp <número><unidad de mesura>")
+        else:
+            bot.reply(u"Syntax error. User .temp <number><measure unit>")
+        return
     try:
         source = find_length.match(trigger.group(2)).groups()
     except AttributeError:

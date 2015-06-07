@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 
 from willie import web
 from willie.module import commands, example

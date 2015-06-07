@@ -1,11 +1,5 @@
 # -*- coding: utf8 -*-
-"""
-units.py - Unit conversion module for Willie
-Copyright © 2013, Elad Alfassa, <elad@fedoraproject.org>
-Copyright © 2013, Dimitri Molenaars, <tyrope@tyrope.nl>
-Licensed under the Eiffel Forum License 2.
 
-"""
 from willie.module import commands, example, NOLIMIT
 import re
 
@@ -29,7 +23,7 @@ def k_to_c(temp):
     return temp - 273.15
 
 
-@commands('temp')
+@commands('temp', 'temperatura', 'temperature')
 @example('.temp 100F', '37.7777777778°C = 100.0°F = 310.927777778K')
 @example('.temp 100C', '100.0°C = 212.0°F = 373.15K')
 @example('.temp 100K', '-173.15°C = -279.67°F = 100.0K')
@@ -40,7 +34,12 @@ def temperature(bot, trigger):
     try:
         source = find_temp.match(trigger.group(2)).groups()
     except AttributeError:
-        bot.reply("That's not a valid temperature.")
+        if bot.config.lang == 'ca':
+            bot.reply(u"Aquesta temperatura no és vàlida")
+        elif bot.config.lang == 'es':
+            bot.reply(u"Esa temperatura no es valida")
+        else:
+            bot.reply("That's not a valid temperature.")
         return NOLIMIT
     unit = source[1].upper()
     numeric = float(source[0])
@@ -57,7 +56,7 @@ def temperature(bot, trigger):
     bot.reply("%s°C = %s°F = %sK" % (celsius, fahrenheit, kelvin))
 
 
-@commands('length', 'distance')
+@commands('length', 'distance', 'distancia')
 @example('.distance 3m', '3.0m = 9 feet, 10.11 inches')
 @example('.distance 3km', '3.0km = 1.86411 miles')
 @example('.distance 3 miles', '4.82804126366km = 3.0 miles')
@@ -71,24 +70,29 @@ def distance(bot, trigger):
     try:
         source = find_length.match(trigger.group(2)).groups()
     except AttributeError:
-        bot.reply("That's not a valid length unit.")
+        if bot.config.lang == 'ca':
+            bot.reply(u"Aquesta no és unitat de distànica vàlida.")
+        elif bot.config.lang == 'es':
+            bot.reply(u"Esa no es una unidad de distancia valida.")
+        else:
+            bot.reply("That's not a valid length unit.")
         return NOLIMIT
     unit = source[1].lower()
     numeric = float(source[0])
     meter = 0
-    if unit in ("meters", "meter", "m"):
+    if unit in ("meters", "meter", "m", "metre", "metro", "metres", "metros"):
         meter = numeric
-    elif unit in ("kilometers", "kilometer", "km"):
+    elif unit in ("kilometers", "kilometer", "km", "kilometres", "kilometre", "quilometres", "quilometre", "kilometros", "kilometro"):
         meter = numeric * 1000
-    elif unit in ("miles", "mile", "mi"):
+    elif unit in ("miles", "mile", "mi", "milla", "milles", "millas"):
         meter = numeric / 0.00062137
     elif unit in ("inch", "in"):
         meter = numeric / 39.370
-    elif unit in ("centimeters", "centimeter", "cm"):
+    elif unit in ("centimeters", "centimeter", "cm", "centimetre", "centimetres", "centimetro", "centimetros"):
         meter = numeric / 100
-    elif unit in ("feet", "foot", "ft"):
+    elif unit in ("feet", "foot", "ft", "peu", "peus", "pie", "pies"):
         meter = numeric / 3.2808
-    elif unit in ("yards", "yard", "yd"):
+    elif unit in ("yards", "yard", "yd", "iarda", "iardes", "yarda", "yardas"):
         meter = numeric / (3.2808 * 3)
 
     if meter >= 1000:

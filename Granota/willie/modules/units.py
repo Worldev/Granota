@@ -77,11 +77,11 @@ def distance(bot, trigger):
     """
     if not trigger.group(2):
         if bot.config.lang == 'ca':
-            bot.reply(u"Error de sintaxi. Escriu .temp <número><unitat de mesura>")
+            bot.reply(u"Error de sintaxi. Escriu .distancia <número><unitat de mesura>")
         elif bot.config.lang == 'es':
-            bot.repy(u"Error de sintaxis. Escribe .temp <número><unidad de mesura>")
+            bot.repy(u"Error de sintaxis. Escribe .distancia <número><unidad de mesura>")
         else:
-            bot.reply(u"Syntax error. User .temp <number><measure unit>")
+            bot.reply(u"Syntax error. User .length <number><measure unit>")
         return
     try:
         source = find_length.match(trigger.group(2)).groups()

@@ -21,7 +21,7 @@ def configure(config):
             config.interactive_add('meetbot', 'meeting_log_baseurl', "URL on desar els registres de la reunió (ex. http://example.com/logs).")
         elif bot.config.lang == 'es':
             config.interactive_add('meetbot', 'meeting_log_path', u"Directorio donde guardar el registro de las reuniones.")
-            config.interactive_add('meetbot', 'meeting_log_baseurl', u"URL donde guardar los registros de la reunion".)
+            config.interactive_add('meetbot', 'meeting_log_baseurl', u"URL donde guardar los registros de la reunion.")
         else:
             config.interactive_add('meetbot', 'meeting_log_path', u"Path where you want to save the meeting log.")
             config.interactive_add('meetbot', 'meeting_log_baseurl', u"URL where you want to save the meeting log.")

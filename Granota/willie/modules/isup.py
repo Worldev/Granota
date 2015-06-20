@@ -37,7 +37,7 @@ def isup(bot, trigger):
             bot.say(site + ' looks down from here.')
         return
 
-    if response
+    if response:
         if bot.config.lang == 'ca':
             bot.say('No veig cap problema a ' + site)
         elif bot.config.lang == 'es':

@@ -3,6 +3,6 @@ python:
   - "2.6"
   - "2.7"
 
-install: "python Granota/setup.py"
+install: "cd Granota"
 
-script: python Granota/willie.py
+script: python willie.py

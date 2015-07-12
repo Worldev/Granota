@@ -4,4 +4,4 @@ python:
 
 install: "cd Granota"
 
-script: python willie.py
+script: pyteset

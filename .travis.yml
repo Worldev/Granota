@@ -4,4 +4,4 @@ python:
 
 install: "cd Granota"
 
-script: pyteset
+script: pytest

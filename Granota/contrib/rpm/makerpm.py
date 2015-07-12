@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
-import git
+try:
+    import git
+catch ImportError:
+    return
 import sys
 import os
 import os.path

@@ -2,7 +2,7 @@
 
 try:
     import git
-catch ImportError:
+except ImportError:
     return
 import sys
 import os

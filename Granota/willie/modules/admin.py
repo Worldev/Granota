@@ -1,15 +1,4 @@
 # coding=utf-8
-"""
-admin.py - Willie Admin Module
-Copyright 2010-2011, Sean B. Palmer (inamidst.com) and Michael Yanovich
-(yanovich.net)
-Copyright © 2012, Elad Alfassa, <elad@fedoraproject.org>
-Copyright 2013, Ari Koivula <ari@koivu.la>
-
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dfbta.net
-"""
 
 import willie
 import willie.module
@@ -22,7 +11,7 @@ def configure(config):
     | -------- | ------- | ------- |
     | hold_ground | False | Auto re-join on kick |
     """
-    config.add_option('admin', 'hold_ground', u"Vols que torni a entrar que el facin fora d'un canal?")
+    config.add_option('admin', 'hold_ground', u"Enable auto-rejoin on kick?")
 
 
 @willie.module.commands('join', 'entra')
@@ -32,7 +21,13 @@ def join(bot, trigger):
     u"""Entra al canal especificat. Només els administradors."""
     # Can only be done in privmsg by an admin
     if trigger.sender.startswith('#'):
-        bot.reply(u"En privat, si us plau")
+        if trigger.group(1) == 'join':
+            bot.reply(u"Only works in private")
+        else:
+            if bot.config.lang == 'es':
+                bot.reply(u"Solo funciona en privado")
+            elif bot.config.lang == 'ca':
+                bot.reply(u"Nomes funciona en privat")
         return
 
     if trigger.admin:
@@ -47,7 +42,10 @@ def join(bot, trigger):
         if trigger.group(1) == 'join':
             bot.reply(u"You need admin rights.")
         else:
-            bot.reply(u"No ets admin")
+            if bot.config.lang == 'ca':
+                bot.reply(u"No ets admin")
+            elif bot.config.lang == 'es':
+                bot.reply(u"No eres admin")
         return
 
 @willie.module.commands('part', 'surt', 'sal')
@@ -59,7 +57,7 @@ def part(bot, trigger):
     if not trigger.admin:
         if trigger.group(1) == 'join':
             bot.reply(u"You don't have admin rights")
-        elif trigger.group(1) == 'sal':
+        if trigger.group(1) == 'sal':
             bot.reply(u"No eres admin")
         else:
             bot.reply(u"No ets admin")
@@ -84,15 +82,17 @@ def quit(bot, trigger):
     """Es desconnecta del servidor. Només els administradors del bt"""
     # Can only be done in privmsg by the owner
 
-    quit_message = trigger.group(2) + "[by " + trigger.nick + "]"
-    if not quit_message:
-        quit_message = u"Command "quit" performed by %s" % trigger.nick
-    bot.quit(quit_message)
-
+    quit_message = trigger.group(2)
+    if bot.config.lang == 'es':
+        bot.quit(quit_message + " [comando ejecutado por %s]" % trigger.nick)
+    elif bot.config.lang == 'ca':
+        bot.quit(quit_message + " [ordre executada per %s]" % trigger.nick)
+    else:
+        bot.quit(quit_message + " [by %s]" % trigger.nick)
 
 @willie.module.commands('msg')
 @willie.module.priority('low')
-@willie.module.example(u'.msg #exemple Hola! Que hi ha algú per aquí? :D')
+@willie.module.example(u'.msg #example Hi!')
 def msg(bot, trigger):
     if trigger.sender.startswith('#'):
         return
@@ -173,13 +173,23 @@ def mode(bot, trigger):
 
 
 @willie.module.commands('set')
-@willie.module.example('.set core.owner Me')
+@willie.module.example('.set core.owner nick')
 def set_config(bot, trigger):
     if trigger.sender.startswith('#'):
-        bot.reply("Només funciona en un missatge privat.")
+        if bot.config.lang == 'ca':
+            bot.reply("Només funciona en un missatge privat.")
+        elif bot.config.lang == 'es':
+            bot.reply("Solo en mensaje privado.")
+        else:
+            bot.reply("Private message only.")
         return
     if not trigger.admin:
-        bot.reply("Necessites ser administrador del bot.")
+        if bot.config.lang == 'ca':
+            bot.reply("Necessites ser administrador del bot.")
+        elif bot.config.lang == 'es':
+            bot.reply("Necesitas ser administrador del bot.")
+        else:
+            bot.reply("You are not bot admin.")
         return
     """See and modify values of willies config object.
 
@@ -198,19 +208,34 @@ def set_config(bot, trigger):
     elif len(arg1) == 2:
         section, option = arg1
     else:
-        bot.reply(u"Ús: .set secció.opció valor")
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ús: .set secció.opció nou valor")
+        elif bot.config.lang == 'es':
+            bot.reply(u"Uso: .set sección.opción nuevo valor")
+        else:
+            bot.reply(u"Use: .set section.option new value")
         return
 
     # Display current value if no value is given.
     value = trigger.group(4)
     if not value:
         if not bot.config.has_option(section, option):
-            bot.reply("Option %s.%s does not exist." % (section, option))
+            if bot.config.lang == 'ca':
+                bot.reply("L'opcio %s.%s no existeix." % (section, option))
+            elif bot.config.lang == 'es':
+                bot.reply("La opcion %s.%s no existe." % (section, option))
+            else:
+                bot.reply("Option %s.%s does not exist." % (section, option))
             return
         # Except if the option looks like a password. Censor those to stop them
         # from being put on log files.
         if option.endswith("password") or option.endswith("pass"):
-            value = "(password censored)"
+            if bot.config.lang == 'ca':
+                value = "(contrassenya censurda)"
+            elif bot.config.lang == 'es':
+                value = "(contraseña censurda)"
+            else:
+                value = "(password censored)"
         else:
             value = getattr(getattr(bot.config, section), option)
         bot.reply("%s.%s = %s" % (section, option, value))
@@ -220,7 +245,7 @@ def set_config(bot, trigger):
     setattr(getattr(bot.config, section), option, value)
 
 
-@willie.module.commands('save')
+@willie.module.commands('save', 'guardar', 'desa')
 @willie.module.example('.save')
 def save_config(bot, trigger):
     """Save state of willies config object to the configuration file."""
@@ -228,6 +253,12 @@ def save_config(bot, trigger):
         return
     if not trigger.admin:
         return
+    if bot.config.lang == 'ca':
+        bot.say(u"Nova configuracio guardada. Pot ser que necessitis reiniciar-me perque tingui efecte.")
+    elif bot.config.lang == 'es':
+        bot.say(u"Nueva configuracion guardada. Quizas tendras que reiniciarme para que tenga efecto.")
+    else:
+        bot.say(u"New configuration save. Maybe you will have to reboot me to apply the changes.")
     bot.config.save()
 
 @commands('nick', 'nom', 'nombre')

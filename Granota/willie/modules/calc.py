@@ -1,11 +1,4 @@
 # coding=utf-8
-"""
-calc.py - Willie Calculator Module
-Copyright 2008, Sean B. Palmer, inamidst.com
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dfbta.net
-"""
 
 import re
 from willie import web
@@ -21,15 +14,34 @@ import HTMLParser
 def c(bot, trigger):
     """Google calculator."""
     if not trigger.group(2):
-        return bot.reply("Nothing to calculate.")
+        if bot.config.lang == 'ca':
+            return bot.reply("Res a calcular.")
+        elif bot.config.lang == 'es':
+            return bot.reply(u"Nada a calcular.")
+        else:
+            return bot.reply("Nothing to calculate.")
     try:
         result = str(eval_equation(trigger.group(2)))
     except ZeroDivisionError:
-        result = "Division by zero is not supported in this universe."
+        if bot.config.lang == 'ca':
+            result = u"La diviso entre zero no esta suportada en aquest univers."
+        elif bot.config.lang == 'es':
+            result = u"La division entre zero no esta soportada en ese universo."
+        else:
+            result = "Division by zero is not supported in this universe."
     except Exception:
-        result = ("Sorry, I can't calculate that with this command. "
-                  "I might have another one that can. "
-                  "Use .commands for a list.")
+        if bot.config.lang == 'ca':
+            result = ("Ho sento, no puc calcular aixo amb aquesta ordre. "
+                  "Potser en tinc un altre que pot fer-ho. "
+                  "Escriu .ordres per una llista.")
+        if bot.config.lang == 'es':
+            result = ("Lo siento, pero no puedo calcular eso con ese comando. "
+                  "Quizas tengo otro que si puede. "
+                  "Escribe .comandos por una lista.")
+        else:
+            result = ("Sorry, I can't calculate that with this command. "
+                      "I might have another one that can. "
+                      "Use .commands for a list.")
     bot.reply(result)
 
 
@@ -43,7 +55,12 @@ def py(bot, trigger):
     if answer:
         bot.say(answer)
     else:
-        bot.reply('Sorry, no result.')
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, no hi ha resultat.")
+        elif bot.config.lang == 'es':
+            bot.reply(u"Lo siento, no hay resultados.")
+        else:
+            bot.reply('Sorry, no result.')
 
 
 @commands('wa', 'wolfram')
@@ -52,13 +69,23 @@ def py(bot, trigger):
 def wa(bot, trigger):
     """Wolfram Alpha calculator"""
     if not trigger.group(2):
-        return bot.reply("No search term.")
+        if bot.config.lang == 'ca':
+            return bot.reply("Res per buscar. Sintaxi: .wa <paraula|frase|operacio|...>.")
+        elif bot.config.lang == 'es':
+            return bot.reply("Nada para buscar. Sintaxis: .wa <palabra|frase|operacion|...>.")
+        else:
+           return bot.reply("Nothing to search. Syntax: .wa <word|sentence|operation|...>.")     
     query = trigger.group(2)
     uri = 'http://tumbolia.appspot.com/wa/'
     try:
         answer = web.get(uri + web.quote(query.replace('+', '%2B')), 45)
     except timeout as e:
-        return bot.say('[WOLFRAM ERROR] Request timed out')
+        if bot.config.lang == 'ca':
+            return bot.say('[WOLFRAM ERROR] Temps d\'espera excedit.')
+        elif bot.config.lang == 'es':
+            return bot.say('[WOLFRAM ERROR] Tiempo de espera excedido.')
+        else:
+            return bot.say('[WOLFRAM ERROR] Request timed out')
     if answer:
         answer = answer.decode('string_escape')
         answer = HTMLParser.HTMLParser().unescape(answer)
@@ -74,7 +101,12 @@ def wa(bot, trigger):
         if(len(waOutputArray) < 2):
             if(answer.strip() == "Couldn't grab results from json stringified precioussss."):
                 # Answer isn't given in an IRC-able format, just link to it.
-                bot.say('[WOLFRAM]Couldn\'t display answer, try http://www.wolframalpha.com/input/?i=' + query.replace(' ', '+'))
+                if bot.config.lang == 'ca':
+                    bot.say('[WOLFRAM] No hi ha cap resposta disponible. Prova amb http://www.wolframalpha.com/input/?i=' + query.replace(' ', '+'))
+                elif bot.config.lang == 'es':
+                    bot.say('[WOLFRAM] No hay ninguna respusta disponible. Prueba con http://www.wolframalpha.com/input/?i=' + query.replace(' ', '+'))
+                else:
+                    bot.say('[WOLFRAM] Couldn\'t display answer, try http://www.wolframalpha.com/input/?i=' + query.replace(' ', '+'))
             else:
                 bot.say('[WOLFRAM ERROR]' + answer)
         else:
@@ -83,7 +115,12 @@ def wa(bot, trigger):
                     + waOutputArray[1])
         waOutputArray = []
     else:
-        bot.reply('Sorry, no result.')
+        if bot.config.lang == 'ca':
+            bot.reply(u"Sense resultats.")
+        elif bot.config.lang == 'es':
+            bot.repy(u"Sin resultados.")
+        else:
+            bot.reply('Sorry, no result.')
 
 
 if __name__ == "__main__":

@@ -1,10 +1,4 @@
-"""
-tld.py - Willie TLD Module
-Copyright 2009-10, Michael Yanovich, yanovich.net
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net
-"""
+# -*- coding:utf-8 -*-
 
 from willie import web
 from willie.module import commands, example
@@ -57,5 +51,10 @@ def gettld(bot, trigger):
                 dict_val["notes"] = dict_val["notes"][:400] + "..."
             reply = "%s (%s, %s). IDN: %s, DNSSEC: %s, SLD: %s" % (dict_val["country"], dict_val["expl"], dict_val["notes"], dict_val["idn"], dict_val["dnssec"], dict_val["sld"])
         else:
-            reply = "No matches found for TLD: {0}".format(unicode(trigger.group(2)))
+            if bot.config.lang == 'ca':
+                reply = "Cap resultat per TLD: {0}".format(unicode(trigger.group(2)))
+            elif bot.config.lang == 'es':
+                reply = u"Ningún resultado por TLD: {0}".format(unicode(trigger.group(2)))
+            else:
+                reply = "No results for TLD: {0}".format(unicode(trigger.group(2)))
         bot.reply(reply)

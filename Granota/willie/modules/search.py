@@ -1,11 +1,4 @@
-"""
-search.py - Willie Web Search Module
-Copyright 2008-9, Sean B. Palmer, inamidst.com
-Copyright 2012, Edward Powell, embolalia.net
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net
-"""
+# -*- coding: utf-8 -*-
 
 import re
 from willie import web
@@ -52,7 +45,7 @@ def formatnumber(n):
 
 
 @commands('g', 'google')
-@example('.g swhack')
+@example('.g Barcelona')
 def g(bot, trigger):
     """Queries Google for the specified input."""
     query = trigger.group(2)
@@ -63,9 +56,19 @@ def g(bot, trigger):
         bot.reply(uri)
         bot.memory['last_seen_url'][trigger.sender] = uri
     elif uri is False:
-        bot.reply("Problem getting data from Google.")
+        if bot.config.lang == 'ca':
+            bot.reply("Error al connectar amb Google.")
+        elif bot.config.lang == 'es':
+            bo.reply("Error al conectar con Google.")
+        else:
+            bot.reply("Problem getting data from Google.")
     else:
-        bot.reply("No results found for '%s'." % query)
+        if bot.config.lang == 'ca':
+            bot.reply("Cap resultat per '%s'." % query)
+        elif bot.config.lang == 'es':
+            bot.reply(u"Ningún resultado por '%s'." % query)
+        else:
+            bot.reply("No results found for '%s'." % query)
 
 
 @commands('gc')
@@ -84,14 +87,20 @@ r_query = re.compile(
 
 
 @commands('gcs', 'comp')
-@example('.gcs foo bar')
+@example('.gcs Barcelona London')
 def gcs(bot, trigger):
     """Compare the number of Google search results"""
     if not trigger.group(2):
         return bot.reply("Nothing to compare.")
     queries = r_query.findall(trigger.group(2))
     if len(queries) > 6:
-        return bot.reply('Sorry, can only compare up to six things.')
+        if bot.config.lang == 'ca':
+            bot.reply(u"Només puc comparar fins a sis coses.")
+        elif bot.config.lang == 'es':
+            bot.reply(u"Sólo puedo comparar hasta seis cosas.")
+        else:
+            bot.reply('Sorry, can only compare up to six things.')
+        return
 
     results = []
     for i, query in enumerate(queries):
@@ -151,8 +160,14 @@ def duck(bot, trigger):
     """Queries Duck Duck Go for the specified input."""
     query = trigger.group(2)
     if not query:
-        return bot.reply('.ddg what?')
-
+        if bot.config.lang == 'ca':
+            bot.reply("Error de sintaxi. Escriu .ddg <paraula a cercar>")
+        elif bot.config.lang == 'es':
+            bot.reply("Error de sintaxis. Escribe .ddg <palabra a buscar>")
+        else:
+            bot.reply("Syntax error. Use .ddg <word>")
+        return
+    
     #If the API gives us something, say it and stop
     result = duck_api(query)
     if result:
@@ -166,15 +181,28 @@ def duck(bot, trigger):
         bot.reply(uri)
         bot.memory['last_seen_url'][trigger.sender] = uri
     else:
-        bot.reply("No results found for '%s'." % query)
+        if bot.config.lang == 'ca':
+            bot.reply("No s'han trobat resultats per '%s'." % query)
+        elif bot.config.lang == 'es':
+            bot.reply("No se han encontrado resultados para '%s'." % query)
+        else:
+            bot.reply("No results found for '%s'." % query)
+        return
 
 
-@commands('search')
+@commands('search', 'cerca', 'cercar', 'busca', 'buscar')
 @example('.search nerdfighter')
 def search(bot, trigger):
     """Searches Google, Bing, and Duck Duck Go."""
     if not trigger.group(2):
-        return bot.reply('.search for what?')
+        if bot.config.lang == 'ca':
+            bot.reply("Error de sintaxi. Escriu .cerca <paraula a cercar>")
+        elif bot.config.lang == 'es':
+            bot.reply("Error de sintaxis. Escribe .busca <palabra a buscar>")
+        else:
+            bot.reply("Syntax error. Use .search <word>")
+        return
+    
     query = trigger.group(2)
     gu = google_search(query) or '-'
     bu = bing_search(query) or '-'
@@ -199,16 +227,26 @@ def search(bot, trigger):
 
     bot.reply(result)
 
-
-@commands('suggest')
+@commands('suggest', 'suggereix', 'sugiere')
 def suggest(bot, trigger):
     """Suggest terms starting with given input"""
     if not trigger.group(2):
-        return bot.reply("No query term.")
+	if bot.config.lang == 'ca':
+            bot.reply("Error de sintaxi. Escriu .suggereix <paraula>")
+	elif bot.config.lang == 'es':
+            bot.reply("Error de sintaxis. Escribe .sugiere <palabra>")
+	else:
+            bot.reply("Syntax error. User .suggest <word>")
+	return
     query = trigger.group(2)
     uri = 'http://websitedev.de/temp-bin/suggest.pl?q='
     answer = web.get(uri + web.quote(query).replace('+', '%2B'))
     if answer:
-        bot.say(answer)
+    	bot.say(answer)
     else:
-        bot.reply('Sorry, no result.')
+    	if bot.config.lang == 'ca':
+    	    bot.reply("No hi ha resultats")
+    	elif bot.config.lang == 'es':
+            bot.reply("No hay resultados")
+    	else:
+            bot.reply('Sorry, no result.')

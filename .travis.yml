@@ -1,0 +1,7 @@
+language: python
+python:
+  - "2.7.9"
+
+install: "cd Granota"
+
+script: python pytest_run.py

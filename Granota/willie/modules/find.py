@@ -1,16 +1,4 @@
-"""
-find.py - Willie Spelling correction module
-Copyright 2011, Michael Yanovich, yanovich.net
-Copyright 2013, Edward Powell, embolalia.net
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net
-
-Contributions from: Matt Meinwald and Morgan Goose
-This module will fix spelling errors if someone corrects them
-using the sed notation (s///) commonly found in vi/vim.
-"""
-
+# -*- coding: utf-8 -*-
 import re
 from willie.tools import Nick, WillieMemory
 from willie.module import rule, priority
@@ -129,9 +117,14 @@ def findandreplace(bot, trigger):
 
     # output
     if not me:
-        new_phrase = '\x02meant\x02 to say: ' + new_phrase
+        if bot.config.lang == 'ca':
+            new_phrase = '\x02volia dir:\x02 ' + new_phrase
+        elif bot.config.lang == 'es':
+            new_phrase = u'\x02quería decir:\x02 ' + new_phrase
+        else:
+            new_phrase = '\x02meant to say:\x02 ' + new_phrase
     if trigger.group(1):
-        phrase = '%s thinks %s %s' % (trigger.nick, rnick, new_phrase)
+        phrase = '* %s %s %s' % (trigger.nick, rnick, new_phrase)
     else:
         phrase = '%s %s' % (trigger.nick, new_phrase)
 

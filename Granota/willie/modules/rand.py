@@ -1,17 +1,10 @@
-"""
-rand.py - Rand Module
-Copyright 2013, Ari Koivula, <ari@koivu.la>
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net
-"""
 
 from willie.module import commands, example
 import random
 import sys
 
 
-@commands('rand')
+@commands('rand', 'alea')
 @example('.rand 2', re=r'random\(0, 2\) = (0|1|2)', repeat=10)
 @example('.rand -1 -1', 'random(-1, -1) = -1')
 @example('.rand', re=r'random\(0, \d+\) = \d+')
@@ -36,7 +29,12 @@ def rand(bot, trigger):
         low, high = high, low
 
     number = random.randint(low, high)
-    bot.reply("random(%d, %d) = %d" % (low, high, number))
+    if bot.config.lang == 'ca':
+        bot.reply("aleatori(%d, %d) = %d" % (low, high, number))
+    elif bot.config.lang == 'es':
+        bot.reply("aleatorio(%d, %d) = %d" % (low, high, number))
+    else:
+        bot.reply("random(%d, %d) = %d" % (low, high, number))
 
 
 if __name__ == "__main__":

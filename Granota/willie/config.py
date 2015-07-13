@@ -31,15 +31,6 @@ The configuration function, if used, must be declared with the signature
 ``configure(config)``. To add options, use ``interactive_add``, ``add_list``
 and ``add_option``.
 """
-"""
-Config - A config class and writing/updating utility for Willie
-Copyright 2012, Edward Powell, embolalia.net
-Copyright © 2012, Elad Alfassa <elad@fedoraproject.org>
-
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net
-"""
 
 import db
 import os
@@ -48,6 +39,7 @@ import ConfigParser
 import getpass
 import imp
 
+lang = None
 
 class ConfigurationError(Exception):
     """ Exception type for configuration errors """
@@ -274,24 +266,76 @@ class Config(object):
         return (ans is 'y' or ans is 'Y')
 
     def _core(self):
-        self.interactive_add('core', 'nick', 'Enter the nickname for your bot',
-                             'Willie')
-        self.interactive_add('core', 'host', 'Enter the server to connect to',
-                             'irc.dftba.net')
-        self.add_option('core', 'use_ssl', 'Should the bot connect with SSL')
-        if self.use_ssl == 'True':
-            default_port = '6697'
+        global lang
+        if lang == 'en':
+            self.interactive_add('core', 'lang', 'Language to use',
+                            'en')
+        elif lang == 'es':
+            self.interactive_add('core', 'lang', 'Idioma en el que el bot debe hablar',
+                            'es')
+        elif lang == 'ca':
+            self.interactive_add('core', 'lang', 'Idioma en el que el bot ha de parlar',
+                            'ca')
         else:
-            default_port = '6667'
-        self.interactive_add('core', 'port', 'Enter the port to connect on',
-                             default_port)
-        self.interactive_add(
-            'core', 'owner',
-            "Enter your own IRC name (or that of the bot's owner)"
-        )
-        c = 'Enter the channels to connect to by default, one at a time.' + \
-            ' When done, hit enter again.'
-        self.add_list('core', 'channels', c, 'Channel:')
+            self.interactive_add('core', 'lang', 'Language to use:',
+                            'en')            
+        if lang == 'en':
+            self.interactive_add('core', 'nick', 'Enter the nickname for your bot',
+                                 'Granota')
+            self.interactive_add('core', 'host', 'Enter the server to connect to',
+                                 'irc.freenode.net')
+            self.add_option('core', 'use_ssl', 'Should the bot connect with SSL')
+            if self.use_ssl == 'True':
+                default_port = '6697'
+            else:
+                default_port = '6667'
+            self.interactive_add('core', 'port', 'Enter the port to connect on',
+                                 default_port)
+            self.interactive_add(
+                'core', 'owner',
+                "Enter your own IRC name (or that of the bot's owner)"
+            )
+            c = 'Enter the channels to connect to by default, one at a time.' + \
+                ' When done, hit enter again.'
+            self.add_list('core', 'channels', c, 'Channel:')
+        elif lang == 'es':
+            self.interactive_add('core', 'nick', 'Nick del bot',
+                                 'Granota')
+            self.interactive_add('core', 'host', 'Server donde el bot debe conectarse',
+                                 'irc.freenode.net')
+            self.add_option('core', 'use_ssl', 'El bot tiene que conectarse con SSL')
+            if self.use_ssl == 'True':
+                default_port = '6697'
+            else:
+                default_port = '6667'
+            self.interactive_add('core', 'port', 'Puerto del servidor donde el bot debe conectarse',
+                                 default_port)
+            self.interactive_add(
+                'core', 'owner',
+                "Tu nick de IRC (o el del propietario del bot)"
+            )
+            c = 'Escribe los canales en los que el bot debe conectarse de forma automatica. Despues cada canal presiona la tecla enter.' + \
+                ' Cuando hayas puesto todos los canales, vuelve a presionar enter.'
+            self.add_list('core', 'channels', c, 'Canal:')
+        elif lang == 'ca':
+            self.interactive_add('core', 'nick', 'Nick del bot',
+                                 'Granota')
+            self.interactive_add('core', 'host', 'Servidor on el bot ha de connectar-se',
+                                 'irc.freenode.net')
+            self.add_option('core', 'use_ssl', 'El bot ha de connectar-se amb SSL')
+            if self.use_ssl == 'True':
+                default_port = '6697'
+            else:
+                default_port = '6667'
+            self.interactive_add('core', 'port', 'Port del servidor on el bot ha de connectar-se',
+                                 default_port)
+            self.interactive_add(
+                'core', 'owner',
+                "El teu nick d'IRC (o el del propietari del bot)"
+            )
+            c = 'Canals on el bot ha de connectar-se de manera automatica. Despres de cada canal presiona la tecla enter.' + \
+                ' Al acabar la llista de canals, pressiona enter una altra vegada.'
+            self.add_list('core', 'channels', c, 'Canal:')            
 
     def _db(self):
         db.configure(self)
@@ -411,10 +455,10 @@ def check_dir(create=True):
                 os.makedirs(dotdir)
             except Exception, e:
                 print >> sys.stderr, \
-                    'There was a problem creating %s:' % dotdir
+                    ('There was a problem creating %s: -- Problema creando %s -- Problema creant %s' % (dotdir, dotdir, dotdir))
                 print >> sys.stderr, e.__class__, str(e)
                 print >> sys.stderr, \
-                    'Please fix this and then run Willie again.'
+                    'Please fix this and then run Granota again. -- Por favor, arregle eso y vuelva a executar a Granota -- Si us plau, arregla el problema i torna a executar el bot.'
                 sys.exit(1)
         else:
             print "No config file found. Please make one before configuring these options."
@@ -423,12 +467,26 @@ def check_dir(create=True):
 
 def create_config(configpath):
     check_dir()
-    print "Please answer the following questions" + \
-        " to create your configuration file:\n"
+    global lang
+    lang = raw_input('Language -- Idioma (en, es, ca) [en]: ')
+    if lang == "":
+        lang = "en"
+    if lang == 'en':
+        print "Please answer the following questions:\n"
+    elif lang == 'es':
+        print "Responde esas preguntas:\n"
+    elif lang == 'ca':
+        print "Respon aquestes preguntes:\n"
+    else:
+        print "The language specified is not valid. It must be 'en' for english, 'es' for spanish and 'ca' for catalan."
+        print "El idioma especificado no es valido. Tiene que ser 'en' para ingles, 'es' para espanol y 'ca' para catalan."
+        print "L'idioma especificat no es valid. Ha de ser 'en' per angles, 'es' per espanyol i 'ca' per catala."
+        create_config(configpath)
+        return
     try:
         config = Config(configpath, os.path.isfile(configpath))
         config._core()
-        if config.option("Would you like to set up a settings database now"):
+        if config.option("Would you like to set up a settings database now?"):
             config._db()
         if config.option(
             'Would you like to see if there are any modules'
@@ -437,8 +495,18 @@ def create_config(configpath):
             config._modules()
         config.save()
     except Exception, e:
-        print "Encountered an error while writing the config file." + \
-            " This shouldn't happen. Check permissions."
+        if lang == 'en':
+            print "Encountered an error while writing the config file." + \
+                " This shouldn't happen. Check permissions."
+        elif lang == 'es':
+            print "Error encontrado al escribir el archivo de configuracion. Comprueba que el servidor o ordenador tenga permiso de escritura."
+        else:
+            print "Error a l'escriure l'arxiu de configuracio. Comprova que el servidor o ordinador tingui permis d'escriptura."
         raise
         sys.exit(1)
-    print "Config file written sucessfully!"
+    if lang == 'en':
+        print "Config file written sucessfully!"
+    elif lang == 'es':
+        print "Fichero de configuracion escrito con exito!"
+    elif lang == 'ca':
+        print "Fitxer de configuracio escrit amb exit!"

@@ -1,11 +1,5 @@
-"""
-codepoints.py - Willie Codepoints Module
-Copyright 2013, Edward Powell, embolalia.net
-Copyright 2008, Sean B. Palmer, inamidst.com
-Licensed under the Eiffel Forum License 2.
+# -*- coding: utf-8 -*-
 
-http://willie.dfbta.net
-"""
 import unicodedata
 from willie.module import commands, example, NOLIMIT
 
@@ -15,13 +9,23 @@ from willie.module import commands, example, NOLIMIT
 def codepoint(bot, trigger):
     arg = trigger.group(2).strip()
     if len(arg) == 0:
-        bot.reply('What code point do you want me to look up?')
+        if bot.config.lang == 'ca':
+            bot.reply("Error de sintaxi. Escriu .u <caràcter>")
+        elif bot.config.lang == 'es':
+            bot.reply("Error de sintaxis. Utiliza .u <carácter>")
+        else:
+            bot.reply('Syntax error. Use .u <character>')
         return NOLIMIT
     elif len(arg) > 1:
         try:
             arg = unichr(int(arg, 16))
         except:
-            bot.reply("That's not a valid code point.")
+            if bot.config.lang == 'ca':
+                bot.reply(u"Aquest no és un caràcter vàlid.")
+            elif bot.config.lang == 'es':
+                bot.reply(u"Ese no es un caracter válido.")
+            else:
+                bot.reply("That's not a valid code point.")
             return NOLIMIT
 
     # Get the hex value for the code point, and drop the 0x from the front
@@ -31,7 +35,12 @@ def codepoint(bot, trigger):
     try:
         name = unicodedata.name(arg)
     except ValueError:
-        return 'U+%s (No name found)' % point
+        if bot.config.lang == 'ca':
+            return 'U+%s (No s\'ha trobat el nom)' % point
+        elif bot.config.lang == 'es':
+            return 'U+%s (No se ha encontrado el nombre)' % point
+        else:
+            return 'U+%s (No name found)' % point
 
     if not unicodedata.combining(arg):
         template = 'U+%s %s (%s)'

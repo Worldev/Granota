@@ -1,13 +1,5 @@
 #!/usr/bin/env python2.7
 # coding=utf-8
-"""
-Willie - An IRC Bot
-Copyright 2008, Sean B. Palmer, inamidst.com
-Copyright © 2012, Elad Alfassa <elad@fedoraproject.org>
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net
-"""
 
 import sys
 import os
@@ -24,8 +16,8 @@ homedir = os.path.join(os.path.expanduser('~'), '.willie')
 
 
 def check_python_version():
-    if sys.version_info < (2, 7):
-        stderr(u'Error: Necessites, com a mínim el Python 2.7!')
+    if sys.version_info < (2, 7, 9):
+        stderr(u'Error: You need at leat Python 2.7.9!')
         sys.exit(1)
 
 
@@ -107,7 +99,7 @@ def main(argv=None):
 
         configpath = find_config(config_name)
         if not os.path.isfile(configpath):
-            print u"Benvingut a Willie!\nNo veig cap arxiu de configuració creat. Generem-lo ara!\n"
+            print u"Welcome to Granota configuration wizard! -- Bienvenido al asistente de configuracion de Granota! -- Benvingut a l'assistent de cnfiguracio de Granota!\n"
             if not configpath.endswith('.cfg'):
                 configpath = configpath + '.cfg'
             create_config(configpath)
@@ -119,7 +111,7 @@ def main(argv=None):
             sys.exit(2)
 
         if config_module.core.not_configured:
-            stderr(u'El bot no està configurat i no es pot executar.')
+            stderr(u'The bot is not configured. -- El bot no esta configurado. -- El bot no esta configurat.')
             # exit with code 2 to prevent auto restart on fail by systemd
             sys.exit(2)
 
@@ -162,25 +154,25 @@ def main(argv=None):
             pid_file.close()
             if tools.check_pid(old_pid):
                 if opts.quit is None and opts.kill is None:
-                    stderr(u'Ja hi ha un bot Willie executant-se des d\'aquest fitxer.')
-                    stderr(u'Intenta les opcions --quit o --kill')
+                    stderr(u'There is already a Granota running. -- Ya hay un bot executandose. -- Ja hi ha un bot executant-se.')
+                    stderr(u'Try -- Intenta: --quit o --kill')
                     sys.exit(1)
                 elif opts.kill:
-                    stderr(u'Matant el Willie')
+                    stderr(u'Killing Granota. -- Matando a Granota. -- Matant Granota.')
                     os.kill(old_pid, signal.SIGKILL)
                     sys.exit(0)
                 elif opts.quit:
-                    stderr(u'Demanant educadament que el Willie es tanqui...')
+                    stderr(u'Quitting Granota. -- Desconnectando a Granota. -- Desconnectant a Granota.')
                     if hasattr(signal, 'SIGUSR1'):
                         os.kill(old_pid, signal.SIGUSR1)
                     else:
                         os.kill(old_pid, signal.SIGTERM)
                     sys.exit(0)
             elif not tools.check_pid(old_pid) and (opts.kill or opts.quit):
-                stderr(u'El Willie no s\'està executant!')
+                stderr(u'The bot is not running. -- El bot no se esta executando. -- El bot no s\'esta executant.')
                 sys.exit(1)
         elif opts.quit is not None or opts.kill is not None:
-            stderr(u'El Willie no s\'està executant!')
+            stderr(u'The bot is not running. -- El bot no se esta executando. -- El bot no s\'esta executant.')
             sys.exit(1)
         if opts.deamonize is not None:
             child_pid = os.fork()
@@ -194,7 +186,7 @@ def main(argv=None):
         # Step Five: Initialise And Run willie
         run(config_module)
     except KeyboardInterrupt:
-        print "\n\nInterromput"
+        print "\n\nKeyboard Interrupt"
         os._exit(1)
 if __name__ == '__main__':
     main()

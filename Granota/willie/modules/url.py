@@ -1,11 +1,4 @@
-"""
-url.py - Willie URL title module
-Copyright 2010-2011, Michael Yanovich, yanovich.net, Kenneth Sham
-Copyright 2012-2013 Edward Powell
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net
-"""
+# -*- coding: utf-8 -*-
 
 import re
 from htmlentitydefs import name2codepoint
@@ -39,10 +32,21 @@ def configure(config):
     if config.option('Exclude certain URLs from automatic title display', False):
         if not config.has_section('url'):
             config.add_section('url')
-        config.add_list('url', 'exclude', 'Enter regular expressions for each URL you would like to exclude.',
-            'Regex:')
-        config.interactive_add('url', 'exclusion_char',
-            'Prefix to suppress URL titling', '!')
+        if config.lang == 'ca':
+            config.add_list('url', 'exclude', u'Expressió regular pels URL que vols excloure.',
+                'Regex:')
+            config.interactive_add('url', 'exclusion_char',
+                u'Prefix per evitar que el bot cerqui informació dels URLs', '!')
+        elif config.lang == 'es':
+            config.add_list('url', 'exclude', u'Expressión regular para los URL que quieres que el bot ignore.',
+                'Regex:')
+            config.interactive_add('url', 'exclusion_char',
+                u'Prefijo para evitar que el bot busque información acerca de los URLs', '!')
+        else:
+            config.add_list('url', 'exclude', 'Enter regular expressions for each URL you would like to exclude.',
+                'Regex:')
+            config.interactive_add('url', 'exclusion_char',
+                'Prefix to suppress URL titling', '!')
 
 
 def setup(bot=None):

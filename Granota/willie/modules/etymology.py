@@ -1,12 +1,4 @@
 # -*- coding: cp1252 -*-
-"""
-etymology.py - Willie Etymology Module
-Copyright 2007-9, Sean B. Palmer, inamidst.com
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net
-"""
-
 import re
 from willie import web
 from willie.module import commands, example, NOLIMIT
@@ -46,7 +38,12 @@ def etymology(word):
     # entries? - http://swhack.com/logs/2006-07-19#T15-05-29
 
     if len(word) > 25:
-        raise ValueError("Paraula massa llarga: %s[...]" % word[:10])
+        if bot.config.lang == 'ca':
+            raise ValueError("Paraula massa llarga: %s[...]" % word[:10])
+        elif bot.config.lang == 'es':
+            raise ValueError("Palabra demasiado larga: %s[...]" % word[:10])
+        else:
+            raise ValueError("Too long word: %s[...]" % word[:10])
     word = {'axe': 'ax/axe'}.get(word, word)
 
     bytes = web.get(etyuri % word)
@@ -72,7 +69,7 @@ def etymology(word):
     return sentence + ' - ' + (etyuri % word)
 
 
-@commands('ety')
+@commands('ety', 'etymology', 'etimologia')
 @example('word')
 def f_etymology(bot, trigger):
     """Diu la etimologia d'una paraula"""
@@ -81,7 +78,12 @@ def f_etymology(bot, trigger):
     try:
         result = etymology(word)
     except IOError:
-        msg = "Buf! L'internet em va fatal... no em puc connectar a etymonline.com (%s)" % (etyuri % word)
+        if bot.config.lang == 'ca':
+            msg = "No puc conenctar-me amb etymonline.com (%s)" % (etyuri % word)
+        elif bot.config.lang == 'es':
+            msg = "No puedo conectarme con etymonline.com (%s)" % (etyuri % word)
+        else:
+            msg = "Can't connect to etymonline.com (%s)" % (etyuri % word)
         bot.msg(trigger.sender, msg)
         return NOLIMIT
     except AttributeError:
@@ -91,6 +93,11 @@ def f_etymology(bot, trigger):
         bot.msg(trigger.sender, result)
     else:
         uri = etysearch % word
-        msg = """No he pogut trobar res per la paraula "%s". Intenta seguir l'enllaç: %s'""" % (word, uri)
+        if bot.config.lang == 'ca':
+            msg = """No he pogut trobar res per la paraula "%s". Intenta seguir l'enllaÃ§: %s'""" % (word, uri)
+        elif bot.config.lang == 'es':
+            msg = """No he encontrado nada para "%s". Prueba con seguir ese enlace: %s'""" % (word, uri)
+        else:
+            msg = """I couldn't find anything for "%s". Try following this link: %s'""" % (word, uri)
         bot.msg(trigger.sender, msg)
         return NOLIMIT

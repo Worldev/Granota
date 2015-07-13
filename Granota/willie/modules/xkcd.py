@@ -1,12 +1,4 @@
-"""
-xkcd.py - XKCD Module
-Copyright 2010, Michael Yanovich (yanovich.net), and Morgan Goose
-Copyright 2012, Lior Ramati
-Copyright 2013, Edward Powell (embolalia.com)
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net
-"""
+# -*- coding:utf-8 -*-
 
 import json
 import random
@@ -75,8 +67,15 @@ def xkcd(bot, trigger):
         if query.isdigit():
             query = int(query)
             if query > max_int:
-                bot.say(("Sorry, comic #{} hasn't been posted yet. "
-                         "The last comic was #{}").format(query, max_int))
+                if bot.config.lang == 'ca':
+                    bot.reply((u"Ho sento, però el comic #{} encara no està penjat. "
+                               u"L'últim còmic és #{}").format(query, max_int))
+                elif bot.config.lang == 'es':
+                    bot.reply((u"Lo siento, pero el comic #{} aún no está colgado. "
+                               u"El último comic es #{}").format(query, max_int))
+                else:
+                    bot.say(("Sorry, comic #{} hasn't been posted yet. "
+                             "The last comic was #{}").format(query, max_int))
                 return
             elif query == 0:
                 requested = latest
@@ -93,7 +92,12 @@ def xkcd(bot, trigger):
             else:
                 number = google(query)
                 if not number:
-                    bot.say('Could not find any comics for that query.')
+                    if bot.config.lang == 'ca':
+                        bot.reply(u"No he trobat cap còmic.")
+                    elif bot.config.lang == 'es':
+                        bot.reply(u"No he encontrado ningún comic.")
+                    else:
+                        bot.say('Could not find any comics for that query.')
                     return
                 requested = get_info(number)
 

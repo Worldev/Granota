@@ -1,13 +1,4 @@
 # coding=utf-8
-"""
-admin.py - Willie Admin Module
-Copyright 2010-2011, Michael Yanovich, Alek Rollyson, and Edward Powell
-Copyright © 2012, Elad Alfassa <elad@fedoraproject.org>
-Licensed under the Eiffel Forum License 2.
-
-http://willie.dftba.net/
-
-"""
 
 import re
 from willie.module import commands, priority, OP
@@ -108,23 +99,9 @@ def kick(bot, trigger):
     """
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         return
-    text = trigger.group().split()
-    argc = len(text)
-    if argc < 2:
+    if not trigger.admin:
         return
-    opt = text[1]
-    nick = opt
-    channel = trigger.sender
-    reasonidx = 2
-    if opt.startswith('#'):
-        if argc < 3:
-            return
-        nick = text[2]
-        channel = opt
-        reasonidx = 3
-    reason = ' '.join(text[reasonidx:])
-    if nick != bot.config.nick:
-        bot.write(['KICK', channel, nick, reason])
+    bot.write(['KICK', trigger.group(2)])
 
 
 def configureHostMask(mask):
@@ -247,7 +224,7 @@ def unquiet(bot, trigger):
     quietmask = configureHostMask(quietmask)
     if quietmask == '':
         return
-    bot.write(['MODE', channel, '-q', quietmask])
+    bot.write(['MODE', opt, '-q', quietmask])
 
 
 @commands('kickban', 'kb')
@@ -300,7 +277,7 @@ def topic(bot, trigger):
         mask = bot.db.preferences.get(channel, 'topic_mask')
         narg = len(re.findall('%s', mask))
     if not mask or mask == '':
-        mask = "Benvinguts a " + channel+  ' || ' + '%s'
+        mask = '%s'
 
     top = trigger.group(2)
     text = tuple()
@@ -308,7 +285,12 @@ def topic(bot, trigger):
         text = tuple(unicode.split(top, '~', narg))
 
     if len(text) != narg:
-        message = "Not enough arguments. You gave " + str(len(text)) + ', it requires ' + str(narg) + '.'
+        if bot.config.lang == 'ca':
+            message = "Falten arguments. Me n'has donat " + str(len(text)) + ', pero en calen ' + str(narg) + '.'
+        elif bot.config.lang == 'es':
+            message = "Faltan argumentos. Me has dado " + str(len(text)) + ', pero hacen falta ' + str(narg) + '.'
+        else:
+            message = "Not enough arguments. You gave " + str(len(text)) + ', it requires ' + str(narg) + '.'
         return bot.say(message)
     topic = mask % text
 
@@ -324,11 +306,20 @@ def set_mask(bot, trigger):
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         return
     if not bot.db:
-        bot.say("I'm afraid I can't do that.")
+        if bot.config.lang == 'ca':
+            bot.say("No tinc ben configurada la base de dades i no he pogut dur a terme aquesta accio.")
+        elif bot.config.lang == 'es':
+            bot.say(u"No tengo bien configurada la base de datos y no he podido hacer esa accion.")
+        else:
+            bot.say(u"I don't have my database configured and I couldn't make this action.")
     else:
         bot.db.preferences.update(trigger.sender.lower(), {'topic_mask': trigger.group(2)})
-        bot.say("Gotcha, " + trigger.nick)
-
+        if bot.config.lang == 'ca':
+            bot.say("Fet, " + trigger.nick)
+        elif bot.config.lang == 'es':
+            bot.say("Hecho, " + trigger.nick)
+        else:
+            bot.say("Done, " + trigger.nick)
 
 @commands('showmask')
 def show_mask(bot, trigger):
@@ -336,7 +327,12 @@ def show_mask(bot, trigger):
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         return
     if not bot.db:
-        bot.say("I'm afraid I can't do that.")
+        if bot.config.lang == 'ca':
+            bot.say("No tinc ben configurada la base de dades i no he pogut dur a terme aquesta accio.")
+        elif bot.config.lang == 'es':
+            bot.say(u"No tengo bien configurada la base de datos y no he podido hacer esa accion.")
+        else:
+            bot.say(u"I don't have my database configured and I couldn't make this action.")
     elif trigger.sender.lower() in bot.db.preferences:
         bot.say(bot.db.preferences.get(trigger.sender.lower(), 'topic_mask'))
     else:
@@ -351,15 +347,20 @@ def moderat(bot, trigger):
     else:
         bot.say(u"Ho sento, pero no")
         return
-
-@commands('dm', 'nomoderat')
+    
+@commands('dm', 'nomoderat', '-m')
 def dmoderat(bot, trigger):
     """Posa el canal en moderat. Només els administradors."""
     if trigger.admin:
         channel = trigger.sender
         bot.write(["MODE", channel + " -m"])
     else:
-        bot.say(u"Ho sento, pero no")
+        if bot.config.lang == 'ca':
+            bot.say(u"No ets administrador.")
+        elif bot.config.lang == 'es':
+            bot.say(u"No eres administrador.")
+        else:
+            bot.say(u"You are not admin.")
         return
 
 @commands('recover', 'recupera')
@@ -370,7 +371,12 @@ def recover(bot, trigger):
     if not trigger.admin:
         return
     if trigger.sender.startswith('#'):
-        bot.say('En privat')
+        if bot.config.lang == 'ca':
+            bot.say('Nomes en privat')
+        elif bot.config.lang == 'es':
+            bot.say('Solo en privado')
+        else:
+            bot.say('Only in private')
         return
     if not trigger.group(2):
         return
@@ -378,8 +384,13 @@ def recover(bot, trigger):
         channel = trigger.group(2)
         bot.msg('ChanServ', 'recover ' + channel)
         bot.join(channel)
-        bot.write(['INVITE', trigger.nick + ' ' + channel])
-        bot.reply(u"Recuperació completada")
+        bot.write(['MODE', channel + ' +I ' + trigger.nick])
+        if bot.config.lang == 'ca':
+            bot.reply(u"Recuperació completada per %s. Ja pots entrar al canal." % channel)
+        elif bot.config.lang == 'es':
+            bot.reply(u"Recuperacion completada por %s. Ya puedes entrar al canal." % channel)
+        else:
+            bot.reply(u"Recover complete for %s. You can now join the channel." % channel)
         return
     
 @commands('i')
@@ -398,16 +409,6 @@ def di(bot, trigger):
     if trigger.admin:
         channel = trigger.sender
         bot.write(['MODE', channel + ' -i'])
-        return
-    else:
-        return
-
-@commands('invite')
-def invite(bot, trigger):
-    u"""Convida un usuari al canal."""
-    if trigger.admin:
-        channel = trigger.sender
-        bot.write(['INVITE', trigger.group(2)])
         return
     else:
         return

@@ -40,8 +40,11 @@ def galeta(bot, trigger):
     if not trigger.group(2):
         return
     if bot.config.lang == 'ca':
-        bot.me(u"dóna una galeta a %s" % trigger.group(2))
+        elme = '\x01ACTION dóna una galleta a %s\x01' % trigger.group(2)
+        bot.msg(trigger.sender, elme)
     elif bot.config.lang == 'es':
-        bot.me(u"da una galleta a %s" % trigger.group(2))
+        elme = '\x01ACTION da una galleta a %s\x01' % trigger.group(2)
+        bot.msg(trigger.sender, elme)
     else:
+        elme = '\x01ACTION gives a cookie to %s\x01' % trigger.group(2)
         bot.me(u"gives a cookie to %s" % trigger.group(2))

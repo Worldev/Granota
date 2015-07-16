@@ -1,5 +1,5 @@
 # Granota
-Multilingual IRC bot
+A multilingual IRC bot
 
 [![Build Status](https://travis-ci.org/CatIRCBots/Granota.svg?branch=master)](https://travis-ci.org/CatIRCBots/Granota)
 

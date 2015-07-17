@@ -5,6 +5,3 @@ python:
 install: "cd Granota"
 
 script: python pytest_run.py
-
-notifications:
-  irc: "irc.lizardirc.org#catbots-bots"

@@ -15,5 +15,5 @@ http://willie.dfbta.net
 if __name__ == "__main__":
     import sys
     import pytest
-    returncode = pytest.main()
-    sys.exit(0)
+    code = pytest.main()
+    sys.exit(code)

@@ -13,7 +13,7 @@ def do_setup():
         # willie, not willie.py. Don't remove it, or you'll break it.
         tmp_dir = tempfile.mkdtemp()
         tmp_main_script = os.path.join(tmp_dir, 'willie')
-        shutil.copy('willie.py', tmp_main_script)
+        shutil.copy('granota.py', tmp_main_script)
 
         setup(name='willie',
               version=__version__,

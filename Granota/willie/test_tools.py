@@ -10,10 +10,10 @@ https://willie.dftba.net
 import sys
 import re
 
-import willie.config
-import willie.bot
-import willie.irc
-import willie.tools
+import .config
+import .bot
+import .irc
+import .tools
 
 
 class MockWillie(object):

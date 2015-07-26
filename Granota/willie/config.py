@@ -268,23 +268,41 @@ class Config(object):
     def _core(self):
         global lang
         if lang == 'en':
+            print("You have set up the language for the setup wizard, but the bot language can be different. \
+            Now, choose the language that the bot has to use in the IRC. This can be 'en' for English, \
+            'es' for Spanish or 'ca' for Catalan.\n")
             self.interactive_add('core', 'lang', 'Language to use',
                             'en')
         elif lang == 'es':
-            self.interactive_add('core', 'lang', 'Idioma en el que el bot debe hablar',
+            print(u"Has configurado un idioma para el asistente de configuración, pero el idioma del bot puede \
+            ser diferente. Ahora, escoje el idioma que el bot debe usar en IRC. Puede ser 'en' para Inglés, \
+            'es' para Español o 'ca' para Catalán.\n")
+            self.interactive_add('core', 'lang', 'Idioma en el que el bot debe usar',
                             'es')
         elif lang == 'ca':
-            self.interactive_add('core', 'lang', 'Idioma en el que el bot ha de parlar',
+            print(u"Has configurat un idioma per l'assistent de configuració, però l'idioma del bot pot ser diferent. \
+            Ara, escull l'idioma que el bot ha d'utilitzar a l'IRC. Pot ser 'en' per Anglès, 'es' per Castellà \
+            o 'ca' per Català.\n")
+            self.interactive_add('core', 'lang', 'Idioma en el que el bot ha d\'utilitzar',
                             'ca')
         else:
-            self.interactive_add('core', 'lang', 'Language to use:',
-                            'en')            
+            print("There is a problem in your language settings. The language can be only 'en', 'es' or 'ca'. Fix \
+            it and run the wizard again.")
+            sys.exit()
         if lang == 'en':
+            print("First of all, you need to set up a nickname for your bot. It can be 'Granota', but if your bot \
+            will connect to a network with the official version of Granota, your bot will not be able to connect. \
+            You should also check if the nickname is in use or registered with NickServ by typing \
+            /msg NickServ info <the nick that you want>.\n")
             self.interactive_add('core', 'nick', 'Enter the nickname for your bot',
                                  'Granota')
+            print("Of course, the bot is useless if it doesn't connect to some IRC server. If you don't know the host \
+            of your server, contact the server administrators.\n")
             self.interactive_add('core', 'host', 'Enter the server to connect to',
-                                 'irc.freenode.net')
-            self.add_option('core', 'use_ssl', 'Should the bot connect with SSL')
+                                 'irc.lizardirc.org')
+            print("Some server support SSL connections. If your server supports it, it's recommended to \
+            use it. If you are in doubt, contact the server administrators.\n")
+            self.add_option('core', 'use_ssl', 'Should the bot connect with SSL?')
             if self.use_ssl == 'True':
                 default_port = '6697'
             else:

@@ -29,7 +29,7 @@ def pastis(bot, trigger):
     else:
         bot.say(u"I take a cake and...")
     time.sleep(1)
-    bot.say(random.choice(cake) % trigger.group(2))
+    bot.say(random.choice(cakes) % trigger.group(2))
 
 @commands('galeta', 'galleta', 'cookie')
 @example('.cookie NeoMahler')

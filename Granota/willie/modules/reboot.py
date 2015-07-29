@@ -4,7 +4,7 @@ from willie.module import commands, example
 
 @commands('reinicia', 'reboot', 'reinici', 'reinicio', 'restart')
 def reboot(bot, trigger):
-    if trigger.owner:
+    if trigger.owner or trigger.admin:
         bot.callables = None
         bot.commands = None
         bot.setup()
@@ -15,6 +15,5 @@ def reboot(bot, trigger):
         else:
             bot.reply(u"Bot rebooted.")
         return
-
-    if not trigger.owner:
+    else:
         return bot.reply(u"You aren't my owner")

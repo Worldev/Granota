@@ -2,6 +2,6 @@ language: python
 python:
   - "2.7.9"
 
-install: "cd Granota;wget https://raw.githubusercontent.com/CatIRCBots/Granota/tools/testbot.py"
+install: "cd Granota;wget https://github.com/CatIRCBots/Granota/raw/tools/testbot.py"
 
 script: "python testbot.py"

@@ -7,5 +7,5 @@ A multilingual IRC bot
 ## Configuration
 
 - English: http://wikicatbots.tk/wiki/index.php/Granota/Configuration
-- Castellano: http://wikicatbots.tk/wiki/index.php/Granota/es/Configuration
+- Español: http://wikicatbots.tk/wiki/index.php/Granota/es/Configuration
 - Català: http://wikicatbots.tk/wiki/index.php/Granota/ca/Configuration

@@ -79,11 +79,11 @@ def f_reload(bot, trigger):
 if sys.version_info >= (2, 7):
     @willie.module.nickname_commands('update')
     def update(bot, trigger):
-        if not trigger.admin:
+        if not trigger.admin or not trigger.owner:
             return
 
         """Pulls the latest versions of all modules from Git"""
-        proc = subprocess.Popen('/usr/bin/git pull',
+        proc = subprocess.Popen('git pull',
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, shell=True)
         bot.reply(proc.communicate()[0])

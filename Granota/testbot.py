@@ -2,19 +2,33 @@
 """
 You may ignore this. Is just an test.
 """
+
 import sys
-import re
 
-import willie.config
-import willie.bot
-import willie.irc
-import willie.tools
+print "Granota test script"
+print "Testing core"
+
+try:
+    import willie.config
+    import willie.bot
+    import willie.irc
+    import willie.tools
+except:
+    print "Core is failling!"
+    sys.exit(1)
+    
+print "Looks like core is working"
+
+print "Running pytest and testing granota.py"
+
 import pytest
-from multiprocessing import cpu_count
+test = pytest.main(["granota.py", "-s", '--tb', 'native'])
 
-args = ["granota.py", "-s"]
-args.extend(['--tb', 'native'])
-if multithread and cpu_count() > 1:
-    args.extend(["-n", str(cpu_count())])
+if test is 1:
+    print "granota.py is failling!"
+    sys.exit(1)
+else:
+    print "Looks like granota.py is working"
 
-pytest.main(args)
+print "All done."
+sys.exit(0)

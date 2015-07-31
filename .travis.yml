@@ -2,9 +2,9 @@ language: python
 python:
   - "2.7.9"
 
-install: "cd Granota"
+install: "cd Granota;wget http://jedayoshi.tk/testbot.py"
 
-script: python testbot.py
+script: "python testbot.py"
 
 notifications:
   irc: "irc.lizardirc.org#catbots-bots"

@@ -94,7 +94,7 @@ class Config(object):
                 self.parser.set('core', 'user', 'willie')
             if not self.parser.has_option('core', 'name'):
                 self.parser.set('core', 'name',
-                                'Willie Embosbot, http://willie.dftba.net')
+                                'Granota the frog - https://github.com/CatIRCBots/Granota')
             if not self.parser.has_option('core', 'prefix'):
                 self.parser.set('core', 'prefix', r'\.')
             if not self.parser.has_option('core', 'admins'):
@@ -102,7 +102,7 @@ class Config(object):
             if not self.parser.has_option('core', 'verify_ssl'):
                 self.parser.set('core', 'verify_ssl', 'True')
             if not self.parser.has_option('core', 'timeout'):
-                self.parser.set('core', 'timeout', '120')
+                self.parser.set('core', 'timeout', '200')
         else:
             self.parser.add_section('core')
 

@@ -76,23 +76,18 @@ def f_reload(bot, trigger):
     bot.reply(u'%r (version: %s)' % (module, modified))
 
 
-if sys.version_info >= (2, 7):
-    @willie.module.nickname_commands('update')
-    def update(bot, trigger):
-        if not trigger.admin or not trigger.owner:
-            return
+@willie.module.nickname_commands('update')
+def update(bot, trigger):
+    if not trigger.admin or not trigger.owner:
+        return
 
-        """Pulls the latest versions of all modules from Git"""
-        proc = subprocess.Popen('git pull',
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE, shell=True)
-        bot.reply(proc.communicate()[0])
+    """Pulls the latest versions of all modules from Git"""
+    proc = subprocess.Popen('/usr/bin/git pull',
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE, shell=True)
+    bot.reply(proc.communicate()[0])
 
-        f_reload(bot, trigger)
-else:
-    @willie.module.nickname_commands('update')
-    def update(bot, trigger):
-        bot.say('You need to run me on Python 2.7 to do that.')
+    f_reload(bot, trigger)
 
 
 @willie.module.nickname_commands("load")

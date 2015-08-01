@@ -21,8 +21,8 @@ def isup(bot, trigger):
         else:
             return bot.reply("What web do you want to check?")
 
-    if site is 'localhost' or site is '127.0.0.1' or site is '0::1':
-        bot.reply("I mind not say you it.")
+    if 'localhost' in site or '127.0.0.1' in site or '0::1' in site:
+        bot.reply("I'm minding on not say you it.")
     if site[:6] != 'http://' and site[:7] != 'https://':
         if '://' in site:
             protocol = site.split('://')[0] + '://'
@@ -33,7 +33,7 @@ def isup(bot, trigger):
             else:
                 return bot.reply("Try it again without the %s" % protocol)
         else:
-            if is_http_url(site) is false:
+            if is_http_url(site) is False:
                return bot.reply("That URL looks not valid for me.")
             site = 'http://' + site
     try:

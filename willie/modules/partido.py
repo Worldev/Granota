@@ -13,6 +13,9 @@ def partido(bot, trigger):
     elif politico == "ElGatoSaez":
         bot.say(politico + " ( http://enwp.org/es:Usuario:ElGatoSaez ) milita en el Partido del Mundo Gaturro ( http://enwp.org/es:Mundo_Gaturro ) ")
         return
+    elif politico == "NeoMahler":
+        bot.say(politico + " ( http://enwp.org/es:Usuario:NeoMahler ) milita en el Partido del Basurero ( http://enwp.org/es:Basurero ) ")
+        return
     else:
         siguecontucamino = "ok"
 

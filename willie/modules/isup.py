@@ -23,6 +23,7 @@ def isup(bot, trigger):
 
     if 'localhost' in site or '127.0.0.1' in site or '0::1' in site:
         bot.reply("I'm minding on not say you it.")
+        return
     elif site[:6] != 'http://' and site[:7] != 'https://':
         if '://' in site:
             protocol = site.split('://')[0] + '://'

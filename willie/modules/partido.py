@@ -21,16 +21,31 @@ def partido(bot, trigger):
     tododelPolitico = json.loads(linkapidelPolitico.read())
     idParaAPI = '"' + idWikidata + '"'
     numeroPartido = tododelPolitico['entities'][idWikidata]['claims']['P102'][0]['mainsnak']['datavalue']['value']['numeric-id']
-    linkWikipediaPersona = tododelPolitico['entities'][idWikidata]['sitelinks']['eswiki']['title']
+    if bot.config.lang == 'ca':
+        linkWikipediaPersona = tododelPolitico['entities'][idWikidata]['sitelinks']['cawiki']['title']
+    elif bot.config.lang == 'es':
+        linkWikipediaPersona = tododelPolitico['entities'][idWikidata]['sitelinks']['eswiki']['title']
+    else:
+        linkWikipediaPersona = tododelPolitico['entities'][idWikidata]['sitelinks']['enwiki']['title']
     linkbajoWikipediaPersona = linkWikipediaPersona.replace(" ", "_")
     numerobuscaPartido = "Q" + str(numeroPartido)
 
     linkapidelPartido = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + numerobuscaPartido + "&languages=es&format=json")
     linkparaverapidelPartido = "http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + numerobuscaPartido + "&languages=es&format=json"
     tododelPartido = json.loads(linkapidelPartido.read())
-    linkWikipediaPartido = tododelPartido['entities'][numerobuscaPartido]['labels']['es']['value']
-    linkbajoWikipediaPartido = linkWikipediaPartido.replace(" ", "_")  
-    nombrePartido = tododelPartido['entities'][numerobuscaPartido]['labels']['es']['value'] 
+    if bot.config.lang == 'ca':
+        linkWikipediaPartido = tododelPartido['entities'][numerobuscaPartido]['labels']['ca']['value']
+    elif bot.config.lang == 'es':
+        linkWikipediaPartido = tododelPartido['entities'][numerobuscaPartido]['labels']['es']['value']
+    else:
+        linkWikipediaPartido = tododelPartido['entities'][numerobuscaPartido]['labels']['en']['value']
+    linkbajoWikipediaPartido = linkWikipediaPartido.replace(" ", "_")
+    if bot.config.lang == 'ca':
+        nombrePartido = tododelPartido['entities'][numerobuscaPartido]['labels']['ca']['value']
+    elif bot.config.lang == 'es':
+        nombrePartido = tododelPartido['entities'][numerobuscaPartido]['labels']['es']['value']
+    else:
+        nombrePartido = tododelPartido['entities'][numerobuscaPartido]['labels']['en']['value']
     if bot.config.lang == 'es' or bot.config.lang == 'ca':
         linkparaelprintPersona = ("http://enwp.org/%s:%s" % (bot.config.lang, linkbajoWikipediaPersona))
         linkparaelprintPartido = ("http://enwp.org/%s:%s" % (bot.config.lang, linkbajoWikipediaPartido))
@@ -44,4 +59,3 @@ def partido(bot, trigger):
         bot.say(nombrePolitico + " (" + linkparaelprintPersona + ")" + " milita en " + nombrePartido + " (" + linkparaelprintPartido + ")")
     else:
         bot.say(nombrePolitico + " (" + linkparaelprintPersona + ")" + " is a member of " + nombrePartido + " (" + linkparaelprintPartido + ")")
-    

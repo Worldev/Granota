@@ -31,8 +31,17 @@ def partido(bot, trigger):
     linkWikipediaPartido = tododelPartido['entities'][numerobuscaPartido]['labels']['es']['value']
     linkbajoWikipediaPartido = linkWikipediaPartido.replace(" ", "_")  
     nombrePartido = tododelPartido['entities'][numerobuscaPartido]['labels']['es']['value'] 
-
-    linkparaelprintPersona = "http://enwp.org/es:" + linkbajoWikipediaPersona
-    linkparaelprintPartido = "http://enwp.org/es:" + linkbajoWikipediaPartido
-
-    bot.say(nombrePolitico + " ( " + linkparaelprintPersona + " )" + " milita en " + nombrePartido + " ( " + linkparaelprintPartido + " )")
+    if bot.config.lang == 'es' or bot.config.lang == 'ca':
+        linkparaelprintPersona = ("http://enwp.org/%s:%s" % (bot.config.lang, linkbajoWikipediaPersona))
+        linkparaelprintPartido = ("http://enwp.org/%s:%s" % (bot.config.lang, linkbajoWikipediaPartido))
+    else:
+        linkparaelprintPersona = ("http://enwp.org/%s" % linkbajoWikipediaPersona)
+        linkparaelprintPartido = ("http://enwp.org/%s" % linkbajoWikipediaPartido)
+    
+    if bot.config.lang == 'ca':
+        bot.say(nombrePolitico + " (" + linkparaelprintPersona + ")" + " milita a " + nombrePartido + " (" + linkparaelprintPartido + ")")
+    elif bot.config.lang == 'es':
+        bot.say(nombrePolitico + " (" + linkparaelprintPersona + ")" + " milita en " + nombrePartido + " (" + linkparaelprintPartido + ")")
+    else:
+        bot.say(nombrePolitico + " (" + linkparaelprintPersona + ")" + " is a member of " + nombrePartido + " (" + linkparaelprintPartido + ")")
+    

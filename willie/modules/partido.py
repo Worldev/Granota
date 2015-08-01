@@ -6,7 +6,6 @@ import urllib2
 def partido(bot, trigger):
     politico = trigger.group(2)
 
-    # troll a dlcastc
     siguecontucamino = "consolito"
     if politico == "dlcastc":
         bot.say(politico + " ( http://enwp.org/es:Usuario:DLeandroc ) milita en el Partido de la Plaza Roja ( http://enwp.org/es:Plaza_Roja ) ")
@@ -22,7 +21,6 @@ def partido(bot, trigger):
     bajoPolitico = nombrePolitico.replace(" ", "_")
     idWikidata = todo["search"][0]["id"]
 
-    # ahora viene lo de conseguir la propiedad 120
     linkazoparaverlo = "http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + idWikidata + "&format=json"
     linkapidelPolitico = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + idWikidata + "&format=json")
     tododelPolitico = json.loads(linkapidelPolitico.read())
@@ -32,8 +30,6 @@ def partido(bot, trigger):
     linkbajoWikipediaPersona = linkWikipediaPersona.replace(" ", "_")
     numerobuscaPartido = "Q" + str(numeroPartido)
 
-    # ahora viene el partido político y sus links
-
     linkapidelPartido = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + numerobuscaPartido + "&languages=es&format=json")
     linkparaverapidelPartido = "http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + numerobuscaPartido + "&languages=es&format=json"
     tododelPartido = json.loads(linkapidelPartido.read())
@@ -41,12 +37,9 @@ def partido(bot, trigger):
     linkbajoWikipediaPartido = linkWikipediaPartido.replace(" ", "_")  
     nombrePartido = tododelPartido['entities'][numerobuscaPartido]['labels']['es']['value'] 
 
-    # para el print
-
     linkparaelprintPersona = "http://enwp.org/es:" + linkbajoWikipediaPersona
     linkparaelprintPartido = "http://enwp.org/es:" + linkbajoWikipediaPartido
 
-    # el encode
     if siguecontucamino == "ok":
         bot.say(nombrePolitico + " ( " + linkparaelprintPersona + " )" + " milita en " + nombrePartido + " ( " + linkparaelprintPartido + " )")
     else:

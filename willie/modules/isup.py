@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from willie import web
 from willie.module import commands
+import re
 
 def is_http_url(s):
     if re.match('(?:www)?(?:[\w-]{2,255}(?:\.\w{2,6}){1,2})(?:/[\w&%?#-]{1,300})?',s):

@@ -9,6 +9,7 @@ def partido(bot, trigger):
     siguecontucamino = "consolito"
     if politico == "dlcastc":
         bot.say(politico + " ( http://enwp.org/es:Usuario:DLeandroc ) milita en el Partido de la Plaza Roja ( http://enwp.org/es:Plaza_Roja ) ")
+        return
     else:
         siguecontucamino = "ok"
 

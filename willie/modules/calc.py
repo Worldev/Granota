@@ -9,8 +9,8 @@ import string
 import HTMLParser
 
 
-@commands('=', 'calcula')
-@example('.c 5 + 3', '8')
+@commands('=', 'calcula', 'calculate', 'calc')
+@example('.= 5 + 3', '8')
 def c(bot, trigger):
     """Google calculator."""
     if not trigger.group(2):

@@ -3,7 +3,6 @@ import json
 import urllib2
 
 @commands('partido')
-@example('.example dlcastc')
 def partido(bot, trigger):
     politico = trigger.group(2)
 

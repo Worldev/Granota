@@ -1,8 +1,9 @@
-from willie.module import commands
+import willie
 import json
 import urllib2
 
-@commands('partido')
+@willie.module.commands('partido')
+@willie.module.example(".partido NeoMahler")
 def partido(bot, trigger):
     politico = trigger.group(2)
 
@@ -14,7 +15,10 @@ def partido(bot, trigger):
         bot.say(politico + " ( http://enwp.org/es:Usuario:ElGatoSaez ) milita en el Partido del Mundo Gaturro ( http://enwp.org/es:Mundo_Gaturro ) ")
         return
     elif politico == "NeoMahler":
-        bot.say(politico + " ( http://enwp.org/es:Usuario:NeoMahler ) milita en el Partido del Basurero ( http://enwp.org/es:Basurero ) ")
+        bot.say(politico + " ( http://enwp.org/es:Usuario:Unapersona ) milita en el Partido del Basurero ( http://enwp.org/es:Basurero ) ")
+        return
+    elif politico == "JeDa":
+        bot.say(politico + " ( http://enwp.org/es:Usuario:Jesushernandez9856 ) milita en el Partido del Internet Relay Chat ( http://enwp.org/es:Internet_Relay_Chat ) ")
         return
     else:
         siguecontucamino = "ok"

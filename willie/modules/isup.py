@@ -2,6 +2,11 @@
 from willie import web
 from willie.module import commands
 
+def is_http_url(s):
+    if re.match('(?:www)?(?:[\w-]{2,255}(?:\.\w{2,6}){1,2})(?:/[\w&%?#-]{1,300})?',s):
+        return True
+    else:
+        return False
 
 @commands('isup')
 def isup(bot, trigger):
@@ -15,6 +20,8 @@ def isup(bot, trigger):
         else:
             return bot.reply("What web do you want to check?")
 
+    if site is 'localhost' or site is '127.0.0.1' or site is '0::1':
+        bot.reply("I mind not say you it.")
     if site[:6] != 'http://' and site[:7] != 'https://':
         if '://' in site:
             protocol = site.split('://')[0] + '://'
@@ -25,6 +32,8 @@ def isup(bot, trigger):
             else:
                 return bot.reply("Try it again without the %s" % protocol)
         else:
+            if is_http_url(site) is false:
+               return bot.reply("That URL looks not valid for me.")
             site = 'http://' + site
     try:
         response = web.get(site)

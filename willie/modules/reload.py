@@ -78,7 +78,7 @@ def f_reload(bot, trigger):
 
 @willie.module.nickname_commands('update')
 def update(bot, trigger):
-    if not trigger.admin or not trigger.owner:
+    if not trigger.admin:
         return
 
     """Pulls the latest versions of all modules from Git"""

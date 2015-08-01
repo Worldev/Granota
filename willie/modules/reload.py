@@ -77,16 +77,17 @@ def f_reload(bot, trigger):
 
 
 @willie.module.nickname_commands('update')
-def update(bot, trigger):
+def f_update(bot, trigger):
     if not trigger.admin:
         return
 
+    bot.reply("Updating...")
     """Pulls the latest versions of all modules from Git"""
     proc = subprocess.Popen('/usr/bin/git pull',
                             stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE, shell=True)
     bot.reply(proc.communicate()[0])
-
+    bot.reply("Reloading...")
     f_reload(bot, trigger)
 
 

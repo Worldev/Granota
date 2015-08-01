@@ -2,31 +2,15 @@ import willie
 import json
 import urllib2
 
-@willie.module.commands('partido')
-@willie.module.example(".partido NeoMahler")
+@willie.module.commands('partido', 'partit', 'politician')
+@willie.module.example(".politician Mariano Rajoy")
 def partido(bot, trigger):
     politico = trigger.group(2)
 
-    siguecontucamino = "consolito"
-    if politico == "dlcastc":
-        bot.say(politico + " ( http://enwp.org/es:Usuario:DLeandroc ) milita en el Partido de la Plaza Roja ( http://enwp.org/es:Plaza_Roja ) ")
-        return
-    elif politico == "ElGatoSaez":
-        bot.say(politico + " ( http://enwp.org/es:Usuario:ElGatoSaez ) milita en el Partido del Mundo Gaturro ( http://enwp.org/es:Mundo_Gaturro ) ")
-        return
-    elif politico == "NeoMahler":
-        bot.say(politico + " ( http://enwp.org/es:Usuario:Unapersona ) milita en el Partido del Basurero ( http://enwp.org/es:Basurero ) ")
-        return
-    elif politico == "JeDa":
-        bot.say(politico + " ( http://enwp.org/es:Usuario:Jesushernandez9856 ) milita en el Partido del Internet Relay Chat ( http://enwp.org/es:Internet_Relay_Chat ) ")
-        return
-    else:
-        siguecontucamino = "ok"
-
     politicoParaTest = politico.decode("utf-8")
     politicoParaLink = politico.replace(" ", "%20")
-    linkapiqueBusca = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbsearchentities&search=" + politicoParaLink + "&language=es&format=json")
-    eldearriba = "http://www.wikidata.org/w/api.php?action=wbsearchentities&search=" + politicoParaLink + "&language=es&format=json"
+    linkapiqueBusca = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbsearchentities&search=" + politicoParaLink + "&language=%s&format=json" % bot.config.lang)
+    eldearriba = ("http://www.wikidata.org/w/api.php?action=wbsearchentities&search=" + politicoParaLink + "&language=%s&format=json" % bot.config.lang)
     todo = json.loads(linkapiqueBusca.read())
     nombrePolitico = todo["searchinfo"]["search"]
     bajoPolitico = nombrePolitico.replace(" ", "_")
@@ -51,7 +35,4 @@ def partido(bot, trigger):
     linkparaelprintPersona = "http://enwp.org/es:" + linkbajoWikipediaPersona
     linkparaelprintPartido = "http://enwp.org/es:" + linkbajoWikipediaPartido
 
-    if siguecontucamino == "ok":
-        bot.say(nombrePolitico + " ( " + linkparaelprintPersona + " )" + " milita en " + nombrePartido + " ( " + linkparaelprintPartido + " )")
-    else:
-        dontDoNothing = "meow"
+    bot.say(nombrePolitico + " ( " + linkparaelprintPersona + " )" + " milita en " + nombrePartido + " ( " + linkparaelprintPartido + " )")

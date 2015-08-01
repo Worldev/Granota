@@ -1,8 +1,9 @@
-import willie
+from willie.module import commands
 import json
 import urllib2
 
-@willie.module.commands('partido')
+@commands('partido')
+@example('.example dlcastc')
 def partido(bot, trigger):
     politico = trigger.group(2)
 

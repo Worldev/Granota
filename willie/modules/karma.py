@@ -22,7 +22,7 @@ def def_karmafile():
 @willie.module.commands('karma')
 def karma(bot, trigger):
     if trigger.group(2):
-       user = trigger.group(2).lower()
+       user = trigger.group(2).lower().replace(" ", "")
     else:
        user = trigger.nick.lower()
     if trigger.group(2):

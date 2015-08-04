@@ -266,43 +266,54 @@ def track_nicks(bot, trigger):
 @willie.module.event('PART')
 @willie.module.unblockable
 def track_part(bot, trigger):
-    if trigger.nick == bot.nick:
-        bot.channels.remove(trigger.sender)
-        del bot.privileges[trigger.sender]
-    else:
-        del bot.privileges[trigger.sender][trigger.nick]
+    try:
+        if trigger.nick == bot.nick:
+            bot.channels.remove(trigger.sender)
+            del bot.privileges[trigger.sender]
+        else:
+            del bot.privileges[trigger.sender][trigger.nick]
+    except:
+        pass
 
 
 @willie.module.rule('.*')
 @willie.module.event('KICK')
 @willie.module.unblockable
 def track_kick(bot, trigger):
-    nick = Nick(trigger.args[1])
-    if nick == bot.nick:
-        bot.channels.remove(trigger.sender)
-        del bot.privileges[trigger.sender]
-    else:
-        del bot.privileges[trigger.sender][nick]
+    try:
+        nick = Nick(trigger.args[1])
+        if nick == bot.nick:
+            bot.channels.remove(trigger.sender)
+            del bot.privileges[trigger.sender]
+        else:
+            del bot.privileges[trigger.sender][nick]
+    except:
+        pass
 
 
 @willie.module.rule('.*')
 @willie.module.event('JOIN')
 @willie.module.unblockable
 def track_join(bot, trigger):
-    if trigger.nick == bot.nick and trigger.sender not in bot.channels:
-        bot.channels.append(trigger.sender)
-        bot.privileges[trigger.sender] = dict()
-    bot.privileges[trigger.sender][trigger.nick] = 0
-    print bot.privileges
+    try:
+        if trigger.nick == bot.nick and trigger.sender not in bot.channels:
+            bot.channels.append(trigger.sender)
+            bot.privileges[trigger.sender] = dict()
+        bot.privileges[trigger.sender][trigger.nick] = 0
+    except:
+        pass
 
 
 @willie.module.rule('.*')
 @willie.module.event('QUIT')
 @willie.module.unblockable
 def track_quit(bot, trigger):
-    for chanprivs in bot.privileges.values():
-        if trigger.nick in chanprivs:
-            del chanprivs[trigger.nick]
+    try:
+        for chanprivs in bot.privileges.values():
+            if trigger.nick in chanprivs:
+                del chanprivs[trigger.nick]
+    except:
+        pass
 
 
 @willie.module.rule('.*')

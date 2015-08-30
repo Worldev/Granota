@@ -297,7 +297,7 @@ class OutputRedirect:
             except:
                 pass
         logfile = open(self.logpath, 'a')
-        logfile.write(string.encode('utf8'))
+        logfile.write(bytes(string, 'utf-8')
         logfile.close()
 
 

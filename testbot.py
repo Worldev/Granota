@@ -12,14 +12,14 @@ import os
 import pytest
 import socket
 import time
-import urllib
+import urllib2
 
 working = []
 notworking = []
 criticalnotworking = []
 
 def nreport(msg):
-    urllib.request.urlopen("http://n.tkte.ch/h/4314/eOoVGWdAFqh-sJRGGTJb3XCW?payload={0}".format(urllib.parse.quote("[Granota testing] {0}".format(msg))))
+    urllib2.urlopen("http://n.tkte.ch/h/4314/eOoVGWdAFqh-sJRGGTJb3XCW?payload={0}".format(urllib.parse.quote("[Granota testing] {0}".format(msg))))
 
 print "Granota testing script\n"
 
@@ -164,7 +164,6 @@ for val in os.listdir("willie/modules"):
 print "\nThe tests have been done successfully.\n"
 
 print "============================= test results =============================="
-nreport("============================= \x0313test results\x0F ==============================")
 workingnum = len(working)
 notworkingnum = len(notworking)
 criticalnotworkingnum = len(criticalnotworking)

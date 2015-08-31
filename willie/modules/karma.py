@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import willie
 import json
 import os

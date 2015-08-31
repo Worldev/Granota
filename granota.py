@@ -17,7 +17,7 @@ homedir = os.path.join(os.path.expanduser('~'), '.willie')
 
 def check_python_version():
     if sys.version_info < (2, 7, 8):
-        stderr(u'Error: You need at leat Python 2.7.8!')
+        stderr(u'Error: You need at least Python 2.7.8!')
         sys.exit(1)
 
 

@@ -161,6 +161,14 @@ def roll(bot, trigger):
     # Get a list of all dice expressions, evaluate them and then replace the
     # expressions in the original string with the results. Replacing is done
     # using string formatting, so %-characters must be escaped.
+    if not trigger.group(2):
+        if bot.config.lang == 'ca':
+            bot.reply("No m'has donat cap argument!")
+        elif bot.config.lang == 'es':
+            bot.reply("No me has dado ningun argumento!")
+        else:
+            bot.reply("You didn't give me any arguments!")
+        return
     arg_str = trigger.group(2)
     dice_expressions = re.findall(dice_regexp, arg_str)
     arg_str = arg_str.replace("%", "%%")

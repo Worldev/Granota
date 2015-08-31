@@ -19,7 +19,7 @@ notworking = []
 criticalnotworking = []
 
 def nreport(msg):
-    urllib2.urlopen("http://n.tkte.ch/h/4314/eOoVGWdAFqh-sJRGGTJb3XCW?payload={0}".format(urllib.parse.quote("[Granota testing] {0}".format(msg))))
+    urllib2.urlopen("http://n.tkte.ch/h/4314/eOoVGWdAFqh-sJRGGTJb3XCW?payload={0}".format(urllib2.quote("[Granota testing] {0}".format(msg))))
 
 print "Granota testing script\n"
 

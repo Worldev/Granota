@@ -66,7 +66,7 @@ def g(bot, trigger):
         if bot.config.lang == 'ca':
             bot.reply("Cap resultat per '%s'." % query)
         elif bot.config.lang == 'es':
-            bot.reply(u"Ningún resultado por '%s'." % query)
+            bot.reply("Ningún resultado por '%s'." % query)
         else:
             bot.reply("No results found for '%s'." % query)
 
@@ -95,9 +95,9 @@ def gcs(bot, trigger):
     queries = r_query.findall(trigger.group(2))
     if len(queries) > 6:
         if bot.config.lang == 'ca':
-            bot.reply(u"Només puc comparar fins a sis coses.")
+            bot.reply("Només puc comparar fins a sis coses.")
         elif bot.config.lang == 'es':
-            bot.reply(u"Sólo puedo comparar hasta seis cosas.")
+            bot.reply("Sólo puedo comparar hasta seis cosas.")
         else:
             bot.reply('Sorry, can only compare up to six things.')
         return
@@ -147,7 +147,7 @@ def duck_api(query):
     uri = web.quote(query)
     uri = 'http://api.duckduckgo.com/?q=%s&format=json&no_html=1&no_redirect=1' % query
     results = json.loads(web.get(uri))
-    print results
+    print(results)
     if results['Redirect']:
         return results['Redirect']
     else:

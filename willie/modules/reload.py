@@ -13,11 +13,11 @@ import subprocess
 def f_reload(bot, trigger):
     if not trigger.admin:
         if bot.config.lang == 'ca':
-            bot.reply(u'No tens permisos d\'administrador')
+            bot.reply('No tens permisos d\'administrador')
         elif bot.config.lang == 'es':
-            bot.reply(u"No tienes permisos de administrador")
+            bot.reply("No tienes permisos de administrador")
         else:
-            bot.reply(u"You aren't an admin")
+            bot.reply("You aren't an admin")
         return
 
     name = trigger.group(2)
@@ -30,9 +30,9 @@ def f_reload(bot, trigger):
 
     if not name in sys.modules:
         if bot.config.lang == 'ca':
-            bot.reply(u"No hi ha cap mòdul anomenat " + name)
+            bot.reply("No hi ha cap mòdul anomenat " + name)
         elif bot.config.lang == 'es':
-            bot.reply(u"No hay ningún module nombrado " + name)
+            bot.reply("No hay ningún module nombrado " + name)
         else:
             bot.reply(name + ": no such module!")
         return
@@ -40,7 +40,7 @@ def f_reload(bot, trigger):
     old_module = sys.modules[name]
 
     old_callables = {}
-    for obj_name, obj in vars(old_module).iteritems():
+    for obj_name, obj in vars(old_module).items():
         if bot.is_callable(obj) or bot.is_shutdown(obj):
             old_callables[obj_name] = obj
 
@@ -48,7 +48,7 @@ def f_reload(bot, trigger):
     # Also remove all references to willie callables from top level of the
     # module, so that they will not get loaded again if reloading the
     # module does not override them.
-    for obj_name in old_callables.keys():
+    for obj_name in list(old_callables.keys()):
         delattr(old_module, obj_name)
     
     # Also delete the setup function
@@ -68,12 +68,12 @@ def f_reload(bot, trigger):
         module.setup(bot)
 
     mtime = os.path.getmtime(module.__file__)
-    modified = time.strftime(u'%Y-%m-%d, %H:%M:%S', time.gmtime(mtime))
+    modified = time.strftime('%Y-%m-%d, %H:%M:%S', time.gmtime(mtime))
 
     bot.register(vars(module))
     bot.bind_commands()
 
-    bot.reply(u'%r (version: %s)' % (module, modified))
+    bot.reply('%r (version: %s)' % (module, modified))
 
 
 @willie.module.nickname_commands('update')
@@ -120,8 +120,8 @@ def f_load(bot, trigger):
     bot.register(vars(module))
     bot.bind_commands()
 
-    bot.reply(u'%r (version: %s)' % (module, modified))
+    bot.reply('%r (version: %s)' % (module, modified))
 
 
 if __name__ == '__main__':
-    print __doc__.strip()
+    print(__doc__.strip())

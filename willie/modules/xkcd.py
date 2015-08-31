@@ -68,11 +68,11 @@ def xkcd(bot, trigger):
             query = int(query)
             if query > max_int:
                 if bot.config.lang == 'ca':
-                    bot.reply((u"Ho sento, però el comic #{} encara no està penjat. "
-                               u"L'últim còmic és #{}").format(query, max_int))
+                    bot.reply(("Ho sento, però el comic #{} encara no està penjat. "
+                               "L'últim còmic és #{}").format(query, max_int))
                 elif bot.config.lang == 'es':
-                    bot.reply((u"Lo siento, pero el comic #{} aún no está colgado. "
-                               u"El último comic es #{}").format(query, max_int))
+                    bot.reply(("Lo siento, pero el comic #{} aún no está colgado. "
+                               "El último comic es #{}").format(query, max_int))
                 else:
                     bot.say(("Sorry, comic #{} hasn't been posted yet. "
                              "The last comic was #{}").format(query, max_int))
@@ -93,9 +93,9 @@ def xkcd(bot, trigger):
                 number = google(query)
                 if not number:
                     if bot.config.lang == 'ca':
-                        bot.reply(u"No he trobat cap còmic.")
+                        bot.reply("No he trobat cap còmic.")
                     elif bot.config.lang == 'es':
-                        bot.reply(u"No he encontrado ningún comic.")
+                        bot.reply("No he encontrado ningún comic.")
                     else:
                         bot.say('Could not find any comics for that query.')
                     return

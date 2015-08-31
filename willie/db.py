@@ -16,7 +16,7 @@ http://willie.dftba.net
 """
 
 from collections import Iterable
-from tools import deprecated
+from .tools import deprecated
 
 supported_types = set()
 #Attempt to import possible db modules
@@ -59,14 +59,14 @@ class WillieDB(object):
         self.tables = set()
         if not config.parser.has_section('db'):
             self.type = None
-            print 'No user settings database specified. Ignoring.'
+            print('No user settings database specified. Ignoring.')
             return
 
         self.type = config.db.userdb_type.lower()
         if self.type not in supported_types:
             self.type = None
-            print 'User settings database type is not supported.' + \
-                ' You may be missing the module for it. Ignoring.'
+            print('User settings database type is not supported.' + \
+                ' You may be missing the module for it. Ignoring.')
             return
 
         if self.type == 'mysql':
@@ -82,7 +82,7 @@ class WillieDB(object):
         """
         return self._none
 
-    def __nonzero__(self):
+    def __bool__(self):
         """Allow for testing if a db is set up through `if willie.db`."""
         return bool(self.type)
 
@@ -93,8 +93,8 @@ class WillieDB(object):
             self._passwd = config.db.userdb_pass
             self._dbname = config.db.userdb_name
         except AttributeError as e:
-            print 'Some options are missing for your MySQL DB.' + \
-                ' The database will not be set up.'
+            print('Some options are missing for your MySQL DB.' + \
+                ' The database will not be set up.')
             return
 
         try:
@@ -105,7 +105,7 @@ class WillieDB(object):
                 db=self._dbname
             )
         except:
-            print 'Error: Unable to connect to user settings DB.'
+            print('Error: Unable to connect to user settings DB.')
             return
 
         #Set up existing tables and columns
@@ -130,14 +130,14 @@ class WillieDB(object):
         try:
             self._file = config.db.userdb_file
         except AttributeError:
-            print 'No file specified for SQLite DB.' + \
-                ' The database will not be set up.'
+            print('No file specified for SQLite DB.' + \
+                ' The database will not be set up.')
             return
 
         try:
             db = sqlite3.connect(self._file)
         except:
-            print 'Error: Unable to connect to DB.'
+            print('Error: Unable to connect to DB.')
             return
 
         #Set up existing tables and columns
@@ -173,7 +173,7 @@ class WillieDB(object):
     def _get_column_creation_text(self, columns, key=None):
         cols = '('
         for column in columns:
-            if isinstance(column, basestring):
+            if isinstance(column, str):
                 if self.type == 'mysql':
                     cols = cols + column + ' VARCHAR(255)'
                 elif self.type == 'sqlite':
@@ -186,7 +186,7 @@ class WillieDB(object):
             cols += ', '
 
         if key:
-            if isinstance(key, basestring):
+            if isinstance(key, str):
                 cols += 'PRIMARY KEY (%s)' % key
             else:
                 cols += 'PRIMARY KEY (%s)' % ', '.join(key)
@@ -297,7 +297,7 @@ class Table(object):
         self.db = db
         self.columns = set(columns)
         self.name = name
-        if isinstance(key, basestring):
+        if isinstance(key, str):
             if key not in columns:
                 raise Exception  # TODO
             self.key = key
@@ -307,7 +307,7 @@ class Table(object):
                     raise Exception  # TODO
             self.key = key
 
-    def __nonzero__(self):
+    def __bool__(self):
         return bool(self.columns)
 
     def users(self):
@@ -358,7 +358,7 @@ class Table(object):
         return result
 
     def _make_where_statement(self, key, row):
-        if isinstance(key, basestring):
+        if isinstance(key, str):
             key = [key]
         where = []
         for k in key:
@@ -367,7 +367,7 @@ class Table(object):
 
     def _get_one(self, row, value, key):
         """Implements get() for where values is a single string"""
-        if isinstance(row, basestring):
+        if isinstance(row, str):
             row = [row]
         db = self.db.connect()
         cur = db.cursor()
@@ -384,7 +384,7 @@ class Table(object):
 
     def _get_many(self, row, values, key):
         """Implements get() for where values is iterable"""
-        if isinstance(row, basestring):
+        if isinstance(row, str):
             row = [row]
         db = self.db.connect()
         cur = db.cursor()
@@ -426,11 +426,11 @@ class Table(object):
 
         if not key:
             key = self.key
-        if not (isinstance(row, basestring) and isinstance(key, basestring)):
+        if not (isinstance(row, str) and isinstance(key, str)):
             if not len(row) == len(key):
                 raise ValueError('Unequal number of key and row columns.')
 
-        if isinstance(columns, basestring):
+        if isinstance(columns, str):
             return self._get_one(row, columns, key)
         elif isinstance(columns, Iterable):
             return self._get_many(row, columns, key)
@@ -447,7 +447,7 @@ class Table(object):
         if not self.columns:  # handle a non-existant table
             raise ValueError('Table is empty.')
 
-        if isinstance(row, basestring):
+        if isinstance(row, str):
             rowl = [row]
         else:
             rowl = row
@@ -479,7 +479,7 @@ class Table(object):
         if not self.columns:  # handle a non-existant table
             raise KeyError('Table is empty.')
 
-        if isinstance(row, basestring):
+        if isinstance(row, str):
             row = [row]
         if not key:
             key = self.key
@@ -519,7 +519,7 @@ class Table(object):
         return result
 
     def __iter__(self):
-        return self.keys()
+        return list(self.keys())
 
     def contains(self, row, key=None):
         """
@@ -568,7 +568,7 @@ class Table(object):
         if not self.columns:  # handle a non-existant table
             return False
 
-        if isinstance(column, basestring):
+        if isinstance(column, str):
             return column in self.columns
         elif isinstance(column, Iterable):
             has = True
@@ -637,4 +637,4 @@ def configure(config):
         )
 
     else:
-        print "This isn't currently supported. Aborting."
+        print("This isn't currently supported. Aborting.")

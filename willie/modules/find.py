@@ -120,7 +120,7 @@ def findandreplace(bot, trigger):
         if bot.config.lang == 'ca':
             new_phrase = '\x02volia dir:\x02 ' + new_phrase
         elif bot.config.lang == 'es':
-            new_phrase = u'\x02quería decir:\x02 ' + new_phrase
+            new_phrase = '\x02quería decir:\x02 ' + new_phrase
         else:
             new_phrase = '\x02meant to say:\x02 ' + new_phrase
     if trigger.group(1):

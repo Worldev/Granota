@@ -9,11 +9,11 @@ def reboot(bot, trigger):
         bot.commands = None
         bot.setup()
         if bot.config.lang == 'ca':
-            bot.reply(u"Bot reiniciat correctament")
+            bot.reply("Bot reiniciat correctament")
         elif bot.config.lang == 'es':
-            bot.reply(u"Bot reiniciado correctamente")
+            bot.reply("Bot reiniciado correctamente")
         else:
-            bot.reply(u"Bot rebooted.")
+            bot.reply("Bot rebooted.")
         return
     else:
-        return bot.reply(u"You aren't my owner")
+        return bot.reply("You aren't my owner")

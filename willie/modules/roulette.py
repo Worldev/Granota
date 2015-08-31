@@ -29,21 +29,21 @@ def roulette(bot, trigger):
     if bot.config.lang == 'ca':
         ROULETTE_STRINGS = {
             'TICK': '*tick*',
-            'KICK_REASON': u'Oh, no! Has perdut i estàs mort D:',
+            'KICK_REASON': 'Oh, no! Has perdut i estàs mort D:',
             'GAME_END': 'Joc aturat.',
             'GAME_END_FAIL': "%s: Si us plau, espera %s segons per aturar el joc.",
         }
     elif bot.config.lang == 'es':
         ROULETTE_STRINGS = {
             'TICK': '*tick*',
-            'KICK_REASON': u'Oh, no! Has perdido y estás muerto D:',
+            'KICK_REASON': 'Oh, no! Has perdido y estás muerto D:',
             'GAME_END': 'Juego parado.',
             'GAME_END_FAIL': "%s: Por favor, espera %s segundos para parar el juego.",
         }
     else:
         ROULETTE_STRINGS = {
             'TICK': '*tick*',
-            'KICK_REASON': u'Oh, no! You lose and you are dead D:',
+            'KICK_REASON': 'Oh, no! You lose and you are dead D:',
             'GAME_END': 'Game stopped.',
             'GAME_END_FAIL': "%s: Please, wait %s seconds to stop the game.",
         }        
@@ -60,4 +60,4 @@ def roulette(bot, trigger):
         bot.say(ROULETTE_STRINGS['TICK'])
 
 if __name__ == '__main__':
-    print __doc__.strip()
+    print(__doc__.strip())

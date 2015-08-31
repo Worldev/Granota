@@ -11,23 +11,23 @@ def configure(config):
     | -------- | ------- | ------- |
     | hold_ground | False | Auto re-join on kick |
     """
-    config.add_option('admin', 'hold_ground', u"Enable auto-rejoin on kick?")
+    config.add_option('admin', 'hold_ground', "Enable auto-rejoin on kick?")
 
 
 @willie.module.commands('join', 'entra')
 @willie.module.priority('low')
 @willie.module.example('.entra #exemple')
 def join(bot, trigger):
-    u"""Entra al canal especificat. Només els administradors."""
+    """Entra al canal especificat. Només els administradors."""
     # Can only be done in privmsg by an admin
     if trigger.sender.startswith('#'):
         if trigger.group(1) == 'join':
-            bot.reply(u"Only works in private")
+            bot.reply("Only works in private")
         else:
             if bot.config.lang == 'es':
-                bot.reply(u"Solo funciona en privado")
+                bot.reply("Solo funciona en privado")
             elif bot.config.lang == 'ca':
-                bot.reply(u"Nomes funciona en privat")
+                bot.reply("Nomes funciona en privat")
         return
 
     if trigger.admin:
@@ -40,12 +40,12 @@ def join(bot, trigger):
             bot.join(channel, key)
     if not trigger.admin:
         if trigger.group(1) == 'join':
-            bot.reply(u"You need admin rights.")
+            bot.reply("You need admin rights.")
         else:
             if bot.config.lang == 'ca':
-                bot.reply(u"No ets admin")
+                bot.reply("No ets admin")
             elif bot.config.lang == 'es':
-                bot.reply(u"No eres admin")
+                bot.reply("No eres admin")
         return
 
 @willie.module.commands('part', 'surt', 'sal')
@@ -56,11 +56,11 @@ def part(bot, trigger):
         return
     if not trigger.admin:
         if trigger.group(1) == 'join':
-            bot.reply(u"You don't have admin rights")
+            bot.reply("You don't have admin rights")
         if trigger.group(1) == 'sal':
-            bot.reply(u"No eres admin")
+            bot.reply("No eres admin")
         else:
-            bot.reply(u"No ets admin")
+            bot.reply("No ets admin")
         return
     """Deixa el canal especificat. Només els administrdors del bot."""
     # Can only be done in privmsg by an admin
@@ -92,7 +92,7 @@ def quit(bot, trigger):
 
 @willie.module.commands('msg')
 @willie.module.priority('low')
-@willie.module.example(u'.msg #example Hi!')
+@willie.module.example('.msg #example Hi!')
 def msg(bot, trigger):
     if trigger.sender.startswith('#'):
         return
@@ -209,11 +209,11 @@ def set_config(bot, trigger):
         section, option = arg1
     else:
         if bot.config.lang == 'ca':
-            bot.reply(u"Ús: .set secció.opció nou valor")
+            bot.reply("Ús: .set secció.opció nou valor")
         elif bot.config.lang == 'es':
-            bot.reply(u"Uso: .set sección.opción nuevo valor")
+            bot.reply("Uso: .set sección.opción nuevo valor")
         else:
-            bot.reply(u"Use: .set section.option new value")
+            bot.reply("Use: .set section.option new value")
         return
 
     # Display current value if no value is given.
@@ -254,11 +254,11 @@ def save_config(bot, trigger):
     if not trigger.admin:
         return
     if bot.config.lang == 'ca':
-        bot.say(u"Nova configuracio guardada. Pot ser que necessitis reiniciar-me perque tingui efecte.")
+        bot.say("Nova configuracio guardada. Pot ser que necessitis reiniciar-me perque tingui efecte.")
     elif bot.config.lang == 'es':
-        bot.say(u"Nueva configuracion guardada. Quizas tendras que reiniciarme para que tenga efecto.")
+        bot.say("Nueva configuracion guardada. Quizas tendras que reiniciarme para que tenga efecto.")
     else:
-        bot.say(u"New configuration save. Maybe you will have to reboot me to apply the changes.")
+        bot.say("New configuration save. Maybe you will have to reboot me to apply the changes.")
     bot.config.save()
 
 @commands('nick', 'nom', 'nombre')
@@ -269,4 +269,4 @@ def nick(bot, trigger):
         return
 
 if __name__ == '__main__':
-    print __doc__.strip()
+    print(__doc__.strip())

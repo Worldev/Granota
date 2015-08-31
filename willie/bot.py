@@ -19,11 +19,12 @@ import threading
 
 from datetime import datetime
 from willie import tools
-import irc
-from db import WillieDB
-from tools import (stderr, Nick, PriorityQueue, released,
+from . import irc
+from .db import WillieDB
+from .tools import (stderr, Nick, PriorityQueue, released,
                    get_command_regexp)
-import module
+from . import module
+import collections
 
 
 class Willie(irc.Bot):
@@ -186,7 +187,7 @@ class Willie(irc.Bot):
                         t.start()
                     else:
                         self._call(job.func)
-                    job.next()
+                    next(job)
                 # If jobs were cleared during the call, don't put an old job
                 # into the new job queue.
                 if not self._cleared:
@@ -231,7 +232,7 @@ class Willie(irc.Bot):
             self.interval = interval
             self.func = func
 
-        def next(self):
+        def __next__(self):
             """Update self.next_time with the assumption func was just called.
 
             Returns: A modified job object.
@@ -276,7 +277,7 @@ class Willie(irc.Bot):
             return self
 
     def setup(self):
-        stderr(u"\nBenvingut al Willie. Carregant mòduls...\n\n")
+        stderr("\nBenvingut al Willie. Carregant mòduls...\n\n")
         self.callables = set()
         self.shutdown_methods = set()
 
@@ -287,10 +288,10 @@ class Willie(irc.Bot):
 
         modules = []
         error_count = 0
-        for name, filename in filenames.iteritems():
+        for name, filename in filenames.items():
             try:
                 module = imp.load_source(name, filename)
-            except Exception, e:
+            except Exception as e:
                 error_count = error_count + 1
                 filename, lineno = tools.get_raising_file_and_line()
                 rel_path = os.path.relpath(filename, os.path.dirname(__file__))
@@ -302,21 +303,21 @@ class Willie(irc.Bot):
                         module.setup(self)
                     self.register(vars(module))
                     modules.append(name)
-                except Exception, e:
+                except Exception as e:
                     error_count = error_count + 1
                     filename, lineno = tools.get_raising_file_and_line()
                     rel_path = os.path.relpath(
                         filename, os.path.dirname(__file__)
                     )
                     raising_stmt = "%s:%d" % (rel_path, lineno)
-                    stderr(u"Error al procediment de configuració %s: %s (%s)"
+                    stderr("Error al procediment de configuració %s: %s (%s)"
                            % (name, e, raising_stmt))
 
         if modules:
-            stderr(u'\n\n%d mòduls registrats,' % (len(modules) - 1))
-            stderr(u'%d mòduls no carregats\n\n' % error_count)
+            stderr('\n\n%d mòduls registrats,' % (len(modules) - 1))
+            stderr('%d mòduls no carregats\n\n' % error_count)
         else:
-            stderr(u"Atenció: No he pogut trobar cap mòdul")
+            stderr("Atenció: No he pogut trobar cap mòdul")
 
         self.bind_commands()
 
@@ -328,7 +329,7 @@ class Willie(irc.Bot):
         have either "commands", "rule" or "interval" as attributes to mark it
         as a willie callable.
         """
-        if not callable(obj):
+        if not isinstance(obj, collections.Callable):
             # Check is to help distinguish between willie callables and objects
             # which just happen to have parameter commands or rule.
             return False
@@ -344,7 +345,7 @@ class Willie(irc.Bot):
 
         Object must be both be callable and named shutdown.
         """
-        if (callable(obj) and
+        if (isinstance(obj, collections.Callable) and
                 hasattr(obj, "name")
                 and obj.__name__ == 'shutdown'):
             return True
@@ -357,7 +358,7 @@ class Willie(irc.Bot):
         shutdown methods, to allow the modules to be notified when willie is
         quitting.
         """
-        for obj in variables.itervalues():
+        for obj in variables.values():
             if self.is_callable(obj):
                 self.callables.add(obj)
             if self.is_shutdown(obj):
@@ -376,16 +377,16 @@ class Willie(irc.Bot):
 
         def remove_func(func, commands):
             """Remove all traces of func from commands."""
-            for func_list in commands.itervalues():
+            for func_list in commands.values():
                 if func in func_list:
                     func_list.remove(func)
 
         hostmask = "%s!%s@%s" % (self.nick, self.user, socket.gethostname())
         willie = self.WillieWrapper(self, irc.Origin(self, hostmask, [], {}))
-        for obj in variables.itervalues():
+        for obj in variables.values():
             if obj in self.callables:
                 self.callables.remove(obj)
-                for commands in self.commands.itervalues():
+                for commands in self.commands.values():
                     remove_func(obj, commands)
             if obj in self.shutdown_methods:
                 try:
@@ -409,7 +410,7 @@ class Willie(irc.Bot):
             # At least for now, only account for the first command listed.
             if func.__doc__ and hasattr(func, 'commands') and func.commands[0]:
                 if hasattr(func, 'example'):
-                    if isinstance(func.example, basestring):
+                    if isinstance(func.example, str):
                         # Support old modules that add the attribute directly.
                         example = func.example
                     else:
@@ -452,7 +453,7 @@ class Willie(irc.Bot):
 
             if hasattr(func, 'rule'):
                 rules = func.rule
-                if isinstance(rules, basestring):
+                if isinstance(rules, str):
                     rules = [func.rule]
 
                 if isinstance(rules, list):
@@ -519,7 +520,7 @@ class Willie(irc.Bot):
                 string = string.decode('utf8')
             self.bot.msg(
                 self.origin.sender,
-                u'%s: %s' % (self.origin.nick, string)
+                '%s: %s' % (self.origin.nick, string)
             )
 
         def action(self, string, recipient=None):
@@ -530,9 +531,9 @@ class Willie(irc.Bot):
         def __getattr__(self, attr):
             return getattr(self.bot, attr)
 
-    class Trigger(unicode):
+    class Trigger(str):
         def __new__(cls, text, origin, bytes, match, event, args, self):
-            s = unicode.__new__(cls, text)
+            s = str.__new__(cls, text)
             s.sender = origin.sender
             """
             The channel (or nick, in a private message) from which the
@@ -700,7 +701,7 @@ class Willie(irc.Bot):
 
         list_of_blocked_functions = []
         for priority in ('high', 'medium', 'low'):
-            items = self.commands[priority].items()
+            items = list(self.commands[priority].items())
 
             for regexp, funcs in items:
                 match = regexp.match(text)
@@ -803,7 +804,7 @@ class Willie(irc.Bot):
         }
         if level in output_on and verbosity in output_on[level]:
             if debug_target == 'stdio':
-                print debug_msg
+                print(debug_msg)
             else:
                 self.msg(debug_target, debug_msg)
             return True
@@ -884,4 +885,4 @@ class Willie(irc.Bot):
             self._cap_reqs[cap] = entry
 
 if __name__ == '__main__':
-    print __doc__
+    print(__doc__)

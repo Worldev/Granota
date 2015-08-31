@@ -22,7 +22,7 @@ import asynchat
 import os
 import codecs
 import traceback
-from tools import stderr, Nick
+from .tools import stderr, Nick
 try:
     import select
     import ssl
@@ -33,7 +33,7 @@ except:
 import errno
 import threading
 from datetime import datetime
-from tools import verify_ssl_cn
+from .tools import verify_ssl_cn
 
 
 class Origin(object):
@@ -129,14 +129,14 @@ class Bot(asynchat.async_chat):
         if not os.path.isdir(self.config.core.logdir):
             try:
                 os.mkdir(self.config.core.logdir)
-            except Exception, e:
+            except Exception as e:
                 stderr('There was a problem creating the logs directory.')
                 stderr('%s %s' % (str(e.__class__), str(e)))
                 stderr('Please fix this and then run Willie again.')
                 os._exit(1)
         f = codecs.open(os.path.join(self.config.core.logdir, 'raw.log'),
                         'a', encoding='utf-8')
-        f.write(prefix + unicode(time.time()) + "\t")
+        f.write(prefix + str(time.time()) + "\t")
         temp = line.replace('\n', '')
 
         f.write(temp)
@@ -147,8 +147,8 @@ class Bot(asynchat.async_chat):
         '''Remove newlines from a string'''
         string = string.replace('\n', '')
         string = string.replace('\r', '')
-        if not isinstance(string, unicode):
-            string = unicode(string, encoding='utf8')
+        if not isinstance(string, str):
+            string = str(string, encoding='utf8')
         return string
 
     def write(self, args, text=None):
@@ -188,9 +188,9 @@ class Bot(asynchat.async_chat):
             #provision for continuation of message lines.
 
             if text is not None:
-                temp = (u' '.join(args) + ' :' + text)[:510] + '\r\n'
+                temp = (' '.join(args) + ' :' + text)[:510] + '\r\n'
             else:
-                temp = u' '.join(args)[:510] + '\r\n'
+                temp = ' '.join(args)[:510] + '\r\n'
             self.log_raw(temp, '>>')
             self.send(temp.encode('utf-8'))
         finally:
@@ -199,7 +199,7 @@ class Bot(asynchat.async_chat):
     def run(self, host, port=6667):
         try:
             self.initiate_connect(host, port)
-        except socket.error, e:
+        except socket.error as e:
             stderr('Connection error: %s' % e.strerror)
             self.hasquit = True
 
@@ -219,7 +219,7 @@ class Bot(asynchat.async_chat):
         try:
             asyncore.loop()
         except KeyboardInterrupt:
-            print 'KeyboardInterrupt'
+            print('KeyboardInterrupt')
             self.quit('KeyboardInterrupt')
 
     def quit(self, message):
@@ -295,7 +295,7 @@ class Bot(asynchat.async_chat):
                 try:
                     self.ssl.do_handshake()
                     break
-                except ssl.SSLError, err:
+                except ssl.SSLError as err:
                     if err.args[0] == ssl.SSL_ERROR_WANT_READ:
                         select.select([self.ssl], [], [])
                     elif err.args[0] == ssl.SSL_ERROR_WANT_WRITE:
@@ -312,8 +312,8 @@ class Bot(asynchat.async_chat):
                             os._exit(1)
                         raise
                 except Exception as e:
-                    print >> sys.stderr, ('SSL Handshake failed with error: %s'
-                                          % e)
+                    print(('SSL Handshake failed with error: %s'
+                                          % e), file=sys.stderr)
                     os._exit(1)
             self.set_socket(self.ssl)
 
@@ -362,11 +362,11 @@ class Bot(asynchat.async_chat):
         try:
             result = self.socket.send(data)
             return result
-        except ssl.SSLError, why:
+        except ssl.SSLError as why:
             if why[0] in (asyncore.EWOULDBLOCK, errno.ESRCH):
                 return 0
             else:
-                raise ssl.SSLError, why
+                raise ssl.SSLError(why)
             return 0
 
     def _ssl_recv(self, buffer_size):
@@ -378,7 +378,7 @@ class Bot(asynchat.async_chat):
                 self.handle_close()
                 return ''
             return data
-        except ssl.SSLError, why:
+        except ssl.SSLError as why:
             if why[0] in (asyncore.ECONNRESET, asyncore.ENOTCONN,
                           asyncore.ESHUTDOWN):
                 self.handle_close()
@@ -392,15 +392,15 @@ class Bot(asynchat.async_chat):
     def collect_incoming_data(self, data):
         # We can't trust clients to pass valid unicode.
         try:
-            data = unicode(data, encoding='utf-8')
+            data = str(data, encoding='utf-8')
         except UnicodeDecodeError:
             # not unicode, let's try cp1252
             try:
-                data = unicode(data, encoding='cp1252')
+                data = str(data, encoding='cp1252')
             except UnicodeDecodeError:
                 # Okay, let's try ISO8859-1
                 try:
-                    data = unicode(data, encoding='iso8859-1')
+                    data = str(data, encoding='iso8859-1')
                 except:
                     # Discard line if encoding is unknown
                     return
@@ -413,7 +413,7 @@ class Bot(asynchat.async_chat):
         line = self.buffer
         if line.endswith('\r'):
             line = line[:-1]
-        self.buffer = u''
+        self.buffer = ''
         self.raw = line
 
         # Break off IRCv3 message tags, if present
@@ -535,16 +535,16 @@ class Bot(asynchat.async_chat):
                 with codecs.open(
                     log_filename, 'a', encoding='utf-8'
                 ) as logfile:
-                    logfile.write(u'Signature: %s\n' % signature)
+                    logfile.write('Signature: %s\n' % signature)
                     if origin:
                         logfile.write(
-                            u'from %s at %s:\n' % (
+                            'from %s at %s:\n' % (
                                 origin.sender, str(datetime.now())
                             )
                         )
                     if trigger:
                         logfile.write(
-                            u'Message was: <%s> %s\n' % (
+                            'Message was: <%s> %s\n' % (
                                 trigger.nick, trigger.group(0)
                             )
                         )
@@ -593,7 +593,7 @@ class Bot(asynchat.async_chat):
         logfile.close()
         if self.error_count > 10:
             if (datetime.now() - self.last_error_timestamp).seconds < 5:
-                print >> sys.stderr, "Too many errors, can't continue"
+                print("Too many errors, can't continue", file=sys.stderr)
                 os._exit(1)
         self.last_error_timestamp = datetime.now()
         self.error_count = self.error_count + 1
@@ -646,4 +646,4 @@ class Bot(asynchat.async_chat):
 
 
 if __name__ == "__main__":
-    print __doc__
+    print(__doc__)

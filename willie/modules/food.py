@@ -7,7 +7,7 @@ import re
 @commands('cake', 'pastel', 'pastis')
 @example('.cake NeoMahler')
 def pastis(bot, trigger):
-    u"""
+    """
     Give a cake to the specified user.
     """
     if bot.config.lang == 'ca':
@@ -23,18 +23,18 @@ def pastis(bot, trigger):
                     "...I give the cake to %s, because is a nice person!",
                     "...I throw the cake to %s's face!"]
     if bot.config.lang == 'ca':
-        bot.say(u"Agafo un pastís i...")
+        bot.say("Agafo un pastís i...")
     elif bot.config.lang == 'es':
-        bot.say(u"Cojo un pastel y...")
+        bot.say("Cojo un pastel y...")
     else:
-        bot.say(u"I take a cake and...")
+        bot.say("I take a cake and...")
     time.sleep(1)
     bot.say(random.choice(cakes) % trigger.group(2))
 
 @commands('galeta', 'galleta', 'cookie')
 @example('.cookie NeoMahler')
 def galeta(bot, trigger):
-    u"""
+    """
     Gives a cookie to the specified user.
     """
     if not trigger.group(2):

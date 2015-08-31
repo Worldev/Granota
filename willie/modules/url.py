@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import re
-from htmlentitydefs import name2codepoint
+from html.entities import name2codepoint
 from willie import web, tools
 from willie.module import commands, rule, example
-import urlparse
+import urllib.parse
 
 url_finder = None
 exclusion_char = '!'
@@ -33,15 +33,15 @@ def configure(config):
         if not config.has_section('url'):
             config.add_section('url')
         if config.lang == 'ca':
-            config.add_list('url', 'exclude', u'Expressió regular pels URL que vols excloure.',
+            config.add_list('url', 'exclude', 'Expressió regular pels URL que vols excloure.',
                 'Regex:')
             config.interactive_add('url', 'exclusion_char',
-                u'Prefix per evitar que el bot cerqui informació dels URLs', '!')
+                'Prefix per evitar que el bot cerqui informació dels URLs', '!')
         elif config.lang == 'es':
-            config.add_list('url', 'exclude', u'Expressión regular para los URL que quieres que el bot ignore.',
+            config.add_list('url', 'exclude', 'Expressión regular para los URL que quieres que el bot ignore.',
                 'Regex:')
             config.interactive_add('url', 'exclusion_char',
-                u'Prefijo para evitar que el bot busque información acerca de los URLs', '!')
+                'Prefijo para evitar que el bot busque información acerca de los URLs', '!')
         else:
             config.add_list('url', 'exclude', 'Enter regular expressions for each URL you would like to exclude.',
                 'Regex:')
@@ -188,7 +188,7 @@ def check_callbacks(bot, trigger, url, run=True):
     # Check if it matches the exclusion list first
     matched = any(regex.search(url) for regex in bot.memory['url_exclude'])
     # Then, check if there's anything in the callback list
-    for regex, function in bot.memory['url_callbacks'].iteritems():
+    for regex, function in bot.memory['url_callbacks'].items():
         match = regex.search(url)
         if match:
             if run:
@@ -256,8 +256,8 @@ def urlEncodeNonAscii(b):
 
 
 def iri_to_uri(iri):
-    parts = urlparse.urlparse(iri)
-    return urlparse.urlunparse(
+    parts = urllib.parse.urlparse(iri)
+    return urllib.parse.urlunparse(
         part.encode('idna') if parti == 1 else urlEncodeNonAscii(part.encode('utf-8'))
         for parti, part in enumerate(parts)
     )

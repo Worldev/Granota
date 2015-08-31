@@ -10,9 +10,9 @@ def generic_countdown(bot, trigger):
     text = trigger.group(2)
     if not text:
         if bot.config.lang == 'ca':
-            bot.reply(u"Utilitza el format correcte: .comptenrere 2018 12 19")
+            bot.reply("Utilitza el format correcte: .comptenrere 2018 12 19")
         elif bot.config.lang == 'es':
-            bot.say(u"Utiliza el formato correcto: .cuentatras 2018 12 19")
+            bot.say("Utiliza el formato correcto: .cuentatras 2018 12 19")
         else:
             bot.say("Please use correct format: .countdown 2018 12 19")
         return NOLIMIT
@@ -41,9 +41,9 @@ def generic_countdown(bot, trigger):
                        + text[0] + " " + text[1] + " " + text[2])
     else:
         if bot.config.lang == 'ca':
-            bot.reply(u"Utilitza el format correcte: .comptenrere 2018 12 19")
+            bot.reply("Utilitza el format correcte: .comptenrere 2018 12 19")
         elif bot.config.lang == 'es':
-            bot.say(u"Utiliza el formato correcto: .cuentatras 2018 12 19")
+            bot.say("Utiliza el formato correcto: .cuentatras 2018 12 19")
         else:
             bot.say("Please use correct format: .countdown 2018 12 19")
         return NOLIMIT

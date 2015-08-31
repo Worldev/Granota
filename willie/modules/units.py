@@ -33,19 +33,19 @@ def temperature(bot, trigger):
     """
     if not trigger.group(2):
         if bot.config.lang == 'ca':
-            bot.reply(u"Error de sintaxi. Escriu .temp <número><unitat de mesura>")
+            bot.reply("Error de sintaxi. Escriu .temp <número><unitat de mesura>")
         elif bot.config.lang == 'es':
-            bot.repy(u"Error de sintaxis. Escribe .temp <número><unidad de mesura>")
+            bot.repy("Error de sintaxis. Escribe .temp <número><unidad de mesura>")
         else:
-            bot.reply(u"Syntax error. User .temp <number><measure unit>")
+            bot.reply("Syntax error. User .temp <number><measure unit>")
         return
     try:
         source = find_temp.match(trigger.group(2)).groups()
     except AttributeError:
         if bot.config.lang == 'ca':
-            bot.reply(u"Aquesta temperatura no és vàlida")
+            bot.reply("Aquesta temperatura no és vàlida")
         elif bot.config.lang == 'es':
-            bot.reply(u"Esa temperatura no es valida")
+            bot.reply("Esa temperatura no es valida")
         else:
             bot.reply("That's not a valid temperature.")
         return NOLIMIT
@@ -77,19 +77,19 @@ def distance(bot, trigger):
     """
     if not trigger.group(2):
         if bot.config.lang == 'ca':
-            bot.reply(u"Error de sintaxi. Escriu .distancia <número><unitat de mesura>")
+            bot.reply("Error de sintaxi. Escriu .distancia <número><unitat de mesura>")
         elif bot.config.lang == 'es':
-            bot.repy(u"Error de sintaxis. Escribe .distancia <número><unidad de mesura>")
+            bot.repy("Error de sintaxis. Escribe .distancia <número><unidad de mesura>")
         else:
-            bot.reply(u"Syntax error. User .length <number><measure unit>")
+            bot.reply("Syntax error. User .length <number><measure unit>")
         return
     try:
         source = find_length.match(trigger.group(2)).groups()
     except AttributeError:
         if bot.config.lang == 'ca':
-            bot.reply(u"Aquesta no és unitat de distànica vàlida.")
+            bot.reply("Aquesta no és unitat de distànica vàlida.")
         elif bot.config.lang == 'es':
-            bot.reply(u"Esa no es una unidad de distancia valida.")
+            bot.reply("Esa no es una unidad de distancia valida.")
         else:
             bot.reply("That's not a valid length unit.")
         return NOLIMIT

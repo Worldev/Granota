@@ -1,6 +1,6 @@
 import willie
 import json
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 @willie.module.commands('partido', 'partit', 'politician')
 @willie.module.example(".politician Mariano Rajoy")
@@ -9,7 +9,7 @@ def partido(bot, trigger):
 
     politicoParaTest = politico.decode("utf-8")
     politicoParaLink = politico.replace(" ", "%20")
-    linkapiqueBusca = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbsearchentities&search=" + politicoParaLink + "&language=%s&format=json" % bot.config.lang)
+    linkapiqueBusca = urllib.request.urlopen("http://www.wikidata.org/w/api.php?action=wbsearchentities&search=" + politicoParaLink + "&language=%s&format=json" % bot.config.lang)
     eldearriba = ("http://www.wikidata.org/w/api.php?action=wbsearchentities&search=" + politicoParaLink + "&language=%s&format=json" % bot.config.lang)
     todo = json.loads(linkapiqueBusca.read())
     nombrePolitico = todo["searchinfo"]["search"]
@@ -17,7 +17,7 @@ def partido(bot, trigger):
     idWikidata = todo["search"][0]["id"]
 
     linkazoparaverlo = "http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + idWikidata + "&format=json"
-    linkapidelPolitico = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + idWikidata + "&format=json")
+    linkapidelPolitico = urllib.request.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + idWikidata + "&format=json")
     tododelPolitico = json.loads(linkapidelPolitico.read())
     idParaAPI = '"' + idWikidata + '"'
     numeroPartido = tododelPolitico['entities'][idWikidata]['claims']['P102'][0]['mainsnak']['datavalue']['value']['numeric-id']
@@ -30,7 +30,7 @@ def partido(bot, trigger):
     linkbajoWikipediaPersona = linkWikipediaPersona.replace(" ", "_")
     numerobuscaPartido = "Q" + str(numeroPartido)
 
-    linkapidelPartido = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + numerobuscaPartido + "&languages=es&format=json")
+    linkapidelPartido = urllib.request.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + numerobuscaPartido + "&languages=es&format=json")
     linkparaverapidelPartido = "http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + numerobuscaPartido + "&languages=es&format=json"
     tododelPartido = json.loads(linkapidelPartido.read())
     if bot.config.lang == 'ca':

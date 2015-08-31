@@ -1,7 +1,7 @@
 language: python
 python:
-  - "3.4"
+  - "2.7.9"
 
 install: "wget https://github.com/CatIRCBots/Granota/raw/tools/testbot.py"
 
-script: "python3 testbot.py"
+script: "python testbot.py"

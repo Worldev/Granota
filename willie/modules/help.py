@@ -10,11 +10,11 @@ def help(bot, trigger):
     """T'ofereix ajuda per una ordre i, a vegades, un exemple"""
     if not trigger.group(2):
     	if bot.config.lang == 'ca':
-    		bot.reply('Escriu .ajuda <ordre> (per exemple .help c) per obtindre ajuda per una ordre, o .ordres per una llista d\'ordres')
+    		bot.reply(u'Escriu .ajuda <ordre> (per exemple .help c) per obtindre ajuda per una ordre, o .ordres per una llista d\'ordres')
     	elif bot.config.lang == 'es':
-    		bot.reply('Escribe .ayuda <orden> (por ejemplo .ayuda c) para obtener ayuda sobre un comando, o .comandos para una lista de órdenes')
+    		bot.reply(u'Escribe .ayuda <orden> (por ejemplo .ayuda c) para obtener ayuda sobre un comando, o .comandos para una lista de órdenes')
     	else:
-    		bot.reply('Write .help <command> (for example .help c) to get help about a command, or .commands to get a list of commands.')
+    		bot.reply(u'Write .help <command> (for example .help c) to get help about a command, or .commands to get a list of commands.')
     
     else:
         name = trigger.group(2)
@@ -35,7 +35,7 @@ def help(bot, trigger):
 def commands(bot, trigger):
     """Retorna una llista de les ordres disponibles en un missatge privat"""
     #ordres = """=, admins, ban, bots, choose, commands, countdown, d, debug_print, deop, devoice, diec, drae, ety, frase, g, galeta, gc, gcs, help, ip, isup, kick, kickban, length, link, lmgtfy, movie, op, pastis, pregaria, privs, py, quiet, recomana, ves, \x02join, part, quit, anunci, msg, me, recover\x02"""
-    names = ', '.join(sorted(bot.doc.keys()))
+    names = ', '.join(sorted(bot.doc.iterkeys()))
     listnames = names.split()
     num = len(listnames)
     if bot.config.lang == 'ca':
@@ -56,21 +56,21 @@ def commands(bot, trigger):
 def help2(bot, trigger):
     if bot.config.lang == 'ca':
 	    response = (
-	        'Hola, Sóc un bot del projecte CatBots. Escriu ".ordres" per una llista d\'ordres ' +
-	        'o segueix el següent enllaç per més detalls: https://wikicatbots.tk/wiki/Granota/ca. El meu propietari és %s.'
+	        u'Hola, Sóc un bot del projecte CatBots. Escriu ".ordres" per una llista d\'ordres ' +
+	        u'o segueix el següent enllaç per més detalls: https://wikicatbots.tk/wiki/Granota/ca. El meu propietari és %s.'
 	    % bot.config.owner)
     elif bot.config.lang == 'es':
     	    response = (
-	        'Hola, Soy un bot del proyecto CatBots. Escribe ".comandos" por una lista de mis comandos ' +
-	        'o sigue ese enlace para más detalles: https://wikicatbots.tk/wiki/Granota/es. Mi propietario es %s.'
+	        u'Hola, Soy un bot del proyecto CatBots. Escribe ".comandos" por una lista de mis comandos ' +
+	        u'o sigue ese enlace para más detalles: https://wikicatbots.tk/wiki/Granota/es. Mi propietario es %s.'
 	    ) % bot.config.owner
     else:
        	    response = (
-	        'Hi, I\'m a CatBots project bot. Write ".commands" for a commands list ' +
-	        'or follow this links for more information: https://wikicatbots.tk/wiki/Granota. My owner is %s.'
+	        u'Hi, I\'m a CatBots project bot. Write ".commands" for a commands list ' +
+	        u'or follow this links for more information: https://wikicatbots.tk/wiki/Granota. My owner is %s.'
 	    ) % bot.config.owner
 	   
     bot.reply(response)
 
 if __name__ == '__main__':
-    print(__doc__.strip())
+    print __doc__.strip()

@@ -26,23 +26,23 @@ def movie(bot, trigger):
             bot.debug(__file__, 'Got an error from the imdb api, search phrase was %s' % word, 'warning')
             bot.debug(__file__, str(data), 'warning')
             if bot.config.lang == 'ca':
-                message = '[Pel·lícula] Error de l\'API d\'imdb'
+                message = u'[Pel·lícula] Error de l\'API d\'imdb'
             elif bot.config.lang == 'es':
-                message = '[Película] Error de la API de imdb'
+                message = u'[Película] Error de la API de imdb'
             else:
                 message = '[MOVIE] Error from the imdb API'
     else:
         if bot.config.lang == 'ca':
-            message = '[Pel·lícula] Títol: ' + data['Title'] + \
+            message = u'[Pel·lícula] Títol: ' + data['Title'] + \
                     ' | Any: ' + data['Year'] + \
-                    ' | Valoració: ' + data['imdbRating'] + \
-                    ' | Gènere: ' + data['Genre'] + \
+                    u' | Valoració: ' + data['imdbRating'] + \
+                    u' | Gènere: ' + data['Genre'] + \
                     ' | Link a IMDB: http://imdb.com/title/' + data['imdbID']
         elif bot.config.lang == 'es':
-            message = '[Película] Título: ' + data['Title'] + \
-                    ' | Año: ' + data['Year'] + \
-                    ' | Valoración: ' + data['imdbRating'] + \
-                    ' | Género: ' + data['Genre'] + \
+            message = u'[Película] Título: ' + data['Title'] + \
+                    u' | Año: ' + data['Year'] + \
+                    u' | Valoración: ' + data['imdbRating'] + \
+                    u' | Género: ' + data['Genre'] + \
                     ' | Link a IMDB: http://imdb.com/title/' + data['imdbID']
         else:
             message = '[MOVIE] Title: ' + data['Title'] + \

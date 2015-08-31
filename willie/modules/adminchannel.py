@@ -12,7 +12,7 @@ def setup(bot):
 
 @commands('op')
 def op(bot, trigger):
-    """
+    u"""
     Dóna l'estatus d'operador al nick indicat.
     """
     if trigger.admin:
@@ -52,7 +52,7 @@ def deop(bot, trigger):
 
 @commands('voice', 'v', 'veu')
 def voice(bot, trigger):
-    """
+    u"""
     Dóna l'estatus veu al nick indicat.
     """
     if trigger.admin:
@@ -230,7 +230,7 @@ def unquiet(bot, trigger):
 @commands('kickban', 'kb')
 @priority('high')
 def kickban(bot, trigger):
-    """
+    u"""
     Bandeja i fa fora a un usari. El bot ha de ser operador
     Sintaxi: .kickban [#chan] user1 user!*@* raó
     """
@@ -282,7 +282,7 @@ def topic(bot, trigger):
     top = trigger.group(2)
     text = tuple()
     if top:
-        text = tuple(str.split(top, '~', narg))
+        text = tuple(unicode.split(top, '~', narg))
 
     if len(text) != narg:
         if bot.config.lang == 'ca':
@@ -309,9 +309,9 @@ def set_mask(bot, trigger):
         if bot.config.lang == 'ca':
             bot.say("No tinc ben configurada la base de dades i no he pogut dur a terme aquesta accio.")
         elif bot.config.lang == 'es':
-            bot.say("No tengo bien configurada la base de datos y no he podido hacer esa accion.")
+            bot.say(u"No tengo bien configurada la base de datos y no he podido hacer esa accion.")
         else:
-            bot.say("I don't have my database configured and I couldn't make this action.")
+            bot.say(u"I don't have my database configured and I couldn't make this action.")
     else:
         bot.db.preferences.update(trigger.sender.lower(), {'topic_mask': trigger.group(2)})
         if bot.config.lang == 'ca':
@@ -330,9 +330,9 @@ def show_mask(bot, trigger):
         if bot.config.lang == 'ca':
             bot.say("No tinc ben configurada la base de dades i no he pogut dur a terme aquesta accio.")
         elif bot.config.lang == 'es':
-            bot.say("No tengo bien configurada la base de datos y no he podido hacer esa accion.")
+            bot.say(u"No tengo bien configurada la base de datos y no he podido hacer esa accion.")
         else:
-            bot.say("I don't have my database configured and I couldn't make this action.")
+            bot.say(u"I don't have my database configured and I couldn't make this action.")
     elif trigger.sender.lower() in bot.db.preferences:
         bot.say(bot.db.preferences.get(trigger.sender.lower(), 'topic_mask'))
     else:
@@ -345,7 +345,7 @@ def moderat(bot, trigger):
         channel = trigger.sender
         bot.write(["MODE", channel, "+m"])
     else:
-        bot.say("Ho sento, pero no")
+        bot.say(u"Ho sento, pero no")
         return
     
 @commands('dm', 'nomoderat', '-m')
@@ -356,16 +356,16 @@ def dmoderat(bot, trigger):
         bot.write(["MODE", channel + " -m"])
     else:
         if bot.config.lang == 'ca':
-            bot.say("No ets administrador.")
+            bot.say(u"No ets administrador.")
         elif bot.config.lang == 'es':
-            bot.say("No eres administrador.")
+            bot.say(u"No eres administrador.")
         else:
-            bot.say("You are not admin.")
+            bot.say(u"You are not admin.")
         return
 
 @commands('recover', 'recupera')
 def recover(bot, trigger):
-    """
+    u"""
     Recupera el canal: +o al bot, +im al canal i, si es dona al cas, el ChanServ invita el bot al canal.
     """
     if not trigger.admin:
@@ -386,16 +386,16 @@ def recover(bot, trigger):
         bot.join(channel)
         bot.write(['MODE', channel + ' +I ' + trigger.nick])
         if bot.config.lang == 'ca':
-            bot.reply("Recuperació completada per %s. Ja pots entrar al canal." % channel)
+            bot.reply(u"Recuperació completada per %s. Ja pots entrar al canal." % channel)
         elif bot.config.lang == 'es':
-            bot.reply("Recuperacion completada por %s. Ya puedes entrar al canal." % channel)
+            bot.reply(u"Recuperacion completada por %s. Ya puedes entrar al canal." % channel)
         else:
-            bot.reply("Recover complete for %s. You can now join the channel." % channel)
+            bot.reply(u"Recover complete for %s. You can now join the channel." % channel)
         return
     
 @commands('i')
 def i(bot, trigger):
-    """Posa el canal en +i."""
+    u"""Posa el canal en +i."""
     if trigger.admin:
         channel = trigger.sender
         bot.write(['MODE', channel + ' +i'])
@@ -405,7 +405,7 @@ def i(bot, trigger):
 
 @commands('-i')
 def di(bot, trigger):
-    """Posa el canal en -i."""
+    u"""Posa el canal en -i."""
     if trigger.admin:
         channel = trigger.sender
         bot.write(['MODE', channel + ' -i'])

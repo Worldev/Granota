@@ -23,7 +23,7 @@ def rand(bot, trigger):
         high = int(arg1)
     else:
         low = 0
-        high = sys.maxsize
+        high = sys.maxint
 
     if low > high:
         low, high = high, low

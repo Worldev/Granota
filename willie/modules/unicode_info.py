@@ -18,18 +18,18 @@ def codepoint(bot, trigger):
         return NOLIMIT
     elif len(arg) > 1:
         try:
-            arg = chr(int(arg, 16))
+            arg = unichr(int(arg, 16))
         except:
             if bot.config.lang == 'ca':
-                bot.reply("Aquest no és un caràcter vàlid.")
+                bot.reply(u"Aquest no és un caràcter vàlid.")
             elif bot.config.lang == 'es':
-                bot.reply("Ese no es un caracter válido.")
+                bot.reply(u"Ese no es un caracter válido.")
             else:
                 bot.reply("That's not a valid code point.")
             return NOLIMIT
 
     # Get the hex value for the code point, and drop the 0x from the front
-    point = str(hex(ord('' + arg)))[2:]
+    point = str(hex(ord(u'' + arg)))[2:]
     # Make the hex 4 characters long with preceding 0s, and all upper case
     point = point.rjust(4, '0').upper()
     try:

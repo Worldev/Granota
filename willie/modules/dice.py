@@ -28,7 +28,7 @@ class DicePouch:
         """Roll all the dice in the pouch."""
         self.dice = {}
         self.dropped = {}
-        for __ in range(self.num):
+        for __ in xrange(self.num):
             number = random.randint(1, self.type)
             count = self.dice.setdefault(number, 0)
             self.dice[number] = count + 1
@@ -39,7 +39,7 @@ class DicePouch:
         Args:
             n: the number of dice to drop.
         """
-        for i, count in self.dice.items():
+        for i, count in self.dice.iteritems():
             count = self.dice[i]
             if n == 0:
                 break
@@ -52,19 +52,19 @@ class DicePouch:
                 self.dropped[i] = count
                 n = n - count
 
-        for i, count in self.dropped.items():
+        for i, count in self.dropped.iteritems():
             if self.dice[i] == 0:
                 del self.dice[i]
 
     def get_simple_string(self):
         """Return the values of the dice like (2+2+2[+1+1])+1."""
-        dice = iter(self.dice.items())
+        dice = self.dice.iteritems()
         faces = ("+".join([str(face)] * times) for face, times in dice)
         dice_str = "+".join(faces)
 
         dropped_str = ""
         if self.dropped:
-            dropped = iter(self.dropped.items())
+            dropped = self.dropped.iteritems()
             dfaces = ("+".join([str(face)] * times) for face, times in dropped)
             dropped_str = "[+%s]" % ("+".join(dfaces),)
 
@@ -76,13 +76,13 @@ class DicePouch:
 
     def get_compressed_string(self):
         """Return the values of the dice like (3x2[+2x1])+1."""
-        dice = iter(self.dice.items())
+        dice = self.dice.iteritems()
         faces = ("%dx%d" % (times, face) for face, times in dice)
         dice_str = "+".join(faces)
 
         dropped_str = ""
         if self.dropped:
-            dropped = iter(self.dropped.items())
+            dropped = self.dropped.iteritems()
             dfaces = ("%dx%d" % (times, face) for face, times in dropped)
             dropped_str = "[+%s]" % ("+".join(dfaces),)
 
@@ -95,7 +95,7 @@ class DicePouch:
     def get_sum(self):
         """Get the sum of non-dropped dice and the addition."""
         result = self.addition
-        for face, times in self.dice.items():
+        for face, times in self.dice.iteritems():
             result += face * times
         return result
 
@@ -165,14 +165,14 @@ def roll(bot, trigger):
     dice_expressions = re.findall(dice_regexp, arg_str)
     arg_str = arg_str.replace("%", "%%")
     arg_str = re.sub(dice_regexp, "%s", arg_str)
-    dice = list(map(_roll_dice, dice_expressions))
+    dice = map(_roll_dice, dice_expressions)
     if None in dice:
         if bot.config.lang == 'ca':
-            bot.reply("Només tinc 1000 daus.")
+            bot.reply(u"Només tinc 1000 daus.")
         elif bot.config.lang == 'es':
-            bot.reply("Solo tengo 1000 dados.")
+            bot.reply(u"Solo tengo 1000 dados.")
         else:
-            bot.reply("I only have 1000 dices.")
+            bot.reply(u"I only have 1000 dices.")
         return
 
     def _get_eval_str(dice):
@@ -209,9 +209,9 @@ def choose(bot, trigger):
     """
     if not trigger.group(2):
         if bot.config.lang == 'ca':
-            return bot.reply("No m'has donat cap opció per triar!")
+            return bot.reply(u"No m'has donat cap opció per triar!")
         elif bot.config.lang == 'es':
-            return bot.reply("No me has dado ninguna opción para escojer!")
+            return bot.reply(u"No me has dado ninguna opción para escojer!")
         else:
             return bot.reply('I\'d choose an option, but you didn\'t give me any.')
     choices = re.split('[\|\\\\\/]', trigger.group(2))
@@ -219,7 +219,7 @@ def choose(bot, trigger):
     if bot.config.lang == 'ca':
         return bot.reply('Les teves opcions: %s. La meva tria: %s' % (', '.join(choices), pick))
     elif bot.config.lang == 'es':
-        return bot.reply("Tus opciones: %s. Mi eleccion: %s" % (', '.join(choices), pick))
+        return bot.reply(u"Tus opciones: %s. Mi eleccion: %s" % (', '.join(choices), pick))
     else:
         return bot.reply('Your options: %s. My choice: %s' % (', '.join(choices), pick))
 

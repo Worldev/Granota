@@ -22,9 +22,9 @@ http://willie.dftba.net
 """
 
 import re
-import urllib.request, urllib.parse, urllib.error
-import urllib.request, urllib.error, urllib.parse
-from html.entities import name2codepoint
+import urllib
+import urllib2
+from htmlentitydefs import name2codepoint
 
 
 # HTTP GET
@@ -81,7 +81,7 @@ def post(uri, query, limit_bytes=None):
     """
     if not uri.startswith('http'):
         uri = "http://" + uri
-    u = urllib.request.urlopen(uri, query)
+    u = urllib2.urlopen(uri, query)
     bytes = u.read(limit_bytes)
     u.close()
     return bytes
@@ -92,11 +92,11 @@ r_entity = re.compile(r'&([^;\s]+);')
 def entity(match):
     value = match.group(1).lower()
     if value.startswith('#x'):
-        return chr(int(value[2:], 16))
+        return unichr(int(value[2:], 16))
     elif value.startswith('#'):
-        return chr(int(value[1:]))
-    elif value in name2codepoint:  # FIXME: Maybe use 'in'?
-        return chr(name2codepoint[value])
+        return unichr(int(value[1:]))
+    elif name2codepoint.has_key(value):  # FIXME: Maybe use 'in'?
+        return unichr(name2codepoint[value])
     return '[' + value + ']'
 
 
@@ -124,10 +124,10 @@ def get_urllib_object(uri, timeout, headers=None):
         original_headers.update(headers)
     else:
         headers = original_headers
-    req = urllib.request.Request(uri, headers=headers)
+    req = urllib2.Request(uri, headers=headers)
     try:
-        u = urllib.request.urlopen(req, None, timeout)
-    except urllib.error.HTTPError as e:
+        u = urllib2.urlopen(req, None, timeout)
+    except urllib2.HTTPError, e:
         # Even when there's an error (say HTTP 404), return page contents
         return e.fp
 
@@ -139,9 +139,9 @@ def quote(string):
     """
     Like urllib2.quote but handles unicode properly
     """
-    if isinstance(string, str):
+    if isinstance(string, unicode):
         string = string.encode('utf8')
-    return urllib.parse.quote(string)
+    return urllib2.quote(string)
 
 
 # Identical to urllib.urlencode
@@ -151,4 +151,4 @@ def urlencode(data):
     your module and don't want to import urllib just to use the urlencode
     function.
     """
-    return urllib.parse.urlencode(data)
+    return urllib.urlencode(data)

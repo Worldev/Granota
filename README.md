@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/CatIRCBots/Granota.svg?branch=master)](https://travis-ci.org/CatIRCBots/Granota)
 
-A multilingual IRC bot coded in Python 3 based off Willie.
+A multilingual IRC bot
 
 ## Configuration
 

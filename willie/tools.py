@@ -12,7 +12,7 @@ Licensed under the Eiffel Forum License 2.
 
 https://willie.dftba.net
 """
-
+from __future__ import division
 
 import sys
 import os
@@ -25,7 +25,7 @@ except ImportError:
     #no SSL support
     ssl = False
 import traceback
-import queue
+import Queue
 import copy
 import ast
 import operator
@@ -151,7 +151,7 @@ def get_command_regexp(prefix, command):
 
 def deprecated(old):
     def new(*args, **kwargs):
-        print('Function %s is deprecated.' % old.__name__, file=sys.stderr)
+        print >> sys.stderr, 'Function %s is deprecated.' % old.__name__
         trace = traceback.extract_stack()
         for line in traceback.format_list(trace[:-1]):
             stderr(line[:-1])
@@ -161,7 +161,7 @@ def deprecated(old):
     return new
 
 
-class PriorityQueue(queue.PriorityQueue):
+class PriorityQueue(Queue.PriorityQueue):
     """A priority queue with a peek method."""
     def peek(self):
         """Return a copy of the first element without removing it."""
@@ -205,7 +205,7 @@ class Ddict(dict):
         return dict.__getitem__(self, key)
 
 
-class Nick(str):
+class Nick(unicode):
     """
     A `unicode` subclass which acts appropriately for an IRC nickname. When
     used as normal `unicode` objects, case will be preserved. However, when
@@ -221,7 +221,7 @@ class Nick(str):
         # assume unicode. It won't hurt anything, and is more internally
         # consistent. And who knows, maybe there's another use case for this
         # weird case convention.
-        s = str.__new__(cls, nick)
+        s = unicode.__new__(cls, nick)
         s._lowered = Nick._lower(nick)
         return s
 
@@ -297,7 +297,7 @@ class OutputRedirect:
             except:
                 pass
         logfile = open(self.logpath, 'a')
-        logfile.write(string)
+        logfile.write(string.encode('utf8'))
         logfile.close()
 
 
@@ -306,7 +306,7 @@ class OutputRedirect:
 #4.0
 @deprecated
 def stdout(string):
-    print(string)
+    print string
 
 
 def stderr(string):
@@ -314,7 +314,7 @@ def stderr(string):
     Print the given ``string`` to stderr. This is equivalent to ``print >>
     sys.stderr, string``
     """
-    print(string, file=sys.stderr)
+    print >> sys.stderr, string
 
 
 def check_pid(pid):

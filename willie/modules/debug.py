@@ -35,9 +35,9 @@ def debug_print(bot, trigger):
         willie.modules.version.version(bot, trigger)
     except Exception as e:
         if bot.config.lang == 'ca':
-            bot.reply("Error al intentar obtenir la versio actual")
+            bot.reply(u"Error al intentar obtenir la versio actual")
         elif bot.config.lang == 'es':
-            bot.reply("Error al intentar obtener la version actual.")
+            bot.reply(u"Error al intentar obtener la version actual.")
         else:
             bot.say('An error occured trying to get the current version.')
     admins(bot, trigger)

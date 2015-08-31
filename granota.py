@@ -1,3 +1,4 @@
+#!/usr/bin/env python2
 # coding=utf-8
 
 import sys
@@ -15,8 +16,8 @@ homedir = os.path.join(os.path.expanduser('~'), '.willie')
 
 
 def check_python_version():
-    if sys.version_info < (3, 3):
-        stderr('Error: You need at least Python 3.3!')
+    if sys.version_info < (2, 7, 8):
+        stderr(u'Error: You need at leat Python 2.7.8!')
         sys.exit(1)
 
 
@@ -85,20 +86,20 @@ def main(argv=None):
         check_python_version()
         if opts.list_configs is not None:
             configs = enumerate_configs()
-            print('Arxius de configuació a ~/.willie:')
+            print u'Arxius de configuació a ~/.willie:'
             if len(configs[0]) is 0:
-                print('\tNo he trobat res')
+                print u'\tNo he trobat res'
             else:
                 for config in configs:
-                    print('\t%s' % config)
-            print('-------------------------')
+                    print '\t%s' % config
+            print '-------------------------'
             return
 
         config_name = opts.config or 'default'
 
         configpath = find_config(config_name)
         if not os.path.isfile(configpath):
-            print("Welcome to Granota configuration wizard! -- Bienvenido al asistente de configuracion de Granota! -- Benvingut a l'assistent de cnfiguracio de Granota!\n")
+            print u"Welcome to Granota configuration wizard! -- Bienvenido al asistente de configuracion de Granota! -- Benvingut a l'assistent de cnfiguracio de Granota!\n"
             if not configpath.endswith('.cfg'):
                 configpath = configpath + '.cfg'
             create_config(configpath)
@@ -110,7 +111,7 @@ def main(argv=None):
             sys.exit(2)
 
         if config_module.core.not_configured:
-            stderr('The bot is not configured. -- El bot no esta configurado. -- El bot no esta configurat.')
+            stderr(u'The bot is not configured. -- El bot no esta configurado. -- El bot no esta configurat.')
             # exit with code 2 to prevent auto restart on fail by systemd
             sys.exit(2)
 
@@ -153,25 +154,25 @@ def main(argv=None):
             pid_file.close()
             if tools.check_pid(old_pid):
                 if opts.quit is None and opts.kill is None:
-                    stderr('There is already a Granota running. -- Ya hay un bot executandose. -- Ja hi ha un bot executant-se.')
-                    stderr('Try -- Intenta: --quit o --kill')
+                    stderr(u'There is already a Granota running. -- Ya hay un bot executandose. -- Ja hi ha un bot executant-se.')
+                    stderr(u'Try -- Intenta: --quit o --kill')
                     sys.exit(1)
                 elif opts.kill:
-                    stderr('Killing Granota. -- Matando a Granota. -- Matant Granota.')
+                    stderr(u'Killing Granota. -- Matando a Granota. -- Matant Granota.')
                     os.kill(old_pid, signal.SIGKILL)
                     sys.exit(0)
                 elif opts.quit:
-                    stderr('Quitting Granota. -- Desconnectando a Granota. -- Desconnectant a Granota.')
+                    stderr(u'Quitting Granota. -- Desconnectando a Granota. -- Desconnectant a Granota.')
                     if hasattr(signal, 'SIGUSR1'):
                         os.kill(old_pid, signal.SIGUSR1)
                     else:
                         os.kill(old_pid, signal.SIGTERM)
                     sys.exit(0)
             elif not tools.check_pid(old_pid) and (opts.kill or opts.quit):
-                stderr('The bot is not running. -- El bot no se esta executando. -- El bot no s\'esta executant.')
+                stderr(u'The bot is not running. -- El bot no se esta executando. -- El bot no s\'esta executant.')
                 sys.exit(1)
         elif opts.quit is not None or opts.kill is not None:
-            stderr('The bot is not running. -- El bot no se esta executando. -- El bot no s\'esta executant.')
+            stderr(u'The bot is not running. -- El bot no se esta executando. -- El bot no s\'esta executant.')
             sys.exit(1)
         if opts.deamonize is not None:
             child_pid = os.fork()
@@ -185,7 +186,7 @@ def main(argv=None):
         # Step Five: Initialise And Run willie
         run(config_module)
     except KeyboardInterrupt:
-        print("\n\nKeyboard Interrupt")
+        print "\n\nKeyboard Interrupt"
         os._exit(1)
 if __name__ == '__main__':
     main()

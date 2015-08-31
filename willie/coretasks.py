@@ -82,7 +82,7 @@ def retry_join(bot, trigger):
     identified-only (+R) channel. Maximum of ten rejoin attempts.
     """
     channel = trigger.args[1]
-    if channel in list(bot.memory['retry_join'].keys()):
+    if channel in bot.memory['retry_join'].keys():
         bot.memory['retry_join'][channel] += 1
         if bot.memory['retry_join'][channel] > 10:
             bot.debug(__file__, 'Failed to join %s after 10 attempts.' % channel, 'warning')
@@ -121,10 +121,10 @@ def handle_names(bot, trigger):
                    '@': willie.module.OP,
                    '&': willie.module.ADMIN,
                    '~': willie.module.OWNER}
-        for prefix, value in mapping.items():
+        for prefix, value in mapping.iteritems():
             if prefix in name:
                 priv = priv | value
-        nick = Nick(name.lstrip(''.join(list(mapping.keys()))))
+        nick = Nick(name.lstrip(''.join(mapping.keys())))
         bot.privileges[channel][nick] = priv
 
         # Old op list maintenance is down here, and should be removed at some
@@ -309,7 +309,7 @@ def track_join(bot, trigger):
 @willie.module.unblockable
 def track_quit(bot, trigger):
     try:
-        for chanprivs in list(bot.privileges.values()):
+        for chanprivs in bot.privileges.values():
             if trigger.nick in chanprivs:
                 del chanprivs[trigger.nick]
     except:
@@ -357,7 +357,7 @@ def recieve_cap_ls_reply(bot, trigger):
         # parse it, so we don't need to worry if it fails.
         bot._cap_reqs['multi-prefix'] = ['', 'coretasks', None]
 
-    for cap, req in bot._cap_reqs.items():
+    for cap, req in bot._cap_reqs.iteritems():
         # It's not required, or it's supported, so we can request it
         if req[0] != '=' or cap in bot.server_capabilities:
             # REQs fail as a whole, so we send them one capability at a time

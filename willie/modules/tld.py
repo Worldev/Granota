@@ -36,7 +36,7 @@ def gettld(bot, trigger):
         bot.reply(reply)
     else:
         search = r'<td><a href="\S+" title="\S+">.{0}</a></td>\n<td><span class="flagicon"><img.*?\">(.*?)</a></td>\n<td[^>]*>(.*?)</td>\n<td[^>]*>(.*?)</td>\n<td[^>]*>(.*?)</td>\n<td[^>]*>(.*?)</td>\n<td[^>]*>(.*?)</td>\n'
-        search = search.format(str(trigger.group(2)))
+        search = search.format(unicode(trigger.group(2)))
         re_country = re.compile(search)
         matches = re_country.findall(page)
         if matches:
@@ -52,9 +52,9 @@ def gettld(bot, trigger):
             reply = "%s (%s, %s). IDN: %s, DNSSEC: %s, SLD: %s" % (dict_val["country"], dict_val["expl"], dict_val["notes"], dict_val["idn"], dict_val["dnssec"], dict_val["sld"])
         else:
             if bot.config.lang == 'ca':
-                reply = "Cap resultat per TLD: {0}".format(str(trigger.group(2)))
+                reply = "Cap resultat per TLD: {0}".format(unicode(trigger.group(2)))
             elif bot.config.lang == 'es':
-                reply = "Ningún resultado por TLD: {0}".format(str(trigger.group(2)))
+                reply = u"Ningún resultado por TLD: {0}".format(unicode(trigger.group(2)))
             else:
-                reply = "No results for TLD: {0}".format(str(trigger.group(2)))
+                reply = "No results for TLD: {0}".format(unicode(trigger.group(2)))
         bot.reply(reply)

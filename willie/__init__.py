@@ -15,9 +15,9 @@ import os
 import time
 import threading
 import traceback
-from . import bot
+import bot
 import signal
-from .tools import stderr
+from tools import stderr
 
 __version__ = '4.1.0'
 
@@ -42,7 +42,7 @@ def run(config):
             p.run(config.core.host, int(config.core.port))
         except KeyboardInterrupt:
             break
-        except Exception as e:
+        except Exception, e:
             trace = traceback.format_exc()
             try:
                 stderr(trace)
@@ -66,4 +66,4 @@ def run(config):
     os._exit(0)
 
 if __name__ == '__main__':
-    print(__doc__)
+    print __doc__

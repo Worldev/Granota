@@ -51,7 +51,7 @@ def mw_snippet(server, query, bot):
 
     # For some reason, the API gives the page *number* as the key, so we just
     # grab the first page number in the results.
-    snippet = snippet[list(snippet.keys())[0]]
+    snippet = snippet[snippet.keys()[0]]
 
     return snippet['extract']
 

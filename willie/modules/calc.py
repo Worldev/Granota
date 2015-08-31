@@ -6,7 +6,7 @@ from willie.module import commands, example
 from willie.tools import eval_equation
 from socket import timeout
 import string
-import html.parser
+import HTMLParser
 
 
 @commands('=', 'calcula', 'calculate', 'calc')
@@ -17,16 +17,16 @@ def c(bot, trigger):
         if bot.config.lang == 'ca':
             return bot.reply("Res a calcular.")
         elif bot.config.lang == 'es':
-            return bot.reply("Nada a calcular.")
+            return bot.reply(u"Nada a calcular.")
         else:
             return bot.reply("Nothing to calculate.")
     try:
         result = str(eval_equation(trigger.group(2)))
     except ZeroDivisionError:
         if bot.config.lang == 'ca':
-            result = "La diviso entre zero no esta suportada en aquest univers."
+            result = u"La diviso entre zero no esta suportada en aquest univers."
         elif bot.config.lang == 'es':
-            result = "La division entre zero no esta soportada en ese universo."
+            result = u"La division entre zero no esta soportada en ese universo."
         else:
             result = "Division by zero is not supported in this universe."
     except Exception:
@@ -56,9 +56,9 @@ def py(bot, trigger):
         bot.say(answer)
     else:
         if bot.config.lang == 'ca':
-            bot.reply("Ho sento, no hi ha resultat.")
+            bot.reply(u"Ho sento, no hi ha resultat.")
         elif bot.config.lang == 'es':
-            bot.reply("Lo siento, no hay resultados.")
+            bot.reply(u"Lo siento, no hay resultados.")
         else:
             bot.reply('Sorry, no result.')
 
@@ -88,14 +88,14 @@ def wa(bot, trigger):
             return bot.say('[WOLFRAM ERROR] Request timed out')
     if answer:
         answer = answer.decode('string_escape')
-        answer = html.parser.HTMLParser().unescape(answer)
+        answer = HTMLParser.HTMLParser().unescape(answer)
         # This might not work if there are more than one instance of escaped
         # unicode chars But so far I haven't seen any examples of such output
         # examples from Wolfram Alpha
         match = re.search('\\\:([0-9A-Fa-f]{4})', answer)
         if match is not None:
             char_code = match.group(1)
-            char = chr(int(char_code, 16))
+            char = unichr(int(char_code, 16))
             answer = answer.replace('\:' + char_code, char)
         waOutputArray = string.split(answer, ";")
         if(len(waOutputArray) < 2):
@@ -116,9 +116,9 @@ def wa(bot, trigger):
         waOutputArray = []
     else:
         if bot.config.lang == 'ca':
-            bot.reply("Sense resultats.")
+            bot.reply(u"Sense resultats.")
         elif bot.config.lang == 'es':
-            bot.reply("Sin resultados.")
+            bot.repy(u"Sin resultados.")
         else:
             bot.reply('Sorry, no result.')
 

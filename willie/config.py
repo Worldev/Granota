@@ -32,10 +32,10 @@ The configuration function, if used, must be declared with the signature
 and ``add_option``.
 """
 
-from . import db
+import db
 import os
 import sys
-import configparser
+import ConfigParser
 import getpass
 import imp
 
@@ -63,7 +63,7 @@ class Config(object):
         """
         self.filename = filename
         """The config object's associated file, as noted above."""
-        self.parser = configparser.RawConfigParser(allow_no_value=True)
+        self.parser = ConfigParser.RawConfigParser(allow_no_value=True)
         if load:
             self.parser.read(self.filename)
 
@@ -119,7 +119,7 @@ class Config(object):
         """
         try:
             return self.parser.add_section(name)
-        except configparser.DuplicateSectionError:
+        except ConfigParser.DuplicateSectionError:
             return False
 
     def has_option(self, section, name):
@@ -158,7 +158,7 @@ class Config(object):
             value = getattr(self, name)
             if not value:
                 return []
-            if isinstance(value, str):
+            if isinstance(value, basestring):
                 value = value.split(',')
                 # Keep the split value, so we don't have to keep doing this
                 setattr(self, name, value)
@@ -194,7 +194,7 @@ class Config(object):
                 value = getpass.getpass(prompt + ' [%s]: ' % atr) or atr
                 self.parser.set(section, option, value)
             else:
-                value = input(prompt + ' [%s]: ' % atr) or atr
+                value = raw_input(prompt + ' [%s]: ' % atr) or atr
                 self.parser.set(section, option, value)
         elif default:
             if ispass:
@@ -203,7 +203,7 @@ class Config(object):
                 ) or default
                 self.parser.set(section, option, value)
             else:
-                value = input(prompt + ' [%s]: ' % default) or default
+                value = raw_input(prompt + ' [%s]: ' % default) or default
                 self.parser.set(section, option, value)
         else:
             value = ''
@@ -211,7 +211,7 @@ class Config(object):
                 if ispass:
                     value = getpass.getpass(prompt + ': ')
                 else:
-                    value = input(prompt + ': ')
+                    value = raw_input(prompt + ': ')
             self.parser.set(section, option, value)
 
     def add_list(self, section, option, message, prompt):
@@ -221,17 +221,17 @@ class Config(object):
         current values and ask if the user would like to keep them. If so,
         additional values can be entered.
         """
-        print(message)
+        print message
         lst = []
         if self.parser.has_option(section, option) and self.parser.get(section,
                                                                        option):
             m = "You currently have " + self.parser.get(section, option)
             if self.option(m + '. Would you like to keep them', True):
                 lst = self.parser.get(section, option).split(',')
-        mem = input(prompt + ' ')
+        mem = raw_input(prompt + ' ')
         while mem:
             lst.append(mem)
-            mem = input(prompt + ' ')
+            mem = raw_input(prompt + ' ')
         self.parser.set(section, option, ','.join(lst))
 
     def add_option(self, section, option, question, default=False):
@@ -264,9 +264,9 @@ class Config(object):
             elif lang == 'es' or lang == 'ca':
                 d = 's'
         if lang == 'en':
-            ans = input(question + ' (y/n)? [' + d + '] ')
+            ans = raw_input(question + ' (y/n)? [' + d + '] ')
         elif lang == 'es' or lang == 'ca':
-            ans = input(question + ' (s/n)? [' + d + '] ')
+            ans = raw_input(question + ' (s/n)? [' + d + '] ')
         if not ans:
             ans = d
         return (ans is 'y' or ans is 'Y' or ans is 's' or ans is 'S')
@@ -280,13 +280,13 @@ class Config(object):
             self.interactive_add('core', 'lang', 'Language to use',
                             'en')
         elif lang == 'es':
-            print("Has configurado un idioma para el asistente de configuración, pero el idioma del bot puede \
+            print(u"Has configurado un idioma para el asistente de configuración, pero el idioma del bot puede \
             ser diferente. Ahora, escoje el idioma que el bot debe usar en IRC. Puede ser 'en' para Inglés, \
             'es' para Español o 'ca' para Catalán.\n")
             self.interactive_add('core', 'lang', 'Idioma en el que el bot debe usar',
                             'es')
         elif lang == 'ca':
-            print("Has configurat un idioma per l'assistent de configuració, però l'idioma del bot pot ser diferent. \
+            print(u"Has configurat un idioma per l'assistent de configuració, però l'idioma del bot pot ser diferent. \
             Ara, escull l'idioma que el bot ha d'utilitzar a l'IRC. Pot ser 'en' per Anglès, 'es' per Castellà \
             o 'ca' per Català.\n")
             self.interactive_add('core', 'lang', 'Idioma en el que el bot ha d\'utilitzar',
@@ -329,69 +329,69 @@ class Config(object):
                 ' When done, hit enter again.'
             self.add_list('core', 'channels', c, 'Channel:')
         elif lang == 'es':
-            print("Antes de todo, necesitas configurar un nick para tu bot. Puede ser 'Granota', pero si quieres que \
+            print(u"Antes de todo, necesitas configurar un nick para tu bot. Puede ser 'Granota', pero si quieres que \
             se connecte en una red donde haya el Granota oficial, no lo hara. Tiene que ser un nick que no esté en \
             uso o registrado con NickServ (compruébalo con /msg NickServ info <el nick que tu quieres>). Se recomienda \
             registrar el nick de tu bot para evitar que te lo quiten.\n")
             self.interactive_add('core', 'nick', 'Nick del bot',
                                  'Granota')
-            print("Evidentemente, el bot es inútil si no se connecta en una red IRC. Escoje un servidor y busca \
+            print(u"Evidentemente, el bot es inútil si no se connecta en una red IRC. Escoje un servidor y busca \
             su 'hostname'. Si no sabes su hostname, contacta con los administradores de la red.\n")
             self.interactive_add('core', 'host', 'Server donde el bot debe conectarse',
                                  'irc.freenode.net')
-            print("La conexión SSL es recomendada, pero algunos servidores no soportan conexiones SSL. Si no estás \
+            print(u"La conexión SSL es recomendada, pero algunos servidores no soportan conexiones SSL. Si no estás \
             seguro, contacta con los administradores del servidor.\n")
             self.add_option('core', 'use_ssl', 'El bot tiene que conectarse con SSL?')
             if self.use_ssl == 'True':
                 default_port = '6697'
             else:
                 default_port = '6667'
-            print("Además del servidor tienes que escojer el puerto. El puerto por defecto es 6667 para conexiones \
+            print(u"Además del servidor tienes que escojer el puerto. El puerto por defecto es 6667 para conexiones \
             sin SSL. Si has escojido connectarte con SSL, el puerto por defecto es 6697.\n")
             self.interactive_add('core', 'port', 'Puerto del servidor donde el bot debe conectarse',
                                  default_port)
-            print("Hay algunas funciones que solo las puede usar el propietario del bot. Ten en cuenta que el el nick \
+            print(u"Hay algunas funciones que solo las puede usar el propietario del bot. Ten en cuenta que el el nick \
             que configures aqui tendrá un poder absoluto sobre el bot.\n")
             self.interactive_add(
                 'core', 'owner',
                 "Tu nick de IRC (o el del propietario del bot)"
             )
-            c = 'Mientras el bot está connectado puedes hacer que entre o salga de canales, pero se recomienda \
+            c = u'Mientras el bot está connectado puedes hacer que entre o salga de canales, pero se recomienda \
             configurar los canales dónde debe entrar siempre que se connecte a IRC. Escribe los canales en los que \
             el bot debe conectarse de forma automática. Despues cada canal presiona la tecla enter.' + \
                 ' Cuando hayas puesto todos los canales, vuelve a presionar enter.'
             self.add_list('core', 'channels', c, 'Canal:')
         elif lang == 'ca':
-            print("Primer, necessites configurar un nick pel teu bot. Pot ser 'Granota', però tingues en compte que \
+            print(u"Primer, necessites configurar un nick pel teu bot. Pot ser 'Granota', però tingues en compte que \
             si vols que el bot es connecti en una xarxa IRC on ja hi ha un Granota oficial, el bot no es podrà \
             connectar. Et recomanem que abans comprovis si el nick ja s'està utilitzant o està registrat amb el \
             NickServ (comprova-ho amb /msg NickServ info <nick>). També et recomanem que registris el nick \
             per evitar que algú altre te'l prengui.\n")
             self.interactive_add('core', 'nick', 'Nick del bot',
                                  'Granota')
-            print("Ara has d'escollir el servidor on el bot s'ha de connectar. Quan l'hagis escollit escriu el \
+            print(u"Ara has d'escollir el servidor on el bot s'ha de connectar. Quan l'hagis escollit escriu el \
             servidor, has de trobar el seu 'hostname'. Si no saps quin és, contacta amb els administradors del \
             servidor.\n")
             self.interactive_add('core', 'host', 'Servidor on el bot ha de connectar-se',
                                  'irc.freenode.net')
-            print("Es recomana utilitzar connexió SSL, però hi ha servidors que no poden rebre connexions \
+            print(u"Es recomana utilitzar connexió SSL, però hi ha servidors que no poden rebre connexions \
             d'aquest tipus. Si no n'estàs segur, pots preguntar als administradors de la xarxa.\n")
             self.add_option('core', 'use_ssl', 'El bot ha de connectar-se amb SSL')
             if self.use_ssl == 'True':
                 default_port = '6697'
             else:
                 default_port = '6667'
-            print("A més del servidor, el bot necessita saber el port on s'ha de connectar. Normalment és el \
+            print(u"A més del servidor, el bot necessita saber el port on s'ha de connectar. Normalment és el \
             6667, però si utilitza SSL segurament serà 6697.\n")
             self.interactive_add('core', 'port', 'Port del servidor on el bot ha de connectar-se',
                                  default_port)
-            print("Hi ha algunes funciones reservades nomes al propietari del bot. Ves en compte en escollir-lo \
+            print(u"Hi ha algunes funciones reservades nomes al propietari del bot. Ves en compte en escollir-lo \
             si no ets tu, perque el propietari tindra un control absolut sobre el bot mentre estigui connectat.\n")
             self.interactive_add(
                 'core', 'owner',
                 "El teu nick d'IRC (o el del propietari del bot)"
             )
-            c = 'Mentre el bot està connectat pots fer que entri o surti de canals. Però es recomana que especifiquis \
+            c = u'Mentre el bot està connectat pots fer que entri o surti de canals. Però es recomana que especifiquis \
             ara els canals en els que el bot ha de connectar-se de manera automatica a cada connexió. Despres de \
             cada canal presiona la tecla enter. Al acabar la llista de canals, pressiona enter una altra vegada.'
             self.add_list('core', 'channels', c, 'Canal:')            
@@ -405,12 +405,12 @@ class Config(object):
         modules_dir = os.path.join(home, 'modules')
         filenames = self.enumerate_modules()
         os.sys.path.insert(0, modules_dir)
-        for name, filename in filenames.items():
+        for name, filename in filenames.iteritems():
             try:
                 module = imp.load_source(name, filename)
-            except Exception as e:
-                print(("Error loading %s: %s (in config.py)"
-                                      % (name, e)), file=sys.stderr)
+            except Exception, e:
+                print >> sys.stderr, ("Error loading %s: %s (in config.py)"
+                                      % (name, e))
             else:
                 if hasattr(module, 'configure'):
                     module.configure(self)
@@ -490,16 +490,16 @@ def wizard(section, config=None):
     elif section == 'db':
         check_dir(False)
         if not os.path.isfile(configpath):
-            print("No config file found." + \
-                " Please make one before configuring these options.")
+            print "No config file found." + \
+                " Please make one before configuring these options."
             sys.exit(1)
         config = Config(configpath, True)
         config._db()
     elif section == 'mod':
         check_dir(False)
         if not os.path.isfile(configpath):
-            print("No config file found." + \
-                " Please make one before configuring these options.")
+            print "No config file found." + \
+                " Please make one before configuring these options."
             sys.exit(1)
         config = Config(configpath, True)
         config._modules()
@@ -509,35 +509,37 @@ def check_dir(create=True):
     dotdir = os.path.join(os.path.expanduser('~'), '.willie')
     if not os.path.isdir(dotdir):
         if create:
-            print('Creating a config directory at ~/.willie...')
+            print 'Creating a config directory at ~/.willie...'
             try:
                 os.makedirs(dotdir)
-            except Exception as e:
-                print(('There was a problem creating %s: -- Problema creando %s -- Problema creant %s' % (dotdir, dotdir, dotdir)), file=sys.stderr)
-                print(e.__class__, str(e), file=sys.stderr)
-                print('Please fix this and then run Granota again. -- Por favor, arregle eso y vuelva a executar a Granota -- Si us plau, arregla el problema i torna a executar el bot.', file=sys.stderr)
+            except Exception, e:
+                print >> sys.stderr, \
+                    ('There was a problem creating %s: -- Problema creando %s -- Problema creant %s' % (dotdir, dotdir, dotdir))
+                print >> sys.stderr, e.__class__, str(e)
+                print >> sys.stderr, \
+                    'Please fix this and then run Granota again. -- Por favor, arregle eso y vuelva a executar a Granota -- Si us plau, arregla el problema i torna a executar el bot.'
                 sys.exit(1)
         else:
-            print("No config file found. Please make one before configuring these options.")
+            print "No config file found. Please make one before configuring these options."
             sys.exit(1)
 
 
 def create_config(configpath):
     check_dir()
     global lang
-    lang = input('Language -- Idioma (en, es, ca) [en]: ')
+    lang = raw_input('Language -- Idioma (en, es, ca) [en]: ')
     if lang == "":
         lang = "en"
     if lang == 'en':
-        print("Please answer the following questions:\n")
+        print "Please answer the following questions:\n"
     elif lang == 'es':
-        print("Responde esas preguntas:\n")
+        print "Responde esas preguntas:\n"
     elif lang == 'ca':
-        print("Respon aquestes preguntes:\n")
+        print "Respon aquestes preguntes:\n"
     else:
-        print("The language specified is not valid. It must be 'en' for english, 'es' for spanish and 'ca' for catalan.")
-        print("El idioma especificado no es valido. Tiene que ser 'en' para ingles, 'es' para espanol y 'ca' para catalan.")
-        print("L'idioma especificat no es valid. Ha de ser 'en' per angles, 'es' per espanyol i 'ca' per catala.")
+        print "The language specified is not valid. It must be 'en' for english, 'es' for spanish and 'ca' for catalan."
+        print "El idioma especificado no es valido. Tiene que ser 'en' para ingles, 'es' para espanol y 'ca' para catalan."
+        print "L'idioma especificat no es valid. Ha de ser 'en' per angles, 'es' per espanyol i 'ca' per catala."
         create_config(configpath)
         return
     try:
@@ -551,19 +553,19 @@ def create_config(configpath):
         ):
             config._modules()
         config.save()
-    except Exception as e:
+    except Exception, e:
         if lang == 'en':
-            print("Encountered an error while writing the config file." + \
-                " This shouldn't happen. Check permissions.")
+            print "Encountered an error while writing the config file." + \
+                " This shouldn't happen. Check permissions."
         elif lang == 'es':
-            print("Error encontrado al escribir el archivo de configuracion. Comprueba que el servidor o ordenador tenga permiso de escritura.")
+            print "Error encontrado al escribir el archivo de configuracion. Comprueba que el servidor o ordenador tenga permiso de escritura."
         else:
-            print("Error a l'escriure l'arxiu de configuracio. Comprova que el servidor o ordinador tingui permis d'escriptura.")
+            print "Error a l'escriure l'arxiu de configuracio. Comprova que el servidor o ordinador tingui permis d'escriptura."
         raise
         sys.exit(1)
     if lang == 'en':
-        print("Config file written sucessfully!")
+        print "Config file written sucessfully!"
     elif lang == 'es':
-        print("Fichero de configuracion escrito con exito!")
+        print "Fichero de configuracion escrito con exito!"
     elif lang == 'ca':
-        print("Fitxer de configuracio escrit amb exit!")
+        print "Fitxer de configuracio escrit amb exit!"

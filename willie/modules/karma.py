@@ -9,6 +9,8 @@ homedir = os.path.join(os.path.expanduser('~'), '.willie')
 
 karmare = re.compile(r"^([a-zA-Z0-9\[\]\{\}\\\|\-\_\`^]*)(:?,? ?)?(\+\+|\-\-)")
 
+karmafile = 'karma.txt':
+    
 try:
     shutil.copy2(homedir + '/karma.py', 'karma.py')
     from karma import karmas

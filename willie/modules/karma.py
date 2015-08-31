@@ -11,7 +11,7 @@ karmare = re.compile(r"^([a-zA-Z0-9\[\]\{\}\\\|\-\_\`^]*)(:?,? ?)?(\+\+|\-\-)")
 
 try:
     shutil.copy2(homedir + '/karma.py', 'karma.py')
-    import karma
+    from karma import karmas
     os.remove('karma.py')
 except:
     karmas = {}

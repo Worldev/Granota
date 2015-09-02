@@ -99,7 +99,7 @@ def main(argv=None):
 
         configpath = find_config(config_name)
         if not os.path.isfile(configpath):
-            print u"Welcome to Granota configuration wizard! -- Bienvenido al asistente de configuracion de Granota! -- Benvingut a l'assistent de cnfiguracio de Granota!\n"
+            print u"Welcome to Granota's configuration wizard! -- Bienvenido al asistente de configuración de Granota! -- Benvingut a l'assistent de cnfiguracio de Granota!\n"
             if not configpath.endswith('.cfg'):
                 configpath = configpath + '.cfg'
             create_config(configpath)
@@ -111,7 +111,7 @@ def main(argv=None):
             sys.exit(2)
 
         if config_module.core.not_configured:
-            stderr(u'The bot is not configured. -- El bot no esta configurado. -- El bot no esta configurat.')
+            stderr(u'The bot is not configured. -- El bot no está configurado. -- El bot no esta configurat.')
             # exit with code 2 to prevent auto restart on fail by systemd
             sys.exit(2)
 
@@ -154,7 +154,7 @@ def main(argv=None):
             pid_file.close()
             if tools.check_pid(old_pid):
                 if opts.quit is None and opts.kill is None:
-                    stderr(u'There is already a Granota running. -- Ya hay un bot executandose. -- Ja hi ha un bot executant-se.')
+                    stderr(u'There is already a Granota running. -- Ya hay un bot ejecutandose. -- Ja hi ha un bot executant-se.')
                     stderr(u'Try -- Intenta: --quit o --kill')
                     sys.exit(1)
                 elif opts.kill:
@@ -162,17 +162,17 @@ def main(argv=None):
                     os.kill(old_pid, signal.SIGKILL)
                     sys.exit(0)
                 elif opts.quit:
-                    stderr(u'Quitting Granota. -- Desconnectando a Granota. -- Desconnectant a Granota.')
+                    stderr(u'Quitting Granota. -- Desconectando a Granota. -- Desconnectant a Granota.')
                     if hasattr(signal, 'SIGUSR1'):
                         os.kill(old_pid, signal.SIGUSR1)
                     else:
                         os.kill(old_pid, signal.SIGTERM)
                     sys.exit(0)
             elif not tools.check_pid(old_pid) and (opts.kill or opts.quit):
-                stderr(u'The bot is not running. -- El bot no se esta executando. -- El bot no s\'esta executant.')
+                stderr(u'The bot is not running. -- El bot no se esta ejecutando. -- El bot no s\'esta executant.')
                 sys.exit(1)
         elif opts.quit is not None or opts.kill is not None:
-            stderr(u'The bot is not running. -- El bot no se esta executando. -- El bot no s\'esta executant.')
+            stderr(u'The bot is not running. -- El bot no se esta ejecutando. -- El bot no s\'esta executant.')
             sys.exit(1)
         if opts.deamonize is not None:
             child_pid = os.fork()

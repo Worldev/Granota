@@ -32,9 +32,6 @@ try:
 except:
     raise Exception("I can't load karma file!")
 
-def def_karmafile():
-    karmafilew = karmafile
-
 @willie.module.commands('karma')
 def karma(bot, trigger):
     if trigger.group(2):
@@ -93,9 +90,8 @@ def karmaman(bot, trigger):
                 bot.notice(trigger.nick, "Has quitado un punto de karma a " + k.group(1) + ".")
             else:
                 bot.notice(trigger.nick, "You have karmed down " + k.group(1) + ".")
-        karmafilew.close()
-        os.remove(homedir + "/karma.py")
-        karmafile = open(homedir + "/karma.py", "w")
-        karmafile.truncate()
-        karmafile.write("karmas = " + str(dict(karmas)))
-        def_karmafile()
+        try:
+            karmafilew.truncate()
+        except:
+            pass
+        karmafilew.write("karmas = " + str(dict(karmas)))

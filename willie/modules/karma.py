@@ -17,14 +17,20 @@ try:
 except:
     karmas = {}
     
-karmafilev = open(homedir + "/karma.py", "w")
 try:
-    karmafilev.truncate()
+    karmafilev = open(homedir + "/karma.py", "w")
+    try:
+        karmafilev.truncate()
+    except:
+        pass
+    karmafilev.write("karmas = " + str(dict(karmas)))
+    karmafilev.close()
 except:
     pass
-karmafilev.write("karmas = " + str(dict(karmas)))
-karmafilev.close()
-karmafilew = open(homedir + "/karma.py", "w")
+try:
+    karmafilew = open(homedir + "/karma.py", "w")
+except:
+    raise Exception("I can't load karma file!")
 
 def def_karmafile():
     karmafilew = karmafile

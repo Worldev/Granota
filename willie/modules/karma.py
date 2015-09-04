@@ -9,8 +9,6 @@ import time
 homedir = os.path.join(os.path.expanduser('~'), '.willie')
 
 karmare = re.compile(r"^([a-zA-Z0-9\[\]\{\}\\\|\-\_\`^]*)(:?,? ?)?(\+\+|\-\-)")
-
-karmafile = 'karma.txt'
     
 try:
     shutil.copy2(homedir + '/karma.py', 'karma.py')
@@ -18,7 +16,16 @@ try:
     os.remove('karma.py')
 except:
     karmas = {}
+    
+karmafilev = open(homedir + "/karma.py", "w")
+try:
+    karmafilev.truncate()
+except:
+    pass
+karmafilev.write("karmas = " + str(dict(karmas)))
+karmafilev.close()
 karmafilew = open(homedir + "/karma.py", "w")
+
 def def_karmafile():
     karmafilew = karmafile
 
@@ -83,5 +90,6 @@ def karmaman(bot, trigger):
         karmafilew.close()
         os.remove(homedir + "/karma.py")
         karmafile = open(homedir + "/karma.py", "w")
+        karmafile.truncate()
         karmafile.write("karmas = " + str(dict(karmas)))
         def_karmafile()

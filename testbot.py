@@ -19,7 +19,7 @@ notworking = []
 criticalnotworking = []
 
 def nreport(msg):
-    urllib2.urlopen("http://n.tkte.ch/h/4314/eOoVGWdAFqh-sJRGGTJb3XCW?payload={0}".format(urllib2.quote("[Granota testing] {0}".format(msg))))
+    urllib2.urlopen("http://n.tkte.ch/h/4314/eOoVGWdAFqh-sJRGGTJb3XCW?payload={0}".format(urllib2.quote("[Granota Testing] {0}".format(msg))))
 
 print "Granota testing script\n"
 
@@ -191,7 +191,6 @@ elif criticalnotworkingnum is 0 and notworkingnum is 0:
 else:
 	print "The build has failed."
 	nreport("The build has \x02\x0304failed\x0F.")
-nreport("For more information please visit https://travis-ci.org/CatIRCBots/Granota")
 print "============================= test results =============================="
 if criticalnotworkingnum is 0:
 	sys.exit(0)

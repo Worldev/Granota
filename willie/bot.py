@@ -31,12 +31,7 @@ class Willie(irc.Bot):
 
     def __init__(self, config):
         irc.Bot.__init__(self, config.core)
-        self.config.lang = "en" # Travis CI stuff
-        try:
-            self.config = config
-            self.config.lang = config.lang # :P
-        except:
-            pass
+        self.config = config
         """The ``Config`` for the current Willie instance."""
         self.doc = {}
         """

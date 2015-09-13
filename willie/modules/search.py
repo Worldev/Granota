@@ -45,7 +45,7 @@ def formatnumber(n):
 
 
 @commands('g', 'google')
-@example('.g Barcelona')
+@example('.g CatBots')
 def g(bot, trigger):
     """Queries Google for the specified input."""
     query = trigger.group(2)
@@ -54,7 +54,6 @@ def g(bot, trigger):
     uri = google_search(query)
     if uri:
         bot.reply(uri)
-        bot.memory['last_seen_url'][trigger.sender] = uri
     elif uri is False:
         if bot.config.lang == 'ca':
             bot.reply("Error al connectar amb Google.")

@@ -1,4 +1,4 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
 
 import re
 from willie.module import commands, priority, OP
@@ -266,7 +266,7 @@ def topic(bot, trigger):
     purple, green, bold = '\x0306', '\x0310', '\x02'
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         if bot.config.lang == 'ca':
-            bot.reply("Necessito com a ḿinim flags d'operador del canal.")
+            bot.reply(u"Necessito com a ḿinim flags d'operador del canal.")
         elif bot.config.lang == 'es':
             bot.reply("Necesito flags de operador del canal.")
         else:

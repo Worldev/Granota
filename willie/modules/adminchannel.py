@@ -265,6 +265,12 @@ def topic(bot, trigger):
     """
     purple, green, bold = '\x0306', '\x0310', '\x02'
     if bot.privileges[trigger.sender][trigger.nick] < OP:
+        if bot.config.lang == 'ca':
+            bot.reply("Necessito com a ḿinim flags d'operador del canal.")
+        elif bot.config.lang == 'es':
+            bot.reply("Necesito flags de operador del canal.")
+        else:
+            bot.reply("I need at least operator flags to perform this action.")
         return
     text = trigger.group(2)
     if text == '':

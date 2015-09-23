@@ -20,9 +20,9 @@ def hug(bot, trigger):
         return
     else:
         if bot.config.lang == 'ca':
-            bot.me(u"abraça a %s" % nick)
+            bot.write("action", u"abraça a %s" % nick)
         elif bot.config.lang == 'es':
-            bot.me(u"abraza a %s" % nick)
+            bot.write("action", u"abraza a %s" % nick)
         else:
-            bot.me("hugs %s" % nick)
+            bot.write("action", "hugs %s" % nick)
         return

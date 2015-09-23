@@ -4,7 +4,7 @@ from willie.module import commands, example
 
 @commands("hug", "abraza", "abrazar", "abraca", "abracada")
 @example(".hug John")
-def hug(willie, trigger):
+def hug(bot, trigger):
     """Hugs the specified nick"""
     if not trigger.group(2):
         nick = trigger.nick

@@ -323,10 +323,10 @@ class Config(object):
                 'core', 'owner',
                 "Enter your own IRC name (or that of the bot's owner)"
             )
-            c = "\nNow, let\'s set up the channels. You will be able to make the " +
+            c = ("\nNow, let\'s set up the channels. You will be able to make the " +
             u"bot to join another channel when it is connected, but you can also configure some channels to connect by " +
-            u"default.\nEnter the channels to connect to by default, one at a time." + \
-                ' When done, hit enter again.'
+            u"default.\nEnter the channels to connect to by default, one at a time." +
+                ' When done, hit enter again.')
             self.add_list('core', 'channels', c, 'Channel:')
         elif lang == 'es':
             print(u"\nAntes de todo, necesitas configurar un nick para tu bot. Puede ser 'Granota', pero si quieres que " +
@@ -356,10 +356,10 @@ class Config(object):
                 'core', 'owner',
                 "Tu nick de IRC (o el del propietario del bot)"
             )
-            c = u"\nMientras el bot está connectado puedes hacer que entre o salga de canales, pero se recomienda " +
+            c = (u"\nMientras el bot está connectado puedes hacer que entre o salga de canales, pero se recomienda " +
             u"configurar los canales dónde debe entrar siempre que se connecte a IRC. Escribe los canales en los que " +
-            u"el bot debe conectarse de forma automática. Despues cada canal presiona la tecla enter." + \
-                ' Cuando hayas puesto todos los canales, vuelve a presionar enter.'
+            u"el bot debe conectarse de forma automática. Despues cada canal presiona la tecla enter." +
+                ' Cuando hayas puesto todos los canales, vuelve a presionar enter.')
             self.add_list('core', 'channels', c, 'Canal:')
         elif lang == 'ca':
             print(u"\nPrimer, necessites configurar un nick pel teu bot. Pot ser 'Granota', però tingues en compte que " +
@@ -391,9 +391,9 @@ class Config(object):
                 'core', 'owner',
                 "El teu nick d'IRC (o el del propietari del bot)"
             )
-            c = u"\nMentre el bot està connectat pots fer que entri o surti de canals. Però es recomana que especifiquis " +
+            c = (u"\nMentre el bot està connectat pots fer que entri o surti de canals. Però es recomana que especifiquis " +
             u"ara els canals en els que el bot ha de connectar-se de manera automatica a cada connexió. Despres de " +
-            u"cada canal presiona la tecla enter. Al acabar la llista de canals, pressiona enter una altra vegada."
+            u"cada canal presiona la tecla enter. Al acabar la llista de canals, pressiona enter una altra vegada.")
             self.add_list('core', 'channels', c, 'Canal:')            
 
     def _db(self):

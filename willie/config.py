@@ -275,125 +275,125 @@ class Config(object):
         global lang
         if lang == 'en':
             print("\nYou have set up the language for the setup wizard, but the bot language can be different. " + 
-            "Now, choose the language that the bot has to use in the IRC. This can be 'en' for English, " +
-            "'es' for Spanish or 'ca' for Catalan.\n")
+            u"Now, choose the language that the bot has to use in the IRC. This can be 'en' for English, " +
+            u"'es' for Spanish or 'ca' for Catalan.\n")
             self.interactive_add('core', 'lang', 'Language to use',
                             'en')
         elif lang == 'es':
             print(u"\nHas configurado un idioma para el asistente de configuración, pero el idioma del bot puede " +
-            "ser diferente. Ahora, escoje el idioma que el bot debe usar en IRC. Puede ser 'en' para Inglés, " +
-            "'es' para Español o 'ca' para Catalán.\n")
+            u"ser diferente. Ahora, escoje el idioma que el bot debe usar en IRC. Puede ser 'en' para Inglés, " +
+            u"'es' para Español o 'ca' para Catalán.\n")
             self.interactive_add('core', 'lang', 'Idioma en el que el bot debe usar',
                             'es')
         elif lang == 'ca':
             print(u"\nHas configurat un idioma per l'assistent de configuració, però l'idioma del bot pot ser diferent. " +
-            "Ara, escull l'idioma que el bot ha d'utilitzar a l'IRC. Pot ser 'en' per Anglès, 'es' per Castellà " +
-            "o 'ca' per Català.\n")
+            u"Ara, escull l'idioma que el bot ha d'utilitzar a l'IRC. Pot ser 'en' per Anglès, 'es' per Castellà " +
+            u"o 'ca' per Català.\n")
             self.interactive_add('core', 'lang', 'Idioma en el que el bot ha d\'utilitzar',
                             'ca')
         else:
             print("\nWARNING: There is a problem in your language settings. The language can be only 'en', 'es' or 'ca'. Fix " +
-            "it and run the wizard again.")
+            u"it and run the wizard again.")
             sys.exit()
         if lang == 'en':
             print("\nFirst of all, you need to set up a nickname for your bot. It can be 'Granota', but if your bot " +
-            "will connect to a network with the official version of Granota, your bot will not be able to connect. " +
-            "You should also check if the nickname is in use or registered with NickServ by typing " +
-            "/msg NickServ info <the nick that you want>.\n")
+            u"will connect to a network with the official version of Granota, your bot will not be able to connect. " +
+            u"You should also check if the nickname is in use or registered with NickServ by typing " +
+            u"/msg NickServ info <the nick that you want>.\n")
             self.interactive_add('core', 'nick', 'Enter the nickname for your bot',
                                  'Granota')
             print("\nOf course, the bot is useless if it doesn't connect to some IRC server. If you don't know the host " +
-            "of your server, contact the server administrators.\n")
+            u"of your server, contact the server administrators.\n")
             self.interactive_add('core', 'host', 'Enter the server to connect to',
                                  'irc.lizardirc.org')
             print("\nSome server support SSL connections. If your server supports it, it's recommended to " +
-            "use it. If you are in doubt, contact the server administrators.\n")
+            u"use it. If you are in doubt, contact the server administrators.\n")
             self.add_option('core', 'use_ssl', 'Should the bot connect with SSL?')
             if self.use_ssl == 'True':
                 default_port = '6697'
             else:
                 default_port = '6667'
             print("\nYou also need to know the port of the server. The default port for an IRC server is 6667, " +
-            "but if your bot connects with SSL the default port is 6697.\n")
+            u"but if your bot connects with SSL the default port is 6697.\n")
             self.interactive_add('core', 'port', 'Enter the port to connect on',
                                  default_port)
             print("\nGranota has some commands that can only be performed by its owner (probably you). " +
-            "Be careful, because the owner will have a total control of the bot.\n")
+            u"Be careful, because the owner will have a total control of the bot.\n")
             self.interactive_add(
                 'core', 'owner',
                 "Enter your own IRC name (or that of the bot's owner)"
             )
             c = "\nNow, let\'s set up the channels. You will be able to make the " +
-            "bot to join another channel when it is connected, but you can also configure some channels to connect by " +
-            "default.\nEnter the channels to connect to by default, one at a time." + \
+            u"bot to join another channel when it is connected, but you can also configure some channels to connect by " +
+            u"default.\nEnter the channels to connect to by default, one at a time." + \
                 ' When done, hit enter again.'
             self.add_list('core', 'channels', c, 'Channel:')
         elif lang == 'es':
             print(u"\nAntes de todo, necesitas configurar un nick para tu bot. Puede ser 'Granota', pero si quieres que " +
-            "se connecte en una red donde haya el Granota oficial, no lo hara. Tiene que ser un nick que no esté en " +
-            "uso o registrado con NickServ (compruébalo con /msg NickServ info <el nick que tu quieres>). Se recomienda " +
-            "registrar el nick de tu bot para evitar que te lo quiten.\n")
+            u"se connecte en una red donde haya el Granota oficial, no lo hara. Tiene que ser un nick que no esté en " +
+            u"uso o registrado con NickServ (compruébalo con /msg NickServ info <el nick que tu quieres>). Se recomienda " +
+            u"registrar el nick de tu bot para evitar que te lo quiten.\n")
             self.interactive_add('core', 'nick', 'Nick del bot',
                                  'Granota')
             print(u"\nEvidentemente, el bot es inútil si no se connecta en una red IRC. Escoje un servidor y busca " +
-            "su 'hostname'. Si no sabes su hostname, contacta con los administradores de la red.\n")
+            u"su 'hostname'. Si no sabes su hostname, contacta con los administradores de la red.\n")
             self.interactive_add('core', 'host', 'Server donde el bot debe conectarse',
                                  'irc.freenode.net')
             print(u"\nLa conexión SSL es recomendada, pero algunos servidores no soportan conexiones SSL. Si no estás " +
-            "seguro, contacta con los administradores del servidor.\n")
+            u"seguro, contacta con los administradores del servidor.\n")
             self.add_option('core', 'use_ssl', 'El bot tiene que conectarse con SSL?')
             if self.use_ssl == 'True':
                 default_port = '6697'
             else:
                 default_port = '6667'
             print(u"\nAdemás del servidor tienes que escojer el puerto. El puerto por defecto es 6667 para conexiones " +
-            "sin SSL. Si has escojido connectarte con SSL, el puerto por defecto es 6697.\n")
+            u"sin SSL. Si has escojido connectarte con SSL, el puerto por defecto es 6697.\n")
             self.interactive_add('core', 'port', 'Puerto del servidor donde el bot debe conectarse',
                                  default_port)
             print(u"\nHay algunas funciones que solo las puede usar el propietario del bot. Ten en cuenta que el el nick " +
-            "que configures aqui tendrá un poder absoluto sobre el bot.\n")
+            u"que configures aqui tendrá un poder absoluto sobre el bot.\n")
             self.interactive_add(
                 'core', 'owner',
                 "Tu nick de IRC (o el del propietario del bot)"
             )
             c = u"\nMientras el bot está connectado puedes hacer que entre o salga de canales, pero se recomienda " +
-            "configurar los canales dónde debe entrar siempre que se connecte a IRC. Escribe los canales en los que " +
-            "el bot debe conectarse de forma automática. Despues cada canal presiona la tecla enter." + \
+            u"configurar los canales dónde debe entrar siempre que se connecte a IRC. Escribe los canales en los que " +
+            u"el bot debe conectarse de forma automática. Despues cada canal presiona la tecla enter." + \
                 ' Cuando hayas puesto todos los canales, vuelve a presionar enter.'
             self.add_list('core', 'channels', c, 'Canal:')
         elif lang == 'ca':
             print(u"\nPrimer, necessites configurar un nick pel teu bot. Pot ser 'Granota', però tingues en compte que " +
-            "si vols que el bot es connecti en una xarxa IRC on ja hi ha un Granota oficial, el bot no es podrà " +
-            "connectar. Et recomanem que abans comprovis si el nick ja s'està utilitzant o està registrat amb el " +
-            "NickServ (comprova-ho amb /msg NickServ info <nick>). També et recomanem que registris el nick " +
-            "per evitar que algú altre te'l prengui.\n")
+            u"si vols que el bot es connecti en una xarxa IRC on ja hi ha un Granota oficial, el bot no es podrà " +
+            u"connectar. Et recomanem que abans comprovis si el nick ja s'està utilitzant o està registrat amb el " +
+            u"NickServ (comprova-ho amb /msg NickServ info <nick>). També et recomanem que registris el nick " +
+            u"per evitar que algú altre te'l prengui.\n")
             self.interactive_add('core', 'nick', 'Nick del bot',
                                  'Granota')
             print(u"\nAra has d'escollir el servidor on el bot s'ha de connectar. Quan l'hagis escollit escriu el " +
-            "servidor, has de trobar el seu 'hostname'. Si no saps quin és, contacta amb els administradors del " +
-            "servidor.\n")
+            u"servidor, has de trobar el seu 'hostname'. Si no saps quin és, contacta amb els administradors del " +
+            u"servidor.\n")
             self.interactive_add('core', 'host', 'Servidor on el bot ha de connectar-se',
                                  'irc.freenode.net')
             print(u"\nEs recomana utilitzar connexió SSL, però hi ha servidors que no poden rebre connexions " +
-            "d'aquest tipus. Si no n'estàs segur, pots preguntar als administradors de la xarxa.\n")
+            u"d'aquest tipus. Si no n'estàs segur, pots preguntar als administradors de la xarxa.\n")
             self.add_option('core', 'use_ssl', 'El bot ha de connectar-se amb SSL')
             if self.use_ssl == 'True':
                 default_port = '6697'
             else:
                 default_port = '6667'
             print(u"\nA més del servidor, el bot necessita saber el port on s'ha de connectar. Normalment és el " +
-            "6667, però si utilitza SSL segurament serà 6697.\n")
+            u"6667, però si utilitza SSL segurament serà 6697.\n")
             self.interactive_add('core', 'port', 'Port del servidor on el bot ha de connectar-se',
                                  default_port)
             print(u"\nHi ha algunes funciones reservades nomes al propietari del bot. Ves en compte en escollir-lo " +
-            "si no ets tu, perque el propietari tindra un control absolut sobre el bot mentre estigui connectat.\n")
+            u"si no ets tu, perque el propietari tindra un control absolut sobre el bot mentre estigui connectat.\n")
             self.interactive_add(
                 'core', 'owner',
                 "El teu nick d'IRC (o el del propietari del bot)"
             )
             c = u"\nMentre el bot està connectat pots fer que entri o surti de canals. Però es recomana que especifiquis " +
-            "ara els canals en els que el bot ha de connectar-se de manera automatica a cada connexió. Despres de " +
-            "cada canal presiona la tecla enter. Al acabar la llista de canals, pressiona enter una altra vegada."
+            u"ara els canals en els que el bot ha de connectar-se de manera automatica a cada connexió. Despres de " +
+            u"cada canal presiona la tecla enter. Al acabar la llista de canals, pressiona enter una altra vegada."
             self.add_list('core', 'channels', c, 'Canal:')            
 
     def _db(self):

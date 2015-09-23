@@ -52,7 +52,7 @@ owner_ping_es = [u"¡Totalmente de acuerdo!",u"Nuestro amo nos guía muy bien...
                
 normal_ping_en = [u"Do you think that I'll answer you? Bah!",u"Oh, my love! What do you want to say?",
                  u"Talking to me?",u"Be aware of what you say. You don't know who am I!",
-                 u"Bah",u"Why yo say that? Don't offend me!",u"Hello, here the bot-central.",
+                 u"Bah",u"Why do you say that? Don't offend me!",u"Hello, here the bot-central.",
                  u"pffff",u"hi!",u"Shut up, I'm unavailable!",u"Don't be silly!",
                  u"mmmmmhhh",u"are you sure?",u"one second",u"hi hi hi",
                  u"There are 10 types of bots: The ones that know binary and the ones that don't know it",

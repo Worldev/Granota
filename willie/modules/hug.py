@@ -12,17 +12,17 @@ def hug(bot, trigger):
         nick = trigger.group(2)
     if nick == r'$nickname':
         if bot.config.lang == 'ca':
-            bot.write("action", u"s'abraça a ell mateix")
+            bot.msg(trigger.sender, u"\x01ACTION s'abraça a ell mateix\x01")
         elif bot.config.lang == 'es':
-            bot.write("action", u"se abraza a si mismo")
+            bot.msg(trigger.sender, u"\x01ACTION se abraza a si mismo\x01")
         else:
-            bot.write("action", u"hugs himself")
+            bot.msg(trigger.sender, u"\x01ACTION hugs himself\x01")
         return
     else:
         if bot.config.lang == 'ca':
-            bot.write("action", u"abraça a %s" % nick)
+            bot.msg(trigger.sender, u"\x01ACTION abraça a %s\x01" % nick)
         elif bot.config.lang == 'es':
-            bot.write(["action", u"abraza a %s" % nick])
+            bot.msg(trigger.sender, u"\x01ACTION abraza a %s\x01" % nick)
         else:
-            bot.write("action", "hugs %s" % nick)
+            bot.msg(trigger.sender, "\x01ACTION hugs %s\x01" % nick)
         return

@@ -25,12 +25,12 @@ def hug(bot, trigger):
         return
     else:
         if bot.config.lang == 'ca':
-            msg = random.choice(hugs_ca)
-            bot.msg(trigger.sender, u"\x01ACTION %s %s\x01" % (msg, nick))
+            msg = (random.choice(hugs_ca) % nick)
+            bot.msg(trigger.sender, u"\x01ACTION %s\x01" % msg)
         elif bot.config.lang == 'es':
             msg = (random.choice(hugs_es) % nick)
-            bot.msg(trigger.sender, u"\x01ACTION %s %s\x01" % (msg, nick))
+            bot.msg(trigger.sender, u"\x01ACTION %s\x01" % msg)
         else:
-            msg = random.choice(hugs_en)
-            bot.msg(trigger.sender, "\x01ACTION %s %s\x01" % (msg, nick))
+            msg = (random.choice(hugs_en) % nick)
+            bot.msg(trigger.sender, "\x01ACTION %s\x01" % msg)
         return

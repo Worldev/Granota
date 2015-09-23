@@ -276,7 +276,7 @@ class Willie(irc.Bot):
             return self
 
     def setup(self):
-        stderr(u"\nBenvingut al Willie. Carregant mòduls...\n\n")
+        stderr(u"\nWelcome to Granota launcher. Loading modules...\n\n")
         self.callables = set()
         self.shutdown_methods = set()
 
@@ -295,7 +295,7 @@ class Willie(irc.Bot):
                 filename, lineno = tools.get_raising_file_and_line()
                 rel_path = os.path.relpath(filename, os.path.dirname(__file__))
                 raising_stmt = "%s:%d" % (rel_path, lineno)
-                stderr("Error carregant %s: %s (%s)" % (name, e, raising_stmt))
+                stderr("Error loading %s: %s (%s)" % (name, e, raising_stmt))
             else:
                 try:
                     if hasattr(module, 'setup'):
@@ -309,14 +309,14 @@ class Willie(irc.Bot):
                         filename, os.path.dirname(__file__)
                     )
                     raising_stmt = "%s:%d" % (rel_path, lineno)
-                    stderr(u"Error al procediment de configuració %s: %s (%s)"
+                    stderr(u"Error in the configuration protocol %s: %s (%s)"
                            % (name, e, raising_stmt))
 
         if modules:
-            stderr(u'\n\n%d mòduls registrats,' % (len(modules) - 1))
-            stderr(u'%d mòduls no carregats\n\n' % error_count)
+            stderr(u'\n\n%d registered modules,' % (len(modules) - 1))
+            stderr(u'%d unloaded modules\n\n' % error_count)
         else:
-            stderr(u"Atenció: No he pogut trobar cap mòdul")
+            stderr(u"Warning: I couldn't find any modules!")
 
         self.bind_commands()
 

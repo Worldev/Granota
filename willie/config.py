@@ -1,4 +1,4 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
 """
 *Availability: 3+ for all functions; attributes may vary.*
 

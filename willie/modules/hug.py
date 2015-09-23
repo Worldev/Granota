@@ -10,7 +10,7 @@ def hug(bot, trigger):
         nick = trigger.nick
     else:
         nick = trigger.group(2)
-    if nick == r'$nickname':
+    if nick == bot.config.nick:
         if bot.config.lang == 'ca':
             bot.msg(trigger.sender, u"\x01ACTION s'abraça a ell mateix\x01")
         elif bot.config.lang == 'es':

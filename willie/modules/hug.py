@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from willie.module import commands, example
+import random
+
+hugs_ca = [u"abraça a %s", u"es menja a petons a %s", u"es llança a sobre de %s per abraçar-lo", u"omple de petons a %s"]
+hugs_es = [u"abraza a %s", u"se come a besos a %s", u"se lanza sobre %s para abrazarlo", "llena de besitos a %s"]
+hugs_en = [u"hugs %s", u"eats %s with kisses", u"throws himself over %s to hug them"]
 
 @commands("hug", "abraza", "abrazar", "abraca", "abracada")
 @example(".hug John")
@@ -20,9 +25,12 @@ def hug(bot, trigger):
         return
     else:
         if bot.config.lang == 'ca':
-            bot.msg(trigger.sender, u"\x01ACTION abraça a %s\x01" % nick)
+            msg = random.choice(hugs_ca)
+            bot.msg(trigger.sender, u"\x01ACTION %s %s\x01" % (msg, nick))
         elif bot.config.lang == 'es':
-            bot.msg(trigger.sender, u"\x01ACTION abraza a %s\x01" % nick)
+            msg = random.choice(hugs_es)
+            bot.msg(trigger.sender, u"\x01ACTION %s %s\x01" % (msg, nick))
         else:
-            bot.msg(trigger.sender, "\x01ACTION hugs %s\x01" % nick)
+            msg = random.choice(hugs_en)
+            bot.msg(trigger.sender, "\x01ACTION %s %s\x01" % (msg, nick))
         return

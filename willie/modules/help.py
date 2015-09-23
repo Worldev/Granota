@@ -1,4 +1,4 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
 from willie.module import commands, rule, example, priority
 
 
@@ -43,7 +43,7 @@ def commands(bot, trigger):
         bot.reply("Per obtenir ajuda sobre una ordre en concret, escriu .ajuda <ordre>")
         return
     elif bot.config.lang == 'es':
-    	bot.msg(trigger.sender, '\x02' + str(num) + ' ordres disponibles:\x02 ' + names + '.', max_messages=10)
+    	bot.msg(trigger.sender, '\x02' + str(num) + ' comandos disponibles:\x02 ' + names + '.', max_messages=10)
     	bot.reply("Para obtener ayuda sobre un comando en concreto, escribe .ayuda <comando>")
     	return
     else:

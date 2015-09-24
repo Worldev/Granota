@@ -18,9 +18,6 @@ working = []
 notworking = []
 criticalnotworking = []
 
-def nreport(msg):
-    urllib2.urlopen("http://n.tkte.ch/h/4314/eOoVGWdAFqh-sJRGGTJb3XCW?payload={0}".format(urllib2.quote("[Granota Testing] {0}".format(msg))))
-
 print "Granota testing script\n"
 
 print "Granota testing script has started.\n"
@@ -151,7 +148,7 @@ else:
 print "Testing: Modules\n" 
 
 for val in os.listdir("willie/modules"):
-	if val.find("__init__") == -1 and val.find(".pyc") == -1 and val.find("__pycache__") == -1:
+	if val.find("__init__") == -1 and val.find(".py") != -1:
 		print "Testing: Module {0}".format(val)
 		testmod = pytest.main(["willie/modules/{0}".format(val), "-s", '--tb', 'native'])
 		if testmod is 0:
@@ -178,19 +175,15 @@ for val in notworking:
 for val in criticalnotworking:
 	criticalnotworkingvals = criticalnotworkingvals + val + ", "
 print "Tests made: {0}".format(alltestsmade)
-nreport("Tests made: {0}".format(alltestsmade))
 print "WORKING: {0}{1} in total".format(workingvals, workingnum)
 print "FAILING: {0}{1} in total".format(notworkingvals, notworkingnum)
 print "CRITICALLY FAILING {0}{1} in total".format(criticalnotworkingvals, criticalnotworkingnum)
 if criticalnotworkingnum is 0 and notworkingnum is not 0:
 	print "The build has passed, but there are failing stuff that should get fixed."
-	nreport("The build has \x0309passed\x0F, but there are \x0304failing\x0F stuff that should get fixed.")
 elif criticalnotworkingnum is 0 and notworkingnum is 0:
 	print "The build has passed successfully."
-	nreport("The build has \x0309passed\x0F successfully.")
 else:
 	print "The build has failed."
-	nreport("The build has \x02\x0304failed\x0F.")
 print "============================= test results =============================="
 if criticalnotworkingnum is 0:
 	sys.exit(0)

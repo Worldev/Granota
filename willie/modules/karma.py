@@ -6,7 +6,7 @@ import re
 import shutil
 import time
 
-homedir = os.path.join(os.path.expanduser('~'), '.willie')
+homedir = "config"
 
 karmare = re.compile(r"^([a-zA-Z0-9\[\]\{\}\\\|\-\_\`^]*)(:?,? ?)?(\+\+|\-\-)")
     

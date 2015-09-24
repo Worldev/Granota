@@ -444,7 +444,7 @@ class Config(object):
         if self.core.homedir is not None:
             home_modules_dir = os.path.join(self.core.homedir, 'modules')
         else:
-            home_modules_dir = os.path.join(os.path.expanduser('~'), '.willie',
+            home_modules_dir = os.path.join("config",
                                         'modules')
         if not os.path.isdir(home_modules_dir):
             os.makedirs(home_modules_dir)
@@ -483,7 +483,7 @@ class Config(object):
 
 
 def wizard(section, config=None):
-    dotdir = os.path.expanduser('~/.willie')
+    dotdir = "config"
     configpath = os.path.join(dotdir, (config or 'default') + '.cfg')
     if section == 'all':
         create_config(configpath)
@@ -506,10 +506,10 @@ def wizard(section, config=None):
 
 
 def check_dir(create=True):
-    dotdir = os.path.join(os.path.expanduser('~'), '.willie')
+    dotdir = "config"
     if not os.path.isdir(dotdir):
         if create:
-            print 'Creating a config directory at ~/.willie...'
+            print 'Creating a config directory at "config"...'
             try:
                 os.makedirs(dotdir)
             except Exception, e:

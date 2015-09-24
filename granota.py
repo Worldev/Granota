@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/python
 # coding=utf-8
 
 import sys
@@ -12,7 +12,7 @@ import willie.tools as tools
 from willie.tools import stderr
 
 
-homedir = os.path.join(os.path.expanduser('~'), '.willie')
+homedir = "config"
 
 
 def check_python_version():
@@ -86,7 +86,7 @@ def main(argv=None):
         check_python_version()
         if opts.list_configs is not None:
             configs = enumerate_configs()
-            print u'Arxius de configuació a ~/.willie:'
+            print 'Arxius de configuació:'
             if len(configs[0]) is 0:
                 print u'\tNo he trobat res'
             else:

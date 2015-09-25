@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import willie
 import json
 import urllib2
@@ -62,15 +63,15 @@ def partido(bot, trigger):
             bot.say(nombrePolitico + " (" + linkparaelprintPersona + ")" + " is a member of " + nombrePartido + " (" + linkparaelprintPartido + ")")
     except KeyError:
         if bot.config.lang == 'ca':
-            bot.say("Aquest partit polític no existeix")
+            bot.say(u"Aquest partit polític no existeix")
         elif bot.config.lang == 'es':
-            bot.say("Este partido político no exsiste")
+            bot.say(u"Este partido político no exsiste")
         else:
-            bot.say("This political party has not been found")
+            bot.say(u"This political party has not been found")
     except AttributeError:
         if bot.config.lang == 'ca':
-            bot.say("No hi ha res a cercar")
+            bot.say(u"No hi ha res a cercar")
         elif bot.config.lang == 'es':
-            bot.say("No hay nada a buscar")
+            bot.say(u"No hay nada a buscar")
         else:
-            bot.say("There is nothing to search")
+            bot.say(u"There is nothing to search")

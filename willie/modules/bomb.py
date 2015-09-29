@@ -49,7 +49,7 @@ def start(bot, trigger):
                 bot.say(u"No puedo poner otra bomba a " + target + "!")
             return
     if trigger.group(1) == 'bomb':
-        message = 'Hey, ' + target + u'! Somebody has given you a bomb! You have 2 minutes and 5 wires: Red, Yellow, Blue, White and Black. What wire should I cut? Don\'t worry, I know what I\'m doing ! (answer with ".cutwire color")'
+        message = ('Hey, ' + target + u'! Somebody has given you a bomb! You have ·2 minutes· and ·5 wires: Red, Yellow, Blue, White and Black. What wire should I cut? Don\'t worry, I know what I\'m doing ! (answer with "%scutwire color")' % bot.config.prefix.replace("\\", ""))
         bot.say(message)
         color = choice(colors_en)
         bot.msg(trigger.nick,
@@ -60,7 +60,7 @@ def start(bot, trigger):
         sch.run()
     else:
         if bot.config.lang == 'ca':
-            message = 'Ei, ' + target + u'! Sembla que algÃº t\'ha posat una bomba... Tens 2 minuts i 5 cables: Vermell, Groc, Blau, Blanc i Negre. Quin cable he de tallar? No pateixis, jo sÃ© el que em faig! (respon amb ".talla color")'
+            message = ('Ei, ' + target + u'! Sembla que algÃº t\'ha posat una bomba... Tens ·2 minuts· i ·5 cables: Vermell, Groc, Blau, Blanc i Negre. Quin cable he de tallar? No pateixis, jo sÃ© el que em faig! (respon amb "%stalla color")' % bot.config.prefix.replace("\\", ""))
             bot.say(message)
             color = choice(colors_ca)
             bot.msg(trigger.nick,
@@ -70,7 +70,7 @@ def start(bot, trigger):
             bombs[target.lower()] = (color, code)
             sch.run()
         else:
-            message = 'Ey, ' + target + u'! Parece que alguien te ha puesto una bomba... Tienes 2 minutos y 5 cables: Rojo, Amarillo, Azul, Blanc y Negro. Que cable tengo que cortar? No te preocupes, yo se lo que hago! (responde con ".corta color")'
+            message = ('Ey, ' + target + u'! Parece que alguien te ha puesto una bomba... Tienes 2 minutos· y 5 cables·: Rojo, Amarillo, Azul, Blanc y Negro. Que cable tengo que cortar? No te preocupes, yo se lo que hago! (responde con "%scorta color")' % bot.config.prefix.replace("\\", ""))
             bot.say(message)
             color = choice(colors_es)
             bot.msg(trigger.nick,

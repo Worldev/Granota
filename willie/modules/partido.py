@@ -61,13 +61,13 @@ def partido(bot, trigger):
             bot.say(nombrePolitico + " (" + linkparaelprintPersona + ")" + " milita en " + nombrePartido + " (" + linkparaelprintPartido + ")")
         else:
             bot.say(nombrePolitico + " (" + linkparaelprintPersona + ")" + " is a member of " + nombrePartido + " (" + linkparaelprintPartido + ")")
-    except KeyError:
-        if bot.config.lang == 'ca':
-            bot.say(u"Aquest partit polític no existeix")
-        elif bot.config.lang == 'es':
-            bot.say(u"Este partido político no exsiste")
-        else:
-            bot.say(u"This political party has not been found")
+    #except KeyError:
+    #    if bot.config.lang == 'ca':
+    #        bot.say(u"Aquest partit polític no existeix")
+    #    elif bot.config.lang == 'es':
+    #        bot.say(u"Este partido político no exsiste")
+    #    else:
+    #        bot.say(u"This political party has not been found")
     except AttributeError:
         if bot.config.lang == 'ca':
             bot.say(u"No hi ha res a cercar")

@@ -81,19 +81,19 @@ def mention(bot, trigger):
         dice = random.choice(['owner','nowner'])
         if dice == 'owner':
             if bot.config.lang == 'ca':
-                bot.say(random.choice(owner_ping_ca))
+                bot.say(random.choice(owner_ping_ca) + u" [Més sobre mi: %sajuda]" % bot.config.prefix)
             elif bot.config.lang == 'es':
-                bot.say(random.choice(owner_ping_es))
+                bot.say(random.choice(owner_ping_es) + u" [Más sobre mí: %sayuda]" % bot.config.prefix)
             else:
-                bot.say(random.choice(owner_ping_en))
+                bot.say(random.choice(owner_ping_en) + u" [More about me: %shelp]" % bot.config.prefix)
             return
     else:
         if bot.config.lang == 'ca':
-            bot.say(random.choice(normal_ping_ca))
+            bot.say(random.choice(normal_ping_ca) + u" [Més sobre mi: %sajuda]" % bot.config.prefix)
         elif bot.config.lang == 'es':
-            bot.say(random.choice(normal_ping_es))
+            bot.say(random.choice(normal_ping_es) + u" [Más sobre mí: %sayuda]" % bot.config.prefix)
         else:
-            bot.say(random.choice(normal_ping_en))
+            bot.say(random.choice(normal_ping_en) + u" [More about me: %shelp]" % bot.config.prefix)
 
 @commands("ping")
 def normal_ping(bot, trigger):

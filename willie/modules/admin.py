@@ -265,6 +265,7 @@ def save_config(bot, trigger):
 def nick(bot, trigger):
     if trigger.admin:
         bot.write(("NICK", trigger.group(2)))
+        bot.write(("MSG", "NickServ GROUP")) # Tries to automatically group de nickname
     if not trigger.admin:
         return
 

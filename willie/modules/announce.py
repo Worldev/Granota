@@ -22,8 +22,10 @@ def announce(bot, trigger):
     for channel in channels:
         if bot.config.lang == 'ca':
             bot.msg(channel, '[ANUNCI GLOBAL] %s' % trigger.group(2))
+            time.sleep(2) # To avoid anti-flood measures.
         elif bot.config.lang == 'es':
             bot.msg(channel, '[ANUNCIO GLOBAL] %s' % trigger.group(2))
+            time.sleep(2) # To avoid anti-flood measures.
         else:
             bot.msg(channel, '[GLOBAL ANNOUNCE] %s' % trigger.group(2))
-        time.sleep(1) # To avoid anti-flood measures.
+            time.sleep(2) # To avoid anti-flood measures.

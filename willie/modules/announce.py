@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 
 import willie
-from willie.module import commands, example
+import time
 
 
 @willie.module.commands('anunci', 'anuncia', 'announce', 'anuncio')
@@ -26,3 +26,4 @@ def announce(bot, trigger):
             bot.msg(channel, '[ANUNCIO GLOBAL] %s' % trigger.group(2))
         else:
             bot.msg(channel, '[GLOBAL ANNOUNCE] %s' % trigger.group(2))
+        time.sleep(1) # To avoid anti-flood measures.

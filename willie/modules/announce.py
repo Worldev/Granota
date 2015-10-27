@@ -1,10 +1,11 @@
 # -*- coding: utf8 -*-
 
+import willie
 from willie.module import commands, example
 
 
-@commands('anunci', 'anuncia', 'announce', 'anuncio')
-@example('.anunci missatge')
+@willie.module.commands('anunci', 'anuncia', 'announce', 'anuncio')
+@willie.module.example('.announce message')
 def announce(bot, trigger):
     u"""
     Fa un anunci a tots els canals

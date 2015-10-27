@@ -317,6 +317,11 @@ class Config(object):
             u"but if your bot connects with SSL the default port is 6697.\n")
             self.interactive_add('core', 'port', 'Enter the port to connect on',
                                  default_port)
+            print(u"\nSome networks have services. Services offer more security on the channel and are more confortable " + 
+            u"to use if Granota has +o flags. If you set this to 'true', Granota will try to use services to perfor administrative " +
+            u"task on channels. If not, it will try to made them himself (note that if you set this to 'false', Granota " +
+            u"will need ops to perform certain actions)")
+            self.add_option('core', 'services', 'Should the bot use network services?')
             print("\nGranota has some commands that can only be performed by its owner (probably you). " +
             u"Be careful, because the owner will have a total control of the bot.\n")
             self.interactive_add(
@@ -350,6 +355,11 @@ class Config(object):
             u"sin SSL. Si has escojido connectarte con SSL, el puerto por defecto es 6697.\n")
             self.interactive_add('core', 'port', 'Puerto del servidor donde el bot debe conectarse',
                                  default_port)
+            print(u"\nAlgunas redes tienen servicios. Granota ofrece una mayor seguridad si se usarn servicios (el bot necesita " + 
+            u"el flag +o como mínimo). Si configuras eso, Granota intentará utilizar los servicios para hacer acciones administrativas " +
+            u"en los canales. De lo contrario, intentará hacerlo él mismo (ten en cuenta que entonces Granota " +
+            u"necesitará tener estatus de operador para hacer ciertas acciones)")
+            self.add_option('core', 'services', 'Quieres que el bot utilize los servicios?')
             print(u"\nHay algunas funciones que solo las puede usar el propietario del bot. Ten en cuenta que el el nick " +
             u"que configures aqui tendrá un poder absoluto sobre el bot.\n")
             self.interactive_add(
@@ -385,6 +395,11 @@ class Config(object):
             u"6667, però si utilitza SSL segurament serà 6697.\n")
             self.interactive_add('core', 'port', 'Port del servidor on el bot ha de connectar-se',
                                  default_port)
+            print(u"\nAlgunas xarxes tenen serveix. Granota ofereix una millor seguretat si s'utilitzen serveis (el bot necessita " + 
+            u"el flag +o com a mínim). Si ho configures, Granota intentarà utiltizar els serveix per fer accions administratives " +
+            u"en els canals. Si no, intentarà fer-ho ell mateix (tingues en compte que llavors Granota " +
+            u"necessitarà estatus d'operador per dur a terme certes accions)")
+            self.add_option('core', 'services', 'Vols que el bot utilitzi els serveisa?')
             print(u"\nHi ha algunes funciones reservades nomes al propietari del bot. Ves en compte en escollir-lo " +
             u"si no ets tu, perque el propietari tindra un control absolut sobre el bot mentre estigui connectat.\n")
             self.interactive_add(

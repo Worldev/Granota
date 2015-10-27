@@ -18,7 +18,6 @@ def announce(bot, trigger):
         else:
             bot.reply(u"You are not my owner.")
         return
-    bot.reply("asdf asdf")
     for channel in bot.config.channels:
         if bot.config.lang == 'ca':
             bot.msg(channel, '[ANUNCI GLOBAL] %s' % trigger.group(2))
@@ -26,3 +25,4 @@ def announce(bot, trigger):
             bot.msg(channel, '[ANUNCIO GLOBAL] %s' % trigger.group(2))
         else:
             bot.msg(channel, '[GLOBAL ANNOUNCE] %s' % trigger.group(2))
+            bot.reply("asdf asdf")

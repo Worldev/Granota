@@ -27,4 +27,4 @@ def announce(bot, trigger):
         else:
             bot.msg(channel, '[GLOBAL ANNOUNCE] %s' % trigger.group(2))
             channels.append(channel)
-    bot.say(str(channels))
+    bot.say(str(bot.config.channels))

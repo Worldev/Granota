@@ -19,12 +19,18 @@ def op(bot, trigger):
         if not trigger.group(2):
             channel = trigger.sender
             nick = trigger.nick
-            bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
+            if bot.config.services == True:
+                bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
+            else:
+                bot.write(['OP', nick])
             return
         else:
             channel = trigger.sender
             nick = trigger.group(2)
-            bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
+            if bot.config.services == True:
+                bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
+            else:
+                bot.write(['OP', nick])
             return
     else:
         return

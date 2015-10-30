@@ -35,19 +35,19 @@ def movie(bot, trigger):
         if bot.config.lang == 'ca':
             message = u'[Pel·lícula] Títol: ' + data['Title'] + \
                     ' | Any: ' + data['Year'] + \
-                    u' | Valoració: ' + data['imdbRating'] + \
+                    u' | Valoració: ' + data['imdbRating'] + ' i ' + data['imdbVotes'] + ' persones han votat.' + \
                     u' | Gènere: ' + data['Genre'] + \
                     ' | Link a IMDB: http://imdb.com/title/' + data['imdbID']
         elif bot.config.lang == 'es':
             message = u'[Película] Título: ' + data['Title'] + \
                     u' | Año: ' + data['Year'] + \
-                    u' | Valoración: ' + data['imdbRating'] + \
+                    u' | Valoración: ' + data['imdbRating'] + ' y ' + data['imdbVotes'] + ' personas han votado.' + \
                     u' | Género: ' + data['Genre'] + \
                     ' | Link a IMDB: http://imdb.com/title/' + data['imdbID']
         else:
             message = '[MOVIE] Title: ' + data['Title'] + \
                       ' | Year: ' + data['Year'] + \
-                      ' | Rating: ' + data['imdbRating'] + \
+                      ' | Rating: ' + data['imdbRating'] + ' and ' + data['imdbVotes'] + ' people have voted.' + \
                       ' | Genre: ' + data['Genre'] + \
                       ' | IMDB Link: http://imdb.com/title/' + data['imdbID']
     bot.say(message)

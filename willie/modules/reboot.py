@@ -22,5 +22,9 @@ def reboot(bot, trigger):
 @commands('restart')
 def restart(bot, trigger):
     if trigger.owner:
-        bot.quit("Restarting [by %s]" % trigger.owner)
+        if not trigger.group(2):
+            quit_msg = "Restarting"
+        else:
+            quit_msg = trigger.group(2)
+        bot.quit("%s [by %s]" % (quit_msg, trigger.nick))
         os.system("python granota.py")

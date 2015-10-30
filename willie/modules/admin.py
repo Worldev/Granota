@@ -265,7 +265,7 @@ def save_config(bot, trigger):
 def nick(bot, trigger):
     if trigger.admin:
         bot.write(("NICK", trigger.group(2)))
-        if bot.config.services == True:
+        if getattr(getattr(bot.config, "core"), "services") == True:
             bot.msg("NickServ", "GROUP") # Tries to automatically group de nickname
             bot.msg(trigger.nick, "I tried to group the new nickname '%s' to my NickServ account." % trigger.group(2))
         return

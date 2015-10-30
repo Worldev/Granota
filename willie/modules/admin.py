@@ -265,6 +265,8 @@ def save_config(bot, trigger):
 def nick(bot, trigger):
     if trigger.admin:
         bot.write(("NICK", trigger.group(2)))
+        if trigger.group(2) == bot.config.nick:
+            return
         bot.msg("NickServ", "GROUP") # Tries to automatically group de nickname
         if bot.config.lang == 'ca':
             msg = (u"He intentat agrupar el nou nick '%s' al meu compte del NickServ. " +

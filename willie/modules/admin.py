@@ -92,24 +92,6 @@ def quit(bot, trigger):
         bot.quit(quit_message + " [by %s]" % trigger.nick)
     sys.exit()
 
-@willie.module.commands('restart', 'reiniciar')
-@willie.module.priority('low')
-def restart(bot, trigger):
-    if trigger.sender.startswith('#'):
-        return
-    if not trigger.owner:
-        return
-    """Es desconnecta del servidor. Només els administradors del bot"""
-    # Can only be done in privmsg by the owner
-
-    quit_message = trigger.group(2)
-    if bot.config.lang == 'es':
-        bot.quit(quit_message + " (Reiniciando [comando ejecutado por %s])" % trigger.nick)
-    elif bot.config.lang == 'ca':
-        bot.quit(quit_message + " (Reiniciant [ordre executada per %s])" % trigger.nick)
-    else:
-        bot.quit(quit_message + " (Rebooting [by %s])" % trigger.nick)
-
 @willie.module.commands('msg')
 @willie.module.priority('low')
 @willie.module.example(u'.msg #example Hi!')

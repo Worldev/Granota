@@ -2,7 +2,7 @@
 
 from willie.module import commands, example
 
-@commands('reinicia', 'reboot', 'reinici', 'reinicio', 'restart')
+@commands('reboot')
 def reboot(bot, trigger):
     if trigger.owner or trigger.admin:
         bot.callables = None

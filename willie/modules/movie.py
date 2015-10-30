@@ -23,6 +23,7 @@ def movie(bot, trigger):
     su = web.get_urllib_object(uri, 30)
     shorturl = json.load(su)
     su.close()
+    print(str(shorturl))
     short_url = shorturl['link']
     if data['Response'] == 'False':
         if 'Error' in data:

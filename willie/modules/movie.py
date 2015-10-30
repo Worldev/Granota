@@ -15,7 +15,7 @@ def movie(bot, trigger):
         return
     word = trigger.group(2).rstrip()
     word = word.replace(" ", "+")
-    uri = "http://www.imdbapi.com/?t=" + word
+    uri = "http://www.omdbapi.com/?t=" + word
     u = web.get_urllib_object(uri, 30)
     data = json.load(u)  # data is a Dict containing all the information we need
     u.close()

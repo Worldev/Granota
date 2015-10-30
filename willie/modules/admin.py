@@ -265,9 +265,23 @@ def save_config(bot, trigger):
 def nick(bot, trigger):
     if trigger.admin:
         bot.write(("NICK", trigger.group(2)))
-        if getattr(getattr(bot.config, "core"), "services") == True:
-            bot.msg("NickServ", "GROUP") # Tries to automatically group de nickname
-            bot.msg(trigger.nick, "I tried to group the new nickname '%s' to my NickServ account." % trigger.group(2))
+        bot.msg("NickServ", "GROUP") # Tries to automatically group de nickname
+        if bot.config.lang == 'ca':
+            msg = (u"He intentat agrupar el nou nick '%s' al meu compte del NickServ. " +
+                    u"Si no estic registrat o identificat, l'ordre no haurà funcionat. " +
+                    u"Si la xarxa IRC no disposa de serveis, o el servei de nicks no és 'NickServ', " +
+                    u"l'ordre tampoc haurà funcionat.")
+        elif bot.config.lang == 'es':
+            msg = (u"He intentado agrupar mi nuevo nick '%s' a mi cuenta de NickServ. " +
+                    u"Si no estoy registrado o identificado, el comando no habrá funcionado. " +
+                    u"Si la red IRC no dispone de servicios, o el servicio de nicks no es 'NickServ', " +
+                    u"el comando tampoco habrá funcionado.")
+        else:
+            msg = ("I tried to group the new nickname '%s' to my NickServ account. " +
+                    "If I'm not registered or identified with NickServ, the command have not worked. " +
+                    "If the network does not have services, or the nick service is not 'NickServ', " +
+                    "the command haven't worked neither.")
+        bot.msg(trigger.nick,  msg % trigger.group(2))
         return
     if not trigger.admin:
         return

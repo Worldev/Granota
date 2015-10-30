@@ -19,6 +19,11 @@ def movie(bot, trigger):
     u = web.get_urllib_object(uri, 30)
     data = json.load(u)  # data is a Dict containing all the information we need
     u.close()
+    shoruri = ("http://ves.cat/?url=http://imdb.com/title/" + data['imdbID'] + "&format=json")
+    su = web.get_urllib_object(uri, 30)
+    shorturl = json.load(su)
+    su.close()
+    short_url = shorturl['link']
     if data['Response'] == 'False':
         if 'Error' in data:
             message = '[MOVIE] %s' % data['Error']
@@ -40,7 +45,7 @@ def movie(bot, trigger):
                     u' | Gènere: ' + data['Genre'] + \
                     u' | Premis: ' + data['Awards'] + \
                     u' | Duració: ' + data['Runtime'] + \
-                    ' | Link a IMDB: http://imdb.com/title/' + data['imdbID']
+                    ' | Link a IMDB: ' + short_url
         elif bot.config.lang == 'es':
             message = u'[Película] Título: ' + data['Title'] + \
                     u' | Director: ' + data['Director'] + \
@@ -49,7 +54,7 @@ def movie(bot, trigger):
                     u' | Género: ' + data['Genre'] + \
                     u' | Premios: ' + data['Awards'] + \
                     u' | Duración: ' + data['Runtime'] + \
-                    ' | Link a IMDB: http://imdb.com/title/' + data['imdbID']
+                    ' | Link a IMDB: ' + short_url
         else:
             message = '[MOVIE] Title: ' + data['Title'] + \
                       ' | Director: ' + data['Director'] + \
@@ -58,5 +63,5 @@ def movie(bot, trigger):
                       ' | Genre: ' + data['Genre'] + \
                       ' | Awards: ' + data['Awards'] + \
                       ' | Runtime: ' + data['Runtime'] + \
-                      ' | IMDB Link: http://imdb.com/title/' + data['imdbID']
+                      ' | IMDB Link: ' + short_url
     bot.say(message)

@@ -4,6 +4,7 @@ import willie
 import willie.module
 from willie.module import commands
 from willie import module
+import sys
 
 def configure(config):
     """
@@ -79,7 +80,7 @@ def quit(bot, trigger):
         return
     if not trigger.owner:
         return
-    """Es desconnecta del servidor. Només els administradors del bt"""
+    """Es desconnecta del servidor. Només els administradors del bot"""
     # Can only be done in privmsg by the owner
 
     quit_message = trigger.group(2)
@@ -89,6 +90,25 @@ def quit(bot, trigger):
         bot.quit(quit_message + " [ordre executada per %s]" % trigger.nick)
     else:
         bot.quit(quit_message + " [by %s]" % trigger.nick)
+    sys.exit()
+
+@willie.module.commands('restart', 'reiniciar')
+@willie.module.priority('low')
+def restart(bot, trigger):
+    if trigger.sender.startswith('#'):
+        return
+    if not trigger.owner:
+        return
+    """Es desconnecta del servidor. Només els administradors del bot"""
+    # Can only be done in privmsg by the owner
+
+    quit_message = trigger.group(2)
+    if bot.config.lang == 'es':
+        bot.quit(quit_message + " (Reiniciando [comando ejecutado por %s])" % trigger.nick)
+    elif bot.config.lang == 'ca':
+        bot.quit(quit_message + " (Reiniciant [ordre executada per %s])" % trigger.nick)
+    else:
+        bot.quit(quit_message + " (Rebooting [by %s])" % trigger.nick)
 
 @willie.module.commands('msg')
 @willie.module.priority('low')
@@ -238,7 +258,7 @@ def set_config(bot, trigger):
                 value = "(password censored)"
         else:
             value = getattr(getattr(bot.config, section), option)
-        bot.reply("%s.%s = %s" % (section, option, value))
+        bot.reply("%s.%s = %s" % (section, option, ",".join(value)))
         return
 
     # Otherwise, set the value to one given as argument 2.

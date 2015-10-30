@@ -1,6 +1,7 @@
 # -*- coding: cp1252 -*-
 
 from willie.module import commands, example
+import os
 
 @commands('reboot')
 def reboot(bot, trigger):
@@ -17,3 +18,9 @@ def reboot(bot, trigger):
         return
     else:
         return bot.reply(u"You aren't my owner")
+
+@commands('restart')
+def restart(bot, trigger):
+    if trigger.owner:
+        bot.quit("Restarting [by %s]" % trigger.owner)
+        os.system("python granota.py")

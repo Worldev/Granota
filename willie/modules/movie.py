@@ -19,12 +19,6 @@ def movie(bot, trigger):
     u = web.get_urllib_object(uri, 30)
     data = json.load(u)  # data is a Dict containing all the information we need
     u.close()
-    shoruri = ("http://ves.cat/?url=http://imdb.com/title/" + data['imdbID'] + "&format=json")
-    su = web.get_urllib_object(uri, 30)
-    shorturl = json.load(su)
-    su.close()
-    print(str(shorturl))
-    short_url = shorturl['link']
     if data['Response'] == 'False':
         if 'Error' in data:
             message = '[MOVIE] %s' % data['Error']

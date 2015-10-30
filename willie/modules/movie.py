@@ -40,7 +40,7 @@ def movie(bot, trigger):
                     u' | Gènere: ' + data['Genre'] + \
                     u' | Premis: ' + data['Awards'] + \
                     u' | Duració: ' + data['Runtime'] + \
-                    ' | Link a IMDB: ' + short_url
+                    ' | Link a IMDB: http://imdb.com/title/' + data['imdbID']
         elif bot.config.lang == 'es':
             message = u'[Película] Título: ' + data['Title'] + \
                     u' | Director: ' + data['Director'] + \
@@ -49,7 +49,7 @@ def movie(bot, trigger):
                     u' | Género: ' + data['Genre'] + \
                     u' | Premios: ' + data['Awards'] + \
                     u' | Duración: ' + data['Runtime'] + \
-                    ' | Link a IMDB: ' + short_url
+                    ' | Link a IMDB: http://imdb.com/title/' + data['imdbID']
         else:
             message = '[MOVIE] Title: ' + data['Title'] + \
                       ' | Director: ' + data['Director'] + \
@@ -58,5 +58,5 @@ def movie(bot, trigger):
                       ' | Genre: ' + data['Genre'] + \
                       ' | Awards: ' + data['Awards'] + \
                       ' | Runtime: ' + data['Runtime'] + \
-                      ' | IMDB Link: ' + short_url
+                      ' | IMDB Link: http://imdb.com/title/' + data['imdbID']
     bot.say(message)

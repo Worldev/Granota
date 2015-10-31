@@ -310,8 +310,9 @@ def owner_hello(bot, trigger): # Says "hello" to the bot owner.
     else:
         msg = ("Hi! I'm a bot, and I've identified you as my owner. In pm, I will tell you all private messages I " +
             "recieve. You can type %scommands to see a list of available commands.")
-    bot.msg(bot.config.owner, msg % bot.config.prefix.replace("\\", "")
+    bot.msg(bot.config.owner, msg % bot.config.prefix.replace("\\", ""))
     return
+
 owner_hello()
 if __name__ == '__main__':
     print __doc__.strip()

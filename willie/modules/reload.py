@@ -128,6 +128,7 @@ def f_load(bot, trigger):
 def unload(bot, trigger):
     if not trigger.owner:
         return
+    name = trigger.group(2)
     old_module = sys.modules[name]
 
     old_callables = {}

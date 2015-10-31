@@ -299,6 +299,19 @@ def pm_tell_owner(bot, trigger):
         return
     bot.msg(bot.config.owner, "<%s> %s" % (trigger.nick, trigger.group(0)))
     return
-    
+
+def owner_hello(bot, trigger): # Says "hello" to the bot owner.
+    if bot.config.lang == 'ca':
+        msg = ("Hola! Sóc un bot i t'he identificat com el meu propietari. En privat et retransmetré tots els " + 
+            "missatges privats que m'arribin. Pots escriure %sordres per veure la llista d'ordres disponibles.")
+    elif bot.config.lang == 'es':
+        msg = ("Hola! Soy un bot, y te he identificado como mi propietario. En privado te retransmitiré todos los " +
+            "mensajes privados que me lleguen. Puedes escribir %scomandos para ver la lista de comandos disponibles.")
+    else:
+        msg = ("Hi! I'm a bot, and I've identified you as my owner. In pm, I will tell you all private messages I " +
+            "recieve. You can type %scommands to see a list of available commands.")
+    bot.msg(bot.config.owner, msg % bot.config.prefix.replace("\\", "")
+    return
+owner_hello()
 if __name__ == '__main__':
     print __doc__.strip()

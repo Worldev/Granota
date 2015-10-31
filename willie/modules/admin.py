@@ -296,7 +296,7 @@ def pm_tell_owner(bot, trigger):
         return
     if trigger.owner:
         return
-    bot.msg(trigger.owner, "<%s> %s" % (trigger.nick, trigger.group(0)))
+    bot.msg(bot.config.owner, "<%s> %s" % (trigger.nick, trigger.group(0)))
     return
     
 if __name__ == '__main__':

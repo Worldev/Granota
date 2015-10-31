@@ -300,8 +300,13 @@ def pm_tell_owner(bot, trigger):
     bot.msg(bot.config.owner, "<%s> %s" % (trigger.nick, trigger.group(0)))
     return
 
+hello = True
 @rule('(Hello|Hola)')
 def owner_hello(bot, trigger): # Says "hello" to the bot owner.
+    global hello
+    if hello == False:
+        return
+    hello = False
     if bot.config.lang == 'ca':
         msg = ("Hola! Sóc un bot i t'he identificat com el meu propietari. En privat et retransmetré tots els " + 
             "missatges privats que m'arribin. Pots escriure %sordres per veure la llista d'ordres disponibles.")

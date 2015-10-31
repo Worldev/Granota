@@ -122,6 +122,29 @@ def f_load(bot, trigger):
 
     bot.reply(u'%r (version: %s)' % (module, modified))
 
+@willie.module.nickname_commands('unload')
+@willie.module.priority("low")
+@willie.module.thread(False)
+def unload(bot, trigger):
+    if not trigger.owner:
+        return
+    old_module = sys.modules[name]
+
+    old_callables = {}
+    for obj_name, obj in vars(old_module).iteritems():
+        if bot.is_callable(obj) or bot.is_shutdown(obj):
+            old_callables[obj_name] = obj
+
+    bot.unregister(old_callables)
+    # Also remove all references to willie callables from top level of the
+    # module, so that they will not get loaded again if reloading the
+    # module does not override them.
+    for obj_name in old_callables.keys():
+        delattr(old_module, obj_name)
+    
+    # Also delete the setup function
+    if hasattr(old_module, "setup"):
+        delattr(old_module, "setup")
 
 if __name__ == '__main__':
     print __doc__.strip()

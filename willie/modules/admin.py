@@ -2,7 +2,7 @@
 
 import willie
 import willie.module
-from willie.module import commands
+from willie.module import commands, rule, event
 from willie import module
 import sys
 
@@ -289,6 +289,15 @@ def nick(bot, trigger):
         return
     if not trigger.admin:
         return
-
+    
+@event('PRIVMSG')
+def pm_tell_owner(bot, trigger):
+    if trigger.sender.startswith("#"):
+        return
+    if trigger.owner:
+        return
+    bot.msg(trigger.owner, "<%s> %s" % (trigger.nick, trigger.group(0)))
+    return
+    
 if __name__ == '__main__':
     print __doc__.strip()

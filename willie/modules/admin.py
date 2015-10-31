@@ -291,6 +291,7 @@ def nick(bot, trigger):
         return
     
 @event('PRIVMSG')
+@rule('(.*)')
 def pm_tell_owner(bot, trigger):
     if trigger.sender.startswith("#"):
         return

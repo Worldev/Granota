@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from willie.module import commands
+import random
 
 @commands('reverse', 'reves')
 def reversetext(bot, trigger):

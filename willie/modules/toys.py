@@ -2,7 +2,12 @@ from willie.module import commands
 
 @commands('reverse', 'reves')
 def reversetext(bot, trigger):
-    """Reverses a text"""
+    if bot.config.lang == 'ca':
+        """Retorna el text al revés."""
+    elif bot.config.lang == 'es':
+        """Retorna el texto al revés."""
+    else
+        """Reverses a text"""
     if not trigger.group(2):
         if bot.config.lang == 'ca':
             bot.reply("Error de sintaxi. Escriu .reves <text>")

@@ -1,11 +1,13 @@
+# -*- coding: utf-8 -*-
+
 from willie.module import commands
 
 @commands('reverse', 'reves')
 def reversetext(bot, trigger):
     if bot.config.lang == 'ca':
-        """Retorna el text al revés."""
+        u"""Retorna el text al revés."""
     elif bot.config.lang == 'es':
-        """Retorna el texto al revés."""
+        u"""Retorna el texto al revés."""
     else:
         """Reverses a text"""
     if not trigger.group(2):

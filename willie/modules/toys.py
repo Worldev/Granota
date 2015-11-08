@@ -54,9 +54,9 @@ def encrypt(bot, trigger):
     #Convert each letter of plaintext to the corrsponding
     #encrypted letter in our dictionary creating the cryptext
     ciphertext=""
-    for l in plaintext.lower():
+	for l in plaintext.lower():
     	if l in dic:
-            l=dic[l]
-	    ciphertext+=l
+        	l=dic[l]
+		ciphertext+=l
 
     bot.say(ciphertext)

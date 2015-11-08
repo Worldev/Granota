@@ -38,3 +38,25 @@ def rainbow(bot, trigger):
     for letter in text:
         rainbowed += random.choice(colorlist) + letter
     bot.say(rainbowed.encode("utf8", "replace"))
+
+@commands('cipher', 'xifra', 'cifra')
+def encrypt(bot, trigger):
+    plaintext = trigger.group(2).lower()
+    shift = 13
+	alphabet=["a","b","c","d","e","f","g","h","i","j","k","l",
+	"m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+
+	#Create our substitution dictionary
+	dic={}
+	for i in range(0,len(alphabet)):
+		dic[alphabet[i]]=alphabet[(i+shift)%len(alphabet)]
+
+	#Convert each letter of plaintext to the corrsponding
+	#encrypted letter in our dictionary creating the cryptext
+	ciphertext=""
+	for l in plaintext.lower():
+		if l in dic:
+			l=dic[l]
+		ciphertext+=l
+
+	bot.say(ciphertext)

@@ -39,7 +39,7 @@ def rainbow(bot, trigger):
         rainbowed += random.choice(colorlist) + letter
     bot.say(rainbowed.encode("utf8", "replace"))
 
-@commands('cipher', 'xifra', 'cifra')
+@commands('cipher', 'xifra', 'cifra', 'rot13')
 def encrypt(bot, trigger):
     plaintext = trigger.group(2).lower()
     shift = 13

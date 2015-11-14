@@ -58,17 +58,17 @@ def help2(bot, trigger):
     if bot.config.lang == 'ca':
 	    response = (
 	        'Hola, Sóc un bot del projecte Worldev. Escriu "{0}ordres" per una llista d\'ordres '.format(bot.config.prefix.replace("\\", "")) +
-	        'o segueix el següent enllaç per més detalls: https://wikicatbots.tk/wiki/Granota/ca. El meu propietari és %s.'
+	        'o segueix el següent enllaç per més detalls: https://wiki.theworldev.org/w/index.php?title=Granota. El meu propietari és %s.'
 	    % bot.config.owner)
     elif bot.config.lang == 'es':
     	    response = (
 	        'Hola, Soy un bot del proyecto Worldev Escribe "{0}comandos" por una lista de mis comandos '.format(bot.config.prefix.replace("\\", "")) +
-	        'o sigue ese enlace para más detalles: https://wikicatbots.tk/wiki/Granota/es. Mi propietario es %s.'
+	        'o sigue ese enlace para más detalles: https://wiki.theworldev.org/w/index.php?title=Granota. Mi propietario es %s.'
 	    ) % bot.config.owner
     else:
        	    response = (
 	        'Hi, I\'m a Worldev project bot. Write "{0}commands" for a commands list '.format(bot.config.prefix.replace("\\", "")) +
-	        'or follow this links for more information: https://wikicatbots.tk/wiki/Granota. My owner is %s.'
+	        'or follow this links for more information: https://wiki.theworldev.org/w/index.php?title=Granota. My owner is %s.'
 	    ) % bot.config.owner
 	   
     bot.reply(response)

@@ -70,7 +70,7 @@ def start(bot, trigger):
             bombs[target.lower()] = (color, code)
             sch.run()
         else:
-            message = ('Ey, ' + target + u'! Parece que alguien te ha puesto una bomba... Tienes \x022 minutos\x02 y \x025 cables\x02: Rojo, Amarillo, Azul, Blanc y Negro. Que cable tengo que cortar? No te preocupes, yo se lo que hago! (responde con "%scorta color")' % bot.config.prefix.replace("\\", ""))
+            message = ('Ey, ' + target + u'! Parece que alguien te ha puesto una bomba... Tienes \x022 minutos\x02 y \x025 cables\x02: Rojo, Amarillo, Azul, Blanco y Negro. Que cable tengo que cortar? No te preocupes, yo se lo que hago! (responde con "%scorta color")' % bot.config.prefix.replace("\\", ""))
             bot.say(message)
             color = choice(colors_es)
             #bot.msg(trigger.nick,

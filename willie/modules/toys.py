@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from willie.module import commands
-import random
+import random, sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 @commands('reverse', 'reves')
 def reversetext(bot, trigger):

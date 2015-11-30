@@ -11,7 +11,6 @@ from willie.config import Config, create_config, ConfigurationError, wizard
 import willie.tools as tools
 from willie.tools import stderr
 
-
 homedir = "config"
 
 
@@ -189,4 +188,6 @@ def main(argv=None):
         print "\n\nKeyboard Interrupt"
         os._exit(1)
 if __name__ == '__main__':
+    reload(sys)
+    sys.setdefaultencoding('utf8')
     main()

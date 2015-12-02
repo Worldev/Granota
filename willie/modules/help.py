@@ -45,8 +45,10 @@ def help(bot, trigger):
 @commands('commands', 'ordres', 'o', 'comandos')
 @priority('low')
 def commands(bot, trigger):
-    #ordres = """=, admins, ban, bots, choose, commands, countdown, d, debug_print, deop, devoice, diec, drae, ety, frase, g, galeta, gc, gcs, help, ip, isup, kick, kickban, length, link, lmgtfy, movie, op, pastis, pregaria, privs, py, quiet, recomana, ves, \x02join, part, quit, anunci, msg, me, recover\x02"""
-    names = ', '.join(sorted(bot.doc.iterkeys()))
+    f = open('doc/alias.json', 'r')
+    data = json.load(f)
+    f.close()
+    names = ', '.join(sorted(list(data)))
     listnames = names.split()
     num = len(listnames)
     if bot.config.lang == 'ca':

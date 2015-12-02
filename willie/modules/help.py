@@ -21,7 +21,7 @@ def help(bot, trigger):
         l = bot.config.lang
         f = 'doc/alias.json'
         aliasfile = open(f, 'r')
-        datalias = json.load(aliasfile)
+        datalias = json.loads(aliasfile)
         aliasfile.close()
         for i in datalias:
             if name in i:
@@ -29,7 +29,7 @@ def help(bot, trigger):
             global command
         ff = 'doc/commands.json'
         helpfile = open(ff, 'r')
-        data = json.load(helpfile)
+        data = json.loads(helpfile)
         helpfile.close()
         try:
             doc = "\x02%s\x02: %s | \x02Example\x02: %s | \x02Alias\x02 (or in other languages): %s" % (command, data[command][l]["help"], bot.config.prefix.replace("\\", "") + data[command][l]["example"], ", ".join(datalias[command]["alias"]))

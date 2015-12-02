@@ -1,17 +1,14 @@
 {
 	"help": {
 		"en": {
-			"alias": ["help", "ayuda", "ajuda"],
 			"help": "Without arguments, shows general help. With arguments, shows documentation about the command specified.",
 			"example": "help wiki"
 		},
 		"es": {
-			"alias": ["help", "ayuda", "ajuda"],
 			"help": "Sin argumentos, muestra ayuda general. Con argumentos, muestra la documentación sobre el comando especificado.",
 			"example": "ayuda wiki"
 		},
 		"ca": {
-			"alias": ["help", "ayuda", "ajuda"],
 			"help": "Sense arguments, mostra ajuda general. Amb arguments mostra la documentació de l'ordre especificada.",
 			"example": "ajuda wiki"
 		}

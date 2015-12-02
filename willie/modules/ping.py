@@ -98,3 +98,7 @@ def mention(bot, trigger):
 @commands("ping")
 def normal_ping(bot, trigger):
     bot.say("Pong!")
+    
+@commands("pong")
+def normal_pong(bot, trigger):
+    bot.say("Ping!")

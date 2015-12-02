@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from willie.module import commands, rule, example, priority
 import willie.config as config
+import json
 
 
 @rule('$nick' '(?i)(help|doc) +([A-Za-z]+)(?:\?+)?$')
@@ -18,19 +19,31 @@ def help(bot, trigger):
     		bot.reply(u'Write {0}help <command> (for example {0}help c) to get help about a command, or {0}commands to get a list of commands.'.format(bot.config.prefix.replace("\\", "")))
     
     else:
-        name = trigger.group(2)
-        name = name.lower()
-
-        if name in bot.doc:
-            bot.reply(bot.doc[name][0])
-            if bot.doc[name][1]:
-            	if bot.config.lang == 'ca':
-            		bot.say('Ex. ' + bot.doc[name][1])
-            	if bot.config.lang == 'es':
-            		bot.say('Ej. ' + bot.doc[name][1])
-            	else:
-            		bot.say('Eg. ' + bot.doc[name][1])
-
+        name = trigger.group(2).lower()
+        l = bot.config.lang
+        f = 'doc/alias.json'
+        aliasfile = open(f, 'r')
+        data = json.load(aliasfile)
+        aliasfile.close()
+        for i in data:
+            if name in i:
+                command = i
+            global command
+        ff = 'doc/commands.json'
+        helpfile = open(ff, 'r')
+        data = json.load(helpfile)
+        helpfile.close()
+        try:
+            doc = "\x02%s\x02: %s | \x02Example\x02: %s | \x02Alias\x02 (or in other languages): %s" % (command, data[command][l]["help"], bot.config.prefix + data[command][l]["example"], ", ".join(data[command][l]["alias"]))
+        except KeyError:
+            if bot.config.lang == "ca":
+            	doc = u"\x02%s\x02: Ho sento, però aquesta ordre no existeix o encara no disposa de documentació." % command
+            elif bot.config.lang == "es":
+            	doc = u"\x02%s\x02: Lo siento, pero ese comando no existe o aún no tiene documentación." % command
+            else:
+            	doc = "\x02%s\x02: Sorry, but this command doesn't exist or doesn't have documentation yet." % command
+        bot.say(doc)
+        
 @commands('commands', 'ordres', 'o', 'comandos')
 @priority('low')
 def commands(bot, trigger):
@@ -58,17 +71,17 @@ def help2(bot, trigger):
     if bot.config.lang == 'ca':
 	    response = (
 	        'Hola, Sóc un bot del projecte Worldev. Escriu "{0}ordres" per una llista d\'ordres '.format(bot.config.prefix.replace("\\", "")) +
-	        'o segueix el següent enllaç per més detalls: https://wiki.theworldev.org/w/index.php?title=Granota. El meu propietari és %s.'
+	        'El meu propietari és %s.'
 	    % bot.config.owner)
     elif bot.config.lang == 'es':
     	    response = (
 	        'Hola, Soy un bot del proyecto Worldev Escribe "{0}comandos" por una lista de mis comandos '.format(bot.config.prefix.replace("\\", "")) +
-	        'o sigue ese enlace para más detalles: https://wiki.theworldev.org/w/index.php?title=Granota. Mi propietario es %s.'
+	        'Mi propietario es %s.'
 	    ) % bot.config.owner
     else:
        	    response = (
 	        'Hi, I\'m a Worldev project bot. Write "{0}commands" for a commands list '.format(bot.config.prefix.replace("\\", "")) +
-	        'or follow this links for more information: https://wiki.theworldev.org/w/index.php?title=Granota. My owner is %s.'
+	        'My owner is %s.'
 	    ) % bot.config.owner
 	   
     bot.reply(response)

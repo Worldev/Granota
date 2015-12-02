@@ -21,9 +21,9 @@ def help(bot, trigger):
         l = bot.config.lang
         f = 'doc/alias.json'
         aliasfile = open(f, 'r')
-        data = json.load(aliasfile)
+        datalias = json.load(aliasfile)
         aliasfile.close()
-        for i in data:
+        for i in datalias:
             if name in i:
                 command = i
             global command
@@ -32,7 +32,7 @@ def help(bot, trigger):
         data = json.load(helpfile)
         helpfile.close()
         try:
-            doc = "\x02%s\x02: %s | \x02Example\x02: %s | \x02Alias\x02 (or in other languages): %s" % (command, data[command][l]["help"], bot.config.prefix + data[command][l]["example"], ", ".join(data[command][l]["alias"]))
+            doc = "\x02%s\x02: %s | \x02Example\x02: %s | \x02Alias\x02 (or in other languages): %s" % (command, data[command][l]["help"], bot.config.prefix + data[command][l]["example"], ", ".join(datalias[command]["alias"]))
         except KeyError:
             if bot.config.lang == "ca":
             	doc = u"\x02%s\x02: Ho sento, però aquesta ordre no existeix o encara no disposa de documentació." % command

@@ -5,11 +5,9 @@ import json
 
 
 @rule('$nick' '(?i)(help|doc) +([A-Za-z]+)(?:\?+)?$')
-@example('help tell')
 @commands('help', 'ajuda', 'ayuda')
 @priority('low')
 def help(bot, trigger):
-    """T'ofereix ajuda per una ordre i, a vegades, un exemple"""
     if not trigger.group(2):
     	if bot.config.lang == 'ca':
     		bot.reply(u'Escriu {0}ajuda <ordre> (per exemple {0}help c) per obtindre ajuda per una ordre, o {0}ordres per una llista d\'ordres'.format(bot.config.prefix.replace("\\", "")))
@@ -47,7 +45,6 @@ def help(bot, trigger):
 @commands('commands', 'ordres', 'o', 'comandos')
 @priority('low')
 def commands(bot, trigger):
-    """Retorna una llista de les ordres disponibles en un missatge privat"""
     #ordres = """=, admins, ban, bots, choose, commands, countdown, d, debug_print, deop, devoice, diec, drae, ety, frase, g, galeta, gc, gcs, help, ip, isup, kick, kickban, length, link, lmgtfy, movie, op, pastis, pregaria, privs, py, quiet, recomana, ves, \x02join, part, quit, anunci, msg, me, recover\x02"""
     names = ', '.join(sorted(bot.doc.iterkeys()))
     listnames = names.split()

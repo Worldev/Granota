@@ -46,7 +46,7 @@ owner_ping_es = [u"¡Totalmente de acuerdo!",u"Nuestro amo nos guía muy bien...
                u"Sí, amo, lo que tu digas.",u"A la órden!",
                u"para servirlo",u"servidor",u"Miseñor, me llena de alegría sentir mi nombre en tu admirable discurso.",
                u":)",u"Mis respetos, majestad",
-               u"Oh, majestad, és evidente que os apoyaré siempre en todas vuestras decisiones!",
+               u"Oh, majestad, es evidente que os apoyaré siempre en todas vuestras decisiones!",
                u"El jefe és un pezaooo, que alguien lo kickee del canal!!! >:D",
                u"Un favor personal... da los privilegios de owner a otro!"]     
                

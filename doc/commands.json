@@ -68,5 +68,5 @@
 			"help": "Fa que el bot enviï un missatge (segon argument) al canal especificat (primer argument), només per ús dels administradors..",
 			"example": "msg #exemple Vull xocolata!"
 		}
-	},
+	}
 }

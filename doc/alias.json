@@ -84,6 +84,42 @@
 		"alias": ["i"]
 	},
 	"-i": {
-		"alias: ["-i"]
+		"alias": ["-i"]
+	},
+	"announce": {
+		"alias": ["announce", "anuncio", "anunci", "anuncia"]
+	},
+	"bomb": {
+		"alias": ["bomb", "bomba"]
+	},
+	"cutwire": {
+		"alias": ["cutwire", "talla", "corta"]
+	},
+	"calc": {
+		"alias": ["calc", "=", "calcula", "calculate"]
+	},
+	"py": {
+		"alias": ["py"]
+	},
+	"wolfram": {
+		"alias": ["wa", "wolfram"]
+	},
+	"coin": {
+		"alias": ["coin", "moneda"]
+	},
+	"countdown": {
+		"alias": ["countdown", "cuentatras", "comptenrere"]
+	},
+	"privs": {
+		"alias": ["privs"]
+	},
+	"admins": {
+		"alias": ["admins"]
+	},
+	"debug_print": {
+		"alias": ["debug_print"]
+	},
+	"raiseException": {
+		"alias": ["raiseException", "causeProblems", "giveError"]
 	}
 }

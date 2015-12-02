@@ -1,7 +1,7 @@
 # -*- coding: cp1252 -*-
 
 from willie.module import commands, example
-import os
+import os, time
 
 @commands('reboot')
 def reboot(bot, trigger):
@@ -27,4 +27,5 @@ def restart(bot, trigger):
         else:
             quit_msg = trigger.group(2)
         bot.quit("%s [by %s]" % (quit_msg, trigger.nick))
+        time.sleep(3) # Avoid restarting granota when it's still running
         os.system("python granota.py")

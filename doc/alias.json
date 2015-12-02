@@ -1,5 +1,89 @@
 {
 	"help": {
 		"alias": ["help", "ayuda", "ajuda"]
+	},
+	"commands": {
+		"alias": ["commands", "comandos", "ordres", "o"]
+	},
+	"join": {
+		"alias": ["join", "entra"]
+	},
+	"part": {
+		"alias": ["part", "surt", "sal"]
+	},
+	"quit": {
+		"alias": ["quit"]
+	},
+	"msg": {
+		"alias": ["msg"]
+	},
+	"me": {
+		"alias": ["me"]
+	},
+	"mode": {
+		"alias": ["mode"]
+	},
+	"set": {
+		"alias": ["set"]
+	},
+	"save": {
+		"alias": ["save", "guardar", "desa"]
+	},
+	"nick": {
+		"alias": ["nick", "nom", "nombre"]
+	},
+	"op": {
+		"alias": ["op"]
+	},
+	"deop": {
+		"alias": ["deop"]
+	},
+	"voice": {
+		"alias": ["voice", "v", "veu", "voz"]
+	},
+	"devoice": {
+		"alias": ["devoice", "dv"]
+	},
+	"kick": {
+		"alias": ["kick"]
+	},
+	"ban": {
+		"alias": ["ban"]
+	},
+	"unban": {
+		"alias": ["unban"]
+	},
+	"quiet": {
+		"alias": ["quiet"]
+	},
+	"unquiet": {
+		"alias": ["unquiet"]
+	},
+	"kickban": {
+		"alias": ["kickban", "kb"]
+	},
+	"topic": {
+		"alias": ["topic"]
+	},
+	"tmask": {
+		"alias": ["tmask"]
+	},
+	"showmask": {
+		"alias": ["showmask"]
+	},
+	"moderate": {
+		"alias": ["m", "moderat", "moderado", "moderate"]
+	},
+	"unmoderate": {
+		"alias": ["unmoderate", "-m"]
+	},
+	"recover": {
+		"alias": ["recover", "recupera"]
+	},
+	"i": {
+		"alias": ["i"]
+	},
+	"-i": {
+		"alias: ["-i"]
 	}
 }

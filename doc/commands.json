@@ -12,5 +12,61 @@
 			"help": "Sense arguments, mostra ajuda general. Amb arguments mostra la documentació de l'ordre especificada.",
 			"example": "ajuda wiki"
 		}
-	}
+	},
+	"join": {
+		"en": {
+			"help": "Joins the specified channel, for admin use only. If a second argument is provided, the bot will use it as the channel key",
+			"example": "join #example foopass"
+		},
+		"es": {
+			"help": "Entra al canal especificado, solo para uso de los administradores. Si se especifica un segundo argumento, se usará como contraseña del canal.",
+			"example": "entra #ejemplo contraseña"
+		},
+		"ca": {
+			"help": "Entra al canal especifica, només per ús d'administradors. Si s'especifica un segon argument, s'utilitzarà com a contrassenya del canal.",
+			"example": "entra #exemple contrassenya"
+		}
+	},
+	"part": {
+		"en": {
+			"help": "Parts the specified channel, for admin use only.",
+			"example": "part #example"
+		},
+		"es": {
+			"help": "Sale del canal especificado, solo para uso de los administradores.",
+			"example": "sal #ejemplo"
+		},
+		"ca": {
+			"help": "Surt del canal especificar, només per ús dels administradors.",
+			"example": "surt #exemple"
+		}
+	},
+	"quit": {
+		"en": {
+			"help": "Shutdowns the bot, for owner use only. It will use the argument as quit message.",
+			"example": "quit Time to go to bed!"
+		},
+		"es": {
+			"help": "Apaga el bot, solo para uso del owner. Usará el argumento como mensaje de desconnexión",
+			"example": "quit ¡Hora de irse a la cama!"
+		},
+		"ca": {
+			"help": "Tanca el bot, nomes per us de l'owner. Utilitzarà l'argument com a missatge de desconnexió.",
+			"example": "quit Hora d'anar a dormir!"
+		}
+	},
+	"msg": {
+		"en": {
+			"help": "Makes the bot to send a message (second argument) to the specified channel (first argument), for admin use only.",
+			"example": "msg #example I want cheese!"
+		},
+		"es": {
+			"help": "Hace que el bot envie un mensaje (segundo argumento) al canal especificado (primer argument), solo para uso de los administradores.",
+			"example": "msg #ejemplo ¡Quiero chocolate!"
+		},
+		"ca": {
+			"help": "Fa que el bot enviï un missatge (segon argument) al canal especificat (primer argument), només per ús dels administradors..",
+			"example": "msg #exemple Vull xocolata!"
+		}
+	},
 }

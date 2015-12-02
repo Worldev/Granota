@@ -121,5 +121,128 @@
 	},
 	"raiseException": {
 		"alias": ["raiseException", "causeProblems", "giveError"]
+	},
+	"dice": {
+		"alias": ["dice", "dau", "dado", "roll", "d"]
+	},
+	"choice": {
+		"alias": ["choice", "tria", "escoge", "triar", "escoger"]
+	},
+	"diec": {
+		"alias": ["diec"]
+	},
+	"drae": {
+		"alias": ["drae"]
+	},
+	"wordreference": {
+		"alias": ["wordreference", "define"]
+	},
+	"etymology": {
+		"alias": ["etymology", "ety", "etimologia"]
+	},
+	"cake": {
+		"alias": ["cake", "pastel", "pastis"]
+	},
+	"cookie": {
+		"alias": ["cookie", "galeta", "galleta"]
+	},
+	"hello": {
+		"alias": ["hello", "hola", "saluda"]
+	},
+	"hug": {
+		"alias": ["hug", "abraza", "abrazar", "abraca", "abracar"]
+	},
+	"isup": {
+		"alias": ["isup"]
+	},
+	"karma": {
+		"alias": ["karma"]
+	},
+	"lmgtfy": {
+		"alias": ["lmgtfy", "lmgify", "gify", "gtfy"]
+	},
+	"movie": {
+		"alias": ["movie", "imdb", "peli", "pelicula", "film"]
+	},
+	"partido": {
+		"alias": ["partido", "partit", "politician"]
+	},
+	"ping": {
+		"alias": ["ping"]
+	},
+	"pong": {
+		"alias": ["pong"]
+	},
+	"rand": {
+		"alias": ["rand", "alea"]
+	},
+	"answer": {
+		"alias": ["answer", "respon", "responde", "resposta"]
+	},
+	"reboot": {
+		"alias": ["reboot"]
+	},
+	"restart": {
+		"alias": ["restart"]
+	},
+	"reload": {
+		"alias": ["reload"]
+	},
+	"update": {
+		"alias": ["update"]
+	},
+	"load": {
+		"alias": ["load"]
+	},
+	"roulette": {
+		"alias": ["roulette", "ruleta"]
+	},
+	"google": {
+		"alias": ["google", "g"]
+	},
+	"gc": {
+		"alias": ["gc"]
+	},
+	"gcs": {
+		"alias": ["gcs", "comp"]
+	},
+	"duck": {
+		"alias": ["duck", "ddg"]
+	},
+	"search": {
+		"alias": ["search", "cerca", "busca", "cercar", "buscar"]
+	},
+	"suggest": {
+		"alias": ["suggest", "suggereix", "sugiere"]
+	},
+	"tld": {
+		"alias": ["tld"]
+	},
+	"reverse": {
+		"alias": ["reverse", "reves"]
+	},
+	"rainbow": {
+		"alias": ["rainbow", "arcoiris", "colores", "colors"]
+	},
+	"rot13": {
+		"alias": ["cipher", "xifra", "cifra", "rot13"]
+	},
+	"u": {
+		"alias": ["u"]
+	},
+	"temp": {
+		"alias": ["temp", "temperatura", "temperature"]
+	},
+	"length": {
+		"alias": ["length", "distance", "distancia"]
+	},
+	"title": {
+		"alias": ["title"]
+	},
+	"wiki": {
+		"alias": ["wiki", "wik", "w"]
+	},
+	"xkcd": {
+		"alias": ["xkcd"]
 	}
 }

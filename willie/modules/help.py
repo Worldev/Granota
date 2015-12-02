@@ -33,7 +33,7 @@ def help(bot, trigger):
         helpfile.close()
         try:
             doc = "\x02%s\x02: %s | \x02Example\x02: %s | \x02Alias\x02 (or in other languages): %s" % (command, data[command][l]["help"], bot.config.prefix.replace("\\", "") + data[command][l]["example"], ", ".join(datalias[command]["alias"]))
-        except KeyError:
+        except:
             if bot.config.lang == "ca":
             	doc = u"\x02%s\x02: Ho sento, però aquesta ordre no existeix o encara no disposa de documentació." % command
             elif bot.config.lang == "es":

@@ -23,7 +23,7 @@ def help(bot, trigger):
         aliasfile = open(f, 'r')
         datalias = json.load(aliasfile)
         aliasfile.close()
-        for i in datalias
+        for i in datalias:
             if name in i["alias"]:
                 command = i["alias"]
             global command

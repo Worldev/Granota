@@ -50,7 +50,7 @@ def deop(bot, trigger):
         return
 
 
-@commands('voice', 'v', 'veu')
+@commands('voice', 'v', 'veu', 'voz')
 def voice(bot, trigger):
     u"""
     Dóna l'estatus veu al nick indicat.
@@ -344,7 +344,7 @@ def show_mask(bot, trigger):
     else:
         bot.say("%s")
 
-@commands('m', 'moderat')
+@commands('m', 'moderat', 'moderado', 'moderate')
 def moderat(bot, trigger):
     """Posa el canal en moderat. Només els administradors."""
     if trigger.admin:
@@ -354,7 +354,7 @@ def moderat(bot, trigger):
         bot.say(u"Ho sento, pero no")
         return
     
-@commands('dm', 'nomoderat', '-m')
+@commands('unmoderate', '-m')
 def dmoderat(bot, trigger):
     """Posa el canal en moderat. Només els administradors."""
     if trigger.admin:

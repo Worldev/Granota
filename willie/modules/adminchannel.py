@@ -12,9 +12,6 @@ def setup(bot):
 
 @commands('op')
 def op(bot, trigger):
-    u"""
-    Dóna l'estatus d'operador al nick indicat.
-    """
     if trigger.admin:
         if not trigger.group(2):
             channel = trigger.sender
@@ -32,9 +29,6 @@ def op(bot, trigger):
 
 @commands('deop')
 def deop(bot, trigger):
-    """
-    Treu l'estatus d'operador al nick indicat.
-    """
     if trigger.admin:
         if not trigger.group(2):
             channel = trigger.sender
@@ -52,9 +46,6 @@ def deop(bot, trigger):
 
 @commands('voice', 'v', 'veu', 'voz')
 def voice(bot, trigger):
-    u"""
-    Dóna l'estatus veu al nick indicat.
-    """
     if trigger.admin:
         if not trigger.group(2):
             channel = trigger.sender
@@ -73,9 +64,6 @@ def voice(bot, trigger):
 
 @commands('devoice', 'dv')
 def devoice(bot, trigger):
-    """
-    Treu l'estatus de veu al nick indicat.
-    """
     if trigger.admin:
         if not trigger.group(2):
             channel = trigger.sender
@@ -94,9 +82,6 @@ def devoice(bot, trigger):
 @commands('kick')
 @priority('high')
 def kick(bot, trigger):
-    """
-    Fa fora a l'usuari indicat.
-    """
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         return
     if not trigger.admin:
@@ -129,9 +114,6 @@ def configureHostMask(mask):
 @commands('ban')
 @priority('high')
 def ban(bot, trigger):
-    """
-    Bandeja a un usuari del canal. El bot ha de ser operador.
-    """
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         return
     text = trigger.group().split()
@@ -154,9 +136,6 @@ def ban(bot, trigger):
 
 @commands('unban')
 def unban(bot, trigger):
-    """
-    Desbandeja a un usuari. El bot ha de ser operador.
-    """
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         return
     text = trigger.group().split()
@@ -179,9 +158,6 @@ def unban(bot, trigger):
 
 @commands('quiet')
 def quiet(bot, trigger):
-    """
-    Impedeix que un usuari parli en el canal. El bot ha de ser operador.
-    """
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         return
     text = trigger.group().split()
@@ -204,9 +180,6 @@ def quiet(bot, trigger):
 
 @commands('unquiet')
 def unquiet(bot, trigger):
-    """
-   Treu +q a un usuari. El bot ha de ser operador
-   """
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         return
     text = trigger.group().split()
@@ -230,10 +203,6 @@ def unquiet(bot, trigger):
 @commands('kickban', 'kb')
 @priority('high')
 def kickban(bot, trigger):
-    u"""
-    Bandeja i fa fora a un usari. El bot ha de ser operador
-    Sintaxi: .kickban [#chan] user1 user!*@* raó
-    """
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         return
     text = trigger.group().split()
@@ -260,9 +229,6 @@ def kickban(bot, trigger):
 
 @commands('topic')
 def topic(bot, trigger):
-    """
-    Canvia el topic del canal
-    """
     purple, green, bold = '\x0306', '\x0310', '\x02'
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         if bot.config.lang == 'ca':
@@ -305,10 +271,6 @@ def topic(bot, trigger):
 
 @commands('tmask')
 def set_mask(bot, trigger):
-    """
-    Set the mask to use for .topic in the current channel. %s is used to allow
-    substituting in chunks of text.
-    """
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         return
     if not bot.db:
@@ -329,7 +291,6 @@ def set_mask(bot, trigger):
 
 @commands('showmask')
 def show_mask(bot, trigger):
-    """Show the topic mask for the current channel."""
     if bot.privileges[trigger.sender][trigger.nick] < OP:
         return
     if not bot.db:
@@ -346,7 +307,6 @@ def show_mask(bot, trigger):
 
 @commands('m', 'moderat', 'moderado', 'moderate')
 def moderat(bot, trigger):
-    """Posa el canal en moderat. Només els administradors."""
     if trigger.admin:
         channel = trigger.sender
         bot.write(["MODE", channel, "+m"])
@@ -356,7 +316,6 @@ def moderat(bot, trigger):
     
 @commands('unmoderate', '-m')
 def dmoderat(bot, trigger):
-    """Posa el canal en moderat. Només els administradors."""
     if trigger.admin:
         channel = trigger.sender
         bot.write(["MODE", channel + " -m"])
@@ -371,9 +330,6 @@ def dmoderat(bot, trigger):
 
 @commands('recover', 'recupera')
 def recover(bot, trigger):
-    u"""
-    Recupera el canal: +o al bot, +im al canal i, si es dona al cas, el ChanServ invita el bot al canal.
-    """
     if not trigger.admin:
         return
     if trigger.sender.startswith('#'):
@@ -401,7 +357,6 @@ def recover(bot, trigger):
     
 @commands('i')
 def i(bot, trigger):
-    u"""Posa el canal en +i."""
     if trigger.admin:
         channel = trigger.sender
         bot.write(['MODE', channel + ' +i'])
@@ -411,7 +366,6 @@ def i(bot, trigger):
 
 @commands('-i')
 def di(bot, trigger):
-    u"""Posa el canal en -i."""
     if trigger.admin:
         channel = trigger.sender
         bot.write(['MODE', channel + ' -i'])

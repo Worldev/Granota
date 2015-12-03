@@ -57,16 +57,86 @@
 	},
 	"msg": {
 		"en": {
-			"help": "Makes the bot to send a message (second argument) to the specified channel (first argument), for admin use only.",
+			"help": "Makes the bot to send a message (2nd argument) to the specified channel (2st argument), for admin use only.",
 			"example": "msg #example I want cheese!"
 		},
 		"es": {
-			"help": "Hace que el bot envie un mensaje (segundo argumento) al canal especificado (primer argument), solo para uso de los administradores.",
+			"help": "Hace que el bot envie un mensaje (2º argumento) al canal especificado (1r argument), solo para uso de los administradores.",
 			"example": "msg #ejemplo ¡Quiero chocolate!"
 		},
 		"ca": {
-			"help": "Fa que el bot enviï un missatge (segon argument) al canal especificat (primer argument), només per ús dels administradors..",
+			"help": "Fa que el bot enviï un missatge (2n argument) al canal especificat (1r argument), només per ús dels administradors.",
 			"example": "msg #exemple Vull xocolata!"
+		}
+	},
+	"me": {
+		"en": {
+			"help": "Makes the bot to send a message (2nd argument) to the specified channel (1st argument) in third person, for admin use only.",
+			"example": "me #example is bored"
+		},
+		"es": {
+			"help": "Hace que el bot envíe un mensaje (2º argumento) al canal especificado (1r argumento) en tercera persona, solo para uso de los administradores.",
+			"example": "me #ejemplo está aburrido"
+		},
+		"ca": {
+			"help": "Fa que el bot enviï un missatge (2n argument) al canal especificat (1r argument) en tercera persona, només per ús dels administradors.",
+			"example": "me #exemple està avorrit"
+		}
+	},
+	"mode": {
+		"en": {
+			"help": "Set a user mode on the bot. Can only be done in privmsg by an admin.",
+			"example": "mode +B"
+		},
+		"es": {
+			"help": "Cambia el modo de usuario del bot. Solo para uso de los administradores.",
+			"example": "mode +B"
+		},
+		"ca": {
+			"help": "Canvia el mode d'usuari del bot. Només per a ús dels administradors.",
+			"example": "mode +B"
+		}
+	},
+	"set": {
+		"en": {
+			"help": "Mange the bot settings. First argument: section.option (for example, core.nick). Second argument: New value. If there is no section, it will default to 'core'. If you don't specify a value, you will see the current value. Remember that you must .save for the new settings to apply!",
+			"example": "set nickserv_password foobar // this will set the NickServ password to 'foobar'"
+		},
+		"es": {
+			"help": "Gestiona la configuración del bot. Primer argumento: sección.opción (por ejemplo, core.nick). Segundo argument: Nuevo valor. Se no se especifica una sección, la sección por defecto será 'core'. Si no especificas un valor, verás el valor actual. Recuerda que tienes que .guardar para aplicar la nueva configuración!",
+			"example": "set nickserv_password ejemplo // eso configurará la contraseña del NickServ a 'ejemplo'"
+		},
+		"ca": {
+			"help": "Gestiona la configuració del bot. Primer argument: secció.opció (per exemple, core.nick). Segon argument: Nou valor. Si no s'especifica la secció, serà per defecte 'core'. Si no especifiques un nou valor, veuràs el valor actual. Recorda de .desar per aplicar la nova configuració!",
+			"example": "set nickserv_password exemple // això configurarà la contrassenya del NickServ a 'exemple'"
+		}
+	},
+	"save": {
+		"en": {
+			"help": "Saves the new configuration. A reboot may be required for the new settings to apply.",
+			"example": "save"
+		},
+		"es": {
+			"help": "Guarda la nueva configuración. Podría requerirse un reinicio para aplicarla.",
+			"example": "guardar"
+		},
+		"ca": {
+			"help": "Desa la nova configuració. Podria necessitarse un reinici per aplicar-la.",
+			"example": "desa"
+		}
+	},
+	"nick": {
+		"en": {
+			"help": "Changes the current bot nick. The bot will try to group the new nick to its NickServ's account.",
+			"example": "nick SuperFrog"
+		},
+		"es": {
+			"help": "Cambia el sobrenombre del bot. El bot intentará agrupar el nuevo sobrenombre a su cuenta de NickServ.",
+			"example": "nombre SuperFrog"
+		},
+		"ca": {
+			"help": "Canvia el sobrenom del bot. Intentarà agrupar-lo al seu compte de NickServ",
+			"example": "nom SuperFrog"
 		}
 	}
 }

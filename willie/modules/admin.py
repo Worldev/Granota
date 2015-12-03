@@ -17,18 +17,15 @@ def configure(config):
 
 @willie.module.commands('join', 'entra')
 @willie.module.priority('low')
-@willie.module.example('.entra #exemple')
 def join(bot, trigger):
-    u"""Entra al canal especificat. Només els administradors."""
     # Can only be done in privmsg by an admin
     if trigger.sender.startswith('#'):
-        if trigger.group(1) == 'join':
+        if bot.config.lang == 'en':
             bot.reply(u"Only works in private")
-        else:
-            if bot.config.lang == 'es':
-                bot.reply(u"Solo funciona en privado")
-            elif bot.config.lang == 'ca':
-                bot.reply(u"Nomes funciona en privat")
+        if bot.config.lang == 'es':
+            bot.reply(u"Solo funciona en privado")
+        elif bot.config.lang == 'ca':
+            bot.reply(u"Nomes funciona en privat")
         return
 
     if trigger.admin:
@@ -40,30 +37,27 @@ def join(bot, trigger):
         else:
             bot.join(channel, key)
     if not trigger.admin:
-        if trigger.group(1) == 'join':
+        if bot.config.lang == 'en':
             bot.reply(u"You need admin rights.")
-        else:
-            if bot.config.lang == 'ca':
-                bot.reply(u"No ets admin")
-            elif bot.config.lang == 'es':
-                bot.reply(u"No eres admin")
+        if bot.config.lang == 'ca':
+            bot.reply(u"No ets admin")
+        elif bot.config.lang == 'es':
+            bot.reply(u"No eres admin")
         return
 
 @willie.module.commands('part', 'surt', 'sal')
 @willie.module.priority('low')
-@willie.module.example('.surt #exemple')
 def part(bot, trigger):
     if trigger.sender.startswith('#'):
         return
     if not trigger.admin:
-        if trigger.group(1) == 'join':
+        if bot.config.lang == 'en':
             bot.reply(u"You don't have admin rights")
-        if trigger.group(1) == 'sal':
+        elif bot.config.lang == 'es':
             bot.reply(u"No eres admin")
         else:
             bot.reply(u"No ets admin")
         return
-    """Deixa el canal especificat. Només els administrdors del bot."""
     # Can only be done in privmsg by an admin
 
     channel, _sep, part_msg = trigger.group(2).partition(' ')
@@ -80,7 +74,6 @@ def quit(bot, trigger):
         return
     if not trigger.owner:
         return
-    """Es desconnecta del servidor. Només els administradors del bot"""
     # Can only be done in privmsg by the owner
 
     quit_message = trigger.group(2)
@@ -94,15 +87,11 @@ def quit(bot, trigger):
 
 @willie.module.commands('msg')
 @willie.module.priority('low')
-@willie.module.example(u'.msg #example Hi!')
 def msg(bot, trigger):
     if trigger.sender.startswith('#'):
         return
     if not trigger.admin:
         return
-    """
-    Envia un missatge al canal especificat. Només pels administradors en un missatge privat.
-    """
 
     channel, _sep, message = trigger.group(2).partition(' ')
     message = message.strip()
@@ -119,9 +108,6 @@ def me(bot, trigger):
         return
     if not trigger.admin:
         return
-    """
-    Envia un missatge amb l'acció "/me" en el canal especificat. Només els administradors en missatge privat.
-    """
 
     channel, _sep, action = trigger.group(2).partition(' ')
     action = action.strip()
@@ -138,9 +124,6 @@ def me(bot, trigger):
 def invite_join(bot, trigger):
     if not trigger.admin:
         return
-    """
-    Entra en un canal on el bot està convidat.
-    """
     bot.join(trigger.args[1])
 
 
@@ -149,7 +132,7 @@ def invite_join(bot, trigger):
 @willie.module.priority('low')
 def hold_ground(bot, trigger):
     """
-    This function monitors all kicks across all channels willie is in. If it
+    This function monitors all kicks across all channels granota is in. If it
     detects that it is the one kicked it'll automatically join that channel.
 
     WARNING: This may not be needed and could cause problems if willie becomes
@@ -168,7 +151,6 @@ def mode(bot, trigger):
         return
     if not trigger.admin:
         return
-    """Set a user mode on Willie. Can only be done in privmsg by an admin."""
 
     mode = trigger.group(3)
     bot.write(('MODE ', bot.nick + '' + mode))
@@ -193,15 +175,6 @@ def set_config(bot, trigger):
         else:
             bot.reply("You are not bot admin.")
         return
-    """See and modify values of willies config object.
-
-    Trigger args:
-        arg1 - section and option, in the form "section.option"
-        arg2 - value
-
-    If there is no section, section will default to "core".
-    If value is None, the option will be deleted.
-    """
 
     # Get section and option from first argument.
     arg1 = trigger.group(3).split('.')
@@ -247,10 +220,9 @@ def set_config(bot, trigger):
     setattr(getattr(bot.config, section), option, value)
 
 
-@willie.module.commands('save', 'guardar', 'desa')
+@willie.module.commands('save', 'guardar', 'desa', 'desar')
 @willie.module.example('.save')
 def save_config(bot, trigger):
-    """Save state of willies config object to the configuration file."""
     if trigger.sender.startswith('#'):
         return
     if not trigger.admin:

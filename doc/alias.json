@@ -27,7 +27,7 @@
 		"alias": ["set"]
 	},
 	"save": {
-		"alias": ["save", "guardar", "desa"]
+		"alias": ["save", "guardar", "desa", "desar"]
 	},
 	"nick": {
 		"alias": ["nick", "nom", "nombre"]

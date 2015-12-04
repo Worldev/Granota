@@ -17,9 +17,6 @@ bombs = dict()
 
 @commands('bomb', 'bomba')
 def start(bot, trigger):
-    u"""
-    Posa una bomba a l'usuari especificat.
-    """
     if not trigger.group(2):
         return
 
@@ -82,9 +79,6 @@ def start(bot, trigger):
 
 @commands('cutwire', 'talla', 'corta')
 def cutwire(bot, trigger):
-    u"""
-    Talla el cable especificat quan algÃº et posa una bomba.
-    """
     global bombs, colors_ca, colors_en, colors_es, allcolors
     target = trigger.nick
     if target.lower() != bot.nick.lower() and target.lower() not in bombs:

@@ -27,7 +27,7 @@ owner_ping_ca = [u"Totalment d'acord!",u"L'amo sap guiar-nos molt bé...",
                u"El jefe és un pesat, que algú el faci fora del xat!!! >:D",
                u"Un favor personal... dona els privilegis d'owner a algú altre!"]
                
-normal_ping_es = [u"¿Crees que te respondré? ¡Bah!",u"¡Di, mi amor!",
+normal_ping_es = [u"¿Crees que te responderé? ¡Bah!",u"¡Di, mi amor!",
                  u"¿Dijeron algo?",u"Vigila con lo que dices, que no sabes quien soy yo!",
                  u"Bah",u"¿Por qué dices eso? ¡No me ofendas!",u"Aquí la bot-central. ¿Diga?",
                  u"pffff",u"hola!",u"Cállate, que estoy ocupado!",u"No seas tonto!",

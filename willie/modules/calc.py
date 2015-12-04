@@ -10,9 +10,7 @@ import HTMLParser
 
 
 @commands('=', 'calcula', 'calculate', 'calc')
-@example('.= 5 + 3', '8')
 def c(bot, trigger):
-    """Google calculator."""
     if not trigger.group(2):
         if bot.config.lang == 'ca':
             return bot.reply("Res a calcular.")
@@ -46,9 +44,7 @@ def c(bot, trigger):
 
 
 @commands('py')
-@example('.py len([1,2,3])', '3')
 def py(bot, trigger):
-    """Evaluate a Python expression."""
     query = trigger.group(2)
     uri = 'http://tumbolia.appspot.com/py/'
     answer = web.get(uri + web.quote(query))
@@ -64,10 +60,7 @@ def py(bot, trigger):
 
 
 @commands('wa', 'wolfram')
-@example('.wa sun mass / earth mass',
-         '[WOLFRAM] M_(.)\/M_(+)  (solar mass per Earth mass) = 332948.6')
 def wa(bot, trigger):
-    """Wolfram Alpha calculator"""
     if not trigger.group(2):
         if bot.config.lang == 'ca':
             return bot.reply("Res per buscar. Sintaxi: .wa <paraula|frase|operacio|...>.")

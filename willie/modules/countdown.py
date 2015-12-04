@@ -4,9 +4,6 @@ import datetime
 
 @commands('countdown', 'comptenrere', 'cuentatras')
 def generic_countdown(bot, trigger):
-    """
-    .countdown <year> <month> <day> - displays a countdown to a given date.
-    """
     text = trigger.group(2)
     if not text:
         if bot.config.lang == 'ca':

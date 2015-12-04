@@ -6,15 +6,14 @@ import time
 @willie.module.commands('moneda', 'coin')
 def moneda(bot, trigger):
     if bot.config.lang == 'ca':
-          bot.me('Tira una moneda i surt...')
-    elif bot.config.lang == 'es':
-    	bot.me('Tira una moneda y sale...')
-    else:
-    	bot.me('tosses a coin into the air that lands on...')
-    if bot.config.lang == 'ca':
     	moneda = ['cara', 'creu']
     elif bot.config.lang == 'es':
     	moneda = ['cara', 'cruz']
     else:
     	moneda = ["heads", "tails"]
-    bot.say(random.choice(moneda) + "!")
+    if bot.config.lang == 'ca':
+          bot.say('\x01ACTIONTira una moneda i surt... \x02%s\x02!\x01' % random.choice(moneda))
+    elif bot.config.lang == 'es':
+    	bot.say('\x01ACTIONTira una moneda y sale... \x02%s\x02!\x01' % random.choice(moneda))
+    else:
+    	bot.say('\x01ACTIONtosses a coin into the air that lands on... \x02%s\x02!\x01' % random.choice(moneda))

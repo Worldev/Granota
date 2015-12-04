@@ -432,5 +432,47 @@
 			"help": "Talla un cable per desactivar la bomba. Vegeu la documentació de l'ordre 'bomba' per més inforamció.",
 			"example": "talla Vermell"
 		}
+	},
+	"calc": {
+		"en": {
+			"help": "Calculates something.",
+			"example": "calc 2+2"
+		},
+		"es": {
+			"help": "Calcula una operación matemática.",
+			"example": "calc 2+2"
+		},
+		"ca": {
+			"help": "Calcula una operació matemàtica.",
+			"example": "calc 2+2"
+		}
+	},
+	"py": {
+		"en": {
+			"help": "Evaluates a Python expression.",
+			"example": "py len([1,2,3])"
+		},
+		"es": {
+			"help": "Evalua una expresión Python.",
+			"example": "py len([1,2,3])"
+		},
+		"ca": {
+			"help": "Evalua una expressió Python.",
+			"example": "py len([1,2,3])"
+		}
+	},
+	"wolfram": {
+		"en": {
+			"help": "Outputs the result on Wolfram Alpha Calculator.",
+			"example": "wolfram sun mass / earth mass"
+		},
+		"es": {
+			"help": "Da el resultado de la Calculadora de Wolfram Alpha.",
+			"example": "wolfram sun mass / earth mass"
+		},
+		"ca": {
+			"help": "Dóna el resultat de la Calculadora de Wolfram Alpha.",
+			"example": "wolfram sun mass / earth mass"
+		}
 	}
 }

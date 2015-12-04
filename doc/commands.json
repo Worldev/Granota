@@ -390,5 +390,47 @@
 			"help": "Posa el canal en mode -i (tots els usuaris poden entrar). El bot necessita op.",
 			"example": "-i"
 		}
+	},
+	"announce": {
+		"en": {
+			"help": "Sends an announce to all channels the bot is connected in.",
+			"example": "announce I like chocolate!"
+		},
+		"es": {
+			"help": "Envia un anuncio a todos los canales donde el bot está connectado.",
+			"example": "anuncio Me gusta el chocolate!"
+		},
+		"ca": {
+			"help": "Envia un anunci a tots els canals on el bot està connectat.",
+			"example": "anunci M'agrada la xocolata!"
+		}
+	},
+	"bomb": {
+		"en": {
+			"help": "Sends a bomb to the specified user. The target user will have to defuse the bomb in 2 minutes using the 'cutwire' command. If he fails or doesn't defuse the bomb, the bot will kick the user. It is recommended to have the bot opped.",
+			"example": "bomb BadGuy"
+		},
+		"es": {
+			"help": "Envia una bomba al usuario especificado. El usuario en cuestión tendrá que desactivar la bomba en 2 mintuos usando el comando 'corta'. Si falla o no desactiva la bomba a tiempo, el bot lo expulsará del canal. Se recomienda dar op al bot.",
+			"example": "bomba ChicoMalo"
+		},
+		"ca": {
+			"help": "Envia una bomba a l'usuari especificat. L'usuari en questió haurà de desactivar la bomba en 2 minuts amb l'ordre 'talla'. Si falla o no la desactiva a temps, el bot expulsarà l'usuari del canl. Es recomana que el bot tingui op.",
+			"example": "bomba NoiDolent"
+		}
+	},
+	"cutwire": {
+		"en": {
+			"help": "Cuts a wire to defuse the bomb. See the documentation of the 'bomb' command for more information.",
+			"example": "cutwire Red"
+		},
+		"es": {
+			"help": "Corta un cable para desactivar la bomba. Ver la documentación del comando 'bomba' para más inforamción.",
+			"example": "corta Rojo"
+		},
+		"ca": {
+			"help": "Talla un cable per desactivar la bomba. Vegeu la documentació de l'ordre 'bomba' per més inforamció.",
+			"example": "talla Vermell"
+		}
 	}
 }

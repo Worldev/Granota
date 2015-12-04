@@ -5,11 +5,7 @@ import time
 
 
 @willie.module.commands('anunci', 'anuncia', 'announce', 'anuncio')
-@willie.module.example('.announce message')
 def announce(bot, trigger):
-    u"""
-    Fa un anunci a tots els canals
-    """
     if not trigger.owner:
         if bot.config.lang == 'ca':
             bot.reply(u'No ets el meu owner.')

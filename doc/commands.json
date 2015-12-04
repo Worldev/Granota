@@ -474,5 +474,89 @@
 			"help": "Dóna el resultat de la Calculadora de Wolfram Alpha.",
 			"example": "wolfram sun mass / earth mass"
 		}
+	},
+	"coin": {
+		"en": {
+			"help": "Throws a coin on the air.",
+			"example": "coin"
+		},
+		"es": {
+			"help": "Tira una moneda al aire.",
+			"example": "moneda"
+		},
+		"ca": {
+			"help": "Tira una moneda a l'aire.",
+			"example": "moneda"
+		}
+	},
+	"countdown": {
+		"en": {
+			"help": "Displays a countdown to the given date.",
+			"example": "countdown 2025 10 30 (Syntax: <year> <month> <day>, all in numbers)"
+		},
+		"es": {
+			"help": "Muestra una cuenta atrás a la fecha especificada.",
+			"example": "cuentatras 2025 10 30 (Sintaxis: <año> <mes> <día>, todo en numeros)"
+		},
+		"ca": {
+			"help": "Mostra un compte enrere cap a la data especificada.",
+			"example": "comptenrere 2025 10 30 (Sintaxi: <any> <mes> <dia>, tot en nombres)"
+		}
+	},
+	"privs": {
+		"en": {
+			"help": "Shows the privileges of the given channel, for debug use. Without arguments, prints the entire array.",
+			"example": "privs #channel"
+		},
+		"es": {
+			"help": "Muestra los privilegios del canal especificado. Sin argumentos, muestra la lista entera.",
+			"example": "privs #canal"
+		},
+		"ca": {
+			"help": "Mostra els privilegis del canal especificat. Sense arguments, mostra la llista sencera.",
+			"example": "privs #canal"
+		}
+	},
+	"admins": {
+		"en": {
+			"help": "Prints the list of admins, including the owner",
+			"example": "admins"
+		},
+		"es": {
+			"help": "Muestra la lista de admins, incluyendo el owner.",
+			"example": "admins"
+		},
+		"ca": {
+			"help": "Mostra la llista d'admins, incloent l'owner.",
+			"example": "admins"
+		}
+	}
+	"debug_print": {
+		"en": {
+			"help": "Prints some debug messages: privileges, admins and bot version. See the documentation of the respective commands for more info.",
+			"example": "debug_print"
+		},
+		"es": {
+			"help": "Muestra algunos mensajes de 'debug': privilegios, admins y versión del bot. Ver la documentación de los comandos respectivos para más información.",
+			"example": "debug_print"
+		},
+		"ca": {
+			"help": "Mostra alguns missatges de 'debug': privilegis, admins i versió del bot. Vegeu la documentació de les ordres respectives per més informació.",
+			"example": "debug_print"
+		}
+	},
+	"raiseException": {
+		"en": {
+			"help": "Makes the bot to raise an error.",
+			"example": "raiseError"
+		},
+		"es": {
+			"help": "Hace que el bot dé algun mensaje de error.",
+			"example": "raiseError"
+		},
+		"ca": {
+			"help": "Fa que el bot dona algun missatge d'error.",
+			"example": "raiseError"
+		}
 	}
 }

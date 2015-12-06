@@ -29,7 +29,7 @@ def admins(bot, trigger):
 @commands('version', 'versio')
 def version(bot, trigger):
     if platform.system() == 'Linux':
-        ver = ("%s %s ('%s')" % (platform.linux_distribution()[0], platform.linux_distribution()[1], platform.linux_distribution()[2]))
+        ver = ("%s %s" % (platform.linux_distribution()[0], platform.linux_distribution()[1]))
     elif platform.system() == 'Windows':
         ver = ("%s %s" % (platform.system(), platform.release()))
     else:

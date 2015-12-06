@@ -40,7 +40,7 @@ def version(bot, trigger):
 @commands('debug_print')
 def debug_print(bot, trigger):
     try:
-        willie.modules.version.version(bot, trigger)
+        version(bot, trigger)
     except Exception as e:
         if bot.config.lang == 'ca':
             bot.reply(u"Error al intentar obtenir la versio actual")

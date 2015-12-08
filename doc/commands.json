@@ -530,7 +530,7 @@
 			"help": "Mostra la llista d'admins, incloent l'owner.",
 			"example": "admins"
 		}
-	}
+	},
 	"debug_print": {
 		"en": {
 			"help": "Prints some debug messages: privileges, admins and bot version. See the documentation of the respective commands for more info.",

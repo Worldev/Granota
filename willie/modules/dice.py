@@ -136,24 +136,9 @@ def _roll_dice(dice_expression):
     return dice
 
 
-@willie.module.commands("roll")
-@willie.module.commands("dice", 'dau', 'dado')
-@willie.module.commands("d")
+@willie.module.commands("roll", "dice", 'dau', 'dado'. 'd')
 @willie.module.priority("medium")
-@willie.module.example(".roll 3d1+1", 'You roll 3d1+1: (1+1+1)+1 = 4')
-@willie.module.example(".roll 3d1v2+1", 'You roll 3d1v2+1: (1[+1+1])+1 = 2')
-@willie.module.example(".roll 2d4", re='You roll 2d4: \(\d\+\d\) = \d')
-@willie.module.example(".roll 100d1", re='[^:]*: \(100x1\) = 100')
-@willie.module.example(".roll 1001d1", 'I only have 1000 dice. =(')
-@willie.module.example(".roll 1d1 + 1d1", 'You roll 1d1 + 1d1: (1) + (1) = 2')
-@willie.module.example(".roll 1d1+1d1", 'You roll 1d1+1d1: (1)+(1) = 2')
 def roll(bot, trigger):
-    """.dice XdY[vZ][+N], rolls dice and reports the result.
-
-    X is the number of dice. Y is the number of faces in the dice. Z is the
-    number of lowest dice to be dropped from the result. N is the constant to
-    be applied to the end result.
-    """
     # This regexp is only allowed to have one captured group, because having
     # more would alter the output of re.findall.
     dice_regexp = r"\d*d\d+(?:v\d+)?"
@@ -212,9 +197,6 @@ def roll(bot, trigger):
 @willie.module.commands("choice", 'tria', 'escoge', 'triar', 'escoger')
 @willie.module.priority("medium")
 def choose(bot, trigger):
-    """
-    .choice option1|option2|option3 - Makes a difficult choice easy.
-    """
     if not trigger.group(2):
         if bot.config.lang == 'ca':
             return bot.reply(u"No m'has donat cap opció per triar!")

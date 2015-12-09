@@ -8,9 +8,7 @@ hugs_es = [u"abraza a %s", u"se come a besos a %s", u"se lanza sobre %s para abr
 hugs_en = [u"hugs %s", u"eats %s with kisses", u"throws himself over %s to hug them"]
 
 @commands("hug", "abraza", "abrazar", "abraca", "abracada")
-@example(".hug John")
 def hug(bot, trigger):
-    """Hugs the specified nick"""
     if not trigger.group(2):
         nick = trigger.nick
     else:

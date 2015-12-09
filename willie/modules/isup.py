@@ -11,7 +11,6 @@ def is_http_url(s):
 
 @commands('isup')
 def isup(bot, trigger):
-    """isup.me website status checker"""
     site = trigger.group(2)
     if not site:
         if bot.config.lang == 'ca':

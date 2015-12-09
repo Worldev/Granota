@@ -816,7 +816,7 @@
 			"help": "Ping!.",
 			"example": "pong"
 		},
-		"es": 
+		"es": {
 			"help": "Ping!.",
 			"example": "pong"
 		},
@@ -830,7 +830,7 @@
 			"help": "Replies with a random number between first and second argument.",
 			"example": "rand 10 34"
 		},
-		"es": 
+		"es": {
 			"help": "Responde con un número aleatóreo entre el primero y el segundo argumento.",
 			"example": "alea 13 39"
 		},
@@ -844,7 +844,7 @@
 			"help": "Answers a question.",
 			"example": "answer Are you a bot?"
 		},
-		"es": 
+		"es": {
 			"help": "Responde una pregunta.",
 			"example": "responde ¿Eres un bot?"
 		},
@@ -858,7 +858,7 @@
 			"help": "Reboots the bot without disconnecting it, only for admins use.",
 			"example": "reboot"
 		},
-		"es": 
+		"es": {
 			"help": "Reinicia el bot sin desconectarle, solo para uso de los admins.",
 			"example": "reboot"
 		},
@@ -872,7 +872,7 @@
 			"help": "Restarts the bot disconnecting it, only for owner use.",
 			"example": "restart"
 		},
-		"es": 
+		"es": {
 			"help": "Reinicia el bot desconectándolo, solo para uso del owner",
 			"example": "restart"
 		},
@@ -886,7 +886,7 @@
 			"help": "Plays the russian roulette game. It's recommended to op the bot.",
 			"example": "roulette"
 		},
-		"es": 
+		"es": {
 			"help": "Juega a la ruleta rusa. Se recomienda dar op al bot.",
 			"example": "ruleta"
 		},
@@ -900,7 +900,7 @@
 			"help": "Searches google.",
 			"example": "g Worldev"
 		},
-		"es": 
+		"es": {
 			"help": "Busca en Google.",
 			"example": "g Worldev"
 		},
@@ -914,7 +914,7 @@
 			"help": "Returns the number of Google searches of the specified word.",
 			"example": "gc Worldev"
 		},
-		"es": 
+		"es": {
 			"help": "Da el número de búsquedas en Google de la palabra especificada.",
 			"example": "gc Worldev"
 		},
@@ -928,7 +928,7 @@
 			"help": "Compare the number of Google search results for the specified inputs.",
 			"example": "gcs London Barcelona"
 		},
-		"es": 
+		"es": {
 			"help": "Compara el número de resultados de Google.",
 			"example": "gcs Londres Barcelona"
 		},
@@ -942,7 +942,7 @@
 			"help": "Searches Duck Duck Go.",
 			"example": "duck Worldev"
 		},
-		"es": 
+		"es": {
 			"help": "Busca en Duck Duck Go.",
 			"example": "duck Worldev"
 		},
@@ -956,7 +956,7 @@
 			"help": "Searches Google, Bing and Duck Duck Go.",
 			"example": "search Worldev"
 		},
-		"es": 
+		"es": {
 			"help": "Busca en Google, Bing y Duck Duck Go.",
 			"example": "busca Worldev"
 		},
@@ -970,7 +970,7 @@
 			"help": "Suggest terms starting with the given input.",
 			"example": "suggest world"
 		},
-		"es": 
+		"es": {
 			"help": "Sugiere palabras empezando por la palabra especificada.",
 			"example": "sugiere world"
 		},
@@ -984,7 +984,7 @@
 			"help": "Shows information about the given Top Level Domain.",
 			"example": "tld ru"
 		},
-		"es": 
+		"es": {
 			"help": "Muestra información sobre el Top Level Domain especificado.",
 			"example": "tld es"
 		},

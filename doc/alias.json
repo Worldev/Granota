@@ -244,5 +244,8 @@
 	},
 	"xkcd": {
 		"alias": ["xkcd"]
+	},
+	"version": {
+		"alias": ["version", "versio"]
 	}
 }

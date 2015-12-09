@@ -978,5 +978,19 @@
 			"help": "Suggereix paraules començant per la paraula especificada.",
 			"example": "suggereix world"
 		}
+	},
+	"tld": {
+		"en": {
+			"help": "Shows information about the given Top Level Domain.",
+			"example": "tld ru"
+		},
+		"es": 
+			"help": "Muestra información sobre el Top Level Domain especificado.",
+			"example": "tld es"
+		},
+		"ca": {
+			"help": "Mostra informació sobre el Top Level Domain especificat.",
+			"example": "tld org"
+		}
 	}
 }

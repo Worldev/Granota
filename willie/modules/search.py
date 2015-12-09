@@ -45,9 +45,7 @@ def formatnumber(n):
 
 
 @commands('g', 'google')
-@example('.g CatBots')
 def g(bot, trigger):
-    """Queries Google for the specified input."""
     query = trigger.group(2)
     if not query:
         return bot.reply('.g what?')
@@ -71,9 +69,7 @@ def g(bot, trigger):
 
 
 @commands('gc')
-@example('.gc extrapolate')
 def gc(bot, trigger):
-    """Returns the number of Google results for the specified input."""
     query = trigger.group(2)
     if not query:
         return bot.reply('.gc what?')
@@ -86,9 +82,7 @@ r_query = re.compile(
 
 
 @commands('gcs', 'comp')
-@example('.gcs Barcelona London')
 def gcs(bot, trigger):
-    """Compare the number of Google search results"""
     if not trigger.group(2):
         return bot.reply("Nothing to compare.")
     queries = r_query.findall(trigger.group(2))
@@ -154,9 +148,7 @@ def duck_api(query):
 
 
 @commands('duck', 'ddg')
-@example('.duck privacy or .duck !mcwiki obsidian')
 def duck(bot, trigger):
-    """Queries Duck Duck Go for the specified input."""
     query = trigger.group(2)
     if not query:
         if bot.config.lang == 'ca':
@@ -190,9 +182,7 @@ def duck(bot, trigger):
 
 
 @commands('search', 'cerca', 'cercar', 'busca', 'buscar')
-@example('.search nerdfighter')
 def search(bot, trigger):
-    """Searches Google, Bing, and Duck Duck Go."""
     if not trigger.group(2):
         if bot.config.lang == 'ca':
             bot.reply("Error de sintaxi. Escriu .cerca <paraula a cercar>")
@@ -228,7 +218,6 @@ def search(bot, trigger):
 
 @commands('suggest', 'suggereix', 'sugiere')
 def suggest(bot, trigger):
-    """Suggest terms starting with given input"""
     if not trigger.group(2):
 	if bot.config.lang == 'ca':
             bot.reply("Error de sintaxi. Escriu .suggereix <paraula>")

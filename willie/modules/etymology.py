@@ -70,9 +70,7 @@ def etymology(word):
 
 
 @commands('ety', 'etymology', 'etimologia')
-@example('word')
 def f_etymology(bot, trigger):
-    """Diu la etimologia d'una paraula"""
     word = trigger.group(2)
 
     try:

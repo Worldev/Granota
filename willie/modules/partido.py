@@ -64,7 +64,7 @@ def partido(bot, trigger):
         if bot.config.lang == 'ca':
             bot.say(u"Aquest polític no existeix")
         elif bot.config.lang == 'es':
-            bot.say(u"Este político no exsiste")
+            bot.say(u"Este político no existe")
         else:
             bot.say(u"This politician doesn't exist")
     except AttributeError:

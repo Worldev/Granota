@@ -642,5 +642,341 @@
 			"help": "Dóna un enllaç cap al wordreference (diccionari anglès) per la paraula especificada.",
 			"example": "wordreference hello"
 		}
+	},
+	"etymology": {
+		"en": {
+			"help": "Give the etymology of the given word from etymonline.com.",
+			"example": "ety hello"
+		},
+		"es": {
+			"help": "Da la etimología de una palabra inglesa de etymonline.com.",
+			"example": "ety hello"
+		},
+		"ca": {
+			"help": "Dóna l'etimologia d'una paraula anglesa d'etymonline.com.",
+			"example": "ety hello"
+		}
+	},
+	"cake": {
+		"en": {
+			"help": "Gives a cake to the given nick.",
+			"example": "cake NiceGuy"
+		},
+		"es": {
+			"help": "Da un pastel al nick especificado.",
+			"example": "pastel ChicoBueno"
+		},
+		"ca": {
+			"help": "Dóna un pastís al nick especificat.",
+			"example": "pastis BonNoi"
+		}
+	},
+	"cookie": {
+		"en": {
+			"help": "Gives a cookie to the given nick.",
+			"example": "cookie NiceGuy"
+		},
+		"es": {
+			"help": "Da una galleta al nick especificado.",
+			"example": "galleta ChicoBueno"
+		},
+		"ca": {
+			"help": "Dóna una galeta al nick especificat.",
+			"example": "galeta BonNoi"
+		}
+	},
+	"hello": {
+		"en": {
+			"help": "Greets the specified user.",
+			"example": "hello JohnSmith"
+		},
+		"es": {
+			"help": "Saluda al usuario especificado.",
+			"example": "hola Juan"
+		},
+		"ca": {
+			"help": "Saluda a l'usuari especificat.",
+			"example": "hola Joan"
+		}
+	},
+	"commands": {
+		"en": {
+			"help": "Show the list of all commands.",
+			"example": "commands"
+		},
+		"es": {
+			"help": "Muestra la lista de todos los comandos.",
+			"example": "comandos"
+		},
+		"ca": {
+			"help": "Mostra la llista de totes les ordres.",
+			"example": "ordres"
+		}
+	},
+	"hug": {
+		"en": {
+			"help": "Hug the given nick.",
+			"example": "hug LovelyGuy"
+		},
+		"es": {
+			"help": "Abraza el nick especificado.",
+			"example": "abraza ChicoGuapo"
+		},
+		"ca": {
+			"help": "Abraça el nick especificat.",
+			"example": "abraca NoiGuapo"
+		}
+	},
+	"isup": {
+		"en": {
+			"help": "Checks the given webpage status.",
+			"example": "isup www.example.com"
+		},
+		"es": {
+			"help": "Comprueba el estado de la web especificada.",
+			"example": "isup www.ejemplo.com"
+		},
+		"ca": {
+			"help": "Comprova l'estat de la web especificada.",
+			"example": "abraca NoiGuapo"
+		}
+	},
+	"karma": {
+		"en": {
+			"help": "Shows the karma point of the specified user. To give karma points simply say the nick of the user followed by ++ or --.",
+			"example": "karma JohnSmith"
+		},
+		"es": {
+			"help": "Muestra los puntos de karma del usuario especificado. Para dar puntos karma simplemente escribe el nick del usuario seguido de ++ o --.",
+			"example": "karma Juan"
+		},
+		"ca": {
+			"help": "Mostra els punts de karma de l'usuari especificat. Per donar punts karma simplement escriu el nick de l'usuari seguit de ++ o --.",
+			"example": "karma Joan"
+		}
+	},
+	"lmgtfy": {
+		"en": {
+			"help": "Give a link to lmgtfy.com for the given search words.",
+			"example": "lmgtfy Worldev"
+		},
+		"es": {
+			"help": "Da un enlace a lmgtfy.com con las palabras de búsqueda especificadas.",
+			"example": "lmgtfy Worldev"
+		},
+		"ca": {
+			"help": "Dóna un enllaç a lmgtfy.com amb les paraules de cerca especificades.",
+			"example": "lmgtfy Worldev"
+		}
+	},
+	"movie": {
+		"en": {
+			"help": "Gives some information about a film from IMDB.",
+			"example": "movie Avatar"
+		},
+		"es": {
+			"help": "Da información de IMDB sobre una película.",
+			"example": "pelicula Avatar"
+		},
+		"ca": {
+			"help": "Dóna informació d'IMDB sobre una pelicula.",
+			"example": "pelicula Avatar"
+		}
+	},
+	"partido": {
+		"en": {
+			"help": "Gives information about a politician.",
+			"example": "politician David Cameron"
+		},
+		"es": {
+			"help": "Da información sobre un político.",
+			"example": "partido Mariano Rajoy"
+		},
+		"ca": {
+			"help": "Dóna informació sobre un polític.",
+			"example": "partit Artur Mas"
+		}
+	},
+	"ping": {
+		"en": {
+			"help": "Pong!.",
+			"example": "ping"
+		},
+		"es": {
+			"help": "Pong!.",
+			"example": "ping"
+		},
+		"ca": {
+			"help": "Pong!.",
+			"example": "ping"
+		}
+	},
+	"pong": {
+		"en": {
+			"help": "Ping!.",
+			"example": "pong"
+		},
+		"es": 
+			"help": "Ping!.",
+			"example": "pong"
+		},
+		"ca": {
+			"help": "Ping!.",
+			"example": "pong"
+		}
+	},
+	"rand": {
+		"en": {
+			"help": "Replies with a random number between first and second argument.",
+			"example": "rand 10 34"
+		},
+		"es": 
+			"help": "Responde con un número aleatóreo entre el primero y el segundo argumento.",
+			"example": "alea 13 39"
+		},
+		"ca": {
+			"help": "Respon amb un número aleatòri entre el primer i el segon argument.",
+			"example": "alea 38 49"
+		}
+	},
+	"answer": {
+		"en": {
+			"help": "Answers a question.",
+			"example": "answer Are you a bot?"
+		},
+		"es": 
+			"help": "Responde una pregunta.",
+			"example": "responde ¿Eres un bot?"
+		},
+		"ca": {
+			"help": "Respon una pregunta.",
+			"example": "respon Ets un bot?"
+		}
+	},
+	"reboot": {
+		"en": {
+			"help": "Reboots the bot without disconnecting it, only for admins use.",
+			"example": "reboot"
+		},
+		"es": 
+			"help": "Reinicia el bot sin desconectarle, solo para uso de los admins.",
+			"example": "reboot"
+		},
+		"ca": {
+			"help": "Reinicia el bot sense desconnectar-lo, només per a ús dels administradors.",
+			"example": "reboot"
+		}
+	},
+	"restart": {
+		"en": {
+			"help": "Restarts the bot disconnecting it, only for owner use.",
+			"example": "restart"
+		},
+		"es": 
+			"help": "Reinicia el bot desconectándolo, solo para uso del owner",
+			"example": "restart"
+		},
+		"ca": {
+			"help": "Reinicia el bot desconnectant-lo, només per a ús de l'owner.",
+			"example": "restart"
+		}
+	},
+	"roulette": {
+		"en": {
+			"help": "Plays the russian roulette game. It's recommended to op the bot.",
+			"example": "roulette"
+		},
+		"es": 
+			"help": "Juega a la ruleta rusa. Se recomienda dar op al bot.",
+			"example": "ruleta"
+		},
+		"ca": {
+			"help": "Juga a la ruleta russa. Es recomana donar op al bot.",
+			"example": "ruleta"
+		}
+	},
+	"google": {
+		"en": {
+			"help": "Searches google.",
+			"example": "g Worldev"
+		},
+		"es": 
+			"help": "Busca en Google.",
+			"example": "g Worldev"
+		},
+		"ca": {
+			"help": "Cerca a Google.",
+			"example": "g Worldev"
+		}
+	},
+	"gc": {
+		"en": {
+			"help": "Returns the number of Google searches of the specified word.",
+			"example": "gc Worldev"
+		},
+		"es": 
+			"help": "Da el número de búsquedas en Google de la palabra especificada.",
+			"example": "gc Worldev"
+		},
+		"ca": {
+			"help": "Dóna el nombre de cerques a Google de la paraula especificada.",
+			"example": "gc Worldev"
+		}
+	},
+	"gcs": {
+		"en": {
+			"help": "Compare the number of Google search results for the specified inputs.",
+			"example": "gcs London Barcelona"
+		},
+		"es": 
+			"help": "Compara el número de resultados de Google.",
+			"example": "gcs Londres Barcelona"
+		},
+		"ca": {
+			"help": "Compara el nombre de resultats de Google.",
+			"example": "gcs Londres Barcelona"
+		}
+	},
+	"duck": {
+		"en": {
+			"help": "Searches Duck Duck Go.",
+			"example": "duck Worldev"
+		},
+		"es": 
+			"help": "Busca en Duck Duck Go.",
+			"example": "duck Worldev"
+		},
+		"ca": {
+			"help": "Cerca a Duck Duck Go.",
+			"example": "duck Worldev"
+		}
+	},
+	"search": {
+		"en": {
+			"help": "Searches Google, Bing and Duck Duck Go.",
+			"example": "search Worldev"
+		},
+		"es": 
+			"help": "Busca en Google, Bing y Duck Duck Go.",
+			"example": "busca Worldev"
+		},
+		"ca": {
+			"help": "Cerca a Google, Bing i Duck Duck Go.",
+			"example": "cerca Worldev"
+		}
+	},
+	"suggest": {
+		"en": {
+			"help": "Suggest terms starting with the given input.",
+			"example": "suggest world"
+		},
+		"es": 
+			"help": "Sugiere palabras empezando por la palabra especificada.",
+			"example": "sugiere world"
+		},
+		"ca": {
+			"help": "Suggereix paraules començant per la paraula especificada.",
+			"example": "suggereix world"
+		}
 	}
 }

@@ -9,9 +9,7 @@ r_tag = re.compile(r'<(?!!)[^>]+>')
 
 
 @commands('tld')
-@example('.tld ru')
 def gettld(bot, trigger):
-    """Show information about the given Top Level Domain."""
     page = web.get(uri)
     search = r'(?i)<td><a href="\S+" title="\S+">\.{0}</a></td>\n(<td><a href=".*</a></td>\n)?<td>([A-Za-z0-9].*?)</td>\n<td>(.*)</td>\n<td[^>]*>(.*?)</td>\n<td[^>]*>(.*?)</td>\n'
     search = search.format(trigger.group(2))

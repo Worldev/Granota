@@ -558,5 +558,89 @@
 			"help": "Fa que el bot dona algun missatge d'error.",
 			"example": "raiseError"
 		}
+	},
+	"version": {
+		"en": {
+			"help": "Shows the Python, OS and bot versions.",
+			"example": "version"
+		},
+		"es": {
+			"help": "Muestra la versión del Python, del Sistema Operativo y del bot.",
+			"example": "version"
+		},
+		"ca": {
+			"help": "Mostra la versió del Python, del Sistema Operatiu i del bot.",
+			"example": "versio"
+		}
+	},
+	"dice": {
+		"en": {
+			"help": "Rolls a dice and shows the result. The argument format is 'XdY'. X is the number of dice, Y the number of faces in the dice.",
+			"example": "dice 3d1"
+		},
+		"es": {
+			"help": "Tira un dado y da el resultado. El formato del argumento es 'XdY'. X es el número del dado, Y el número de caras que tiene el dado.",
+			"example": "dado 3d1"
+		},
+		"ca": {
+			"help": "Llança un dau i dóna el resultat. El format de l'argument és 'XdY'. X és el número del dau, Y el nombre de cares del dau.",
+			"example": "dau 3d1"
+		}
+	},
+	"choice": {
+		"en": {
+			"help": "Choice between two options or more, separated by a '|'.",
+			"example": "choice green|red|yellow"
+		},
+		"es": {
+			"help": "Escoge entre dos opciones o más, separadas por un '|'.",
+			"example": "escoge verde|rojo|amarillo"
+		},
+		"ca": {
+			"help": "Tria entre dues opcions o més, separades per un '|'.",
+			"example": "tria verd|vermell|groc"
+		}
+	},
+	"diec": {
+		"en": {
+			"help": "Gives a link to the DIEC (Catalan dictionary) for the specified word.",
+			"example": "diec àdhuc"
+		},
+		"es": {
+			"help": "Da un link hacia el DIEC (diccionario catalán) para la palabra especificada.",
+			"example": "diec àdhuc"
+		},
+		"ca": {
+			"help": "Dóna un enllaç cap al DIEC per la paraula especificada.",
+			"example": "diec àdhuc"
+		}
+	},
+	"drae": {
+		"en": {
+			"help": "Gives a link to the DRAE (Spanish dictionary) for the specified word.",
+			"example": "drae esperpéntico"
+		},
+		"es": {
+			"help": "Da un link hacia el DRAE para la palabra especificada.",
+			"example": "drae esperpéntico"
+		},
+		"ca": {
+			"help": "Dóna un enllaç cap al DRAE (diccionari castellà) per la paraula especificada.",
+			"example": "drae esperpéntico"
+		}
+	},
+	"wordreference": {
+		"en": {
+			"help": "Gives a link to wordreference for the specified word.",
+			"example": "wordreference hello"
+		},
+		"es": {
+			"help": "Da un link hacia wordreference (diccionario inglés para la palabra especificada.",
+			"example": "wordreference hello"
+		},
+		"ca": {
+			"help": "Dóna un enllaç cap al wordreference (diccionari anglès) per la paraula especificada.",
+			"example": "wordreference hello"
+		}
 	}
 }

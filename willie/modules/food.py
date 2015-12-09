@@ -5,11 +5,7 @@ import random
 import re
 
 @commands('cake', 'pastel', 'pastis')
-@example('.cake NeoMahler')
 def pastis(bot, trigger):
-    u"""
-    Give a cake to the specified user.
-    """
     if bot.config.lang == 'ca':
         cakes = [u"...me'l menjo tot sencer, deixant les espelmes per %s, es clar!",
                     u"...el dono a %s, per bona persona!",
@@ -32,11 +28,7 @@ def pastis(bot, trigger):
     bot.say(random.choice(cakes) % trigger.group(2))
 
 @commands('galeta', 'galleta', 'cookie')
-@example('.cookie NeoMahler')
 def galeta(bot, trigger):
-    u"""
-    Gives a cookie to the specified user.
-    """
     if not trigger.group(2):
         return
     if bot.config.lang == 'ca':

@@ -10,11 +10,11 @@ import json
 def help(bot, trigger):
     if not trigger.group(2):
     	if bot.config.lang == 'ca':
-    		bot.reply(u'Escriu {0}ajuda <ordre> (per exemple {0}help c) per obtindre ajuda per una ordre, o {0}ordres per una llista d\'ordres'.format(bot.config.prefix.replace("\\", "")))
+    	    bot.reply(u'Escriu {0}ajuda <ordre> (per exemple {0}help c) per obtindre ajuda per una ordre, o {0}ordres per una llista d\'ordres'.format(bot.config.prefix.replace("\\", "")))
     	elif bot.config.lang == 'es':
-    		bot.reply(u'Escribe {0}ayuda <orden> (por ejemplo {0}ayuda c) para obtener ayuda sobre un comando, o {0}comandos para una lista de órdenes'.format(bot.config.prefix.replace("\\", "")))
+    	    bot.reply(u'Escribe {0}ayuda <orden> (por ejemplo {0}ayuda c) para obtener ayuda sobre un comando, o {0}comandos para una lista de órdenes'.format(bot.config.prefix.replace("\\", "")))
     	else:
-    		bot.reply(u'Write {0}help <command> (for example {0}help c) to get help about a command, or {0}commands to get a list of commands.'.format(bot.config.prefix.replace("\\", "")))
+    	    bot.reply(u'Write {0}help <command> (for example {0}help c) to get help about a command, or {0}commands to get a list of commands.'.format(bot.config.prefix.replace("\\", "")))
     
     else:
         name = trigger.group(2).lower()
@@ -39,15 +39,7 @@ def help(bot, trigger):
             else:
             	doc = "\x02%s\x02: Sorry, but this command doesn't exist or doesn't have documentation yet." % command
         else:
-            try:
-            	doc = "\x02%s\x02: %s | \x02Example\x02: %s | \x02Alias\x02 (or in other languages): %s" % (command, data[command][l]["help"], bot.config.prefix.replace("\\", "") + data[command][l]["example"], ", ".join(datalias[command]["alias"]))
-            except KeyError:
-            	if bot.config.lang == "ca":
-            	    doc = u"\x02%s\x02: Ho sento, però aquesta ordre no existeix o encara no disposa de documentació." % command
-            	elif bot.config.lang == "es":
-            	    doc = u"\x02%s\x02: Lo siento, pero ese comando no existe o aún no tiene documentación." % command
-            	else:
-            	    doc = "\x02%s\x02: Sorry, but this command doesn't exist or doesn't have documentation yet." % command
+            doc = "\x02%s\x02: %s | \x02Example\x02: %s | \x02Alias\x02 (or in other languages): %s" % (command, data[command][l]["help"], bot.config.prefix.replace("\\", "") + data[command][l]["example"], ", ".join(datalias[command]["alias"]))
         bot.say(doc)
         
 @commands('commands', 'ordres', 'o', 'comandos')

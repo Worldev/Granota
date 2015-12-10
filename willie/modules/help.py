@@ -31,15 +31,23 @@ def help(bot, trigger):
         helpfile = open(ff, 'r')
         data = json.load(helpfile)
         helpfile.close()
-        try:
-            doc = "\x02%s\x02: %s | \x02Example\x02: %s | \x02Alias\x02 (or in other languages): %s" % (command, data[command][l]["help"], bot.config.prefix.replace("\\", "") + data[command][l]["example"], ", ".join(datalias[command]["alias"]))
-        except KeyError:
+        if command not in data:
             if bot.config.lang == "ca":
             	doc = u"\x02%s\x02: Ho sento, però aquesta ordre no existeix o encara no disposa de documentació." % command
             elif bot.config.lang == "es":
             	doc = u"\x02%s\x02: Lo siento, pero ese comando no existe o aún no tiene documentación." % command
             else:
             	doc = "\x02%s\x02: Sorry, but this command doesn't exist or doesn't have documentation yet." % command
+        else:
+            try:
+            	doc = "\x02%s\x02: %s | \x02Example\x02: %s | \x02Alias\x02 (or in other languages): %s" % (command, data[command][l]["help"], bot.config.prefix.replace("\\", "") + data[command][l]["example"], ", ".join(datalias[command]["alias"]))
+            except KeyError:
+            	if bot.config.lang == "ca":
+            	    doc = u"\x02%s\x02: Ho sento, però aquesta ordre no existeix o encara no disposa de documentació." % command
+            	elif bot.config.lang == "es":
+            	    doc = u"\x02%s\x02: Lo siento, pero ese comando no existe o aún no tiene documentación." % command
+            	else:
+            	    doc = "\x02%s\x02: Sorry, but this command doesn't exist or doesn't have documentation yet." % command
         bot.say(doc)
         
 @commands('commands', 'ordres', 'o', 'comandos')

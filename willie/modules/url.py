@@ -87,12 +87,7 @@ def setup(bot=None):
 
 
 @commands('title')
-@example('.title http://google.com', '[ Google ] - google.com')
 def title_command(bot, trigger):
-    """
-    Show the title or URL information for the given URL, or the last URL seen
-    in this channel.
-    """
     if not trigger.group(2):
         if trigger.sender not in bot.memory['last_seen_url']:
             return

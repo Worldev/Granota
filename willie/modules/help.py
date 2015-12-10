@@ -25,7 +25,7 @@ def help(bot, trigger):
         aliasfile.close()
         for i in datalias:
             if name in datalias[i]["alias"]:
-                command = datalias[i]["alias"][0]
+                command = datalias[i]["alias"][0].lower()
             global command
         ff = 'doc/commands.json'
         helpfile = open(ff, 'r')
@@ -68,17 +68,17 @@ def commands(bot, trigger):
 @priority('low')
 def help2(bot, trigger):
     if bot.config.lang == 'ca':
-	    response = (
-	        'Hola, Sóc un bot del projecte Worldev. Escriu "{0}ordres" per una llista d\'ordres '.format(bot.config.prefix.replace("\\", "")) +
+    	response = (
+    		'Hola, Sóc un bot del projecte Worldev. Escriu "{0}ordres" per una llista d\'ordres '.format(bot.config.prefix.replace("\\", "")) +
 	        'El meu propietari és %s.'
 	    % bot.config.owner)
     elif bot.config.lang == 'es':
-    	    response = (
+    	response = (
 	        'Hola, Soy un bot del proyecto Worldev Escribe "{0}comandos" por una lista de mis comandos '.format(bot.config.prefix.replace("\\", "")) +
 	        'Mi propietario es %s.'
 	    ) % bot.config.owner
     else:
-       	    response = (
+    	response = (
 	        'Hi, I\'m a Worldev project bot. Write "{0}commands" for a commands list '.format(bot.config.prefix.replace("\\", "")) +
 	        'My owner is %s.'
 	    ) % bot.config.owner

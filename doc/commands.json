@@ -992,5 +992,131 @@
 			"help": "Mostra informació sobre el Top Level Domain especificat.",
 			"example": "tld org"
 		}
+	},
+	"reverse": {
+		"en": {
+			"help": "Reverses the given text.",
+			"example": "reverse hello I'm a bot"
+		},
+		"es": {
+			"help": "Invierte el texto especificado.",
+			"example": "reves hola soy un bot"
+		},
+		"ca": {
+			"help": "Inverteix el text especificat.",
+			"example": "reves hola sóc un bot"
+		}
+	},
+	"rainbow": {
+		"en": {
+			"help": "Converts the given text to a colourful rainbow.",
+			"example": "rainbow What a beautiful rainbow!"
+		},
+		"es": {
+			"help": "Convierte el texto especificado a un arco iris lleno de color.",
+			"example": "colores ¡Que arco iris más bonito!"
+		},
+		"ca": {
+			"help": "Converteix el text especificat en un arc de Sant Martí ple de colors.",
+			"example": "colors Quin arc de Sant Martí més bonic!"
+		}
+	},
+	"rot13": {
+		"en": {
+			"help": "Ciphers a texts with the rot13 method. It deletes all non-letters characters.",
+			"example": "rot13 You won't decipher me!"
+		},
+		"es": {
+			"help": "Cifra un texto con el método rot13. Borra todos los carácteres que no son letras.",
+			"example": "rot13 No conseguirás decifrarme!"
+		},
+		"ca": {
+			"help": "Xifra un text amb el mètode rot13. Esborra tots els caràcters que no són lletres.",
+			"example": "rot13 No aconseguiràs dexifrar-me!"
+		}
+	},
+	"u": {
+		"en": {
+			"help": "Gives information about the given character.",
+			"example": "u 203D"
+		},
+		"es": {
+			"help": "Da información sobre el carácter especificado.",
+			"example": "u 203D"
+		},
+		"ca": {
+			"help": "Dóna informació sobre el caràcter especificat.",
+			"example": "u 203D"
+		}
+	},
+	"temp": {
+		"en": {
+			"help": "Converts temperature units: Celsius (ºC), Farenheit (ºF) and Kelvin (K).",
+			"example": "temp 100F"
+		},
+		"es": {
+			"help": "Convierte unidades de temperatura: Celsius (ºC), Farenheit (ºF) y Kelvin (K).",
+			"example": "temp 100F"
+		},
+		"ca": {
+			"help": "Converteix unitats de temperatura: Celsius (ºC), Farenheit (ºF) i Kelvin (K).",
+			"example": "temp 100F"
+		}
+	},
+	"length": {
+		"en": {
+			"help": "Converts distance units: meters (m), kilometers (km), miles, inch, feet and yards.",
+			"example": "length 100m"
+		},
+		"es": {
+			"help": "Convierte unidades de distáncia: metros (m), kilómetros (km), millas, inch, pies y yardas.",
+			"example": "distancia 100m"
+		},
+		"ca": {
+			"help": "Converteix unitats de distància: metres (m), quilòmetres (km), milles, inch, peus i yardes.",
+			"example": "distancia 100m"
+		}
+	},
+	"title": {
+		"en": {
+			"help": "Show the title or URL information for the given URL, or the last URL seen in this channel.",
+			"example": "title http://google.com"
+		},
+		"es": {
+			"help": "Muestra información de un URL, o del último URL enviado al canal.",
+			"example": "title http://google.com"
+		},
+		"ca": {
+			"help": "Mostra informació d'un URL, o de l'últim URL enviat al canal.",
+			"example": "title http://google.com"
+		}
+	},
+	"wiki": {
+		"en": {
+			"help": "Gives the first sentences of the given Wikipedia article.",
+			"example": "wiki San Francisco"
+		},
+		"es": {
+			"help": "Da las primeras frases del artículo de Wikipedia especificado.",
+			"example": "wiki San Francisco"
+		},
+		"ca": {
+			"help": "Dóna les primeres frases de l'article de la Viquipèdia especificat.",
+			"example": "wiki San Francisco"
+		}
+	},
+	"xkcd": {
+		"en": {
+			"help": "Finds an xkcd comic strip. Takes one of 3 inputs: If no input is provided it will return a random comic. If numeric input is provided it will return that comic, or the nth-latest comic if the number is non-positive. If non-numeric input is provided it will return the first google result for those keywords on the xkcd.com site.",
+			"example": "xkcd 1010"
+		},
+		"es": {
+			"help": "Busca una viñeta de comic xkcd. Puede tener 3 tipos de argumentos: Si no hay argumento, dará un cómic aleatório. Si se especifica un número dará ese comic. Si el argumento no es un número dará el primer resultado de google.",
+			"example": "xkcd 1010"
+		},
+		"ca": {
+			"help": "Cerca una vinyeta de comic xkcd. Pot tenir 3 tipus d'arguments: Si no hi ha argument, donarà un còmic aleatori. Si s'especifica un número donarà aquest còmic. Si l'argument no és un número donarà el primer resultat de google.",
+			"example": "xkcd 1010"
+		}
 	}
 }

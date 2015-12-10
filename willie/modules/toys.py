@@ -5,12 +5,6 @@ import random
 
 @commands('reverse', 'reves')
 def reversetext(bot, trigger):
-    if bot.config.lang == 'ca':
-        u"""Retorna el text al revés."""
-    elif bot.config.lang == 'es':
-        u"""Retorna el texto al revés."""
-    else:
-        """Reverses a text"""
     if not trigger.group(2):
         if bot.config.lang == 'ca':
             bot.reply("Error de sintaxi. Escriu .reves <text>")
@@ -24,7 +18,6 @@ def reversetext(bot, trigger):
 
 @commands('rainbow', 'arcoiris', 'colores', 'colors')
 def rainbow(bot, trigger):
-    """Speaks with rainbows."""
     text = trigger.group(2)
     if not text:
         if bot.config.lang == 'ca':

@@ -5,7 +5,6 @@ from willie.module import commands, example, NOLIMIT
 
 
 @commands('u')
-@example('.u 203D')
 def codepoint(bot, trigger):
     arg = trigger.group(2).strip()
     if len(arg) == 0:

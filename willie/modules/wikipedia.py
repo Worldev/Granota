@@ -57,7 +57,6 @@ def mw_snippet(server, query, bot):
 
 
 @commands('w', 'wiki', 'wik')
-@example('.w San Francisco')
 def wikipedia(bot, trigger):
     query = trigger.group(2)
     if not query:

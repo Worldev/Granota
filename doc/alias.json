@@ -119,8 +119,8 @@
 	"debug_print": {
 		"alias": ["debug_print"]
 	},
-	"raiseException": {
-		"alias": ["raiseException", "causeProblems", "giveError"]
+	"raiseexception": {
+		"alias": ["raiseexception", "causeproblems", "giveerror"]
 	},
 	"dice": {
 		"alias": ["dice", "dau", "dado", "roll", "d"]

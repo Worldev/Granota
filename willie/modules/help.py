@@ -25,6 +25,7 @@ def help(bot, trigger):
         aliasfile.close()
         for i in datalias:
             if name in datalias[i]["alias"]:
+            	global command
                 command = datalias[i]["alias"][0].lower()
         ff = 'doc/commands.json'
         helpfile = open(ff, 'r')

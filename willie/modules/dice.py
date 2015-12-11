@@ -136,7 +136,7 @@ def _roll_dice(dice_expression):
     return dice
 
 
-@willie.module.commands("roll", "dice", 'dau', 'dado'. 'd')
+@willie.module.commands("roll", "dice", 'dau', 'dado', 'd')
 @willie.module.priority("medium")
 def roll(bot, trigger):
     # This regexp is only allowed to have one captured group, because having

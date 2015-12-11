@@ -31,6 +31,7 @@ def help(bot, trigger):
         helpfile = open(ff, 'r')
         data = json.load(helpfile)
         helpfile.close()
+        bot.say(data)
         if command not in data:
             if bot.config.lang == "ca":
             	doc = u"\x02%s\x02: Ho sento, però aquesta ordre no existeix o encara no disposa de documentació." % command

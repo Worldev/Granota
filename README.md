@@ -1,6 +1,6 @@
 # Granota
 
-[![Build Status](https://travis-ci.org/Worldev/Granota.svg?branch=master)](https://travis-ci.org/Worldev/Granota) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Worldev/granota/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Build Status](https://travis-ci.org/Worldev/Granota.svg?branch=master)](https://travis-ci.org/Worldev/Granota) [![Coverage Status](https://coveralls.io/repos/Worldev/Granota/badge.svg?branch=master&service=github)](https://coveralls.io/github/Worldev/Granota?branch=master) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Worldev/granota/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 A multilingual IRC bot coded in Python and based off Willie.
 

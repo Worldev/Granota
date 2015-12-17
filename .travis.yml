@@ -3,12 +3,12 @@ python:
   - 2.7.9
 
 install: 
-  - wget https://github.com/CatIRCBots/Granota/raw/tools/testbot.py
+  - wget https://github.com/Worldev/Granota/raw/tools/testbot.py
   - pip install coveralls
 
 script: 
   - python testbot.py
-  - coverage run granota.py
+  - coverage run testbot.py
   
 after_success:
   coveralls

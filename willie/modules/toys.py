@@ -34,7 +34,7 @@ def rainbow(bot, trigger):
 
 @commands('cipher', 'xifra', 'cifra', 'rot13')
 def encrypt(bot, trigger):
-    text = trigger.group(2).lower()
+    text = trigger.group(2)
     if not text:
         if bot.config.lang == 'ca':
             bot.reply("Error de sintaxi. Escriu .xifra <text>")

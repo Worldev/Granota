@@ -26,6 +26,7 @@ def rainbow(bot, trigger):
             bot.reply("Error de sintaxis. Escribe .arcoiris <texto>")
         else:
             bot.reply("Syntax error. Type .rainbow <text>")
+        return
     colorlist = ["\x034","\x037","\x038","\x039","\x0311","\x0312","\x0313","\x036","\x034"]
     rainbowed = ""
     for letter in text:
@@ -42,4 +43,5 @@ def encrypt(bot, trigger):
             bot.reply("Error de sintaxis. Escribe .cifra <texto>")
         else:
             bot.reply("Syntax error. Type .cipher <text>")
+        return
     bot.say(text.encode('rot13'))

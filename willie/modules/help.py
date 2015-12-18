@@ -33,11 +33,11 @@ def help(bot, trigger):
         helpfile.close()
         if not command in list(data):
             if bot.config.lang == "ca":
-            	doc = u"\x02%s\x02: Ho sento, però aquesta ordre no existeix o encara no disposa de documentació." % command
+            	doc = u"Ho sento, però aquesta ordre no existeix o encara no disposa de documentació."
             elif bot.config.lang == "es":
-            	doc = u"\x02%s\x02: Lo siento, pero ese comando no existe o aún no tiene documentación." % command
+            	doc = u"Lo siento, pero ese comando no existe o aún no tiene documentación."
             else:
-            	doc = "\x02%s\x02: Sorry, but this command doesn't exist or doesn't have documentation yet." % command
+            	doc = "Sorry, but this command doesn't exist or doesn't have documentation yet."
         else:
             doc = "\x02%s\x02: %s | \x02Example\x02: %s | \x02Alias\x02 (or in other languages): %s" % (command, data[command][l]["help"], bot.config.prefix.replace("\\", "") + data[command][l]["example"], ", ".join(datalias[command]["alias"]))
         bot.say(doc)

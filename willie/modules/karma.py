@@ -11,9 +11,7 @@ homedir = "config"
 karmare = re.compile(r"^([a-zA-Z0-9\[\]\{\}\\\|\-\_\`^]*)(:?,? ?)?(\+\+|\-\-)")
     
 try:
-    shutil.copy2(homedir + '/karma.py', 'karma.py')
-    from karma import karmas
-    os.remove('karma.py')
+    from config.karma import karmas
 except:
     karmas = {}
     

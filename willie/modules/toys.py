@@ -88,4 +88,4 @@ def c_totext(bot, trigger):
         else:
             bot.reply("Syntax error. Type .totext <text>")
         return
-    bot.say(toText(text))
+    bot.say(toText(text).decode("utf-8"))

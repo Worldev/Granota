@@ -11,7 +11,6 @@ A multilingual IRC bot coded in Python and based off Willie.
 
 ## Configuration
 
-- English: Not yet available.
-- Spanish: Aún no está disponible - Not yet available
-- Catalan: Encara no està disponible - Not yet available
-
+- English: Not available.
+- Spanish: No está disponible.
+- Catalan: No està disponible.

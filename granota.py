@@ -15,8 +15,8 @@ homedir = "config"
 
 
 def check_python_version():
-    if sys.version_info < (2, 7, 8):
-        stderr(u'Error: You need at least Python 2.7.8!')
+    if sys.version_info < (2, 7):
+        stderr(u'Error: You need at least Python 2.7!')
         sys.exit(1)
 
 

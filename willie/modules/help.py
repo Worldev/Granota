@@ -25,13 +25,12 @@ def help(bot, trigger):
         aliasfile.close()
         for i in datalias:
             if name in datalias[i]["alias"]:
-            	global command
                 command = datalias[i]["alias"][0].lower()
         ff = 'doc/commands.json'
         helpfile = open(ff, 'r')
         data = json.load(helpfile)
         helpfile.close()
-        if command not in list(data):
+        if not command in list(data):
             if bot.config.lang == "ca":
             	doc = u"\x02%s\x02: Ho sento, però aquesta ordre no existeix o encara no disposa de documentació." % command
             elif bot.config.lang == "es":

@@ -23,6 +23,7 @@ def help(bot, trigger):
         aliasfile = open(f, 'r')
         datalias = json.load(aliasfile)
         aliasfile.close()
+        command = ""
         for i in datalias:
             if name in datalias[i]["alias"]:
                 command = datalias[i]["alias"][0].lower()

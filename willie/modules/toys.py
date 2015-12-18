@@ -45,3 +45,47 @@ def encrypt(bot, trigger):
             bot.reply("Syntax error. Type .cipher <text>")
         return
     bot.say(text.encode('rot13'))
+
+""" Num<->Text/Numchar code - Thanks to Xenthys for giving us the code! """
+numchar = lambda z: '0'*(3-len(str(z)))+str(z)
+toNum = lambda z: ''.join(numchar(ord(z[i])) for i in range(len(z)))
+toText = lambda z: ''.join(chr(int(z[i:i+3])) for i in range(0, len(z), 3))
+    
+@commands('numchar')
+def c_numchar(bot, trigger):
+    text = trigger.group(2)
+    if not text:
+        if bot.config.lang == 'ca':
+            bot.reply("Error de sintaxi. Escriu .numchar <text>")
+        elif bot.config.lang == 'es':
+            bot.reply("Error de sintaxis. Escribe .numchar <texto>")
+        else:
+            bot.reply("Syntax error. Type .numchar <text>")
+        return
+    bot.say(numchar(text))
+
+@commands('tonum')
+def c_tonum(bot, trigger):
+    text = trigger.group(2)
+    if not text:
+        if bot.config.lang == 'ca':
+            bot.reply("Error de sintaxi. Escriu .tonum <text>")
+        elif bot.config.lang == 'es':
+            bot.reply("Error de sintaxis. Escribe .tonum <texto>")
+        else:
+            bot.reply("Syntax error. Type .tonum <text>")
+        return
+    bot.say(toNum(text))
+
+@commands('totext')
+def c_totext(bot, trigger):
+    text = trigger.group(2)
+    if not text:
+        if bot.config.lang == 'ca':
+            bot.reply("Error de sintaxi. Escriu .totext <text>")
+        elif bot.config.lang == 'es':
+            bot.reply("Error de sintaxis. Escribe .totext <texto>")
+        else:
+            bot.reply("Syntax error. Type .totext <text>")
+        return
+    bot.say(toText(text))

@@ -6,7 +6,7 @@ import time
 
 @willie.module.commands('anunci', 'anuncia', 'announce', 'anuncio')
 def announce(bot, trigger):
-    if not trigger.admin:
+    if not trigger.owner:
         if bot.config.lang == 'ca':
             bot.reply(u'No ets el meu owner.')
         elif bot.config.lang == 'es':

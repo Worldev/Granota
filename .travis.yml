@@ -11,4 +11,4 @@ script:
   - coverage run testbot.py
   
 after_success:
-  coveralls
+  - coveralls

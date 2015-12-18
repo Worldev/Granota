@@ -72,7 +72,7 @@ def part(bot, trigger):
 def quit(bot, trigger):
     if trigger.sender.startswith('#'):
         return
-    if not trigger.owner:
+    if not trigger.admin:
         return
     # Can only be done in privmsg by the owner
 

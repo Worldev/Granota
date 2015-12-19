@@ -1,0 +1,7 @@
+test-warnings: true
+strictness: high
+autodetect: true
+ignore-paths:
+    - doc
+python-targets:
+    - 2

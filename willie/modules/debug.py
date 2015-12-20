@@ -26,28 +26,37 @@ def admins(bot, trigger):
     admins = str(bot.config.core.get_list('admins'))
     bot.say("[Owner]"+owner+" [Admins]"+admins)
 
+@commands("uptime")
+def uptime(bot, trigger):
+    now = (time.time() - startTime) / 3600 # Calculates uptime in hours
+    if bot.config.lang == 'ca':
+        bot.say("Porto %s hores despert." % now)
+    elif bot.config.lang == 'es':
+        bot.say("Llevo %s horas despierto." % now)
+    else:
+        bot.say("I have been running for %s hours." % now)
+        
 @commands('version', 'versio')
 def version(bot, trigger):
+    version = '1.0'
     if platform.system() == 'Linux':
-        ver = ("%s %s" % (platform.linux_distribution()[0], platform.linux_distribution()[1]))
+        osver = ("%s %s" % (platform.linux_distribution()[0], platform.linux_distribution()[1]))
     elif platform.system() == 'Windows':
-        ver = ("%s %s" % (platform.system(), platform.release()))
+        osver = ("%s %s" % (platform.system(), platform.release()))
     else:
-        ver = ("some OS which is not Linux or Windows")
+        osver = ("some OS which is not Linux or Windows")
     pyver = sys.version.split()[0]
-    bot.say("I'm Granota, version 1.0, running on %s and using Python %s since %s" % (ver, pyver, startTime))
+    if bot.config.lang == 'ca':
+        bot.say(u"Sóc Granota, versió %s, en el sistema operatiu %s i utilitzant Python %s." % (version, osver, pyver))
+    elif bot.config.lang == 'es':
+        bot.say(u"Soy Granota, versión %s, en el sistema operativo %s y usando Python %s." % (version, osver, pyver))
+    else:
+        bot.say(u"I'm Granota, version %s, on %s and using Python %s." % (version, osver, pyver))
 
 @commands('debug_print')
 def debug_print(bot, trigger):
-    try:
-        version(bot, trigger)
-    except Exception as e:
-        if bot.config.lang == 'ca':
-            bot.reply(u"Error al intentar obtenir la versio actual")
-        elif bot.config.lang == 'es':
-            bot.reply(u"Error al intentar obtener la version actual.")
-        else:
-            bot.say('An error occured trying to get the current version.')
+    version(bot, trigger)
+    uptime(bot, trigger)
     admins(bot, trigger)
     privileges(bot, trigger)
 

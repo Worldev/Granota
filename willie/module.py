@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import time
 """This module is meant to be imported from willie modules.
 
 It defines the following decorators for defining willie callables:
@@ -37,6 +38,10 @@ OP = 4
 ADMIN = 8
 OWNER = 16
 
+startTime = time.time()
+def calcuptime(currentime):
+    uptime = (startTime - currentime) / 3600
+    return uptime
 
 def unblockable(function):
     """Decorator. Equivalent to func.unblockable = True

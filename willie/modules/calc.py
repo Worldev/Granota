@@ -46,7 +46,15 @@ def c(bot, trigger):
 @commands('py')
 def py(bot, trigger):
     query = trigger.group(2)
-    bot.say(eval(query))
+    if "bot" in query and not trigger.admin:
+        if bot.config.lang == 'ca':
+            bot.say("Ho sento, però no pots executar funcions que m'impliquin a mi.")
+        elif bot.config.lang == 'es':
+            bot.say("Lo siento, pero no puedes ejecutar funciones relacionadas conmigo.")
+        else:
+            bot.say("Sorry, but you can't execute functions related with me.")
+        return
+    bot.say(str(eval(query)))
 
 @commands('wa', 'wolfram')
 def wa(bot, trigger):

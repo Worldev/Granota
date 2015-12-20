@@ -60,7 +60,7 @@ def commands(bot, trigger):
     	bot.reply("Para obtener ayuda sobre un comando en concreto, escribe {0}ayuda <comando>".format(bot.config.prefix.replace("\\", "")))
     	return
     else:
-	bot.msg(trigger.sender, '\x02' + str(num) + ' avaiable commands:\x02 ' + names + '.', max_messages=10)
+	bot.msg(trigger.sender, '\x02' + str(num) + ' available commands:\x02 ' + names + '.', max_messages=10)
 	bot.reply("For help on a specific command, type {0}help <command>".format(bot.config.prefix.replace("\\", "")))
 	return
 

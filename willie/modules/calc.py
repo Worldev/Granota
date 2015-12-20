@@ -46,18 +46,7 @@ def c(bot, trigger):
 @commands('py')
 def py(bot, trigger):
     query = trigger.group(2)
-    uri = 'http://tumbolia.appspot.com/py/'
-    answer = web.get(uri + web.quote(query))
-    if answer:
-        bot.say(answer)
-    else:
-        if bot.config.lang == 'ca':
-            bot.reply(u"Ho sento, no hi ha resultat.")
-        elif bot.config.lang == 'es':
-            bot.reply(u"Lo siento, no hay resultados.")
-        else:
-            bot.reply('Sorry, no result.')
-
+    bot.say(eval(query))
 
 @commands('wa', 'wolfram')
 def wa(bot, trigger):

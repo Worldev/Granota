@@ -11,6 +11,6 @@ A multilingual IRC bot coded in Python and based off Willie.
 
 ## Configuration
 
-- English: Not available.
+- English: See Granota's [wiki help page](https://github.com/Worldev/Granota/wiki/Download-and-installation-guide)
 - Spanish: No está disponible.
 - Catalan: No està disponible.

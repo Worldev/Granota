@@ -224,7 +224,7 @@
 	"rainbow": {
 		"alias": ["rainbow", "arcoiris", "colores", "colors"]
 	},
-	"rot13": {
+	"cipher": {
 		"alias": ["cipher", "xifra", "cifra", "rot13"]
 	},
 	"u": {

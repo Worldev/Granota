@@ -1023,15 +1023,15 @@
 	},
 	"cipher": {
 		"en": {
-			"help": "Ciphers a texts with the rot13 method. It deletes all non-letters characters.",
+			"help": "Ciphers a texts with the rot13 method.",
 			"example": "rot13 You won't decipher me!"
 		},
 		"es": {
-			"help": "Cifra un texto con el método rot13. Borra todos los carácteres que no son letras.",
+			"help": "Cifra un texto con el método rot13.",
 			"example": "rot13 No conseguirás decifrarme!"
 		},
 		"ca": {
-			"help": "Xifra un text amb el mètode rot13. Esborra tots els caràcters que no són lletres.",
+			"help": "Xifra un text amb el mètode rot13.",
 			"example": "rot13 No aconseguiràs dexifrar-me!"
 		}
 	},

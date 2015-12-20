@@ -1021,7 +1021,7 @@
 			"example": "colors Quin arc de Sant Martí més bonic!"
 		}
 	},
-	"rot13": {
+	"cipher": {
 		"en": {
 			"help": "Ciphers a texts with the rot13 method. It deletes all non-letters characters.",
 			"example": "rot13 You won't decipher me!"

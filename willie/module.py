@@ -38,11 +38,6 @@ OP = 4
 ADMIN = 8
 OWNER = 16
 
-startTime = time.time()
-def calcuptime(currentime):
-    uptime = (startTime - currentime) / 3600
-    return uptime
-
 def unblockable(function):
     """Decorator. Equivalent to func.unblockable = True
 

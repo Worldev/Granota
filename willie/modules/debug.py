@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from willie.module import commands, example, calcuptime
+from willie.module import commands, example
 import platform, sys, time
 
 @commands('privs')
@@ -24,16 +24,6 @@ def admins(bot, trigger):
     admins = str(bot.config.core.get_list('admins'))
     bot.say("[Owner]"+owner+" [Admins]"+admins)
 
-@commands("uptime")
-def uptime(bot, trigger):
-    now = calcuptime(time.time())
-    if bot.config.lang == 'ca':
-        bot.say("Porto %s hores despert." % now)
-    elif bot.config.lang == 'es':
-        bot.say("Llevo %s horas despierto." % now)
-    else:
-        bot.say("I have been running for %s hours." % now)
-        
 @commands('version', 'versio')
 def version(bot, trigger):
     version = '1.0'
@@ -54,7 +44,6 @@ def version(bot, trigger):
 @commands('debug_print')
 def debug_print(bot, trigger):
     version(bot, trigger)
-    uptime(bot, trigger)
     admins(bot, trigger)
     privileges(bot, trigger)
 

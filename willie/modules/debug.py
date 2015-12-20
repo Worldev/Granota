@@ -1,9 +1,7 @@
 # coding=utf-8
 
-from willie.module import commands, example
+from willie.module import commands, example, uptime
 import platform, sys, time
-
-startTime = time.time()
 
 @commands('privs')
 def privileges(bot, trigger):
@@ -28,7 +26,7 @@ def admins(bot, trigger):
 
 @commands("uptime")
 def uptime(bot, trigger):
-    now = (time.time() - startTime) / 3600 # Calculates uptime in hours
+    now = uptime(time.time())
     if bot.config.lang == 'ca':
         bot.say("Porto %s hores despert." % now)
     elif bot.config.lang == 'es':

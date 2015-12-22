@@ -45,14 +45,10 @@ def encrypt(bot, trigger):
             bot.reply("Syntax error. Type .cipher <text>")
         return
     bot.say(text.encode('rot13'))
-
-""" Num<->Text/Numchar code - Thanks to Xenthys for giving us the code! """
-numchar = lambda z: '0'*(3-len(str(z)))+str(z)
-toNum = lambda z: ''.join(numchar(ord(z[i])) for i in range(len(z)))
-toText = lambda z: ''.join(chr(int(z[i:i+3])) for i in range(0, len(z), 3))
     
 @commands('numchar')
 def c_numchar(bot, trigger):
+    numchar = lambda z: '0'*(3-len(str(z)))+str(z)
     text = trigger.group(2)
     if not text:
         if bot.config.lang == 'ca':
@@ -66,6 +62,7 @@ def c_numchar(bot, trigger):
 
 @commands('tonum')
 def c_tonum(bot, trigger):
+    toNum = lambda z: ''.join(numchar(ord(z[i])) for i in range(len(z)))
     text = trigger.group(2)
     if not text:
         if bot.config.lang == 'ca':
@@ -79,6 +76,7 @@ def c_tonum(bot, trigger):
 
 @commands('totext')
 def c_totext(bot, trigger):
+    toText = lambda z: ''.join(chr(int(z[i:i+3])) for i in range(0, len(z), 3))
     text = trigger.group(2)
     if not text:
         if bot.config.lang == 'ca':

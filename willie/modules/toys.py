@@ -58,7 +58,7 @@ def c_numchar(bot, trigger):
         else:
             bot.reply("Syntax error. Type .numchar <text>")
         return
-    bot.say(numchar(text))
+    bot.say(numchar(ord(text)))
 
 @commands('tonum')
 def c_tonum(bot, trigger):

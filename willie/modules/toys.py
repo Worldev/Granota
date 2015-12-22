@@ -72,6 +72,14 @@ def c_numchar(bot, trigger):
 def c_tonum(bot, trigger):
     toNum = lambda z: ''.join(numchar(ord(z[i])) for i in range(len(z)))
     text = trigger.group(2)
+    if text.isdigit() == True:
+        if bot.config.lang == 'ca':
+            bot.say(u"Només accepto números per aquesta ordre.")
+        elif bot.config.lang == 'es':
+            bot.say(u"Solo acepto números  para ese comando.")
+        else:
+            bot.say("I only accept numbers for this command.")
+        return      
     if not text:
         if bot.config.lang == 'ca':
             bot.reply("Error de sintaxi. Escriu .tonum <text>")
@@ -80,29 +88,12 @@ def c_tonum(bot, trigger):
         else:
             bot.reply("Syntax error. Type .tonum <text>")
         return
-    try:
-        bot.say(toNum(text))
-    except ValueError:
-        if bot.config.lang == 'ca':
-            bot.say(u"Només accepto números per aquesta ordre.")
-        elif bot.config.lang == 'es':
-            bot.say(u"Solo acepto números para ese comando.")
-        else:
-            bot.say("I only accept numbers for this command.")
-        return
+    bot.say(toNum(text))
 
 @commands('totext')
 def c_totext(bot, trigger):
     toText = lambda z: ''.join(chr(int(z[i:i+3])) for i in range(0, len(z), 3))
     text = trigger.group(2)
-    if text.isdigit() == True:
-        if bot.config.lang == 'ca':
-            bot.say(u"Només accepto números per aquesta ordre.")
-        elif bot.config.lang == 'es':
-            bot.say(u"Solo acepto números  para ese comando.")
-        else:
-            bot.say("I only accept numbers for this command.")
-        return        
     if not text:
         if bot.config.lang == 'ca':
             bot.reply("Error de sintaxi. Escriu .totext <text>")

@@ -70,16 +70,7 @@ def c_numchar(bot, trigger):
 
 @commands('tonum')
 def c_tonum(bot, trigger):
-    try:
-        toNum = lambda z: ''.join(numchar(ord(z[i])) for i in range(len(z)))
-    except ValueError:
-        if bot.config.lang == 'ca':
-            bot.say(u"Només accepto números per aquesta ordre.")
-        elif bot.config.lang == 'es':
-            bot.say(u"Solo acepto números para ese comando.")
-        else:
-            bot.say("I only accept numbers for this command.")
-        return
+    toNum = lambda z: ''.join(numchar(ord(z[i])) for i in range(len(z)))
     text = trigger.group(2)
     if not text:
         if bot.config.lang == 'ca':
@@ -89,20 +80,20 @@ def c_tonum(bot, trigger):
         else:
             bot.reply("Syntax error. Type .tonum <text>")
         return
-    bot.say(toNum(text))
+    try:
+        bot.say(toNum(text))
+    except ValueError:
+        if bot.config.lang == 'ca':
+            bot.say(u"Només accepto números per aquesta ordre.")
+        elif bot.config.lang == 'es':
+            bot.say(u"Solo acepto números para ese comando.")
+        else:
+            bot.say("I only accept numbers for this command.")
+        return
 
 @commands('totext')
 def c_totext(bot, trigger):
-    try:
-        toText = lambda z: ''.join(chr(int(z[i:i+3])) for i in range(0, len(z), 3))
-    except ValueError:
-        if bot.config.lang == 'ca':
-            bot.say(u"Només accepto números més petits de 256 per aquesta ordre.")
-        elif bot.config.lang == 'es':
-            bot.say(u"Solo acepto números menores a 256 para ese comando.")
-        else:
-            bot.say("I only accept numbers smaller than 256 for this command.")
-        return
+    toText = lambda z: ''.join(chr(int(z[i:i+3])) for i in range(0, len(z), 3))
     text = trigger.group(2)
     if not text:
         if bot.config.lang == 'ca':
@@ -112,4 +103,13 @@ def c_totext(bot, trigger):
         else:
             bot.reply("Syntax error. Type .totext <text>")
         return
-    bot.say(toText(text).decode('cp1252').encode("utf-8"))
+    try:
+        bot.say(toText(text).decode('cp1252').encode("utf-8"))
+    except ValueError:
+        if bot.config.lang == 'ca':
+            bot.say(u"Només accepto números més petits de 256 per aquesta ordre.")
+        elif bot.config.lang == 'es':
+            bot.say(u"Solo acepto números menores a 256 para ese comando.")
+        else:
+            bot.say("I only accept numbers smaller than 256 for this command.")
+        return

@@ -1118,5 +1118,47 @@
 			"help": "Cerca una vinyeta de comic xkcd. Pot tenir 3 tipus d'arguments: Si no hi ha argument, donarà un còmic aleatori. Si s'especifica un número donarà aquest còmic. Si l'argument no és un número donarà el primer resultat de google.",
 			"example": "xkcd 1010"
 		}
+	},
+	"tonum": {
+		"en": {
+			"help": "Converts a text to numbers using the ASCII talbe.",
+			"example": "tonum hello"
+		},
+		"es": {
+			"help": "Convierte un texto a números usando la tabla ASCII.",
+			"example": "tonum hola"
+		},
+		"ca": {
+			"help": "Converteix un text a números utilitzant la taula ASCII.",
+			"example": "tonum hola"
+		}
+	},
+	"totext": {
+		"en": {
+			"help": "Converts a number to text using the ASCII table.",
+			"example": "totext 163"
+		},
+		"es": {
+			"help": "Convierte un número a texto usando la tabla ASCII.",
+			"example": "totext 163"
+		},
+		"ca": {
+			"help": "Converteix un número a text utilitzant la taula ASCII.",
+			"example": "totext 163"
+		}
+	},
+	"numchar": {
+		"en": {
+			"help": "Returns the number of the given character in the ASCII table",
+			"example": "numchar a"
+		},
+		"es": {
+			"help": "Da el número del carácter especificado en la tabla ASCII.",
+			"example": "numchar a"
+		},
+		"ca": {
+			"help": "Dóna el número del caràcter especificat a la taula ASCII.",
+			"example": "numchar a"
+		}
 	}
 }

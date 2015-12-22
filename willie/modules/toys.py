@@ -72,7 +72,7 @@ def c_numchar(bot, trigger):
 def c_tonum(bot, trigger):
     toNum = lambda z: ''.join(numchar(ord(z[i])) for i in range(len(z)))
     text = trigger.group(2)
-    if text.isdigit() == True:
+    if text.isdigit() == False:
         if bot.config.lang == 'ca':
             bot.say(u"Només accepto números per aquesta ordre.")
         elif bot.config.lang == 'es':

@@ -48,8 +48,16 @@ def encrypt(bot, trigger):
     
 @commands('numchar')
 def c_numchar(bot, trigger):
-    numchar = lambda z: '0'*(3-len(str(z)))+str(z)
     text = trigger.group(2)
+    if len(text) > 1:
+        if bot.config.lang == 'ca':
+            bot.say(u"Només accepto una sola lletra per aquest argument.")
+        elif bot.config.lang == 'es':
+            bot.say("Solo acepto una sola letra para ese argumento.")
+        else:
+            bot.say("I only accept one letter for this argument.")
+        return
+    numchar = lambda z: '0'*(3-len(str(z)))+str(z)
     if not text:
         if bot.config.lang == 'ca':
             bot.reply("Error de sintaxi. Escriu .numchar <text>")
@@ -62,7 +70,16 @@ def c_numchar(bot, trigger):
 
 @commands('tonum')
 def c_tonum(bot, trigger):
-    toNum = lambda z: ''.join(numchar(ord(z[i])) for i in range(len(z)))
+    try:
+        toNum = lambda z: ''.join(numchar(ord(z[i])) for i in range(len(z)))
+    except ValueError:
+        if bot.config.lang == 'ca':
+            bot.say(u"Només accepto números per aquesta ordre.")
+        elif bot.config.lang == 'es':
+            bot.say(u"Solo acepto números para ese comando.")
+        else:
+            bot.say("I only accept numbers for this command.")
+        return
     text = trigger.group(2)
     if not text:
         if bot.config.lang == 'ca':
@@ -76,7 +93,16 @@ def c_tonum(bot, trigger):
 
 @commands('totext')
 def c_totext(bot, trigger):
-    toText = lambda z: ''.join(chr(int(z[i:i+3])) for i in range(0, len(z), 3))
+    try:
+        toText = lambda z: ''.join(chr(int(z[i:i+3])) for i in range(0, len(z), 3))
+    except ValueError:
+        if bot.config.lang == 'ca':
+            bot.say(u"Només accepto números més petits de 256 per aquesta ordre.")
+        elif bot.config.lang == 'es':
+            bot.say(u"Solo acepto números menores a 256 para ese comando.")
+        else:
+            bot.say("I only accept numbers smaller than 256 for this command.")
+        return
     text = trigger.group(2)
     if not text:
         if bot.config.lang == 'ca':

@@ -95,6 +95,14 @@ def c_tonum(bot, trigger):
 def c_totext(bot, trigger):
     toText = lambda z: ''.join(chr(int(z[i:i+3])) for i in range(0, len(z), 3))
     text = trigger.group(2)
+    if text.isdigit() == True:
+        if bot.config.lang == 'ca':
+            bot.say(u"Només accepto números per aquesta ordre.")
+        elif bot.config.lang == 'es':
+            bot.say(u"Solo acepto números  para ese comando.")
+        else:
+            bot.say("I only accept numbers for this command.")
+        return        
     if not text:
         if bot.config.lang == 'ca':
             bot.reply("Error de sintaxi. Escriu .totext <text>")

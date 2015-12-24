@@ -216,8 +216,8 @@ def quiet(bot, trigger):
     if opt.startswith('#'):
         if argc < 3:
             return
-        quietmask = text[2]
         channel = opt
+        quietmask = text[2]
     quietmask = configureHostMask(quietmask)
     if quietmask == '':
         return

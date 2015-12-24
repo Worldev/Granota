@@ -82,13 +82,17 @@ def kick(bot, trigger):
     if not trigger.admin:
         return
     if bot.privileges[trigger.sender][bot.nick] < HALFOP:
-        bot.reply("Sorry, I don't have enough privilegis to perform this operation")
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tinc suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, no tengo suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, I don't have enough privileges to perform this operation")
         return
     if trigger.group(2).startswith('#'):
         bot.write(('KICK', trigger.group(2) + ' [%s]' % trigger.nick))
     else:
         bot.write(('KICK', trigger.sender + ' ' + trigger.group(2) + ' [%s]' % trigger.nick))
-
 
 def configureHostMask(mask):
     if mask == '*!*@*':
@@ -111,11 +115,24 @@ def configureHostMask(mask):
         return '%s!%s@*' % (m.group(1), m.group(2))
     return ''
 
-
 @commands('ban')
 @priority('high')
 def ban(bot, trigger):
-    if bot.privileges[trigger.sender][trigger.nick] < OP:
+    if not trigger.admin:
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, pero no tienes suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, but you don't have enough privilegis to perform this operation")
+        return        
+    if bot.privileges[trigger.sender][bot.nick] < HALFOP:
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tinc suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, no tengo suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, I don't have enough privilegis to perform this operation")
         return
     text = trigger.group().split()
     argc = len(text)

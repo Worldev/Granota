@@ -81,7 +81,7 @@ def devoice(bot, trigger):
 def kick(bot, trigger):
     if not trigger.admin:
         return
-    if bot.privileges[trigger.sender][bot.nick] < OP:
+    if bot.privileges[trigger.sender][bot.nick] > 22: # 22 = halfop (20 = op, 23 = voice)
         bot.reply("Sorry, I don't have enough privilegis to perform this operation
         return
     bot.write(['KICK', trigger.group(2)])

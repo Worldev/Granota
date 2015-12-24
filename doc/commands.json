@@ -257,11 +257,11 @@
 			"example": "unquiet GoodGuy"
 		},
 		"es": {
-			"help": "Treu el silenciamento al usuario especificado del canal. El bot necesita op.",
+			"help": "Treu el silenciament l'usuari especificat del canal. El bot necessita op.",
 			"example": "unquiet ChicoBueno"
 		},
 		"ca": {
-			"help": "Treu el silenciament l'usuari especificat del canal. El bot necessita op.",
+			"help": "Treu el silenciamento al usuario especificado del canal. El bot necesita op.",
 			"example": "unquiet NoiBo"
 		}
 	},

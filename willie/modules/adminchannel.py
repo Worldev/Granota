@@ -84,7 +84,7 @@ def kick(bot, trigger):
     if bot.privileges[trigger.sender][bot.nick] < HALFOP:
         bot.reply("Sorry, I don't have enough privilegis to perform this operation")
         return
-    bot.write(('KICK', ' ' + trigger.sender + ' ' + trigger.group(2)))
+    bot.write(('KICK', trigger.sender + ' ' + trigger.group(2)))
 
 
 def configureHostMask(mask):

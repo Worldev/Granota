@@ -43,7 +43,6 @@ def deop(bot, trigger):
     else:
         return
 
-
 @commands('voice', 'v', 'veu', 'voz')
 def voice(bot, trigger):
     if trigger.admin:
@@ -60,8 +59,6 @@ def voice(bot, trigger):
     else:
         return
             
-
-
 @commands('devoice', 'dv')
 def devoice(bot, trigger):
     if trigger.admin:
@@ -82,7 +79,7 @@ def devoice(bot, trigger):
 @commands('kick')
 @priority('high')
 def kick(bot, trigger):
-    if bot.privileges[trigger.sender][trigger.nick] < OP:
+    if bot.privileges[trigger.sender] < OP:
         return
     if not trigger.admin:
         return

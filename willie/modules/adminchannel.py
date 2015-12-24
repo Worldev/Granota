@@ -79,9 +79,10 @@ def devoice(bot, trigger):
 @commands('kick')
 @priority('high')
 def kick(bot, trigger):
-    if bot.privileges[trigger.sender] < OP:
-        return
     if not trigger.admin:
+        return
+    if bot.privileges[trigger.sender][bot.nick] < OP:
+        bot.reply("Sorry, I don't have enough privilegis to perform this operation
         return
     bot.write(['KICK', trigger.group(2)])
 

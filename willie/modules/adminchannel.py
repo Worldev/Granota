@@ -154,7 +154,21 @@ def ban(bot, trigger):
 
 @commands('unban')
 def unban(bot, trigger):
-    if bot.privileges[trigger.sender][trigger.nick] < OP:
+    if not trigger.admin:
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, pero no tienes suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, but you don't have enough privilegis to perform this operation")
+        return        
+    if bot.privileges[trigger.sender][bot.nick] < HALFOP:
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tinc suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, no tengo suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, I don't have enough privilegis to perform this operation")
         return
     text = trigger.group().split()
     argc = len(text)
@@ -176,7 +190,21 @@ def unban(bot, trigger):
 
 @commands('quiet')
 def quiet(bot, trigger):
-    if bot.privileges[trigger.sender][trigger.nick] < OP:
+    if not trigger.admin:
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, pero no tienes suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, but you don't have enough privilegis to perform this operation")
+        return        
+    if bot.privileges[trigger.sender][bot.nick] < HALFOP:
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tinc suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, no tengo suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, I don't have enough privilegis to perform this operation")
         return
     text = trigger.group().split()
     argc = len(text)
@@ -198,7 +226,21 @@ def quiet(bot, trigger):
 
 @commands('unquiet')
 def unquiet(bot, trigger):
-    if bot.privileges[trigger.sender][trigger.nick] < OP:
+    if not trigger.admin:
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, pero no tienes suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, but you don't have enough privilegis to perform this operation")
+        return        
+    if bot.privileges[trigger.sender][bot.nick] < HALFOP:
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tinc suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, no tengo suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, I don't have enough privilegis to perform this operation")
         return
     text = trigger.group().split()
     argc = len(text)
@@ -221,7 +263,21 @@ def unquiet(bot, trigger):
 @commands('kickban', 'kb')
 @priority('high')
 def kickban(bot, trigger):
-    if bot.privileges[trigger.sender][trigger.nick] < OP:
+    if not trigger.admin:
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, pero no tienes suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, but you don't have enough privilegis to perform this operation")
+        return        
+    if bot.privileges[trigger.sender][bot.nick] < HALFOP:
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tinc suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, no tengo suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, I don't have enough privilegis to perform this operation")
         return
     text = trigger.group().split()
     argc = len(text)
@@ -248,13 +304,21 @@ def kickban(bot, trigger):
 @commands('topic')
 def topic(bot, trigger):
     purple, green, bold = '\x0306', '\x0310', '\x02'
-    if bot.privileges[trigger.sender][trigger.nick] < OP:
+    if not trigger.admin:
         if bot.config.lang == 'ca':
-            bot.reply(u"Necessito com a ḿinim flags d'operador del canal.")
+            bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
         elif bot.config.lang == 'es':
-            bot.reply("Necesito flags de operador del canal.")
+            bot.reply("Lo siento, pero no tienes suficientes permisos para hacer esta operación")
         else:
-            bot.reply("I need at least operator flags to perform this action.")
+            bot.reply("Sorry, but you don't have enough privilegis to perform this operation")
+        return        
+    if bot.privileges[trigger.sender][bot.nick] < HALFOP:
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tinc suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, no tengo suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, I don't have enough privilegis to perform this operation")
         return
     text = trigger.group(2)
     if text == '':

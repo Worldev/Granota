@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
-from willie.module import commands, priority, OP
+from willie.module import commands, priority, OP, HALFOP
 
 
 def setup(bot):
@@ -81,10 +81,10 @@ def devoice(bot, trigger):
 def kick(bot, trigger):
     if not trigger.admin:
         return
-    if bot.privileges[trigger.sender][bot.nick] > 22: # 22 = halfop (20 = op, 23 = voice)
+    if bot.privileges[trigger.sender][bot.nick] < HALFOP:
         bot.reply("Sorry, I don't have enough privilegis to perform this operation
         return
-    bot.write(['KICK', trigger.group(2)])
+    bot.write(('KICK', trigger.group(2)))
 
 
 def configureHostMask(mask):

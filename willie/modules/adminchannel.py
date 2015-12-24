@@ -252,12 +252,12 @@ def unquiet(bot, trigger):
     if opt.startswith('#'):
         if argc < 3:
             return
-        quietmask = text[2]
         channel = opt
+        quietmask = text[2]
     quietmask = configureHostMask(quietmask)
     if quietmask == '':
         return
-    bot.write(['MODE', opt, '-q', quietmask])
+    bot.write(['MODE', channel, '-q', quietmask])
 
 
 @commands('kickban', 'kb')

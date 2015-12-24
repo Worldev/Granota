@@ -82,7 +82,7 @@ def kick(bot, trigger):
     if not trigger.admin:
         return
     if bot.privileges[trigger.sender][bot.nick] < HALFOP:
-        bot.reply("Sorry, I don't have enough privilegis to perform this operation
+        bot.reply("Sorry, I don't have enough privilegis to perform this operation")
         return
     bot.write(('KICK', trigger.group(2)))
 

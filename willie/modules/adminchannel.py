@@ -275,13 +275,13 @@ def kickban(bot, trigger):
     if argc < 2:
         return
     opt = text[1]
+    reason = text[2]
     banmask = opt
     channel = trigger.sender
     if opt.startswith('#'):
         if argc < 3:
             return
         channel = opt
-        reason = text[2]
     banmask = configureHostMask(banmask)
     if banmask == '':
         return

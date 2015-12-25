@@ -243,17 +243,7 @@ def unquiet(bot, trigger):
             bot.reply("Sorry, I don't have enough privilegis to perform this operation")
         return
     text = trigger.group().split()
-    argc = len(text)
-    if argc < 2:
-        return
-    opt = text[1]
-    quietmask = opt
     channel = trigger.sender
-    if opt.startswith('#'):
-        if argc < 3:
-            return
-        channel = opt
-        quietmask = text[2]
     quietmask = configureHostMask(quietmask)
     if quietmask == '':
         return

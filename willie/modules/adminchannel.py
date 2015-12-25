@@ -244,7 +244,7 @@ def unquiet(bot, trigger):
         return
     text = trigger.group().split()
     channel = trigger.sender
-    quietmask = text[2]
+    quietmask = text[1]
     quietmask = configureHostMask(quietmask)
     if quietmask == '':
         return

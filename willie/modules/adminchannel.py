@@ -281,13 +281,12 @@ def kickban(bot, trigger):
         if argc < 3:
             return
         channel = opt
-        nick = text[1]
         reason = text[2]
     banmask = configureHostMask(nick)
     if banmask == '':
         return
     bot.write(['MODE', channel, '+b', banmask])
-    bot.write(['KICK', channel, nick, ' :', reason])
+    bot.write(['KICK', channel, opt, ' :', reason])
 
 @commands('topic')
 def topic(bot, trigger):

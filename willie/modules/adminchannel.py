@@ -272,24 +272,21 @@ def kickban(bot, trigger):
         return
     text = trigger.group().split()
     argc = len(text)
-    if argc < 4:
+    if argc < 2:
         return
     opt = text[1]
-    nick = opt
-    mask = text[2]
-    reasonidx = 3
+    banmask = opt
+    channel = trigger.sender
     if opt.startswith('#'):
-        if argc < 5:
+        if argc < 3:
             return
         channel = opt
-        nick = text[2]
-        mask = text[3]
-        reasonidx = 4
-    reason = ' '.join(text[reasonidx:])
-    mask = configureHostMask(mask)
-    if mask == '':
+        nick = text[1]
+        reason = text[2]
+    banmask = configureHostMask(nick)
+    if banmask == '':
         return
-    bot.write(['MODE', '+b', mask])
+    bot.write(['MODE', channel, '+b', banmask])
     bot.write(['KICK', channel, nick, ' :', reason])
 
 @commands('topic')

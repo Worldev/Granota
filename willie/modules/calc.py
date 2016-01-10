@@ -45,15 +45,15 @@ def c(bot, trigger):
 
 @commands('py')
 def py(bot, trigger):
-    query = trigger.group(2)
-    if "bot" in query and not trigger.admin:
+    if not trigger.admin:
         if bot.config.lang == 'ca':
-            bot.say("Ho sento, però no pots executar funcions que m'impliquin a mi.")
+            bot.say("Ho sento, però aquesta funció està restringida als administradors.")
         elif bot.config.lang == 'es':
-            bot.say("Lo siento, pero no puedes ejecutar funciones relacionadas conmigo.")
+            bot.say("Lo siento, pero esa funcion está restringida a los administradores.")
         else:
-            bot.say("Sorry, but you can't execute functions related with me.")
+            bot.say("Sorry, but this function is restricted to admins.")
         return
+    query = trigger.group(2)
     bot.say(str(eval(query)))
 
 @commands('wa', 'wolfram')

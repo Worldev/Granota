@@ -13,7 +13,8 @@ def detectservices(args):
     if args == None:
         return False
     else:
-        if ("-s" in args(2)) or ("--services" in args(2)):
+        args = args.split()
+        if ("-s" in args[1]) or ("--services" in args[1]):
             return True
         else:
             return False

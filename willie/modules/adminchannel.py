@@ -13,10 +13,13 @@ def setup(bot):
 @commands('op')
 def op(bot, trigger):
     if trigger.admin:
-        if ("-s" in trigger.group(2)) or ("--services" in trigger.group(2)):
-            services = True
+        if not trigger.group(2):
+            services == False
         else:
-            services = False
+            if ("-s" in trigger.group(2)) or ("--services" in trigger.group(2)):
+                services = True
+            else:
+                services = False
         if "-s" in trigger.group(2).split()[0] or "--services" in trigger.group(2).split()[0]:
             channel = trigger.sender
             nick = trigger.nick

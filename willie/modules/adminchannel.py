@@ -10,7 +10,7 @@ def setup(bot):
         bot.db.preferences.add_columns(['topic_mask'])
 
 def detectservices(args):
-    if args == None:
+    if args == "":
         return False
     else:
         args = args.split()

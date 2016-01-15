@@ -14,11 +14,14 @@ def setup(bot):
 def op(bot, trigger):
     if trigger.admin:
         if not trigger.group(2):
+            global services
             services == False
         else:
             if ("-s" in trigger.group(2)) or ("--services" in trigger.group(2)):
+                global services
                 services = True
             else:
+                global services
                 services = False
         if "-s" in trigger.group(2).split()[0] or "--services" in trigger.group(2).split()[0]:
             channel = trigger.sender

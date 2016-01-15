@@ -13,7 +13,7 @@ def setup(bot):
 @commands('op')
 def op(bot, trigger):
     if trigger.admin:
-        if trigger.group(3) == "-s" or trigger.group(3) == "--services":
+        if "-s" in trigger.group(2) or "--services" in trigger.group(2):
             services = True
         else:
             services = False
@@ -27,8 +27,11 @@ def op(bot, trigger):
             return
         else:
             channel = trigger.sender
-            nick = trigger.group(2)
-            bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
+            nick = trigger.group(2).split()
+            if services == True:
+                bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
+            else:
+                bot.write(['MODE', '%s +o %s' % (channel, nick)])
             return
     else:
         return

@@ -23,7 +23,7 @@ def op(bot, trigger):
             if services == True:
                 bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
             else:
-                bot.write(('MODE', '%s +o %s' % (channel, nick)))
+                bot.write(('MODE', channel + ' +o ' + nick))
             return
         else:
             channel = trigger.sender
@@ -31,7 +31,7 @@ def op(bot, trigger):
             if services == True:
                 bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
             else:
-                bot.write(('MODE', '%s +o %s' % (channel, nick)))
+                bot.write(('MODE', channel + ' +o ' + nick))
             return
     else:
         return

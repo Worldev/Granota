@@ -17,7 +17,7 @@ def op(bot, trigger):
             services = True
         else:
             services = False
-        if not trigger.group(2):
+        if "-s" in trigger.group(2).split()[0] or "--services" in trigger.group(2).split()[0]:
             channel = trigger.sender
             nick = trigger.nick
             if services == True:

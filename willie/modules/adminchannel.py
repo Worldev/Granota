@@ -27,7 +27,7 @@ def op(bot, trigger):
             return
         else:
             channel = trigger.sender
-            nick = trigger.group(2).split()
+            nick = trigger.group(2).split()[0]
             if services == True:
                 bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
             else:

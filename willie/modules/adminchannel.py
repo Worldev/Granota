@@ -26,11 +26,11 @@ def _detectservices(bot, args):
 def _op(bot, trigger):
     channel = trigger.sender
     if trigger.group(2):
-        bot.say
+        bot.say("found trigger.group(2)")
         args = trigger.group(2).replace("-s", "").replace("--services", "")
     else:
         args = ""
-    if args != "" or args != " ":
+    if args.split() != []:
         nick = args
         bot.say("channel: %s; nick: %s" % (channel, nick))
         return [channel, nick]
@@ -59,14 +59,16 @@ def op(bot, trigger):
 @commands('deop')
 def deop(bot, trigger):
     if trigger.admin:
-        services = _detectservices(trigger.group(0))
-        args = _op(trigger)
+        services = _detectservices(bot, trigger.group(0))
+        args = _op(bot, trigger)
         if services == True:
+            bot.say("opping with services")
             bot.msg('ChanServ', 'deop ' + args[0] + ' ' + args[1])
         else:
             amount = ""
             for i in args[1].split(","):
                 amount += "o"
+            bot.say("opping without services with amount %s" % amount)
             bot.write(('MODE', args[0] + ' -' + amount + ' ' + args[1]))
     else:
         return

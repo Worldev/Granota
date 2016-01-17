@@ -13,10 +13,10 @@ def _detectservices(args):
     if args == "":
         return [False, args]
     else:
-        args = args.split()
-        if len(args) == 1:
+        aargs = args.split()
+        if len(aargs) == 1:
             return [False, args]
-        if ("-s" in args[1]) or ("--services" in args[1]):
+        if ("-s" in aargs[1]) or ("--services" in aargs[1]):
             return [True, args.replace("-s", "").replace("--services", "")]
         else:
             return [False, args]

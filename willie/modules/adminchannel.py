@@ -11,20 +11,17 @@ def setup(bot):
 
 def _detectservices(args):
     if args == "":
-        return [False, args]
+        return False
     else:
-        aargs = args.split()
-        if len(aargs) == 1:
-            return [False, args]
-        if ("-s" in aargs[1]) or ("--services" in aargs[1]):
-            return [True, args.replace("-s", "").replace("--services", "")]
+        args = args.split()
+        if len(args) == 1:
+            return False
+        if ("-s" in args[1]) or ("--services" in args[1]):
+            return True
         else:
-            return [False, args]
+            return False
 
 def _op(trigger, args):
-    args = args.split()
-    del args[0]
-    args = " ".join(args)
     if args != "" or args != " ":
         channel = trigger.sender
         nick = args
@@ -37,10 +34,8 @@ def _op(trigger, args):
 @commands('op')
 def op(bot, trigger):
     if trigger.admin:
-        result = _detectservices(trigger.group(0))
-        services = result[0]
-        arg = result[1]
-        args = _op(trigger, arg)
+        services = _detectservices(trigger.group(0))
+        args = _op(trigger, trigger.group(2).replace("-s", "").replace("--services", ""))
         if services == True:
             bot.msg('ChanServ', 'op ' + args[0] + ' ' + args[1])
         else:
@@ -54,17 +49,15 @@ def op(bot, trigger):
 @commands('deop')
 def deop(bot, trigger):
     if trigger.admin:
-        result = _detectservices(trigger.group(0))
-        services = result[0]
-        arg = result[1]
-        args = _op(trigger, arg)
+        services = _detectservices(trigger.group(0))
+        args = _op(trigger, trigger.group(2).replace("-s", "").replace("--services", ""))
         if services == True:
-            bot.msg('ChanServ', 'deop ' + args[0] + ' ' + args[1])
+            bot.msg('ChanServ', 'op ' + args[0] + ' ' + args[1])
         else:
             amount = ""
             for i in args[1].split(","):
                 amount += "o"
-            bot.write(('MODE', args[0] + ' -' + amount + ' ' + args[1]))
+            bot.write(('MODE', args[0] + ' +' + amount + ' ' + args[1]))
     else:
         return
 

@@ -14,7 +14,7 @@ def _detectservices(args):
         return False
     else:
         args = args.split()
-        if "-s" in args or "--services" in args[1]:
+        if "-s" in args or "--services" in args:
             return True
         else:
             return False

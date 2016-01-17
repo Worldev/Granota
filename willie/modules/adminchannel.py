@@ -27,12 +27,18 @@ def op(bot, trigger):
         services = detectservices(trigger.group(0))
         if services == True:
             channel = trigger.sender
-            nick = trigger.nick
+            if not trigger.group(2):
+                nick = trigger.nick
+            else:
+                nick = re.split('--?s', trigger.group(2))[0]
             bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
             return
         else:
             channel = trigger.sender
-            nick = trigger.group(2).split()[0]
+            if not trigger.group(2):
+                nick = trigger.nick
+            else:
+                nick = re.split('--?s', trigger.group(2))[0]
             bot.write(('MODE', channel + ' +o ' + nick))
             return
     else:

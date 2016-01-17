@@ -38,6 +38,7 @@ def op(bot, trigger):
         services = result[0]
         arg = result[1]
         args = _op(trigger, arg)
+        bot.say(args[1]) # debug
         if services == True:
             bot.msg('ChanServ', 'op ' + args[0] + ' ' + args[1])
         else:
@@ -55,6 +56,7 @@ def deop(bot, trigger):
         services = result[0]
         arg = result[1]
         args = _op(trigger, arg)
+        bot.say(args[1]) # debug
         if services == True:
             bot.msg('ChanServ', 'deop ' + args[0] + ' ' + args[1])
         else:

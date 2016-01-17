@@ -9,7 +9,7 @@ def setup(bot):
     if bot.db and not bot.db.preferences.has_columns('topic_mask'):
         bot.db.preferences.add_columns(['topic_mask'])
 
-def _detectservices(args):
+def _detectservices(bot, args):
     bot.say("_detectservices()")
     if args == "":
         bot.say("no services, no argument")
@@ -23,7 +23,7 @@ def _detectservices(args):
             bot.say("No services")
             return False
 
-def _op(trigger):
+def _op(bot, trigger):
     channel = trigger.sender
     if trigger.group(2):
         bot.say
@@ -42,8 +42,8 @@ def _op(trigger):
 @commands('op')
 def op(bot, trigger):
     if trigger.admin:
-        services = _detectservices(trigger.group(0))
-        args = _op(trigger)
+        services = _detectservices(bot, trigger.group(0))
+        args = _op(bot, trigger)
         if services == True:
             bot.say("opping with services")
             bot.msg('ChanServ', 'op ' + args[0] + ' ' + args[1])

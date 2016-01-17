@@ -10,26 +10,33 @@ def setup(bot):
         bot.db.preferences.add_columns(['topic_mask'])
 
 def _detectservices(args):
+    bot.say("_detectservices()")
     if args == "":
+        bot.say("no services, no argument")
         return False
     else:
         args = args.split()
         if "-s" in args or "--services" in args:
+            bot.say("with services")
             return True
         else:
+            bot.say("No services")
             return False
 
 def _op(trigger):
     channel = trigger.sender
     if trigger.group(2):
+        bot.say
         args = trigger.group(2).replace("-s", "").replace("--services", "")
     else:
         args = ""
     if args != "" or args != " ":
         nick = args
+        bot.say("channel: %s; nick: %s" % (channel, nick))
         return [channel, nick]
     else:
         nick = trigger.nick
+        bot.say("channel: %s; nick: %s (ln 40)" % (channel, nick))
         return [channel, nick]
 
 @commands('op')
@@ -38,11 +45,13 @@ def op(bot, trigger):
         services = _detectservices(trigger.group(0))
         args = _op(trigger)
         if services == True:
+            bot.say("opping with services")
             bot.msg('ChanServ', 'op ' + args[0] + ' ' + args[1])
         else:
             amount = ""
             for i in args[1].split(","):
                 amount += "o"
+            bot.say("opping without services with amount %s" % amount)
             bot.write(('MODE', args[0] + ' +' + amount + ' ' + args[1]))
     else:
         return

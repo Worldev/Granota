@@ -42,20 +42,6 @@ def c(bot, trigger):
                       "Use .commands for a list.")
     bot.reply(result)
 
-
-@commands('py')
-def py(bot, trigger):
-    if not trigger.admin:
-        if bot.config.lang == 'ca':
-            bot.say("Ho sento, però aquesta funció està restringida als administradors.")
-        elif bot.config.lang == 'es':
-            bot.say("Lo siento, pero esa funcion está restringida a los administradores.")
-        else:
-            bot.say("Sorry, but this function is restricted to admins.")
-        return
-    query = trigger.group(2)
-    bot.say(str(eval(query)))
-
 @commands('wa', 'wolfram')
 def wa(bot, trigger):
     if not trigger.group(2):

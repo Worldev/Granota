@@ -49,7 +49,7 @@ def op(bot, trigger):
             bot.msg('ChanServ', 'op ' + args[0] + ' ' + args[1])
         else:
             amount = ""
-            for i in args[1].split(","):
+            for i in args[1].split():
                 amount += "o"
             bot.say("opping without services with amount %s" % amount)
             bot.write(('MODE', args[0] + ' +' + amount + ' ' + args[1]))
@@ -66,7 +66,7 @@ def deop(bot, trigger):
             bot.msg('ChanServ', 'deop ' + args[0] + ' ' + args[1])
         else:
             amount = ""
-            for i in args[1].split(","):
+            for i in args[1].split():
                 amount += "o"
             bot.say("opping without services with amount %s" % amount)
             bot.write(('MODE', args[0] + ' -' + amount + ' ' + args[1]))

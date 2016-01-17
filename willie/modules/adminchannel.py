@@ -19,7 +19,7 @@ def _detectservices(args):
         else:
             return False
 
-def _op(bot, trigger):
+def _op(trigger):
     channel = trigger.sender
     if trigger.group(2):
         args = trigger.group(2).replace("-s", "").replace("--services", "")
@@ -36,7 +36,7 @@ def _op(bot, trigger):
 def op(bot, trigger):
     if trigger.admin:
         services = _detectservices(trigger.group(0))
-        args = _op(bot, trigger)
+        args = _op( trigger)
         if services == True:
             bot.msg('ChanServ', 'op ' + args[0] + ' ' + args[1])
         else:
@@ -51,7 +51,7 @@ def op(bot, trigger):
 def deop(bot, trigger):
     if trigger.admin:
         services = _detectservices(trigger.group(0))
-        args = _op(bot, trigger)
+        args = _op(trigger)
         if services == True:
             bot.msg('ChanServ', 'deop ' + args[0] + ' ' + args[1])
         else:
@@ -65,32 +65,30 @@ def deop(bot, trigger):
 @commands('voice', 'v', 'veu', 'voz')
 def voice(bot, trigger):
     if trigger.admin:
-        if not trigger.group(2):
-            channel = trigger.sender
-            nick = trigger.nick
-            bot.msg('ChanServ', 'voice ' + trigger.sender + ' ' + nick)
-            return
+        services = _detectservices(trigger.group(0))
+        args = _op(trigger)
+        if services == True:
+            bot.msg('ChanServ', 'voice ' + args[0] + ' ' + args[1])
         else:
-            channel = trigger.sender
-            nick = trigger.group(2)
-            bot.msg('ChanServ', 'voice ' + trigger.sender + ' ' + nick)
-            return
+            amount = ""
+            for i in args[1].split():
+                amount += "v"
+            bot.write(('MODE', args[0] + ' +' + amount + ' ' + args[1]))
     else:
         return
             
 @commands('devoice', 'dv')
 def devoice(bot, trigger):
     if trigger.admin:
-        if not trigger.group(2):
-            channel = trigger.sender
-            nick = trigger.nick
-            bot.msg('ChanServ', 'devoice ' + trigger.sender + ' ' + nick)
-            return
+        services = _detectservices(trigger.group(0))
+        args = _op(trigger)
+        if services == True:
+            bot.msg('ChanServ', 'devoice ' + args[0] + ' ' + args[1])
         else:
-            channel = trigger.sender
-            nick = trigger.nick
-            bot.msg('ChanServ', 'devoice ' + trigger.sender + ' ' + nick)
-            return
+            amount = ""
+            for i in args[1].split():
+                amount += "v"
+            bot.write(('MODE', args[0] + ' -' + amount + ' ' + args[1]))
     else:
         return
 
@@ -240,7 +238,7 @@ def quiet(bot, trigger):
     quietmask = configureHostMask(quietmask)
     if quietmask == '':
         return
-    bot.write(['MODE', channel, '+q', quietmask])
+ bot.write(['MODE', channel, '+q', quietmask])
 
 
 @commands('unquiet')

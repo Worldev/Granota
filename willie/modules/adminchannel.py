@@ -9,7 +9,7 @@ def setup(bot):
     if bot.db and not bot.db.preferences.has_columns('topic_mask'):
         bot.db.preferences.add_columns(['topic_mask'])
 
-def detectservices(args):
+def _detectservices(args):
     if args == "":
         return False
     else:
@@ -21,43 +21,43 @@ def detectservices(args):
         else:
             return False
 
+def _op(trigger):
+    if not trigger.group(2):
+        channel = trigger.sender
+        nick = trigger.nick
+        return [channel, nick]
+    else:
+        channel = trigger.sender
+        nick = trigger.group(2)
+        return [channel, nick]
+
 @commands('op')
 def op(bot, trigger):
     if trigger.admin:
-        services = detectservices(trigger.group(0))
+        services = _detectservices(trigger.group(0))
+        args = _op(trigger)
         if services == True:
-            channel = trigger.sender
-            if trigger.group(2) == "-s" or trigger.group(2) == "--services":
-                nick = trigger.nick
-            else:
-                nick = re.split('--?s', trigger.group(2))[0]
-            bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
-            return
+            bot.msg('ChanServ', 'op ' + args[0] + ' ' + args[1])
         else:
-            channel = trigger.sender
-            if not trigger.group(2):
-                nick = trigger.nick
-            else:
-                nick = re.split('--?s', trigger.group(2))[0]
-            bot.write(('MODE', channel + ' +o ' + nick))
-            return
+            amount = ""
+            for i in args[1].split(","):
+                amount += "o"
+            bot.write(('MODE', args[0] + ' +' + amount + ' ' + args[1]))
     else:
         return
-        
 
 @commands('deop')
 def deop(bot, trigger):
     if trigger.admin:
-        if not trigger.group(2):
-            channel = trigger.sender
-            nick = trigger.nick
-            bot.msg('ChanServ', 'deop ' + trigger.sender + ' ' + nick)
-            return
+        services = _detectservices(trigger.group(0))
+        args = _op(trigger)
+        if services == True:
+            bot.msg('ChanServ', 'deop ' + args[0] + ' ' + args[1])
         else:
-            channel = trigger.sender
-            nick = trigger.group(2)
-            bot.msg('ChanServ', 'deop ' + trigger.sender + ' ' + nick)
-            return
+            amount = ""
+            for i in args[1].split(","):
+                amount += "o"
+            bot.write(('MODE', args[0] + ' -' + amount + ' ' + args[1]))
     else:
         return
 

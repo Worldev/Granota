@@ -22,19 +22,21 @@ def _detectservices(args):
             return [False, args]
 
 def _op(trigger, args):
-    if not trigger.group(2):
+    if args != "" or args != " ":
         channel = trigger.sender
-        nick = trigger.nick
+        nick = args
         return [channel, nick]
     else:
         channel = trigger.sender
-        nick = args
+        nick = trigger.nick
         return [channel, nick]
 
 @commands('op')
 def op(bot, trigger):
     if trigger.admin:
-        services,arg = _detectservices(trigger.group(0))
+        result = _detectservices(trigger.group(0))
+        services = result[0]
+        arg = result[1]
         args = _op(trigger, arg)
         if services == True:
             bot.msg('ChanServ', 'op ' + args[0] + ' ' + args[1])
@@ -49,15 +51,17 @@ def op(bot, trigger):
 @commands('deop')
 def deop(bot, trigger):
     if trigger.admin:
-        services,arg = _detectservices(trigger.group(0))
+        result = _detectservices(trigger.group(0))
+        services = result[0]
+        arg = result[1]
         args = _op(trigger, arg)
         if services == True:
-            bot.msg('ChanServ', 'op ' + args[0] + ' ' + args[1])
+            bot.msg('ChanServ', 'deop ' + args[0] + ' ' + args[1])
         else:
             amount = ""
             for i in args[1].split(","):
                 amount += "o"
-            bot.write(('MODE', args[0] + ' +' + amount + ' ' + args[1]))
+            bot.write(('MODE', args[0] + ' -' + amount + ' ' + args[1]))
     else:
         return
 

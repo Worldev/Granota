@@ -9,49 +9,40 @@ def setup(bot):
     if bot.db and not bot.db.preferences.has_columns('topic_mask'):
         bot.db.preferences.add_columns(['topic_mask'])
 
-def _detectservices(bot, args):
-    bot.say("_detectservices()")
+def _detectservices(args):
     if args == "":
-        bot.say("no services, no argument")
         return False
     else:
         args = args.split()
         if "-s" in args or "--services" in args:
-            bot.say("with services")
             return True
         else:
-            bot.say("No services")
             return False
 
 def _op(bot, trigger):
     channel = trigger.sender
     if trigger.group(2):
-        bot.say("found trigger.group(2)")
         args = trigger.group(2).replace("-s", "").replace("--services", "")
     else:
         args = ""
-    if args.split() != []:
-        nick = args
-        bot.say("channel: %s; nick: %s" % (channel, nick))
+    if args.split() == []:
+        nick = trigger.nick
         return [channel, nick]
     else:
-        nick = trigger.nick
-        bot.say("channel: %s; nick: %s (ln 40)" % (channel, nick))
+        nick = args
         return [channel, nick]
 
 @commands('op')
 def op(bot, trigger):
     if trigger.admin:
-        services = _detectservices(bot, trigger.group(0))
+        services = _detectservices(trigger.group(0))
         args = _op(bot, trigger)
         if services == True:
-            bot.say("opping with services")
             bot.msg('ChanServ', 'op ' + args[0] + ' ' + args[1])
         else:
             amount = ""
             for i in args[1].split():
                 amount += "o"
-            bot.say("opping without services with amount %s" % amount)
             bot.write(('MODE', args[0] + ' +' + amount + ' ' + args[1]))
     else:
         return
@@ -59,16 +50,14 @@ def op(bot, trigger):
 @commands('deop')
 def deop(bot, trigger):
     if trigger.admin:
-        services = _detectservices(bot, trigger.group(0))
+        services = _detectservices(trigger.group(0))
         args = _op(bot, trigger)
         if services == True:
-            bot.say("opping with services")
             bot.msg('ChanServ', 'deop ' + args[0] + ' ' + args[1])
         else:
             amount = ""
             for i in args[1].split():
                 amount += "o"
-            bot.say("opping without services with amount %s" % amount)
             bot.write(('MODE', args[0] + ' -' + amount + ' ' + args[1]))
     else:
         return

@@ -25,21 +25,15 @@ def detectservices(args):
 def op(bot, trigger):
     if trigger.admin:
         services = detectservices(trigger.group(0))
-        if "-s" in trigger.group(2).split()[0] or "--services" in trigger.group(2).split()[0]:
+        if services == True:
             channel = trigger.sender
             nick = trigger.nick
-            if services == True:
-                bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
-            else:
-                bot.write(('MODE', channel + ' +o ' + nick))
+            bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
             return
         else:
             channel = trigger.sender
             nick = trigger.group(2).split()[0]
-            if services == True:
-                bot.msg('ChanServ', 'op ' + trigger.sender + ' ' + nick)
-            else:
-                bot.write(('MODE', channel + ' +o ' + nick))
+            bot.write(('MODE', channel + ' +o ' + nick))
             return
     else:
         return

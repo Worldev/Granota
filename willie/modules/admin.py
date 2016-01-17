@@ -267,9 +267,11 @@ def nick(bot, trigger):
 def pm_tell_owner(bot, trigger):
     if trigger.sender.startswith("#"):
         return
-    if trigger.owner:
+    if trigger.owner or trigger.admin:
         return
     bot.msg(bot.config.owner, "<%s> %s" % (trigger.nick, trigger.group(0)))
+    for i in bot.config.admins.split(","):
+        bot.msg(i, "<%s> %s" % (trigger.nick, trigger.group(0)))
     return
 
 if __name__ == '__main__':

@@ -36,7 +36,7 @@ def _op(trigger):
 def op(bot, trigger):
     if trigger.admin:
         services = _detectservices(trigger.group(0))
-        args = _op( trigger)
+        args = _op(trigger)
         if services == True:
             bot.msg('ChanServ', 'op ' + args[0] + ' ' + args[1])
         else:

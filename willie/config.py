@@ -94,7 +94,7 @@ class Config(object):
                 self.parser.set('core', 'user', 'willie')
             if not self.parser.has_option('core', 'name'):
                 self.parser.set('core', 'name',
-                                'Granota - https://github.com/CatIRCBots/Granota')
+                                'Granota - https://github.com/Worldev/Granota')
             if not self.parser.has_option('core', 'prefix'):
                 self.parser.set('core', 'prefix', r'\.')
             if not self.parser.has_option('core', 'admins'):

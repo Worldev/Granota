@@ -92,13 +92,23 @@ def msg(bot, trigger):
         return
     if not trigger.admin:
         return
+    try:
+        channel, _sep, message = trigger.group(2).partition(' ')
+        message = message.strip()
+        if not channel or not message:
+            return
+        bot.msg(channel, message)
+    except AttributeError:
+        if bot.config.lang == "ca":
+            message = "No has posat missatge!"
+        elif bot.config.lang == "es":
+            message = u"No has introducido ningún mensaje!"
+        else:
+            message = "You have not entered a message!"
+        bot.reply(message)
+    
 
-    channel, _sep, message = trigger.group(2).partition(' ')
-    message = message.strip()
-    if not channel or not message:
-        return
-
-    bot.msg(channel, message)
+    
 
 
 @willie.module.commands('me')

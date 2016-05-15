@@ -1160,5 +1160,19 @@
 			"help": "Dóna el número del caràcter especificat a la taula ASCII.",
 			"example": "numchar a"
 		}
-	}
+	},
+	"update": {
+		"en": {
+			"help": "Updates Granota's code from GitHub. This is a nickname command.",
+			"example": "Granota: update"
+		},
+		"es": {
+			"help": "Actualiza el código de Granota des de GitHub. Es un comando de nick.",
+			"example": "Granota: update"
+		},
+		"ca": {
+			"help": "Actualitza el codi de Granota des de GitHub. És una ordre de nick.",
+			"example": "Granota: update"
+		}
+	}	
 }

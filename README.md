@@ -15,5 +15,7 @@ A multilingual IRC bot coded in Python and based off Willie.
 - Spanish: No está disponible.
 - Catalan: No està disponible.
 
-## License
-See LICENSE file
+## License & copyright
+© Worldev 2015
+
+See LICENSE file for more information

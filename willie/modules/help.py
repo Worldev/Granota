@@ -92,17 +92,17 @@ def help2(bot, trigger):
 		url = ' (' + bot.config.project_url + ')'
     	if bot.config.lang == 'ca':
     		response = (
-    		'Hola, Sóc un bot del projecte {0}{1}. Escriu "{2}ordres" per una llista d\'ordres '.format(project, url, bot.config.prefix.replace("\\", "")) +
+    		'Hola, Sóc un bot del projecte {0}{1}. Escriu "{2}ordres" per una llista d\'ordres. '.format(project, url, bot.config.prefix.replace("\\", "")) +
 	        'El meu propietari és %s.'
 	    % bot.config.owner)
 	elif bot.config.lang == 'es':
     		response = (
-	        'Hola, Soy un bot del proyecto {0}{1}. Escribe "{0}comandos" por una lista de mis comandos '.format(project, url, bot.config.prefix.replace("\\", "")) +
+	        'Hola, Soy un bot del proyecto {0}{1}. Escribe "{0}comandos" por una lista de mis comandos. '.format(project, url, bot.config.prefix.replace("\\", "")) +
 	        'Mi propietario es %s.'
 	    ) % bot.config.owner
 	else:
     		response = (
-	        'Hi, I\'m a {0} project bot{1}. Write "{0}commands" for a commands list '.format(project, url, bot.config.prefix.replace("\\", "")) +
+	        'Hi, I\'m a {0} project bot{1}. Write "{0}commands" for a commands list. '.format(project, url, bot.config.prefix.replace("\\", "")) +
 	        'My owner is %s.'
 	    ) % bot.config.owner
 		   

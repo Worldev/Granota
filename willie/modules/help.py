@@ -5,22 +5,20 @@ import willie.config as config
 import json
 
 def configure(config):
-	if not config.has_section('help'):
-		config.add_section('help')
         if config.lang == 'ca':
-            config.interactive_add('help', 'project', u'Quin és el nom del teu projecte?',
+            config.interactive_add('core', 'project', u'Quin és el nom del teu projecte?',
                 'Worldev')
-            config.interactive_add('url', 'project_url',
+            config.interactive_add('core', 'project_url',
                 u'Quin és l\'url del teu projecte?', 'http://exemple.com')
         elif config.lang == 'es':
-            config.interactive_add('help', 'project', u'¿Cuál es el nombre de tu proyecto?',
+            config.interactive_add('core', 'project', u'¿Cuál es el nombre de tu proyecto?',
                 'Worldev')
-            config.interactive_add('url', 'project_url',
+            config.interactive_add('core', 'project_url',
                 u'¿Cuál es el url de tu proyecto?', 'http://ejemplo.com')
         else:
-            config.interactive_add('help', 'project', u'What\'s the name of your project?',
+            config.interactive_add('core', 'project', u'What\'s the name of your project?',
                 'Worldev')
-            config.interactive_add('url', 'project_url',
+            config.interactive_add('core', 'project_url',
                 u'What\'s the url of your project?', 'http://exemple.com')
 
 @rule('$nick' '(?i)(help|doc) +([A-Za-z]+)(?:\?+)?$')
@@ -86,12 +84,12 @@ def commands(bot, trigger):
 @rule('$nick' r'(?i)(ajuda|ayuda|help)(?:[?!]+)?$')
 @priority('low')
 def help2(bot, trigger):
-	if not bot.config.help.project:
+	if not bot.config.project:
 		project = 'Worldev'
 		url = ''
 	else:
-		project = bot.config.help.project
-		url = ' (' + bot.config.help.project_url + ')'
+		project = bot.config.project
+		url = ' (' + bot.config.project_url + ')'
     	if bot.config.lang == 'ca':
     		response = (
     		'Hola, Sóc un bot del projecte {0}{1}. Escriu "{2}ordres" per una llista d\'ordres '.format(project, url, bot.config.prefix.replace("\\", "")) +

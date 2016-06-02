@@ -3,6 +3,24 @@ from willie.module import commands, rule, example, priority
 import willie.config as config
 import json
 
+def configure(config):
+	if not config.has_section('help'):
+		config.add_section('help')
+        if config.lang == 'ca':
+            config.interactive_add('help', 'project', u'Quin és el nom del teu projecte?',
+                'Worldev')
+            config.interactive_add('url', 'project_url',
+                u'Quin és l\'url del teu projecte?', 'http://exemple.com')
+        elif config.lang == 'es':
+            config.interactive_add('help', 'project', u'¿Cuál es el nombre de tu proyecto?',
+                'Worldev')
+            config.interactive_add('url', 'project_url',
+                u'¿Cuál es el url de tu proyecto?', 'http://ejemplo.com')
+        else:
+            config.interactive_add('help', 'project', u'What\'s the name of your project?',
+                'Worldev')
+            config.interactive_add('url', 'project_url',
+                u'What\'s the url of your project?', 'http://exemple.com')
 
 @rule('$nick' '(?i)(help|doc) +([A-Za-z]+)(?:\?+)?$')
 @commands('help', 'ajuda', 'ayuda')
@@ -67,19 +85,25 @@ def commands(bot, trigger):
 @rule('$nick' r'(?i)(ajuda|ayuda|help)(?:[?!]+)?$')
 @priority('low')
 def help2(bot, trigger):
+	if not bot.config.project:
+		project = 'Worldev'
+		url = ''
+	else:
+		project = bot.config.project
+		url = ' (' + bot.config.project_url + ')'
     if bot.config.lang == 'ca':
     	response = (
-    		'Hola, Sóc un bot del projecte Worldev. Escriu "{0}ordres" per una llista d\'ordres '.format(bot.config.prefix.replace("\\", "")) +
+    		'Hola, Sóc un bot del projecte {0}{1}. Escriu "{2}ordres" per una llista d\'ordres '.format(project, url, bot.config.prefix.replace("\\", "")) +
 	        'El meu propietari és %s.'
 	    % bot.config.owner)
     elif bot.config.lang == 'es':
     	response = (
-	        'Hola, Soy un bot del proyecto Worldev Escribe "{0}comandos" por una lista de mis comandos '.format(bot.config.prefix.replace("\\", "")) +
+	        'Hola, Soy un bot del proyecto {0}{1}. Escribe "{0}comandos" por una lista de mis comandos '.format(project, url, bot.config.prefix.replace("\\", "")) +
 	        'Mi propietario es %s.'
 	    ) % bot.config.owner
     else:
     	response = (
-	        'Hi, I\'m a Worldev project bot. Write "{0}commands" for a commands list '.format(bot.config.prefix.replace("\\", "")) +
+	        'Hi, I\'m a {0} project bot{1}. Write "{0}commands" for a commands list '.format(project, url, bot.config.prefix.replace("\\", "")) +
 	        'My owner is %s.'
 	    ) % bot.config.owner
 	   

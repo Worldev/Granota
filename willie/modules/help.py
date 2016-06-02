@@ -86,12 +86,12 @@ def commands(bot, trigger):
 @rule('$nick' r'(?i)(ajuda|ayuda|help)(?:[?!]+)?$')
 @priority('low')
 def help2(bot, trigger):
-	if not bot.config.project:
+	if not bot.config.help.project:
 		project = 'Worldev'
 		url = ''
 	else:
-		project = bot.config.project
-		url = ' (' + bot.config.project_url + ')'
+		project = bot.config.help.project
+		url = ' (' + bot.config.help.project_url + ')'
     	if bot.config.lang == 'ca':
     		response = (
     		'Hola, Sóc un bot del projecte {0}{1}. Escriu "{2}ordres" per una llista d\'ordres '.format(project, url, bot.config.prefix.replace("\\", "")) +

@@ -77,7 +77,7 @@ owner_ping_en = [u"I agree with you!",u"Our lord guides us very well...",
                                 
 @module.rule(r'(.*)?$nickname')
 def mention(bot, trigger):
-    if trigger.group(2).startswith('.'):
+    if trigger.group(0).startswith('.'):
         return
     if trigger.owner or trigger.admin:
         dice = random.choice(['owner','nowner'])

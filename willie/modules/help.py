@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from willie.module import commands, rule, example, priority
 import willie.config as config
 import json

@@ -54,7 +54,7 @@ def version(bot, trigger):
     if commit == '':
         commitinfo = ''
     else:
-        commitinfo = ' (%s)' % commit
+        commitinfo = ' (commit %s)' % commit
     if bot.config.lang == 'ca':
         bot.say(u"Sóc Granota, versió %s%s, en el sistema operatiu %s i utilitzant Python %s." % (version, commitinfo, osver, pyver))
     elif bot.config.lang == 'es':

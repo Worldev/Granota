@@ -105,7 +105,7 @@ def wikipedia(bot, trigger):
     else:
         bot.say('"%s" - http://en.wikipedia.org/wiki/%s' % (snippet, query))
 
-@event(".*\[\[.+\]\]")
+@event(r".*\[\[.+\]\]")
 def show_wikilink(bot, trigger):
     bot.reply("ok")
     page = trigger.group(0).split('[[')[1].split(']]')[0]

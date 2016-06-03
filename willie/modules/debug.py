@@ -45,11 +45,12 @@ def get_latest_version():
     web = urllib.urlopen("https://api.github.com/repos/Worldev/Granota/releases/latest")
     data = json.load(web)
     n = data['tag_name']
-    return n
+    url = data['html_url']
+    return n, url
 
 @commands('version', 'versio')
 def version(bot, trigger):
-    version = '2.5-beta'
+    version = 'v2.5-beta'
     if platform.system() == 'Linux':
         osver = ("%s %s" % (platform.linux_distribution()[0], platform.linux_distribution()[1]))
     elif platform.system() == 'Windows':
@@ -58,20 +59,31 @@ def version(bot, trigger):
         osver = ("some OS which is not Linux or Windows")
     pyver = sys.version.split()[0]
     commit = git_info()
-    latestver = get_latest_version()
+    latestver, latesturl = get_latest_version()
+    if latestver != version:
+        if bot.config.lang == 'ca':
+            latestmsg = u"L'última versió estable disponible de Grantota és %s (%s)." % (latestver, latesturl)
+        elif bot.config.lang == 'es':
+            latestmsg = u"La última versión estable disponible de Granota es %s (%s)." % (latestver, latesturl)
+        else:
+            latestmsg = u"The lastest stable version of Granota available is %s (%s)." % (latestver, latesturl)
+    else:
+        if bot.config.lang == 'ca':
+            latestmsg = u"Estic utilitzant l'última versió estable de Granota."
+        elif bot.config.lang == 'es':
+            latestmsg = u"Estoy usando la última versión estable de Granota."
+        else:
+            latestmsg = u"I'm using the latest stable version of Granota."
     if commit == '':
         commitinfo = ''
     else:
         commitinfo = ' (commit %s)' % commit
     if bot.config.lang == 'ca':
-        bot.say(u"Sóc Granota, versió %s%s, en el sistema operatiu %s i utilitzant Python %s. \
-        L'última versió disponible de Granota és %s." % (version, commitinfo, osver, pyver, latestver))
+        bot.say(u"Sóc Granota, versió %s%s, en el sistema operatiu %s i utilitzant Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
     elif bot.config.lang == 'es':
-        bot.say(u"Soy Granota, versión %s%s, en el sistema operativo %s y usando Python %s. \
-        La última versión disponible de Granota es %s." % (version, commitinfo, osver, pyver, latestver))
+        bot.say(u"Soy Granota, versión %s%s, en el sistema operativo %s y usando Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
     else:
-        bot.say(u"I'm Granota, version %s%s, on %s and using Python %s. \
-        The last available version of Granota is %s." % (version, commitinfo, osver, pyver, latestver))
+        bot.say(u"I'm Granota, version %s%s, on %s and using Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
 
 @commands('debug_print')
 def debug_print(bot, trigger):

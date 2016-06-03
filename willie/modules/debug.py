@@ -50,7 +50,7 @@ def get_latest_version():
 
 @commands('version', 'versio')
 def version(bot, trigger):
-    version = 'v2.5-beta'
+    version = 'v2.5'
     if platform.system() == 'Linux':
         osver = ("%s %s" % (platform.linux_distribution()[0], platform.linux_distribution()[1]))
     elif platform.system() == 'Windows':

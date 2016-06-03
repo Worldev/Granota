@@ -25,8 +25,7 @@ def admins(bot, trigger):
     admins = str(bot.config.core.get_list('admins'))
     bot.say("[Owner]"+owner+" [Admins]"+admins)
 
-@commands('gitinfo')
-def git_info(bot, trigger):
+def git_info():
     repo = path.join(path.dirname(path.dirname(path.dirname(__file__))), '.git')
     head = path.join(repo, 'HEAD')
     if path.isfile(head):
@@ -37,11 +36,13 @@ def git_info(bot, trigger):
             with open(head_file) as h:
                 sha = h.readline()
                 if sha:
-                    bot.say(sha)
+                    return sha
+                else:
+                    return ''
 
 @commands('version', 'versio')
 def version(bot, trigger):
-    version = '2.4'
+    version = '2.5-beta'
     if platform.system() == 'Linux':
         osver = ("%s %s" % (platform.linux_distribution()[0], platform.linux_distribution()[1]))
     elif platform.system() == 'Windows':
@@ -49,12 +50,17 @@ def version(bot, trigger):
     else:
         osver = ("some OS which is not Linux or Windows")
     pyver = sys.version.split()[0]
-    if bot.config.lang == 'ca':
-        bot.say(u"Sóc Granota, versió %s, en el sistema operatiu %s i utilitzant Python %s." % (version, osver, pyver))
-    elif bot.config.lang == 'es':
-        bot.say(u"Soy Granota, versión %s, en el sistema operativo %s y usando Python %s." % (version, osver, pyver))
+    commit = git_info()
+    if commit == '':
+        commitinfo = ''
     else:
-        bot.say(u"I'm Granota, version %s, on %s and using Python %s." % (version, osver, pyver))
+        commitinfo = ' (%s)' % commit
+    if bot.config.lang == 'ca':
+        bot.say(u"Sóc Granota, versió %s%s, en el sistema operatiu %s i utilitzant Python %s." % (version, commitinfo, osver, pyver))
+    elif bot.config.lang == 'es':
+        bot.say(u"Soy Granota, versión %s%s, en el sistema operativo %s y usando Python %s." % (version, commitinfo, osver, pyver))
+    else:
+        bot.say(u"I'm Granota, version %s%s, on %s and using Python %s." % (version, commitinfo, osver, pyver))
 
 @commands('debug_print')
 def debug_print(bot, trigger):

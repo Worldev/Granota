@@ -107,6 +107,7 @@ def wikipedia(bot, trigger):
 
 @event(".*\[\[.+\]\]")
 def show_wikilink(bot, trigger):
+    bot.reply("ok")
     page = trigger.group(0).split('[[')[1].split(']]')[0]
     if not bot.config.wiki_link:
         link = 'https://%s.wikipedia.org/wiki/' % bot.config.lang

@@ -3,7 +3,7 @@
 from willie.module import commands, example
 import platform, sys, time
 from os import path
-import urllib
+import urllib, json
 
 @commands('privs')
 def privileges(bot, trigger):
@@ -43,8 +43,9 @@ def git_info():
 
 @commands("latest")
 def get_latest_version(bot, trigger):
-    data = urllib.urlopen("https://api.github.com/repos/Worldev/Granota/releases").read()
-    n = data[0]['tag_name']
+    web = urllib.urlopen("https://api.github.com/repos/Worldev/Granota/releases/latest").read()
+    data = json.load(web)
+    n = data['tag_name']
     bot.say(n)
 
 @commands('version', 'versio')

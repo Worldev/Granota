@@ -26,7 +26,7 @@ def admins(bot, trigger):
     bot.say("[Owner]"+owner+" [Admins]"+admins)
 
 @commands('gitinfo')
-def git_info():
+def git_info(bot, trigger):
     repo = path.join(path.dirname(path.dirname(path.dirname(__file__))), '.git')
     head = path.join(repo, 'HEAD')
     if path.isfile(head):

@@ -1,7 +1,7 @@
 # -*- coding: cp1252 -*-
 
 from willie import web
-from willie.module import NOLIMIT, commands, example, event
+from willie.module import NOLIMIT, commands, example, rule
 import json
 import re
 
@@ -105,7 +105,7 @@ def wikipedia(bot, trigger):
     else:
         bot.say('"%s" - http://en.wikipedia.org/wiki/%s' % (snippet, query))
 
-@event(r".*\[\[.+\]\]")
+@rule(r".*\[\[.+\]\]")
 def show_wikilink(bot, trigger):
     bot.reply("ok")
     page = trigger.group(0).split('[[')[1].split(']]')[0]

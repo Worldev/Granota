@@ -2,6 +2,7 @@
 
 from willie.module import commands, example
 import platform, sys, time
+from os import path
 
 @commands('privs')
 def privileges(bot, trigger):
@@ -23,6 +24,20 @@ def admins(bot, trigger):
     owner = bot.config.core.owner
     admins = str(bot.config.core.get_list('admins'))
     bot.say("[Owner]"+owner+" [Admins]"+admins)
+
+@commands('gitinfo')
+def git_info():
+    repo = path.join(path.dirname(path.dirname(path.dirname(__file__))), '.git')
+    head = path.join(repo, 'HEAD')
+    if path.isfile(head):
+        with open(head) as h:
+            head_loc = h.readline()[5:-1]  # strip ref: and \n
+        head_file = path.join(repo, head_loc)
+        if path.isfile(head_file):
+            with open(head_file) as h:
+                sha = h.readline()
+                if sha:
+                    bot.say(sha)
 
 @commands('version', 'versio')
 def version(bot, trigger):

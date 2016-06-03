@@ -84,8 +84,9 @@ def commands(bot, trigger):
 @rule('$nick' r'(?i)(ajuda|ayuda|help)(?:[?!]+)?$')
 @priority('low')
 def help2(bot, trigger):
-	if not bot.config.project:
+	if not bot.config.has_option("core", "project"):
 		project = 'Worldev'
+	if not bot.config.has_option("core", "project_url")
 		url = ''
 	else:
 		project = bot.config.project

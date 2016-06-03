@@ -31,7 +31,7 @@ def help(bot, trigger):
     	elif bot.config.lang == 'es':
     	    bot.reply(u'Escribe {0}ayuda <orden> (por ejemplo {0}ayuda wiki) para obtener ayuda sobre un comando, o {0}comandos para una lista de órdenes'.format(bot.config.prefix.replace("\\", "")))
     	else:
-    	    bot.reply(u'Write {0}help <command> (for example {0}help wiki) to get help about a command, or {0}commands to get a list of commands.'.format(bot.config.prefix.replace("\\", "")))
+    	    bot.reply(u'Type {0}help <command> (for example {0}help wiki) to get help about a command, or {0}commands to get a list of commands.'.format(bot.config.prefix.replace("\\", "")))
     
     else:
         name = trigger.group(2).lower()
@@ -102,7 +102,7 @@ def help2(bot, trigger):
 	    ) % bot.config.owner
 	else:
     		response = (
-	        'Hi, I\'m a {0} project bot{1}. Write "{0}commands" for a commands list. '.format(project, url, bot.config.prefix.replace("\\", "")) +
+	        'Hi, I\'m a {0} project bot{1}. Type "{2}commands" for a commands list. '.format(project, url, bot.config.prefix.replace("\\", "")) +
 	        'My owner is %s.'
 	    ) % bot.config.owner
 		   

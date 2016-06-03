@@ -44,7 +44,7 @@ def git_info():
 @commands("latest")
 def get_latest_version(bot, trigger):
     data = urllib.urlopen("https://api.github.com/repos/Worldev/Granota/releases/latest").read()
-    n = data['tag_name']
+    n = data[0]['tag_name']
     bot.say(n)
 
 @commands('version', 'versio')

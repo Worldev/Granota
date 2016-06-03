@@ -1,11 +1,22 @@
 # -*- coding: cp1252 -*-
 
 from willie import web
-from willie.module import NOLIMIT, commands, example
+from willie.module import NOLIMIT, commands, example, event
 import json
 import re
 
 REDIRECT = re.compile(r'^REDIRECT (.*)')
+
+def configure(config):
+        if config.lang == 'ca':
+            config.interactive_add('core', 'wiki_link', u'Url base del wiki',
+                'http://ca.wikipedia.org/wiki/')
+        elif config.lang == 'es':
+            config.interactive_add('core', 'wiki_link', u'Url base del wiki',
+                'http://es.wikipedia.org/wiki/')
+        else:
+            config.interactive_add('core', 'wiki_link', u'Base url of the wiki',
+                'http://en.wikipedia.org/wiki/')
 
 
 def mw_search(server, query, num, bot):
@@ -93,3 +104,12 @@ def wikipedia(bot, trigger):
         bot.say('"%s" - http://es.wikipedia.org/wiki/%s' % (snippet, query))
     else:
         bot.say('"%s" - http://en.wikipedia.org/wiki/%s' % (snippet, query))
+
+@event(".*\[\[.+\]\]")
+def show_wikilink(bot, trigger):
+    page = trigger.group(0).split('[[')[1].split(']]')[0]
+    if not bot.config.wiki_link:
+        link = 'https://%s.wikipedia.org/wiki/' % bot.config.lang
+    else:
+        link = bot.config.wiki_link
+    bot.say(link + page)

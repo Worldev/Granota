@@ -86,7 +86,7 @@ def commands(bot, trigger):
 def help2(bot, trigger):
 	if not bot.config.has_option("core", "project"):
 		project = 'Worldev'
-	if not bot.config.has_option("core", "project_url")
+	if not bot.config.has_option("core", "project_url"):
 		url = ''
 	else:
 		project = bot.config.project

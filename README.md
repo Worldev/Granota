@@ -11,9 +11,14 @@ A multilingual IRC bot coded in Python and based off Willie.
 
 ## Configuration
 
-- English: See Granota's [wiki help page](https://github.com/Worldev/Granota/wiki/Download-and-installation-guide)
-- Spanish: No está disponible.
-- Catalan: No està disponible.
+* English: See Granota's [wiki help page](https://github.com/Worldev/Granota/wiki/Download-and-installation-guide)
+* Spanish: No está disponible.
+* Catalan: No està disponible.
+
+## Known Granota copies
+This is a list of modified copies of Granota:
+* Cepita (Spanish version): irc.freenode.net:6667, channel ##SkyGen
+If you run a modified copy of Granota and it's not listed, you can open a pull request adding it.
 
 ## License & copyright
 © Worldev 2015

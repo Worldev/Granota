@@ -112,4 +112,4 @@ def show_wikilink(bot, trigger):
         link = 'https://%s.wikipedia.org/wiki/' % bot.config.lang
     else:
         link = bot.config.wiki_link
-    bot.say(link + page.replace(" ", "_")
+    bot.say(link + page.replace(" ", "_"))

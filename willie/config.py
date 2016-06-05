@@ -366,7 +366,7 @@ class Config(object):
                 'core', 'owner',
                 "Tu nick de IRC (o el del propietario del bot)"
             )
-            c = (u"\nMientras el bot está connectado puedes hacer que entre o salga de canales, pero se recomienda " +
+            c = (u"\nMientras el bot está conectado puedes hacer que entre o salga de canales, pero se recomienda " +
             u"configurar los canales dónde debe entrar siempre que se connecte a IRC. Escribe los canales en los que " +
             u"el bot debe conectarse de forma automática. Despues cada canal presiona la tecla enter." +
                 ' Cuando hayas puesto todos los canales, vuelve a presionar enter.')

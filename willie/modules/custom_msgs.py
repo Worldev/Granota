@@ -5,6 +5,8 @@ import time
 
 @willie.module.commands('custom')
 def custom(bot, trigger):
+    bot.say("asdf")
+    bot.say("2: %s 3: %s 4: %s" % (trigger.group(2), trigger.group(3), trigger.group(4)))
     if not trigger.group(4):
         bot.reply("Bad syntax: .custom <action> <keyword> <msg>")
         return

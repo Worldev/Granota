@@ -17,7 +17,7 @@ def custom(bot, trigger):
         return
     if cmd == 'add':
         with open("custom_msgs.txt", "a") as f:
-            f.write(key + "||||" + msg)
+            f.write(key + "||||" + msg + '\n')
         bot.reply("Custom message succesfully added.")
 
 @willie.module.commands('show')

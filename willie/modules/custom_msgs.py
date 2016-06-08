@@ -5,14 +5,12 @@ import time
 
 @willie.module.commands('custom')
 def custom(bot, trigger):
-    bot.say("asdf")
-    bot.say("2: %s 3: %s 4: %s" % (trigger.group(2), trigger.group(3), trigger.group(4)))
     if not trigger.group(4):
         bot.reply("Bad syntax: .custom <action> <keyword> <msg>")
         return
     cmd = trigger.group(2).split()[0]
-    key = trigger.group(3).split()[0]
-    msg = trigger.group(4)
+    key = trigger.group(3).split()[1]
+    msg = trigger.group(5)
     bot.reply("cmd: %s key: %s msg: %s" % (cmd, key, msg))
     if not trigger.admin:
         bot.reply("You don't have permission")

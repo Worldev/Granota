@@ -19,7 +19,7 @@ def c(bot, trigger):
         else:
             return bot.reply("Nothing to calculate.")
     try:
-        result = str(eval_equation(trigger.group(2)))
+        result = str(eval_equation(trigger.group(2).replace(',', '')))
     except ZeroDivisionError:
         if bot.config.lang == 'ca':
             result = u"La diviso entre zero no esta suportada en aquest univers."

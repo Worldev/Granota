@@ -2,6 +2,9 @@
 	"help": {
 		"alias": ["help", "ayuda", "ajuda"]
 	},
+	"bomb": {
+		"alias": ["bomb", "bomba"]
+	},
 	"commands": {
 		"alias": ["commands", "comandos", "ordres", "o"]
 	},

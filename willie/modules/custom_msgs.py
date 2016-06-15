@@ -10,7 +10,7 @@ def custom(bot, trigger):
         return
     cmd = trigger.group(2).split()[0]
     key = trigger.group(4).split()[0]
-    msg = trigger.group(5)
+    msg = trigger.group(0).split(key)[1]
     bot.reply("cmd: %s key: %s msg: %s" % (cmd, key, msg))
     if not trigger.admin:
         bot.reply("You don't have permission")

@@ -5,7 +5,11 @@ import time
 
 @willie.module.commands('info')
 def custom(bot, trigger):
-    if not trigger.group(4):
+    try:
+        cmd = trigger.group(2).split()[0]
+        key = trigger.group(4).split("||")[0]
+        msg = trigger.group(0).split("||")[1]
+    except IndexError:
         if bot.config.lang == 'ca':
             bot.reply(u"Error de sintaxi: %sinfo <add|del> <paraula clau>||<missatge>" % bot.config.prefix.replace("\", ""))
             return
@@ -14,10 +18,7 @@ def custom(bot, trigger):
             return
         else:
             bot.reply("Syntax error: %sinfo <add|del> <keyword>||<message>" % bot.config.prefix.replace("\", ""))
-            return
-    cmd = trigger.group(2).split()[0]
-    key = trigger.group(4).split("||")[0]
-    msg = trigger.group(0).split("||")[1]
+            return        
     if not trigger.admin:
         if bot.config.lang == 'ca':
             bot.reply("No tens permisos")

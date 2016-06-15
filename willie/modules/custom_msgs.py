@@ -9,7 +9,7 @@ def custom(bot, trigger):
         bot.reply("Bad syntax: .custom <action> <keyword>||<msg>")
         return
     cmd = trigger.group(2).split()[0]
-    key = trigger.group(4).split()[0]
+    key = trigger.group(4).split("||")[0]
     msg = trigger.group(0).split("||")[1]
     bot.reply("cmd: %s key: %s msg: %s" % (cmd, key, msg))
     if not trigger.admin:

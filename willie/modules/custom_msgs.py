@@ -23,7 +23,7 @@ def custom(bot, trigger):
         with open("custom_msgs.txt", "r+") as f:
             msgs = f.readlines()
             for msg in msgs:
-                if msg.startswith('key'):
+                if msg.startswith(key):
                     msgs.remove(msg)
             f.seek(0)
             for msg in msgs:

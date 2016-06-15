@@ -25,8 +25,10 @@ def custom(bot, trigger):
             for msg in msgs:
                 if msg.startswith('key'):
                     msgs.remove(msg)
+            f.seek(0)
             for msg in msgs:
                 f.write(msg)
+            f.truncate()
         bot.reply("Message succesfully deleted")
 
 @willie.module.commands('show')

@@ -3,22 +3,39 @@
 import willie
 import time
 
-@willie.module.commands('custom')
+@willie.module.commands('info')
 def custom(bot, trigger):
     if not trigger.group(4):
-        bot.reply("Bad syntax: .custom <action> <keyword>||<msg>")
-        return
+        if bot.config.lang == 'ca':
+            bot.reply(u"Error de sintaxi: %sinfo <add|del> <paraula clau>||<missatge>" % bot.config.prefix)
+            return
+        elif bot.config.lang == 'es':
+            bot.reply(u"Error de sintaxis: %sinfo <add|del> <palabra clave>||<mensaje>" % bot.config.prefix)
+            return
+        else:
+            bot.reply("Syntax error: %sinfo <add|del> <keyword>||<message>" % bot.config.prefix)
+            return
     cmd = trigger.group(2).split()[0]
     key = trigger.group(4).split("||")[0]
     msg = trigger.group(0).split("||")[1]
-    bot.reply("cmd: %s key: %s msg: %s" % (cmd, key, msg))
     if not trigger.admin:
-        bot.reply("You don't have permission")
-        return
+        if bot.config.lang == 'ca':
+            bot.reply("No tens permisos")
+            return
+        elif bot.config.lang == 'es':
+            bot.reply("No tienes permiso")
+        else:
+            bot.reply("You don't have permission")
+            return
     if cmd == 'add':
         with open("custom_msgs.txt", "a") as f:
             f.write(key + "||||" + msg + '\n')
-        bot.reply("Custom message succesfully added.")
+        if bot.config.lang == 'ca':
+            bot.reply("Missatge afegit correctament.")
+        elif bot.config.lang == 'es':
+            bot.reply("Mensaje añadido correctamente.")
+        else:
+            bot.reply("Message succesfully added.")
     elif cmd == 'del':
         with open("custom_msgs.txt", "r+") as f:
             msgs = f.readlines()
@@ -29,13 +46,24 @@ def custom(bot, trigger):
             for msg in msgs:
                 f.write(msg)
             f.truncate()
-        bot.reply("Message succesfully deleted")
+        if bot.config.lang == 'ca':
+            bot.reply("Missatge esborrat correctament.")
+        elif bot.config.lang == 'es':
+            bot.reply("Mensaje borrado correctamente.")
+        else:
+            bot.reply("Message succesfully deleted.")
 
-@willie.module.commands('show')
+@willie.module.commands('show', 'mostra', 'muestra')
 def custom_show(bot, trigger):
     if not trigger.group(2):
-        bot.reply("bad syntax: .show <keyword>")
-        return
+        if bot.config.lang == 'ca':
+            bot.reply(u"Error de sintaxi: %smostra <paraula clau>" % bot.config.prefix)
+            return
+        elif bot.config.lang == 'es':
+            bot.reply(u"Error de sintaxis: %smuestra <palabra clave>" % bot.config.prefix)
+            return
+        else:
+            bot.reply("Syntax error: %sshow <keyword>" % bot.config.prefix)
     key = trigger.group(2)
     with open("custom_msgs.txt", 'r') as f:
         lines = f.read().splitlines()

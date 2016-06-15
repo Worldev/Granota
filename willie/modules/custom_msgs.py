@@ -19,6 +19,15 @@ def custom(bot, trigger):
         with open("custom_msgs.txt", "a") as f:
             f.write(key + "||||" + msg + '\n')
         bot.reply("Custom message succesfully added.")
+    elif cmd == 'del':
+        with open("custom_msgs.txt", "rw") as f:
+            msgs = f.readlines()
+            for msg in msgs:
+                if msg.startswith('key'):
+                    msgs.remove(msg)
+            for msg in msgs:
+                f.write(msg)
+        bot.reply("Message succesfully deleted")
 
 @willie.module.commands('show')
 def custom_show(bot, trigger):

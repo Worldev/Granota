@@ -20,7 +20,7 @@ def custom(bot, trigger):
             f.write(key + "||||" + msg + '\n')
         bot.reply("Custom message succesfully added.")
     elif cmd == 'del':
-        with open("custom_msgs.txt", "rw") as f:
+        with open("custom_msgs.txt", "r+") as f:
             msgs = f.readlines()
             for msg in msgs:
                 if msg.startswith('key'):

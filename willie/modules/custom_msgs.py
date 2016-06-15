@@ -7,13 +7,13 @@ import time
 def custom(bot, trigger):
     if not trigger.group(4):
         if bot.config.lang == 'ca':
-            bot.reply(u"Error de sintaxi: %sinfo <add|del> <paraula clau>||<missatge>" % bot.config.prefix)
+            bot.reply(u"Error de sintaxi: %sinfo <add|del> <paraula clau>||<missatge>" % bot.config.prefix.replace("\", ""))
             return
         elif bot.config.lang == 'es':
-            bot.reply(u"Error de sintaxis: %sinfo <add|del> <palabra clave>||<mensaje>" % bot.config.prefix)
+            bot.reply(u"Error de sintaxis: %sinfo <add|del> <palabra clave>||<mensaje>" % bot.config.prefix.replace("\", ""))
             return
         else:
-            bot.reply("Syntax error: %sinfo <add|del> <keyword>||<message>" % bot.config.prefix)
+            bot.reply("Syntax error: %sinfo <add|del> <keyword>||<message>" % bot.config.prefix.replace("\", ""))
             return
     cmd = trigger.group(2).split()[0]
     key = trigger.group(4).split("||")[0]
@@ -57,13 +57,13 @@ def custom(bot, trigger):
 def custom_show(bot, trigger):
     if not trigger.group(2):
         if bot.config.lang == 'ca':
-            bot.reply(u"Error de sintaxi: %smostra <paraula clau>" % bot.config.prefix)
+            bot.reply(u"Error de sintaxi: %smostra <paraula clau>" % bot.config.prefix.replace("\", ""))
             return
         elif bot.config.lang == 'es':
-            bot.reply(u"Error de sintaxis: %smuestra <palabra clave>" % bot.config.prefix)
+            bot.reply(u"Error de sintaxis: %smuestra <palabra clave>" % bot.config.prefix.replace("\", ""))
             return
         else:
-            bot.reply("Syntax error: %sshow <keyword>" % bot.config.prefix)
+            bot.reply("Syntax error: %sshow <keyword>" % bot.config.prefix.replace("\", ""))
     key = trigger.group(2)
     with open("custom_msgs.txt", 'r') as f:
         lines = f.read().splitlines()

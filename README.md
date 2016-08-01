@@ -17,7 +17,7 @@ A multilingual IRC bot coded in Python and based off Willie.
 
 ## Known Granota copies
 This is a list of modified copies of Granota:
-* MasterBot (Spanish version): irc.freenode.net:6667, channel ##SkyGen
+* Cepita (French, English and Spanish version): irc.freenode.net:6667, channel ##SkyGen
 
 If you run a modified copy of Granota and it's not listed, you can open a pull request adding it.
 

@@ -98,7 +98,7 @@ def help2(bot, trigger):
 	    % bot.config.owner)
 	elif bot.config.lang == 'es':
     		response = (
-	        'Hola, Soy un bot del proyecto {0}{1}. Escribe "{0}comandos" por una lista de mis comandos. '.format(project, url, bot.config.prefix.replace("\\", "")) +
+	        'Hola, Soy un bot del proyecto {0}{1}. Escribe "{2}comandos" por una lista de mis comandos. '.format(project, url, bot.config.prefix.replace("\\", "")) +
 	        'Mi propietario es %s.'
 	    ) % bot.config.owner
 	else:

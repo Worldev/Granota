@@ -42,7 +42,7 @@ def c(bot, trigger):
                       "Use .commands for a list.")
     bot.reply(result)
 
-@commands('wa', 'wolfram')
+#@commands('wa', 'wolfram')
 def wa(bot, trigger):
     if not trigger.group(2):
         if bot.config.lang == 'ca':

@@ -5,36 +5,7 @@ from willie import web
 from willie.module import commands, example
 import json
 import time
-
-
-def google_ajax(query):
-    """Search using AjaxSearch, and return its JSON."""
-    uri = 'http://ajax.googleapis.com/ajax/services/search/web'
-    args = '?v=1.0&safe=off&q=' + web.quote(query)
-    bytes = web.get(uri + args)
-    return json.loads(bytes)
-
-
-def google_search(query):
-    results = google_ajax(query)
-    try:
-        return results['responseData']['results'][0]['unescapedUrl']
-    except IndexError:
-        return None
-    except TypeError:
-        return False
-
-
-def google_count(query):
-    results = google_ajax(query)
-    if not 'responseData' in results:
-        return '0'
-    if not 'cursor' in results['responseData']:
-        return '0'
-    if not 'estimatedResultCount' in results['responseData']['cursor']:
-        return '0'
-    return results['responseData']['cursor']['estimatedResultCount']
-
+from google import search
 
 def formatnumber(n):
     """Format a number with beautiful commas."""
@@ -49,14 +20,16 @@ def g(bot, trigger):
     query = trigger.group(2)
     if not query:
         return bot.reply('.g what?')
-    uri = google_search(query)
-    if uri:
-        bot.reply(uri)
+    results = []
+    for result in search(query, stop=3):
+	results.append(result)
+    if results:
+        bot.reply(results.join(' - '))
     elif uri is False:
         if bot.config.lang == 'ca':
             bot.reply("Error al connectar amb Google.")
         elif bot.config.lang == 'es':
-            bo.reply("Error al conectar con Google.")
+            bot.reply("Error al conectar con Google.")
         else:
             bot.reply("Problem getting data from Google.")
     else:

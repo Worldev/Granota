@@ -171,25 +171,16 @@ def search(bot, trigger):
     
     query = trigger.group(2)
     gu = google_search(query, bot.config.lang).split(' - ')[0] or '-'
-    bu = bing_search(query) or '-'
     du = duck_search(query) or '-'
 
-    if (gu == bu) and (bu == du):
-        result = '%s (g, b, d)' % gu
-    elif (gu == bu):
-        result = '%s (g, b), %s (d)' % (gu, du)
-    elif (bu == du):
-        result = '%s (b, d), %s (g)' % (bu, gu)
-    elif (gu == du):
-        result = '%s (g, d), %s (b)' % (gu, bu)
+    if (gu == du):
+        result = '%s (Google, DuckDuckGo)' % gu
     else:
         if len(gu) > 250:
             gu = '(extremely long link)'
-        if len(bu) > 150:
-            bu = '(extremely long link)'
         if len(du) > 150:
             du = '(extremely long link)'
-        result = '%s (g), %s (b), %s (d)' % (gu, bu, du)
+        result = '%s (Google), %s (DuckDuckGo)' % (gu, du)
 
     bot.reply(result)
 

@@ -24,7 +24,7 @@ def g(bot, trigger):
     for result in gsearch(query, stop=3):
 	results.append(result)
     if results:
-        bot.reply(results.join(' - '))
+        bot.reply(" - ".join(results))
     elif uri is False:
         if bot.config.lang == 'ca':
             bot.reply("Error al connectar amb Google.")

@@ -5,7 +5,7 @@ from willie import web
 from willie.module import commands, example
 import json
 import time
-from google import search
+from google import search as gsearch
 
 def formatnumber(n):
     """Format a number with beautiful commas."""
@@ -21,7 +21,7 @@ def g(bot, trigger):
     if not query:
         return bot.reply('.g what?')
     results = []
-    for result in search(query, stop=3):
+    for result in gsearch(query, stop=3):
 	results.append(result)
     if results:
         bot.reply(results.join(' - '))

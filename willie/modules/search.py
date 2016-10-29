@@ -21,7 +21,7 @@ def g(bot, trigger):
     if not query:
         return bot.reply('.g what?')
     results = []
-    for result in gsearch(query, stop=3):
+    for result in gsearch(query, lang=bot.config.lang, stop=3):
 	results.append(result)
     if results:
         bot.reply(" - ".join(results))

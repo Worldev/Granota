@@ -170,7 +170,7 @@ def search(bot, trigger):
         return
     
     query = trigger.group(2)
-    gu = google_search(query, bot.config.lang) or '-'
+    gu = google_search(query, bot.config.lang).split(' - ')[0] or '-'
     bu = bing_search(query) or '-'
     du = duck_search(query) or '-'
 

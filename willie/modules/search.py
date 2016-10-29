@@ -41,46 +41,46 @@ def g(bot, trigger):
             bot.reply("No results found for '%s'." % query)
 
 
-@commands('gc')
-def gc(bot, trigger):
-    query = trigger.group(2)
-    if not query:
-        return bot.reply('.gc what?')
-    num = formatnumber(google_count(query))
-    bot.say(query + ': ' + num)
+#@commands('gc')
+#def gc(bot, trigger):
+#    query = trigger.group(2)
+#    if not query:
+#        return bot.reply('.gc what?')
+#    num = formatnumber(google_count(query))
+#    bot.say(query + ': ' + num)
 
-r_query = re.compile(
-    r'\+?"[^"\\]*(?:\\.[^"\\]*)*"|\[[^]\\]*(?:\\.[^]\\]*)*\]|\S+'
-)
+#r_query = re.compile(
+#    r'\+?"[^"\\]*(?:\\.[^"\\]*)*"|\[[^]\\]*(?:\\.[^]\\]*)*\]|\S+'
+#)
 
 
-@commands('gcs', 'comp')
-def gcs(bot, trigger):
-    if not trigger.group(2):
-        return bot.reply("Nothing to compare.")
-    queries = r_query.findall(trigger.group(2))
-    if len(queries) > 6:
-        if bot.config.lang == 'ca':
-            bot.reply(u"Només puc comparar fins a sis coses.")
-        elif bot.config.lang == 'es':
-            bot.reply(u"Sólo puedo comparar hasta seis cosas.")
-        else:
-            bot.reply('Sorry, can only compare up to six things.')
-        return
+#@commands('gcs', 'comp')
+#def gcs(bot, trigger):
+#    if not trigger.group(2):
+#        return bot.reply("Nothing to compare.")
+#    queries = r_query.findall(trigger.group(2))
+#    if len(queries) > 6:
+#        if bot.config.lang == 'ca':
+#            bot.reply(u"Només puc comparar fins a sis coses.")
+#        elif bot.config.lang == 'es':
+#            bot.reply(u"Sólo puedo comparar hasta seis cosas.")
+#        else:
+#            bot.reply('Sorry, can only compare up to six things.')
+#        return
 
-    results = []
-    for i, query in enumerate(queries):
-        query = query.strip('[]')
-        n = int((formatnumber(google_count(query)) or '0').replace(',', ''))
-        results.append((n, query))
-        if i >= 2:
-            time.sleep(0.25)
-        if i >= 4:
-            time.sleep(0.25)
+#    results = []
+#    for i, query in enumerate(queries):
+#        query = query.strip('[]')
+#        n = int((formatnumber(google_count(query)) or '0').replace(',', ''))
+#        results.append((n, query))
+#        if i >= 2:
+#            time.sleep(0.25)
+#        if i >= 4:
+#            time.sleep(0.25)
 
-    results = [(term, n) for (n, term) in reversed(sorted(results))]
-    reply = ', '.join('%s (%s)' % (t, formatnumber(n)) for (t, n) in results)
-    bot.say(reply)
+#    results = [(term, n) for (n, term) in reversed(sorted(results))]
+#    reply = ', '.join('%s (%s)' % (t, formatnumber(n)) for (t, n) in results)
+#    bot.say(reply)
 
 r_bing = re.compile(r'<h3><a href="([^"]+)"')
 
@@ -166,7 +166,7 @@ def search(bot, trigger):
         return
     
     query = trigger.group(2)
-    gu = google_search(query) or '-'
+    gu = g(query) or '-'
     bu = bing_search(query) or '-'
     du = duck_search(query) or '-'
 

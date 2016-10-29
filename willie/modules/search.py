@@ -14,17 +14,21 @@ def formatnumber(n):
         parts.insert(i, ',')
     return ''.join(parts)
 
-
+def google_search(query, lang):
+    results = []
+    for result in gsearch(query, lang=lang, stop=3):
+	results.append(result)
+    
+    return " - ".join(results)
+	
 @commands('g', 'google')
 def g(bot, trigger):
     query = trigger.group(2)
     if not query:
         return bot.reply('.g what?')
-    results = []
-    for result in gsearch(query, lang=bot.config.lang, stop=3):
-	results.append(result)
+    results = google_search(query, bot.config.lang)
     if results:
-        bot.reply(" - ".join(results))
+        bot.reply(results)
     elif uri is False:
         if bot.config.lang == 'ca':
             bot.reply("Error al connectar amb Google.")
@@ -166,7 +170,7 @@ def search(bot, trigger):
         return
     
     query = trigger.group(2)
-    gu = g(query) or '-'
+    gu = google_search(query) or '-'
     bu = bing_search(query) or '-'
     du = duck_search(query) or '-'
 

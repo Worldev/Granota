@@ -7,7 +7,9 @@ from willie.tools import eval_equation
 from socket import timeout
 import string
 import HTMLParser
+import wolframalpha
 
+client = wolframalpha.Client(bot.config.wolframID)
 
 @commands('=', 'calcula', 'calculate', 'calc')
 def c(bot, trigger):
@@ -42,7 +44,7 @@ def c(bot, trigger):
                       "Use .commands for a list.")
     bot.reply(result)
 
-#@commands('wa', 'wolfram')
+@commands('wa', 'wolfram')
 def wa(bot, trigger):
     if not trigger.group(2):
         if bot.config.lang == 'ca':
@@ -52,51 +54,21 @@ def wa(bot, trigger):
         else:
            return bot.reply("Nothing to search. Syntax: .wa <word|sentence|operation|...>.")     
     query = trigger.group(2)
-    uri = 'http://tumbolia.appspot.com/wa/'
-    try:
-        answer = web.get(uri + web.quote(query.replace('+', '%2B')), 45)
-    except timeout as e:
-        if bot.config.lang == 'ca':
-            return bot.say('[WOLFRAM ERROR] Temps d\'espera excedit.')
-        elif bot.config.lang == 'es':
-            return bot.say('[WOLFRAM ERROR] Tiempo de espera excedido.')
-        else:
-            return bot.say('[WOLFRAM ERROR] Request timed out')
+    res = client.query(query)
+    answers = []
+    for pod in res.pods:
+        for sub in pod.subpods:
+            answers.append(sub)
+    answer = " - ".join(answers)
     if answer:
-        answer = answer.decode('string_escape')
-        answer = HTMLParser.HTMLParser().unescape(answer)
-        # This might not work if there are more than one instance of escaped
-        # unicode chars But so far I haven't seen any examples of such output
-        # examples from Wolfram Alpha
-        match = re.search('\\\:([0-9A-Fa-f]{4})', answer)
-        if match is not None:
-            char_code = match.group(1)
-            char = unichr(int(char_code, 16))
-            answer = answer.replace('\:' + char_code, char)
-        waOutputArray = string.split(answer, ";")
-        if(len(waOutputArray) < 2):
-            if(answer.strip() == "Couldn't grab results from json stringified precioussss."):
-                # Answer isn't given in an IRC-able format, just link to it.
-                if bot.config.lang == 'ca':
-                    bot.say('[WOLFRAM] No hi ha cap resposta disponible. Prova amb http://www.wolframalpha.com/input/?i=' + query.replace(' ', '+'))
-                elif bot.config.lang == 'es':
-                    bot.say('[WOLFRAM] No hay ninguna respusta disponible. Prueba con http://www.wolframalpha.com/input/?i=' + query.replace(' ', '+'))
-                else:
-                    bot.say('[WOLFRAM] Couldn\'t display answer, try http://www.wolframalpha.com/input/?i=' + query.replace(' ', '+'))
-            else:
-                bot.say('[WOLFRAM ERROR]' + answer)
-        else:
-
-            bot.say('[WOLFRAM] ' + waOutputArray[0] + " = "
-                    + waOutputArray[1])
-        waOutputArray = []
+        bot.say("[WOLFRAM] " + answer)
     else:
         if bot.config.lang == 'ca':
             bot.reply(u"Sense resultats.")
         elif bot.config.lang == 'es':
             bot.repy(u"Sin resultados.")
         else:
-            bot.reply('Sorry, no result.')
+            bot.reply('Sorry, no results.')
 
 
 if __name__ == "__main__":

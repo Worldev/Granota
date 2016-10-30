@@ -909,6 +909,7 @@
 			"example": "g Worldev"
 		}
 	},
+	/*
 	"gc": {
 		"en": {
 			"help": "Returns the number of Google searches of the specified word.",
@@ -937,6 +938,7 @@
 			"example": "gcs Londres Barcelona"
 		}
 	},
+	*/
 	"duck": {
 		"en": {
 			"help": "Searches Duck Duck Go.",

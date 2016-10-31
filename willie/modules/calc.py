@@ -56,7 +56,7 @@ def wa(bot, trigger):
     res = client.query(query)
     answers = []
     for pod in res.pods:
-        if pod.main:
+        if pod.img:
             answers.append(str(pod))
     answer = " - ".join(answers)
     if answer:

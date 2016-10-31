@@ -56,7 +56,7 @@ def wa(bot, trigger):
     res = client.query(query)
     answers = []
     for pod in res.pods:
-        if pod.text:
+        if pod.main:
             answers.append(str(pod))
     answer = " - ".join(answers)
     if answer:

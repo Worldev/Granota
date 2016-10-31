@@ -56,8 +56,8 @@ def wa(bot, trigger):
     res = client.query(query)
     answers = []
     for pod in res.pods:
-        for sub in pod.subpods:
-            answers.append(str(sub))
+        if pod.text:
+            answers.append(pod)
     answer = " - ".join(answers)
     if answer:
         bot.say("[WOLFRAM] " + answer)

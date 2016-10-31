@@ -9,8 +9,6 @@ import string
 import HTMLParser
 import wolframalpha
 
-client = wolframalpha.Client(bot.config.wolframID)
-
 @commands('=', 'calcula', 'calculate', 'calc')
 def c(bot, trigger):
     if not trigger.group(2):
@@ -46,6 +44,7 @@ def c(bot, trigger):
 
 @commands('wa', 'wolfram')
 def wa(bot, trigger):
+    client = wolframalpha.Client(bot.config.wolframID)
     if not trigger.group(2):
         if bot.config.lang == 'ca':
             return bot.reply("Res per buscar. Sintaxi: .wa <paraula|frase|operacio|...>.")

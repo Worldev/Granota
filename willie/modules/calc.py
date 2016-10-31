@@ -55,10 +55,13 @@ def wa(bot, trigger):
     query = trigger.group(2)
     res = client.query(query)
     answers = []
-    for pod in res.pods:
-        if pod.text:
-            answers.append(str(pod.text))
-    answer = " - ".join(answers)
+    try:
+        for pod in res.pods:
+            if pod.text:
+                answers.append(str(pod.text))
+        answer = " \x02--\x02 ".join(answers)
+    except AttributeError:
+        pass
     if answer:
         bot.say("[WOLFRAM] " + answer)
     else:

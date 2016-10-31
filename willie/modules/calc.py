@@ -61,7 +61,7 @@ def wa(bot, trigger):
                 answers.append(str(pod.text))
     except AttributeError:
         pass
-    answer = " \x02--\x02 ".join(answers)
+    answer = " \x02-|-\x02 ".join(answers)
     if answer:
         bot.say("[WOLFRAM] " + answer)
     else:

@@ -59,9 +59,9 @@ def wa(bot, trigger):
         for pod in res.pods:
             if pod.text:
                 answers.append(str(pod.text))
-        answer = " \x02--\x02 ".join(answers)
     except AttributeError:
         pass
+    answer = " \x02--\x02 ".join(answers)
     if answer:
         bot.say("[WOLFRAM] " + answer)
     else:

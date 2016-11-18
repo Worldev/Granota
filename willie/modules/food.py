@@ -7,7 +7,7 @@ import re
 @commands('cake', 'pastel', 'pastis')
 def pastis(bot, trigger):
     if not trigger.group(2):
-        nick == bot.nick
+        nick = bot.nick
     else:
         if ' ' in trigger.group(2):
             nick = trigger.group(2).split()[0]

@@ -6,6 +6,10 @@ import re
 
 @commands('cake', 'pastel', 'pastis')
 def pastis(bot, trigger):
+    if ' ' in trigger.group(2):
+        nick = trigger.group(2).split()[0]
+    else:
+        nick = trigger.group(2)
     if bot.config.lang == 'ca':
         cakes = [u"...me'l menjo tot sencer, deixant les espelmes per %s, es clar!",
                     u"...el dono a %s, per bona persona!",
@@ -25,7 +29,7 @@ def pastis(bot, trigger):
     else:
         bot.say(u"I take a cake and...")
     time.sleep(1)
-    bot.say(random.choice(cakes) % trigger.group(2))
+    bot.say(random.choice(cakes) % nick)
 
 @commands('galeta', 'galleta', 'cookie')
 def galeta(bot, trigger):

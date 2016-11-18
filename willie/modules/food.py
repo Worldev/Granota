@@ -6,12 +6,13 @@ import re
 
 @commands('cake', 'pastel', 'pastis')
 def pastis(bot, trigger):
-    if ' ' in trigger.group(2):
-        nick = trigger.group(2).split()[0]
-    elif bot.nick in trigger.group(2):
-        nick = bot.nick
+    if not trigger.group(2):
+        nick == bot.nick
     else:
-        nick = trigger.group(2)
+        if ' ' in trigger.group(2):
+            nick = trigger.group(2).split()[0]
+        else:
+            nick = trigger.group(2)
     if bot.config.lang == 'ca':
         cakes = [u"...me'l menjo tot sencer, deixant les espelmes per %s, es clar!",
                     u"...el dono a %s, per bona persona!",

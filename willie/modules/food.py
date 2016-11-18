@@ -8,6 +8,8 @@ import re
 def pastis(bot, trigger):
     if ' ' in trigger.group(2):
         nick = trigger.group(2).split()[0]
+    elif bot.nick in trigger.group(2):
+        nick = bot.nick
     else:
         nick = trigger.group(2)
     if bot.config.lang == 'ca':

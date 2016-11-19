@@ -26,33 +26,41 @@ def movie(bot, trigger):
             elif bot.config.lang == 'es':
                 message = u'[Película] Error de la API de imdb'
             else:
-                message = '[MOVIE] Error from the imdb API'
+                message = '[Movie] Error from the imdb API'
     else:
+        link = '\x0302http://imdb.com/title/' + data['imdbID'] + '\x0F'
+        ratingraw = data['imdbRating']
+        if rating < 5:
+            rating = '\x0304' + ratingraw + '\x0F'
+        elif rating >= 5 and rating < 7:
+            rating = '\x0307' + ratingraw + '\x0F'
+        else:
+            rating = '\x0303' + ratingraw + '\x0F'
         if bot.config.lang == 'ca':
-            message = u'[Pel·lícula] Títol: ' + data['Title'] + \
+            message = '\x02\x0301,04IMDB\x0F\x02 - ' + data['Title'] + '\x0F' +  \
                     u' | Director: ' + data['Director'] + \
                     u' | Any: ' + data['Year'] + \
-                    u' | Valoració: ' + data['imdbRating'] + ' i ' + data['imdbVotes'] + ' persones han votat.' + \
+                    u' | Valoració: ' + rating + ' i han votat ' + data['imdbVotes'] + ' persones.' + \
                     u' | Gènere: ' + data['Genre'] + \
                     u' | Premis: ' + data['Awards'] + \
                     u' | Duració: ' + data['Runtime'] + \
-                    ' | Link a IMDB: http://imdb.com/title/' + data['imdbID']
+                    ' | Link a IMDB: ' + link
         elif bot.config.lang == 'es':
-            message = u'[Película] Título: ' + data['Title'] + \
+            message = '\x02\x0301,04IMDB\x0F\x02 - ' + data['Title'] + '\x0F' +  \
                     u' | Director: ' + data['Director'] + \
                     u' | Año: ' + data['Year'] + \
-                    u' | Valoración: ' + data['imdbRating'] + ' y ' + data['imdbVotes'] + ' personas han votado.' + \
+                    u' | Valoración: ' + rating + ' y han votado ' + data['imdbVotes'] + ' personas.' + \
                     u' | Género: ' + data['Genre'] + \
                     u' | Premios: ' + data['Awards'] + \
                     u' | Duración: ' + data['Runtime'] + \
-                    ' | Link a IMDB: http://imdb.com/title/' + data['imdbID']
+                    ' | Link a IMDB: ' + link
         else:
-            message = '[MOVIE] Title: ' + data['Title'] + \
+            message = '\x02\x0301,04IMDB\x0F\x02 - ' + data['Title'] + '\x0F' + \
                       ' | Director: ' + data['Director'] + \
                       ' | Year: ' + data['Year'] + \
-                      ' | Rating: ' + data['imdbRating'] + ' and ' + data['imdbVotes'] + ' people have voted.' + \
+                      ' | Rating: ' + rating + ' and ' + data['imdbVotes'] + ' people have voted.' + \
                       ' | Genre: ' + data['Genre'] + \
                       ' | Awards: ' + data['Awards'] + \
                       ' | Runtime: ' + data['Runtime'] + \
-                      ' | IMDB Link: http://imdb.com/title/' + data['imdbID']
+                      ' | IMDB Link: ' + link
     bot.say(message)

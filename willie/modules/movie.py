@@ -32,7 +32,7 @@ def movie(bot, trigger):
         ratingraw = data['imdbRating']
         if ratingraw < 5:
             rating = '\x0304' + ratingraw + '\x0F'
-        elif ratingraw >= 5 and rating < 7:
+        elif ratingraw >= 5 and ratingraw < 7:
             rating = '\x0307' + ratingraw + '\x0F'
         else:
             rating = '\x0303' + ratingraw + '\x0F'

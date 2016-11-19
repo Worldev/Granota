@@ -58,17 +58,16 @@ normal_ping_en = [u"Do you think that I'll answer you? Bah!",u"Oh, my love! What
                  u"There are 10 types of bots: The ones that know binary and the ones that don't know it",
                  u"There are 3 types of bots: The ones that knows how to count and the ones that don't know how to do it.",
                  u"Looking for the full pi number. Wait a moment please...",
-                 #u"Últimes notícias: La tecla 'Control' ha detenido 'Escape' que ha quedado bajo custodia de 'Bloquear Desplazamiento'.",
-                 #u"Un hotel infinito lleno puede acojer infinitos clientes más. Peró un bot infinitamente perfecto (como yo) puede responder a tus peticiones *finitas*.",
+                 u"Breaking news: The 'Control' key has arrested 'Escape' and now it's being guarded by 'Block shift'.",
+                 u"A full infinite hotel can host infinite more clients. But a bot infinitely perfect (like me) can't answer to your infinite commands.",
                  u"Carpe diem et quid pro quo ut non habeas corpus mutatis mutandis.",
                  u"Do you lie when you say you are lying?",
-                 #u"Lo dicen las encuestas: cinco de cada diez bots... són la mitad.",
+                 u"Polls tell it: five of ten bots... are the half.",
                  u"I never forget a nick... but I will make an exception for you.",
-                 #u"[<Espacio reservado para publicidad>]"
+                 u"[<Space reserved for ads>]"
                  ]            
 owner_ping_en = [u"I agree with you!",u"Our lord guides us very well...",
                u"Yes, my lord, I'll follow you.",
-               #u"para servirlo",u"servidor",
                u"My lord, I'm very glad to listen my name in your great discourse.",
                u":)",u"I will follow you until the end, my Lord.",
                u"Oh, majesty, I will give my support on all your decisions!",
@@ -83,19 +82,27 @@ def mention(bot, trigger):
         dice = random.choice(['owner','nowner'])
         if dice == 'owner':
             if bot.config.lang == 'ca':
-                bot.say(random.choice(owner_ping_ca) + u" [Més sobre mi: %sajuda]" % bot.config.prefix.replace("\\", ""))
+                bot.say(random.choice(owner_ping_ca) + u" [Més sobre mi: \x02%sajuda\x02]" % bot.config.prefix.replace("\\", ""))
             elif bot.config.lang == 'es':
-                bot.say(random.choice(owner_ping_es) + u" [Más sobre mí: %sayuda]" % bot.config.prefix.replace("\\", ""))
+                bot.say(random.choice(owner_ping_es) + u" [Más sobre mí: \x02%sayuda\x02]" % bot.config.prefix.replace("\\", ""))
             else:
-                bot.say(random.choice(owner_ping_en) + u" [More about me: %shelp]" % bot.config.prefix.replace("\\", ""))
+                bot.say(random.choice(owner_ping_en) + u" [More about me: \x02%shelp\x02]" % bot.config.prefix.replace("\\", ""))
             return
+        else:
+            if bot.config.lang == 'ca':
+                bot.say(random.choice(normal_ping_ca) + u" [Més sobre mi: \x02%sajuda\x02]" % bot.config.prefix.replace("\\", ""))
+            elif bot.config.lang == 'es':
+                bot.say(random.choice(normal_ping_es) + u" [Más sobre mí: \x02%sayuda\x02]" % bot.config.prefix.replace("\\", ""))
+            else:
+                bot.say(random.choice(normal_ping_en) + u" [More about me: \x02%shelp\x02]" % bot.config.prefix.replace("\\", ""))
+            return          
     else:
         if bot.config.lang == 'ca':
-            bot.say(random.choice(normal_ping_ca) + u" [Més sobre mi: %sajuda]" % bot.config.prefix.replace("\\", ""))
+            bot.say(random.choice(normal_ping_ca) + u" [Més sobre mi: \x02%sajuda\x02]" % bot.config.prefix.replace("\\", ""))
         elif bot.config.lang == 'es':
-            bot.say(random.choice(normal_ping_es) + u" [Más sobre mí: %sayuda]" % bot.config.prefix.replace("\\", ""))
+            bot.say(random.choice(normal_ping_es) + u" [Más sobre mí: \x02%sayuda\x02]" % bot.config.prefix.replace("\\", ""))
         else:
-            bot.say(random.choice(normal_ping_en) + u" [More about me: %shelp]" % bot.config.prefix.replace("\\", ""))
+            bot.say(random.choice(normal_ping_en) + u" [More about me: \x02%shelp\x02]" % bot.config.prefix.replace("\\", ""))
 
 @commands("ping")
 def normal_ping(bot, trigger):

@@ -69,15 +69,15 @@ def commands(bot, trigger):
     listnames = names.split()
     num = len(listnames)
     if bot.config.lang == 'ca':
-        bot.notice(trigger.nick, '\x02' + str(num) + ' ordres disponibles:\x02 ' + names + '.', max_messages=10)
+        bot.notice(trigger.nick, '\x02' + str(num) + ' ordres disponibles:\x02 ' + names + '.')
         bot.reply(trigger.nick, "T'he enviat un missatge amb totes les meves ordres. Per obtenir ajuda sobre una ordre en concret, escriu \x02{0}ajuda <ordre>\x02".format(bot.config.prefix.replace("\\", "")))
         return
     elif bot.config.lang == 'es':
-    	bot.notice(trigger.nick, '\x02' + str(num) + ' comandos disponibles:\x02 ' + names + '.', max_messages=10)
+    	bot.notice(trigger.nick, '\x02' + str(num) + ' comandos disponibles:\x02 ' + names + '.')
     	bot.reply("Te he enviado un mensaje con todos mis comandos. Para obtener ayuda sobre un comando en concreto, escribe \x02{0}ayuda <comando>\x02".format(bot.config.prefix.replace("\\", "")))
     	return
     else:
-	bot.notice(trigger.nick, '\x02' + str(num) + ' available commands:\x02 ' + names + '.', max_messages=10)
+	bot.notice(trigger.nick, '\x02' + str(num) + ' available commands:\x02 ' + names + '.')
 	bot.reply("I've sent you a notice with all my commands. For help on a specific command, type \x02{0}help <command>\x02".format(bot.config.prefix.replace("\\", "")))
 	return
 

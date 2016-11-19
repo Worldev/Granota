@@ -30,9 +30,9 @@ def movie(bot, trigger):
     else:
         link = '\x0302http://imdb.com/title/' + data['imdbID'] + '\x0F'
         ratingraw = data['imdbRating']
-        if rating < 5:
+        if ratingraw < 5:
             rating = '\x0304' + ratingraw + '\x0F'
-        elif rating >= 5 and rating < 7:
+        elif ratingraw >= 5 and rating < 7:
             rating = '\x0307' + ratingraw + '\x0F'
         else:
             rating = '\x0303' + ratingraw + '\x0F'

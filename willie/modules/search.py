@@ -29,7 +29,7 @@ def g(bot, trigger):
         return bot.reply('.g what?')
     results = google_search(query, bot.config.lang)
     if results:
-        bot.reply(glogo + results)
+        bot.say(glogo + results)
     elif uri is False:
         if bot.config.lang == 'ca':
             bot.reply("Error al connectar amb Google.")

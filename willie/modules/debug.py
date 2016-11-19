@@ -62,11 +62,11 @@ def version(bot, trigger):
     latestver, latesturl = get_latest_version()
     if latestver != version:
         if bot.config.lang == 'ca':
-            latestmsg = u"L'última versió estable disponible de Grantota és %s (%s)." % (latestver, latesturl)
+            latestmsg = u"L'última versió estable disponible de Grantota és \x02%s\x02 (%s)." % (latestver, latesturl)
         elif bot.config.lang == 'es':
-            latestmsg = u"La última versión estable disponible de Granota es %s (%s)." % (latestver, latesturl)
+            latestmsg = u"La última versión estable disponible de Granota es \x02%s\x02 (%s)." % (latestver, latesturl)
         else:
-            latestmsg = u"The lastest stable version of Granota available is %s (%s)." % (latestver, latesturl)
+            latestmsg = u"The lastest stable version of Granota available is \x02%s\x02 (%s)." % (latestver, latesturl)
     else:
         if bot.config.lang == 'ca':
             latestmsg = u"Estic utilitzant l'última versió estable de Granota."
@@ -79,11 +79,11 @@ def version(bot, trigger):
     else:
         commitinfo = ' (commit %s)' % commit
     if bot.config.lang == 'ca':
-        bot.say(u"Sóc Granota %s%s, en el sistema operatiu %s i utilitzant Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
+        bot.say(u"Sóc \x02Granota %s%s\x02, en el sistema operatiu %s i utilitzant Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
     elif bot.config.lang == 'es':
-        bot.say(u"Soy Granota %s%s, en el sistema operativo %s y usando Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
+        bot.say(u"Soy \x02Granota %s%s\x02, en el sistema operativo %s y usando Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
     else:
-        bot.say(u"I'm Granota %s%s, on %s and using Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
+        bot.say(u"I'm \x02Granota %s%s\x02, on %s and using Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
 
 @commands('debug_print')
 def debug_print(bot, trigger):

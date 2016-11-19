@@ -23,7 +23,7 @@ def google_search(query, lang):
 	
 @commands('g', 'google')
 def g(bot, trigger):
-    glogo = "\x12G\x04o\x08o\x12g\x03l\x04e\x0F: "
+    glogo = "\x0312G\x0304o\x0308o\x0312g\x0303l\x0304e\x0F: "
     query = trigger.group(2)
     if not query:
         return bot.reply('.g what?')

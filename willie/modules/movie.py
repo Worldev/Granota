@@ -37,7 +37,7 @@ def movie(bot, trigger):
         else:
             rating = '\x0303' + ratingraw + '\x0F'
         if bot.config.lang == 'ca':
-            message = '\x02\x0301,04IMDB\x0F\x02 - ' + data['Title'] + '\x0F' +  \
+            message = '\x02\x0301,08IMDB\x0F\x02 - ' + data['Title'] + '\x0F' +  \
                     u' | Director: ' + data['Director'] + \
                     u' | Any: ' + data['Year'] + \
                     u' | Valoració: ' + rating + ' i han votat ' + data['imdbVotes'] + ' persones.' + \
@@ -46,7 +46,7 @@ def movie(bot, trigger):
                     u' | Duració: ' + data['Runtime'] + \
                     ' | Link a IMDB: ' + link
         elif bot.config.lang == 'es':
-            message = '\x02\x0301,04IMDB\x0F\x02 - ' + data['Title'] + '\x0F' +  \
+            message = '\x02\x0301,08IMDB\x0F\x02 - ' + data['Title'] + '\x0F' +  \
                     u' | Director: ' + data['Director'] + \
                     u' | Año: ' + data['Year'] + \
                     u' | Valoración: ' + rating + ' y han votado ' + data['imdbVotes'] + ' personas.' + \
@@ -55,7 +55,7 @@ def movie(bot, trigger):
                     u' | Duración: ' + data['Runtime'] + \
                     ' | Link a IMDB: ' + link
         else:
-            message = '\x02\x0301,04IMDB\x0F\x02 - ' + data['Title'] + '\x0F' + \
+            message = '\x02\x0301,08IMDB\x0F\x02 - ' + data['Title'] + '\x0F' + \
                       ' | Director: ' + data['Director'] + \
                       ' | Year: ' + data['Year'] + \
                       ' | Rating: ' + rating + ' and ' + data['imdbVotes'] + ' people have voted.' + \

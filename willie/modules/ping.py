@@ -62,7 +62,7 @@ normal_ping_en = [u"Do you think that I'll answer you? Bah!",u"Oh, my love! What
                  u"A full infinite hotel can host infinite more clients. But a bot infinitely perfect (like me) can't answer to your infinite commands.",
                  u"Carpe diem et quid pro quo ut non habeas corpus mutatis mutandis.",
                  u"Do you lie when you say you are lying?",
-                 u"Polls tell it: five of ten bots... are the half.",
+                 u"Polls say it: five of ten bots... are the half.",
                  u"I never forget a nick... but I will make an exception for you.",
                  u"[<Space reserved for ads>]"
                  ]            

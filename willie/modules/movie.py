@@ -33,7 +33,7 @@ def movie(bot, trigger):
         if ratingraw < 5:
             rating = '\x0304' + ratingraw + '\x0F'
         elif ratingraw >= 5 and ratingraw < 7:
-            rating = '\x0307' + ratingraw + '\x0F'
+            rating = '\x0308' + ratingraw + '\x0F'
         else:
             rating = '\x0303' + ratingraw + '\x0F'
         if bot.config.lang == 'ca':

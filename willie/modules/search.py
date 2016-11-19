@@ -23,12 +23,13 @@ def google_search(query, lang):
 	
 @commands('g', 'google')
 def g(bot, trigger):
+    glogo = "\x12G\x04o\x08o\x12g\x03l\x04e\x0F: "
     query = trigger.group(2)
     if not query:
         return bot.reply('.g what?')
     results = google_search(query, bot.config.lang)
     if results:
-        bot.reply(results)
+        bot.reply(glogo + results)
     elif uri is False:
         if bot.config.lang == 'ca':
             bot.reply("Error al connectar amb Google.")

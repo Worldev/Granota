@@ -27,11 +27,11 @@ def configure(config):
 def help(bot, trigger):
     if not trigger.group(2):
     	if bot.config.lang == 'ca':
-    	    bot.reply(u'Escriu {0}ajuda <ordre> (per exemple {0}help wiki) per obtindre ajuda per una ordre, o {0}ordres per una llista d\'ordres'.format(bot.config.prefix.replace("\\", "")))
+    	    bot.reply(u'Escriu \x02{0}ajuda <ordre>\x02 (per exemple \x02{0}help wiki\x02) per obtindre ajuda per una ordre, o \x02{0}ordres\x02 per una llista d\'ordres'.format(bot.config.prefix.replace("\\", "")))
     	elif bot.config.lang == 'es':
-    	    bot.reply(u'Escribe {0}ayuda <orden> (por ejemplo {0}ayuda wiki) para obtener ayuda sobre un comando, o {0}comandos para una lista de órdenes'.format(bot.config.prefix.replace("\\", "")))
+    	    bot.reply(u'Escribe \x02{0}ayuda <orden>\x02 (por ejemplo \x02{0}ayuda wiki\x02) para obtener ayuda sobre un comando, o \x02{0}comandos\x02 para una lista de órdenes'.format(bot.config.prefix.replace("\\", "")))
     	else:
-    	    bot.reply(u'Type {0}help <command> (for example {0}help wiki) to get help about a command, or {0}commands to get a list of commands.'.format(bot.config.prefix.replace("\\", "")))
+    	    bot.reply(u'Type \x02{0}help <command>\x02 (for example \x02{0}help wiki\x02) to get help about a command, or \x02{0}commands\x02 to get a list of commands.'.format(bot.config.prefix.replace("\\", "")))
     
     else:
         name = trigger.group(2).lower()
@@ -70,15 +70,15 @@ def commands(bot, trigger):
     num = len(listnames)
     if bot.config.lang == 'ca':
         bot.msg(trigger.sender, '\x02' + str(num) + ' ordres disponibles:\x02 ' + names + '.', max_messages=10)
-        bot.reply("Per obtenir ajuda sobre una ordre en concret, escriu {0}ajuda <ordre>".format(bot.config.prefix.replace("\\", "")))
+        bot.reply("Per obtenir ajuda sobre una ordre en concret, escriu \x02{0}ajuda <ordre>\x02".format(bot.config.prefix.replace("\\", "")))
         return
     elif bot.config.lang == 'es':
     	bot.msg(trigger.sender, '\x02' + str(num) + ' comandos disponibles:\x02 ' + names + '.', max_messages=10)
-    	bot.reply("Para obtener ayuda sobre un comando en concreto, escribe {0}ayuda <comando>".format(bot.config.prefix.replace("\\", "")))
+    	bot.reply("Para obtener ayuda sobre un comando en concreto, escribe \x02{0}ayuda <comando>\x02".format(bot.config.prefix.replace("\\", "")))
     	return
     else:
 	bot.msg(trigger.sender, '\x02' + str(num) + ' available commands:\x02 ' + names + '.', max_messages=10)
-	bot.reply("For help on a specific command, type {0}help <command>".format(bot.config.prefix.replace("\\", "")))
+	bot.reply("For help on a specific command, type \x02{0}help <command>\x02".format(bot.config.prefix.replace("\\", "")))
 	return
 
 @rule('$nick' r'(?i)(ajuda|ayuda|help)(?:[?!]+)?$')
@@ -93,17 +93,17 @@ def help2(bot, trigger):
 		url = ' (' + bot.config.project_url + ')'
     	if bot.config.lang == 'ca':
     		response = (
-    		'Hola, Sóc un bot del projecte {0}{1}. Escriu "{2}ordres" per una llista d\'ordres. '.format(project, url, bot.config.prefix.replace("\\", "")) +
+    		'Hola, Sóc un bot del projecte {0}{1}. Escriu \x02{2}ordres\x02 per una llista d\'ordres. '.format(project, url, bot.config.prefix.replace("\\", "")) +
 	        'El meu propietari és %s.'
 	    % bot.config.owner)
 	elif bot.config.lang == 'es':
     		response = (
-	        'Hola, Soy un bot del proyecto {0}{1}. Escribe "{2}comandos" por una lista de mis comandos. '.format(project, url, bot.config.prefix.replace("\\", "")) +
+	        'Hola, Soy un bot del proyecto {0}{1}. Escribe \x02{2}comandos\x02 por una lista de mis comandos. '.format(project, url, bot.config.prefix.replace("\\", "")) +
 	        'Mi propietario es %s.'
 	    ) % bot.config.owner
 	else:
     		response = (
-	        'Hi, I\'m a {0} project bot{1}. Type "{2}commands" for a commands list. '.format(project, url, bot.config.prefix.replace("\\", "")) +
+	        'Hi, I\'m a {0} project bot{1}. Type \x02{2}commands\x02 for a commands list. '.format(project, url, bot.config.prefix.replace("\\", "")) +
 	        'My owner is %s.'
 	    ) % bot.config.owner
 		   

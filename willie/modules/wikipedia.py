@@ -99,17 +99,17 @@ def wikipedia(bot, trigger):
 
     query = query.replace(' ', '_')
     if bot.config.lang == 'ca':
-        bot.say('"%s" - http://ca.wikipedia.org/wiki/%s' % (snippet, query))
+        bot.say('"%s" - \x0302http://ca.wikipedia.org/wiki/%s\x0F' % (snippet, query))
     elif bot.config.lang == 'es':
-        bot.say('"%s" - http://es.wikipedia.org/wiki/%s' % (snippet, query))
+        bot.say('"%s" - \x0302http://es.wikipedia.org/wiki/%s\x0F' % (snippet, query))
     else:
-        bot.say('"%s" - http://en.wikipedia.org/wiki/%s' % (snippet, query))
+        bot.say('"%s" - \x0302http://en.wikipedia.org/wiki/%s\x0F' % (snippet, query))
 
 @rule(r".*\[\[.+\]\]")
 def show_wikilink(bot, trigger):
     page = trigger.group(0).split('[[')[1].split(']]')[0]
     if not bot.config.has_option("core", "wiki_link"):
-        link = 'https://%s.wikipedia.org/wiki/' % bot.config.lang
+        link = '\x0302https://%s.wikipedia.org/wiki/' % bot.config.lang
     else:
         link = bot.config.wiki_link
     bot.say(link + page.replace(" ", "_"))

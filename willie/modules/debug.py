@@ -79,11 +79,11 @@ def version(bot, trigger):
     else:
         commitinfo = ' (commit %s)' % commit
     if bot.config.lang == 'ca':
-        bot.say(u"Sóc \x02Granota %s%s\x02, en el sistema operatiu %s i utilitzant Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
+        bot.say(u"Sóc \x02Granota %s\x02%s, en el sistema operatiu %s i utilitzant Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
     elif bot.config.lang == 'es':
-        bot.say(u"Soy \x02Granota %s%s\x02, en el sistema operativo %s y usando Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
+        bot.say(u"Soy \x02Granota %s\x02%s, en el sistema operativo %s y usando Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
     else:
-        bot.say(u"I'm \x02Granota %s%s\x02, on %s and using Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
+        bot.say(u"I'm \x02Granota %s\x02%s, on %s and using Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
 
 @commands('debug_print')
 def debug_print(bot, trigger):

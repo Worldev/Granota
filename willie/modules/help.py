@@ -80,12 +80,12 @@ def commands(bot, trigger):
     elif bot.config.lang == 'es':
     	bot.notice(trigger.nick, '\x02' + str(num) + ' comandos disponibles:\x02 ' + firstnames)
 	bot.notice(trigger.nick, secondnames + '.')
-    	bot.reply("Te he enviado un mensaje con todos mis comandos. Para obtener ayuda sobre un comando en concreto, escribe \x02{0}ayuda <comando>\x02".format(bot.config.prefix.replace("\\", "")))
+    	bot.reply(trigger.nick, "Te he enviado un mensaje con todos mis comandos. Para obtener ayuda sobre un comando en concreto, escribe \x02{0}ayuda <comando>\x02".format(bot.config.prefix.replace("\\", "")))
     	return
     else:
 	bot.notice(trigger.nick, '\x02' + str(num) + ' available commands:\x02 ' + firstnames)
 	bot.notice(trigger.nick, secondnames + '.')
-	bot.reply("I've sent you a notice with all my commands. For help on a specific command, type \x02{0}help <command>\x02".format(bot.config.prefix.replace("\\", "")))
+	bot.reply(trigger.nick, "I've sent you a notice with all my commands. For help on a specific command, type \x02{0}help <command>\x02".format(bot.config.prefix.replace("\\", "")))
 	return
 
 @rule('$nick' r'(?i)(ajuda|ayuda|help)(?:[?!]+)?$')

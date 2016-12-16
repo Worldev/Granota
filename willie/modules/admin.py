@@ -227,7 +227,7 @@ def set_config(bot, trigger):
             finalvalue = ",".join(value)
         else:
             finalvalue = value
-        bot.reply("\x02%s.%s\x02: %s" % (section, option, finalvalue))
+        bot.say("\x02%s.%s\x02: %s" % (section, option, finalvalue))
         return
 
     # Otherwise, set the value to one given as argument 2.

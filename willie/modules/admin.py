@@ -223,7 +223,11 @@ def set_config(bot, trigger):
                 value = "(password censored)"
         else:
             value = getattr(getattr(bot.config, section), option)
-        bot.reply("%s.%s = %s" % (section, option, ",".join(value)))
+        if not isinstance(value, basestring):
+            finalvalue = ",".join(value)
+        else:
+            finalvalue = value
+        bot.reply("\x02%s.%s\x02: %s" % (section, option, finalvalue))
         return
 
     # Otherwise, set the value to one given as argument 2.

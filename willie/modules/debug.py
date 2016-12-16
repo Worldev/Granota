@@ -24,7 +24,15 @@ def privileges(bot, trigger):
 def admins(bot, trigger):
     owner = bot.config.core.owner
     admins = bot.config.core.get_list('admins')
-    bot.say("\x02Owner:\x02 "+owner+" \x02Admins:\x02 "+", ".join(admins))
+    if len(admins) == 0:
+        if bot.config.lang == 'ca':
+            bot.say("\x02Owner:\x02 "+owner+" No tinc administradors.")
+        elif bot.config.lang == 'es':
+            bot.say("\x02Owner:\x02 "+owner+" No tengo administradores.")
+        else:
+            bot.say("\x02Owner:\x02 "+owner+" I don't have any admins.")
+    else:
+        bot.say("\x02Owner:\x02 "+owner+" \x02Admins:\x02 "+", ".join(admins))
 
 def git_info():
     repo = path.join(path.dirname(path.dirname(path.dirname(__file__))), '.git')

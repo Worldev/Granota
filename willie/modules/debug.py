@@ -23,8 +23,8 @@ def privileges(bot, trigger):
 @commands('admins')
 def admins(bot, trigger):
     owner = bot.config.core.owner
-    admins = str(bot.config.core.get_list('admins'))
-    bot.say("[Owner]"+owner+" [Admins]"+admins)
+    admins = bot.config.core.get_list('admins')
+    bot.say("Owner: "+owner+" Admins: "+", ".join(admins))
 
 def git_info():
     repo = path.join(path.dirname(path.dirname(path.dirname(__file__))), '.git')

@@ -13,7 +13,7 @@ A multilingual IRC bot coded in Python and based off Willie.
 
 * English: See Granota's [wiki help page](https://github.com/Worldev/Granota/wiki/Download-and-installation-guide)
 * Spanish: Ver la [página de ayuda del wiki](https://github.com/Worldev/Granota/wiki/Guía-de-instalación)
-* Catalan: No està disponible.
+* Catalan: Veu la [pàgina d'ajuda del wiki](https://github.com/Worldev/Granota/wiki/Guia-d'instal·lació).
 
 ## Known Granota copies
 This is a list of modified copies of Granota:

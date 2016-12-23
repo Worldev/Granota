@@ -103,7 +103,7 @@ def f_load(bot, trigger):
     path = ''
 
     if module_name in sys.modules:
-        return bot.reply('Module already loaded, use reload')
+        return bot.reply('Module already loaded, use reload. If you unloaded thos module use "reload" instead.')
 
     mods = bot.config.enumerate_modules()
     for name in mods:
@@ -176,7 +176,11 @@ def f_unload(bot, trigger):
         path = path[:-1]
     if not os.path.isfile(path):
         return bot.reply('Found %s, but not the source file' % name)    
-    bot.say("Done?")
+    module = imp.load_source(module_name, path)
+    mtime = os.path.getmtime(module.__file__)
+    modified = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(mtime))
 
+    bot.reply(u'%r (version: %s)' % (module, modified))
+    
 if __name__ == '__main__':
     print __doc__.strip()

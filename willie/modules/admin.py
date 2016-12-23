@@ -246,7 +246,7 @@ def save_config(bot, trigger):
     elif bot.config.lang == 'es':
         bot.say(u"Nueva configuracion guardada. Quizas tendras que reiniciarme para que tenga efecto.")
     else:
-        bot.say(u"New configuration save. Maybe you will have to reboot me to apply the changes.")
+        bot.say(u"New configuration saved. Maybe you will have to reboot me to apply the changes.")
     bot.config.save()
 
 @commands('nick', 'nom', 'nombre')

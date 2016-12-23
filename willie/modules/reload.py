@@ -73,7 +73,7 @@ def f_reload(bot, trigger):
     bot.register(vars(module))
     bot.bind_commands()
 
-    bot.reply(u'%r (version: %s)' % (module, modified))
+    bot.reply(u'%r (version: %s) reloaded' % (module, modified))
 
 
 @willie.module.nickname_commands('update')
@@ -120,7 +120,7 @@ def f_load(bot, trigger):
     bot.register(vars(module))
     bot.bind_commands()
 
-    bot.reply(u'%r (version: %s)' % (module, modified))
+    bot.reply(u'%r (version: %s) loaded. Use "unload" to unload it.' % (module, modified))
     
 @willie.module.nickname_commands("unload")
 @willie.module.priority("low")
@@ -180,7 +180,7 @@ def f_unload(bot, trigger):
     mtime = os.path.getmtime(module.__file__)
     modified = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(mtime))
 
-    bot.reply(u'%r (version: %s)' % (module, modified))
+    bot.reply(u'%r (version: %s) unloaded. Use "reload" to load it again.' % (module, modified))
     
 if __name__ == '__main__':
     print __doc__.strip()

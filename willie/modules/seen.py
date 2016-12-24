@@ -35,9 +35,9 @@ def seen(bot, trigger):
 
 @rule('(.*)')
 @priority('low')
-@unblockable
+@unblockable # Also tracks ignored users
 def note(bot, trigger):
-    if not trigger.sender.startswith("#"):
+    if trigger.sender.startswith("#"): # Only sees users that speak on public channels
         nick = Nick(trigger.nick)
         seen_dict[nick]['timestamp'] = time.time()
         seen_dict[nick]['channel'] = trigger.sender

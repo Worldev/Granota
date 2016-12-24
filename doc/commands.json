@@ -1160,5 +1160,19 @@
 			"help": "Desactiva el mòdul especificat. El mòdul pot ser carregat de nou utilitzant l'ordre reload.",
 			"example": "unload help"
 		}
-	}		
+	},
+	"seen": {
+		"en": {
+			"help": "Reports when and where the specified user was last seen by the bot.",
+			"example": "seen SomePerson"
+		},
+		"es": {
+			"help": "Informa de cuando y donde fue visto por el bot el usuario especificado.",
+			"example": "visto UnaPersona"
+		},
+		"ca": {
+			"help": "Informa de quan i on l'usuari especificat va ser vist pel bot.",
+			"example": "vist UnaPersona"
+		}
+	}	
 }

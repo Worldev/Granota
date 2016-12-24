@@ -4,7 +4,7 @@ import sys
 import os.path
 import time
 import imp
-from willie.module import nickname_commands, commands, priority, thread
+from willie.module import nickname_commands, commands, priority, thread, NOLIMIT
 import subprocess
 
 @nickname_commands("reload")
@@ -36,7 +36,7 @@ def f_reload(bot, trigger):
             bot.reply(u"No hay ningún module nombrado " + name)
         else:
             bot.reply(name + ": no such module!")
-        return
+        return NOLIMIT
 
     old_module = sys.modules[name]
 
@@ -75,6 +75,7 @@ def f_reload(bot, trigger):
     bot.bind_commands()
 
     bot.reply(u'%r (version: %s) reloaded' % (module, modified))
+    return NOLIMIT
 
 @nickname_commands("load")
 @commands("load")
@@ -96,7 +97,8 @@ def f_load(bot, trigger):
         if name == trigger.group(2):
             path = mods[name]
     if not os.path.isfile(path):
-        return bot.reply('Module %s not found' % module_name)
+        bot.reply('Module %s not found' % module_name)
+        return NOLIMIT
 
     module = imp.load_source(module_name, path)
     mtime = os.path.getmtime(module.__file__)
@@ -107,6 +109,7 @@ def f_load(bot, trigger):
     bot.bind_commands()
 
     bot.reply(u'%r (version: %s) loaded. Use "unload" to unload it.' % (module, modified))
+    return NOLIMIT
     
 @nickname_commands("unload")
 @commands("unload")
@@ -124,12 +127,6 @@ def f_unload(bot, trigger):
 
     name = trigger.group(2)
 
-    if (not name) or (name == '*') or (name.upper() == 'ALL THE THINGS'):
-        bot.callables = None
-        bot.commands = None
-        bot.setup()
-        return bot.reply('done')
-
     if not name in sys.modules:
         if bot.config.lang == 'ca':
             bot.reply(u"No hi ha cap mòdul anomenat " + name)
@@ -137,7 +134,7 @@ def f_unload(bot, trigger):
             bot.reply(u"No hay ningún module nombrado " + name)
         else:
             bot.reply(name + ": no such module!")
-        return
+        return NOLIMIT
 
     old_module = sys.modules[name]
 
@@ -168,7 +165,8 @@ def f_unload(bot, trigger):
     modified = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(mtime))
 
     bot.reply(u'%r (version: %s) unloaded. Use "reload" to load it again.' % (module, modified))
-  
+    return NOLIMIT
+
 @nickname_commands('update')
 @commands("update")
 def f_update(bot, trigger):
@@ -185,7 +183,7 @@ def f_update(bot, trigger):
     if msg.startswith("Already"): # ...up-to-date.
         return # Not necessary to reload
     else:
-        f_reload(bot, trigger)    
+        f_reload(bot, trigger)
     
 if __name__ == '__main__':
     print __doc__.strip()

@@ -9,9 +9,8 @@ from willie.module import commands, rule, priority, unblockable
 
 seen_dict = Ddict(dict)
 
-@commands('seen')
+@commands('seen', 'vist', 'visto')
 def seen(bot, trigger):
-    """Reports when and where the user was last seen."""
     if not trigger.group(2):
         if bot.config.lang == 'ca':
             bot.say(u"He vist per última vegada a \x02%s\x02 ara mateix a \x02%s\x02, dient \x1D%s\x0F" % (trigger.nick, trigger.sender, trigger.group(0)))

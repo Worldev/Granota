@@ -853,34 +853,6 @@
 			"example": "respon Ets un bot?"
 		}
 	},
-	"reboot": {
-		"en": {
-			"help": "Reboots the bot without disconnecting it, only for admins use.",
-			"example": "reboot"
-		},
-		"es": {
-			"help": "Reinicia el bot sin desconectarle, solo para uso de los admins.",
-			"example": "reboot"
-		},
-		"ca": {
-			"help": "Reinicia el bot sense desconnectar-lo, només per a ús dels administradors.",
-			"example": "reboot"
-		}
-	},
-	"restart": {
-		"en": {
-			"help": "Restarts the bot disconnecting it, only for owner use.",
-			"example": "restart"
-		},
-		"es": {
-			"help": "Reinicia el bot desconectándolo, solo para uso del owner",
-			"example": "restart"
-		},
-		"ca": {
-			"help": "Reinicia el bot desconnectant-lo, només per a ús de l'owner.",
-			"example": "restart"
-		}
-	},
 	"roulette": {
 		"en": {
 			"help": "Plays the russian roulette game. It's recommended to op the bot.",

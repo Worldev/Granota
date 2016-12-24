@@ -37,7 +37,7 @@ def seen(bot, trigger):
 @priority('low')
 @unblockable
 def note(bot, trigger):
-    if not trigger.is_privmsg:
+    if not trigger.sender.startswith("#"):
         nick = Nick(trigger.nick)
         seen_dict[nick]['timestamp'] = time.time()
         seen_dict[nick]['channel'] = trigger.sender

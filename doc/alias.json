@@ -256,5 +256,8 @@
 	},
 	"seen": {
 		"alias": ["seen", "vist", "visto"]
+	},
+	"m": {
+		"alias": ["m"]
 	}
 }

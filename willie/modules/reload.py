@@ -197,11 +197,10 @@ def f_update(bot, trigger):
                             stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE, shell=True)
     msg = proc.communicate()[0]
-    bot.reply(msg)
+    bot.say(msg)
     if msg.startswith("Already"):
         return
     else:
-        bot.reply("Reloading...")
         f_reload(bot, trigger)    
     
 if __name__ == '__main__':

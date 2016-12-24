@@ -1167,7 +1167,7 @@
 			"example": "seen SomePerson"
 		},
 		"es": {
-			"help": "Informa de cuando y donde fue visto por el bot el usuario especificado.",
+			"help": "Informa de cuándo y dónde fue visto por el bot el usuario especificado.",
 			"example": "visto UnaPersona"
 		},
 		"ca": {

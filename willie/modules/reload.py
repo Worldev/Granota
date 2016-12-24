@@ -33,7 +33,7 @@ def f_reload(bot, trigger):
         if bot.config.lang == 'ca':
             bot.reply(u"No hi ha cap mòdul anomenat " + name)
         elif bot.config.lang == 'es':
-            bot.reply(u"No hay ningún module nombrado " + name)
+            bot.reply(u"No hay ningún módulo nombrado " + name)
         else:
             bot.reply(name + ": no such module!")
         return NOLIMIT

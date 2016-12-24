@@ -361,11 +361,14 @@ def set_mask(bot, trigger):
         return
     if not bot.db:
         if bot.config.lang == 'ca':
-            bot.say("No tinc ben configurada la base de dades i no he pogut dur a terme aquesta accio.")
+            bot.say(u"No tinc ben configurada la base de dades i no he pogut dur a terme aquesta acció.\
+            Configura el paràmetre 'topic_mask'.")
         elif bot.config.lang == 'es':
-            bot.say(u"No tengo bien configurada la base de datos y no he podido hacer esa accion.")
+            bot.say(u"No tengo bien configurada la base de datos y no he podido hacer esa accion.\
+            Configura el parámetro 'topic_mask'.")
         else:
-            bot.say(u"I don't have my database configured and I couldn't make this action.")
+            bot.say(u"I don't have my database configured and I couldn't make this action.\
+            Please, configure the parameter 'topic_mask'.")
     else:
         bot.db.preferences.update(trigger.sender.lower(), {'topic_mask': trigger.group(2)})
         if bot.config.lang == 'ca':
@@ -381,11 +384,14 @@ def show_mask(bot, trigger):
         return
     if not bot.db:
         if bot.config.lang == 'ca':
-            bot.say("No tinc ben configurada la base de dades i no he pogut dur a terme aquesta accio.")
+            bot.say(u"No tinc ben configurada la base de dades i no he pogut dur a terme aquesta acció.\
+            Configura el paràmetre 'topic_mask'.")
         elif bot.config.lang == 'es':
-            bot.say(u"No tengo bien configurada la base de datos y no he podido hacer esa accion.")
+            bot.say(u"No tengo bien configurada la base de datos y no he podido hacer esa accion.\
+            Configura el parámetro 'topic_mask'.")
         else:
-            bot.say(u"I don't have my database configured and I couldn't make this action.")
+            bot.say(u"I don't have my database configured and I couldn't make this action.\
+            Please, configure the parameter 'topic_mask'.")
     elif trigger.sender.lower() in bot.db.preferences:
         bot.say(bot.db.preferences.get(trigger.sender.lower(), 'topic_mask'))
     else:

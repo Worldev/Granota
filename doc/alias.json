@@ -253,5 +253,8 @@
 	},
 	"unload": {
 		"alias": ["unload"]
-	}	
+	},
+	"seen": {
+		"alias": ["seen", "vist", "visto"]
+	}
 }

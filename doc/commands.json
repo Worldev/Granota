@@ -1107,16 +1107,58 @@
 	},
 	"update": {
 		"en": {
-			"help": "Updates Granota's code from GitHub. This is a nickname command.",
-			"example": "Granota: update"
+			"help": "Updates Granota's code from GitHub. It only works if the bot is running from git.",
+			"example": "update"
 		},
 		"es": {
-			"help": "Actualiza el código de Granota des de GitHub. Es un comando de nick.",
-			"example": "Granota: update"
+			"help": "Actualiza el código de Granota des de GitHub. Solo funciona si el bot está ejecutándose desde git",
+			"example": "update"
 		},
 		"ca": {
-			"help": "Actualitza el codi de Granota des de GitHub. És una ordre de nick.",
-			"example": "Granota: update"
+			"help": "Actualitza el codi de Granota des de GitHub. Només funciona si el bot s'està executant des de git",
+			"example": "update"
 		}
-	}	
+	},	
+	"reload": {
+		"en": {
+			"help": "Reloads the given module. If no arguments are specified, reloads all modules.",
+			"example": "reload help"
+		},
+		"es": {
+			"help": "Recarga el módulo especificado. Si no hay argumentos, recarga todos los módulos.",
+			"example": "reload help"
+		},
+		"ca": {
+			"help": "Recarrega el mòdul especificat. Si no hi ha arguments, recarrega tots els mòduls.",
+			"example": "reload help"
+		}
+	},	
+	"load": {
+		"en": {
+			"help": "Loads the given module.",
+			"example": "load help"
+		},
+		"es": {
+			"help": "Carga el módulo especificado.",
+			"example": "load help"
+		},
+		"ca": {
+			"help": "Carrega el mòdul especificat.",
+			"example": "load help"
+		}
+	},	
+	"unload": {
+		"en": {
+			"help": "Unloads the given module. The module can be loaded again using the reload command.",
+			"example": "unload help"
+		},
+		"es": {
+			"help": "Desactiva el módulo especificado. El módulo puede ser cargado de nuevo utilizando el comando reload.",
+			"example": "unload help"
+		},
+		"ca": {
+			"help": "Desactiva el mòdul especificat. El mòdul pot ser carregat de nou utilitzant l'ordre reload.",
+			"example": "unload help"
+		}
+	},		
 }

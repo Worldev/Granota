@@ -75,7 +75,7 @@
 		"alias": ["showmask"]
 	},
 	"moderate": {
-		"alias": ["m", "moderat", "moderado", "moderate"]
+		"alias": ["moderate", "moderat", "moderado", "m"]
 	},
 	"unmoderate": {
 		"alias": ["unmoderate", "-m"]

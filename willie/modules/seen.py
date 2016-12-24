@@ -33,7 +33,7 @@ def seen(bot, trigger):
                                 trigger.sender, saw)
         if bot.config.lang == 'ca':
             msg = u"He vist \x02%s\x02 per última vegada el dia \x02%s\x02 al canal \x02%s\x02, dient: \x1D%s\x0F" % (nick, timestamp, channel, message)
-        elif bot.config.lanf == 'es':
+        elif bot.config.lang == 'es':
             msg = u"He visto a \x02%s\x02 por última vez el día \x02%s\x02 en el canal \x02%s\x02, diciendo: \x1D%s\x0F" % (nick, timestamp, channel, message)
         else:                                
             msg = u"I last saw \x02%s\x02 at \x02%s\x02 on \x02%s\x02, saying \x1D%s\x0F" % (nick, timestamp, channel, message)

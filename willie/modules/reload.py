@@ -27,7 +27,7 @@ def f_reload(bot, trigger):
         bot.callables = None
         bot.commands = None
         bot.setup()
-        return bot.reply('done')
+        return bot.say('done')
 
     if not name in sys.modules:
         if bot.config.lang == 'ca':
@@ -168,30 +168,14 @@ def f_unload(bot, trigger):
     modified = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(mtime))
 
     bot.reply(u'%r (version: %s) unloaded. Use "reload" to load it again.' % (module, modified))
-    
-@commands('reboot')
-def reboot(bot, trigger):
-    if trigger.owner or trigger.admin:
-        bot.callables = None
-        bot.commands = None
-        bot.setup()
-        if bot.config.lang == 'ca':
-            bot.reply(u"Bot reiniciat correctament")
-        elif bot.config.lang == 'es':
-            bot.reply(u"Bot reiniciado correctamente")
-        else:
-            bot.reply(u"Bot rebooted.")
-        return
-    else:
-        return bot.reply(u"You aren't my owner")
-    
+  
 @nickname_commands('update')
 @commands("update")
 def f_update(bot, trigger):
     if not trigger.admin:
         return
     
-    bot.reply("Updating...")
+    bot.reply("Updating and reloading...")
     """Pulls the latest versions of all modules from Git"""
     proc = subprocess.Popen('/usr/bin/git pull',
                             stdout=subprocess.PIPE,

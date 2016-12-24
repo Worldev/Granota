@@ -40,9 +40,9 @@ def seen(bot, trigger):
         bot.say(str(trigger.nick) + ': ' + msg)
     else:
         if bot.config.lang == 'ca':
-            bot.say(u"No recordo haver vist a \x02%s\x02" % nick)
+            bot.say(u"No recordo haver vist a \x02%s\x02." % nick)
         elif bot.config.lang == 'es':
-            bot.say(u"No recuerdo haver visto a \x02%s\x02" % nick)
+            bot.say(u"No recuerdo haver visto a \x02%s\x02." % nick)
         else:
             bot.say("Sorry, I haven't seen \x02%s\x02 around." % nick)
 

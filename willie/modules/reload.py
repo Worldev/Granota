@@ -190,14 +190,15 @@ def reboot(bot, trigger):
 def f_update(bot, trigger):
     if not trigger.admin:
         return
-
+    
     bot.reply("Updating...")
     """Pulls the latest versions of all modules from Git"""
     proc = subprocess.Popen('/usr/bin/git pull',
                             stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE, shell=True)
-    if "Already up-to-date." in proc.communicate()[0]:
-        bot.reply(proc.communicate()[0] + " Use \x02%sreboot\x02 to reload all modules" % bot.config.prefix.replace("\\", ""))
+    msg = proc.communicate()[0]
+    bot.reply(msg)
+    if msg.startswith("Already"):
         return
     else:
         bot.reply("Reloading...")

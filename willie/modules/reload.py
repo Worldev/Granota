@@ -196,9 +196,12 @@ def f_update(bot, trigger):
     proc = subprocess.Popen('/usr/bin/git pull',
                             stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE, shell=True)
-    bot.reply(proc.communicate()[0])
-    bot.reply("Reloading...")
-    f_reload(bot, trigger)    
+    if "Already up-to-date." in proc.communicate()[0]:
+        bot.reply(proc.communicate()[0] + " Use \x02%sreboot\x02 to reload all modules" % bot.config.prefix.replace("\\", ""))
+        return
+    else:
+        bot.reply("Reloading...")
+        f_reload(bot, trigger)    
     
 if __name__ == '__main__':
     print __doc__.strip()

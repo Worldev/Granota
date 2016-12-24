@@ -27,7 +27,7 @@ def f_reload(bot, trigger):
         bot.callables = None
         bot.commands = None
         bot.setup()
-        return bot.say('done')
+        return bot.reply('Done')
 
     if not name in sys.modules:
         if bot.config.lang == 'ca':

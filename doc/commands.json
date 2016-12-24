@@ -1160,5 +1160,5 @@
 			"help": "Desactiva el mòdul especificat. El mòdul pot ser carregat de nou utilitzant l'ordre reload.",
 			"example": "unload help"
 		}
-	},		
+	}		
 }

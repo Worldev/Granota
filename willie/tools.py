@@ -29,6 +29,10 @@ import Queue
 import copy
 import ast
 import operator
+try:
+    import pytz
+except:
+    pytz = False
 
 
 class ExpressionEvaluator:

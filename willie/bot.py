@@ -534,6 +534,9 @@ class Willie(irc.Bot):
         def __new__(cls, text, origin, bytes, match, event, args, self):
             s = unicode.__new__(cls, text)
             s.sender = origin.sender
+            
+            """Is trigger from a channel or in PM"""
+            s.is_privmsg = origin.sender.is_nick()
             """
             The channel (or nick, in a private message) from which the
             message was sent.

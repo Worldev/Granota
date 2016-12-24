@@ -75,22 +75,6 @@ def f_reload(bot, trigger):
 
     bot.reply(u'%r (version: %s) reloaded' % (module, modified))
 
-
-@willie.module.nickname_commands('update')
-def f_update(bot, trigger):
-    if not trigger.admin:
-        return
-
-    bot.reply("Updating...")
-    """Pulls the latest versions of all modules from Git"""
-    proc = subprocess.Popen('/usr/bin/git pull',
-                            stdout=subprocess.PIPE,
-                            stderr=subprocess.PIPE, shell=True)
-    bot.reply(proc.communicate()[0])
-    bot.reply("Reloading...")
-    f_reload(bot, trigger)
-
-
 @willie.module.nickname_commands("load")
 @willie.module.priority("low")
 @willie.module.thread(False)
@@ -181,6 +165,36 @@ def f_unload(bot, trigger):
     modified = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(mtime))
 
     bot.reply(u'%r (version: %s) unloaded. Use "reload" to load it again.' % (module, modified))
+    
+@commands('reboot')
+def reboot(bot, trigger):
+    if trigger.owner or trigger.admin:
+        bot.callables = None
+        bot.commands = None
+        bot.setup()
+        if bot.config.lang == 'ca':
+            bot.reply(u"Bot reiniciat correctament")
+        elif bot.config.lang == 'es':
+            bot.reply(u"Bot reiniciado correctamente")
+        else:
+            bot.reply(u"Bot rebooted.")
+        return
+    else:
+        return bot.reply(u"You aren't my owner")
+    
+@willie.module.nickname_commands('update')
+def f_update(bot, trigger):
+    if not trigger.admin:
+        return
+
+    bot.reply("Updating...")
+    """Pulls the latest versions of all modules from Git"""
+    proc = subprocess.Popen('/usr/bin/git pull',
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE, shell=True)
+    bot.reply(proc.communicate()[0])
+    bot.reply("Reloading...")
+    f_reload(bot, trigger)    
     
 if __name__ == '__main__':
     print __doc__.strip()

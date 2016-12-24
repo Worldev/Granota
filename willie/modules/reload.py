@@ -4,12 +4,13 @@ import sys
 import os.path
 import time
 import imp
-import willie.module
+from willie.module import nickname_commands, commands, priority, thread
 import subprocess
 
-@willie.module.nickname_commands("reload")
-@willie.module.priority("low")
-@willie.module.thread(False)
+@nickname_commands("reload")
+@commands("reload")
+@priority("low")
+@thread(False)
 def f_reload(bot, trigger):
     if not trigger.admin:
         if bot.config.lang == 'ca':
@@ -75,9 +76,10 @@ def f_reload(bot, trigger):
 
     bot.reply(u'%r (version: %s) reloaded' % (module, modified))
 
-@willie.module.nickname_commands("load")
-@willie.module.priority("low")
-@willie.module.thread(False)
+@nickname_commands("load")
+@commands("load")
+@priority("low")
+@thread(False)
 def f_load(bot, trigger):
     """Loads a module, for use by admins only."""
     if not trigger.admin:
@@ -106,9 +108,10 @@ def f_load(bot, trigger):
 
     bot.reply(u'%r (version: %s) loaded. Use "unload" to unload it.' % (module, modified))
     
-@willie.module.nickname_commands("unload")
-@willie.module.priority("low")
-@willie.module.thread(False)
+@nickname_commands("unload")
+@commands("unload")
+@priority("low")
+@thread(False)
 def f_unload(bot, trigger):
     if not trigger.admin:
         if bot.config.lang == 'ca':
@@ -182,7 +185,8 @@ def reboot(bot, trigger):
     else:
         return bot.reply(u"You aren't my owner")
     
-@willie.module.nickname_commands('update')
+@nickname_commands('update')
+@commands("update")
 def f_update(bot, trigger):
     if not trigger.admin:
         return

@@ -21,12 +21,9 @@ def politician(bot, trigger):
         wikilink = api_data['entities'][id]['sitelinks'][wiki]['title'].replace(" ", "_")
         
         api_link = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=%s&format=json" % (entity, bot.config.lang))
-        bot.say("a")
         api_link_data = json.loads(api_link.read())
-        wikilink_party = api_data['entities'][entity]['labels'][bot.config.lang]['value'].replace(" ", "_")
-        bot.say(wikilink_party)
-        party = api_data['entities'][entity]['labels'][bot.config.lang]['value']
-        bot.say(party)
+        wikilink_party = api_link_data['entities'][entity]['labels'][bot.config.lang]['value'].replace(" ", "_")
+        party = api_link_data['entities'][entity]['labels'][bot.config.lang]['value']
         final_wikilink_party = ("http://enwp.org/%s:%s" % (bot.config.lang, wikilink_party))
     
         if bot.config.lang == 'ca':

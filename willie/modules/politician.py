@@ -4,62 +4,34 @@ import json
 import urllib2
 
 @willie.module.commands('partido', 'partit', 'politician')
-def partido(bot, trigger):
-    politico = trigger.group(2)
+def politician(bot, trigger):
+    name = trigger.group(2)
     try:
+        politician = name.replace(" ", "%20")
+        search_api = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbsearchentities&search=%s&language=%s&format=json" % (politician, bot.config.lang))
+        search_data = json.loads(search_api.read())
+        pol_name = search_data["searchinfo"]["search"]
+        format_name = pol_name.replace(" ", "_")
+        id = search_data["search"][0]["id"]
 
-        politicoParaTest = politico.decode("utf-8")
-        politicoParaLink = politico.replace(" ", "%20")
-        linkapiqueBusca = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbsearchentities&search=" + politicoParaLink + "&language=%s&format=json" % bot.config.lang)
-        eldearriba = ("http://www.wikidata.org/w/api.php?action=wbsearchentities&search=" + politicoParaLink + "&language=%s&format=json" % bot.config.lang)
-        todo = json.loads(linkapiqueBusca.read())
-        nombrePolitico = todo["searchinfo"]["search"]
-        bajoPolitico = nombrePolitico.replace(" ", "_")
-        idWikidata = todo["search"][0]["id"]
+        api = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&format=json" % api)
+        api_data = json.loads(api.read())
+        entity = "Q" + str(api_data['entities'][id]['claims']['P102'][0]['mainsnak']['datavalue']['value']['numeric-id'])
+        wiki = bot.config.lang + 'wiki' # Both bot language and wiki language codes are ISO. yay!
+        wikilink = api_data['entities'][id]['sitelinks'][wiki]['title'].replace(" ", "_")
 
-        linkazoparaverlo = "http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + idWikidata + "&format=json"
-        linkapidelPolitico = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + idWikidata + "&format=json")
-        tododelPolitico = json.loads(linkapidelPolitico.read())
-        idParaAPI = '"' + idWikidata + '"'
-        numeroPartido = tododelPolitico['entities'][idWikidata]['claims']['P102'][0]['mainsnak']['datavalue']['value']['numeric-id']
-        if bot.config.lang == 'ca':
-            linkWikipediaPersona = tododelPolitico['entities'][idWikidata]['sitelinks']['cawiki']['title']
-        elif bot.config.lang == 'es':
-            linkWikipediaPersona = tododelPolitico['entities'][idWikidata]['sitelinks']['eswiki']['title']
-        else:
-            linkWikipediaPersona = tododelPolitico['entities'][idWikidata]['sitelinks']['enwiki']['title']
-        linkbajoWikipediaPersona = linkWikipediaPersona.replace(" ", "_")
-        numerobuscaPartido = "Q" + str(numeroPartido)
-
-        linkapidelPartido = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + numerobuscaPartido + "&languages=es&format=json")
-        linkparaverapidelPartido = "http://www.wikidata.org/w/api.php?action=wbgetentities&ids=" + numerobuscaPartido + "&languages=es&format=json"
-        tododelPartido = json.loads(linkapidelPartido.read())
-        if bot.config.lang == 'ca':
-            linkWikipediaPartido = tododelPartido['entities'][numerobuscaPartido]['labels']['ca']['value']
-        elif bot.config.lang == 'es':
-            linkWikipediaPartido = tododelPartido['entities'][numerobuscaPartido]['labels']['es']['value']
-        else:
-            linkWikipediaPartido = tododelPartido['entities'][numerobuscaPartido]['labels']['en']['value']
-        linkbajoWikipediaPartido = linkWikipediaPartido.replace(" ", "_")
-        if bot.config.lang == 'ca':
-            nombrePartido = tododelPartido['entities'][numerobuscaPartido]['labels']['ca']['value']
-        elif bot.config.lang == 'es':
-            nombrePartido = tododelPartido['entities'][numerobuscaPartido]['labels']['es']['value']
-        else:
-            nombrePartido = tododelPartido['entities'][numerobuscaPartido]['labels']['en']['value']
-        if bot.config.lang == 'es' or bot.config.lang == 'ca':
-            linkparaelprintPersona = ("http://enwp.org/%s:%s" % (bot.config.lang, linkbajoWikipediaPersona))
-            linkparaelprintPartido = ("http://enwp.org/%s:%s" % (bot.config.lang, linkbajoWikipediaPartido))
-        else:
-            linkparaelprintPersona = ("http://enwp.org/%s" % linkbajoWikipediaPersona)
-            linkparaelprintPartido = ("http://enwp.org/%s" % linkbajoWikipediaPartido)
+        api_link = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=%s&format=json" % (entity, bot.config.lang))
+        api_link_data = json.loads(api_link.read())
+        wikilink_party = api_data['entities'][entity]['labels'][bot.config.lang]['value'].replace(" ", "_")
+        party = api_data['entities'][entity]['labels'][bot.config.lang]['value']
+        final_wikilink_party = ("http://enwp.org/%s:%s" % (bot.config.lang, wikilink_party))
     
         if bot.config.lang == 'ca':
-            bot.say(nombrePolitico + " (" + linkparaelprintPersona + ")" + " milita a " + nombrePartido + " (" + linkparaelprintPartido + ")")
+            bot.say(pol_name + " (" + wikilink + ")" + " milita a " + party + " (" + final_wikilink_party + ")")
         elif bot.config.lang == 'es':
-            bot.say(nombrePolitico + " (" + linkparaelprintPersona + ")" + " milita en " + nombrePartido + " (" + linkparaelprintPartido + ")")
+            bot.say(pol_name + " (" + wikilink + ")" + " milita en " + party + " (" + final_wikilink_party + ")")
         else:
-            bot.say(nombrePolitico + " (" + linkparaelprintPersona + ")" + " is a member of " + nombrePartido + " (" + linkparaelprintPartido + ")")
+            bot.say(pol_name + " (" + wikilink + ")" + " is member of " + party + " (" + final_wikilink_party + ")")
     except KeyError:
         if bot.config.lang == 'ca':
             bot.say(u"Aquest polític no existeix")

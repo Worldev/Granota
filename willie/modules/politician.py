@@ -38,10 +38,10 @@ def politician(bot, trigger):
     #        bot.say(u"Este político no existe")
     #    else:
     #        bot.say(u"This politician doesn't exist")
-    except AttributeError:
-        if bot.config.lang == 'ca':
-            bot.say(u"No hi ha res a cercar")
-        elif bot.config.lang == 'es':
-            bot.say(u"No hay nada a buscar")
-        else:
-            bot.say(u"There is nothing to search")
+    #except AttributeError:
+    #    if bot.config.lang == 'ca':
+    #        bot.say(u"No hi ha res a cercar")
+    #    elif bot.config.lang == 'es':
+    #        bot.say(u"No hay nada a buscar")
+    #    else:
+    #        bot.say(u"There is nothing to search")

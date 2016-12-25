@@ -13,7 +13,6 @@ def politician(bot, trigger):
         pol_name = search_data["searchinfo"]["search"]
         format_name = pol_name.replace(" ", "_")
         id = search_data["search"][0]["id"]
-        bot.say(id)
 
         api = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&format=json" % id)
         api_data = json.loads(api.read())
@@ -25,6 +24,7 @@ def politician(bot, trigger):
         api_link_data = json.loads(api_link.read())
         wikilink_party = api_data['entities'][entity]['labels'][bot.config.lang]['value'].replace(" ", "_")
         party = api_data['entities'][entity]['labels'][bot.config.lang]['value']
+        bot.say(party, wikilink_party)
         final_wikilink_party = ("http://enwp.org/%s:%s" % (bot.config.lang, wikilink_party))
     
         if bot.config.lang == 'ca':

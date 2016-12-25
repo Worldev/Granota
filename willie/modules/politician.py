@@ -22,16 +22,15 @@ def politician(bot, trigger):
         
         api_link = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=%s&format=json" % (entity, bot.config.lang))
         api_link_data = json.loads(api_link.read())
-        wikilink_party = api_link_data['entities'][entity]['labels'][bot.config.lang]['value'].replace(" ", "_")
         party = api_link_data['entities'][entity]['labels'][bot.config.lang]['value']
-        final_wikilink_party = ("http://enwp.org/%s:%s" % (bot.config.lang, wikilink_party))
+        wikilink_party = ("http://enwp.org/%s:%s" % (bot.config.lang, party.replace(" ", "_")))
     
         if bot.config.lang == 'ca':
-            bot.say(pol_name + " (" + wikilink + ")" + " milita a " + party + " (" + final_wikilink_party + ")")
+            bot.say(pol_name + " (" + wikilink + ")" + " milita a " + party + " (" + wikilink_party + ")")
         elif bot.config.lang == 'es':
-            bot.say(pol_name + " (" + wikilink + ")" + " milita en " + party + " (" + final_wikilink_party + ")")
+            bot.say(pol_name + " (" + wikilink + ")" + " milita en " + party + " (" + wikilink_party + ")")
         else:
-            bot.say(pol_name + " (" + wikilink + ")" + " is member of " + party + " (" + final_wikilink_party + ")")
+            bot.say(pol_name + " (" + wikilink + ")" + " is member of " + party + " (" + wikilink_party + ")")
     except KeyError:
         if bot.config.lang == 'ca':
             bot.say(u"Aquest polític no existeix")

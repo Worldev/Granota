@@ -13,6 +13,7 @@ def politician(bot, trigger):
         pol_name = search_data["searchinfo"]["search"]
         format_name = pol_name.replace(" ", "_")
         id = search_data["search"][0]["id"]
+        bot.say(id)
 
         api = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&format=json" % id)
         api_data = json.loads(api.read())

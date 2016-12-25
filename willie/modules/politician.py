@@ -19,12 +19,14 @@ def politician(bot, trigger):
         entity = "Q" + str(api_data['entities'][id]['claims']['P102'][0]['mainsnak']['datavalue']['value']['numeric-id'])
         wiki = bot.config.lang + 'wiki' # Both bot language and wiki language codes are ISO. yay!
         wikilink = api_data['entities'][id]['sitelinks'][wiki]['title'].replace(" ", "_")
-        bot.say(wikilink)
         
         api_link = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&languages=%s&format=json" % (entity, bot.config.lang))
+        bot.say("a")
         api_link_data = json.loads(api_link.read())
         wikilink_party = api_data['entities'][entity]['labels'][bot.config.lang]['value'].replace(" ", "_")
+        bot.say(wikilink_party)
         party = api_data['entities'][entity]['labels'][bot.config.lang]['value']
+        bot.say(party)
         final_wikilink_party = ("http://enwp.org/%s:%s" % (bot.config.lang, wikilink_party))
     
         if bot.config.lang == 'ca':

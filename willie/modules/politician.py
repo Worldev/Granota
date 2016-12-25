@@ -14,7 +14,7 @@ def politician(bot, trigger):
         format_name = pol_name.replace(" ", "_")
         id = search_data["search"][0]["id"]
 
-        api = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&format=json" % api)
+        api = urllib2.urlopen("http://www.wikidata.org/w/api.php?action=wbgetentities&ids=%s&format=json" % id)
         api_data = json.loads(api.read())
         entity = "Q" + str(api_data['entities'][id]['claims']['P102'][0]['mainsnak']['datavalue']['value']['numeric-id'])
         wiki = bot.config.lang + 'wiki' # Both bot language and wiki language codes are ISO. yay!

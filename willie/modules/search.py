@@ -28,7 +28,7 @@ def g(bot, trigger):
     if not query:
         return bot.reply('.g what?')
     results_list = google_search(query, bot.config.lang)
-    if results:
+    if results_list:
         results = results_list[:3] # Get only the first 3 results to avoid flood and splitted urls (and the :3 emoji is nice too)
         results_str = " - ".join(results)		
         bot.say(glogo + results)

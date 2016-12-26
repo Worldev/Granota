@@ -7,7 +7,7 @@ import datetime
 from willie.tools import Ddict, Nick, get_timezone, format_time
 from willie.module import commands, rule, priority, unblockable
 
-seen_dict = Ddict(dict)
+seen_dict = "seen_dict.json"
 
 @commands('seen', 'vist', 'visto')
 def seen(bot, trigger):

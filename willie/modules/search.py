@@ -18,7 +18,6 @@ def google_search(query, lang):
     results = []
     for result in gsearch(query, lang=lang, stop=3):
 	results.append(result)
-    
     return results
 	
 @commands('g', 'google')
@@ -31,7 +30,7 @@ def g(bot, trigger):
     if results_list:
         results = results_list[:3] # Get only the first 3 results to avoid flood and splitted urls (and the :3 emoji is nice too)
         results_str = " - ".join(results)		
-        bot.say(glogo + results)
+        bot.say(glogo + results_str)
     elif uri is False:
         if bot.config.lang == 'ca':
             bot.reply("Error al connectar amb Google.")

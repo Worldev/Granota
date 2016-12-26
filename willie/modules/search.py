@@ -29,8 +29,8 @@ def g(bot, trigger):
         return bot.reply('.g what?')
     results_list = google_search(query, bot.config.lang)
     if results:
-	    results = results_list[:3] # Get only the first 3 results to avoid flood and splitted urls (and the :3 emoji is nice too)
-	    results_str = " - ".join(results)		
+        results = results_list[:3] # Get only the first 3 results to avoid flood and splitted urls (and the :3 emoji is nice too)
+        results_str = " - ".join(results)		
         bot.say(glogo + results)
     elif uri is False:
         if bot.config.lang == 'ca':

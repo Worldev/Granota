@@ -55,8 +55,17 @@ def seen(bot, trigger):
 def note(bot, trigger):
     if trigger.sender.startswith("#"): # Only sees users that speak on public channels
         nick = Nick(trigger.nick)
-        with open(seen_dict, "w+") as f:
-            data = json.load(f)
-            data[nick]['timestamp'] = time.time()
-            data[nick]['channel'] = trigger.sender
-            data[nick]['message'] = trigger
+        try:
+            with open(seen_dict, "r+") as f:
+                data = json.load(f)
+                data[nick]['timestamp'] = time.time()
+                data[nick]['channel'] = trigger.sender
+                data[nick]['message'] = trigger
+        except IOError:
+            with open(seen_dict, "w") as f:
+                f.write("{}")
+            with open(seen_dict, "r+") as f:
+                data = json.load(f)
+                data[nick]['timestamp'] = time.time()
+                data[nick]['channel'] = trigger.sender
+                data[nick]['message'] = trigger

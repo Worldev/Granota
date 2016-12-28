@@ -23,7 +23,7 @@ def seen(bot, trigger):
     name = trigger.nick
     with open(seen_dict, "r") as f:
         data = json.load(f)
-    if name in data:
+    if str(name) in data:
         timestamp = data[name]['timestamp']
         channel = data[name]['channel']
         message = data[name]['message']

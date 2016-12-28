@@ -7,7 +7,7 @@ import datetime
 from willie.tools import Ddict, Nick, get_timezone, format_time
 from willie.module import commands, rule, priority, unblockable
 
-seen_dict = Ddict(dict)
+seen_dict = "seen_dict.json"
 
 @commands('seen', 'vist', 'visto')
 def seen(bot, trigger):
@@ -20,10 +20,12 @@ def seen(bot, trigger):
             bot.say(u"I last saw \x02%s\x02 right now on \x02%s\x02, saying \x1D%s\x0F" % (trigger.nick, trigger.sender, trigger.group(0)))
         return
     nick = Nick(trigger.group(2).strip())
-    if nick in seen_dict:
-        timestamp = seen_dict[nick]['timestamp']
-        channel = seen_dict[nick]['channel']
-        message = seen_dict[nick]['message']
+    with open(seen_dict, "r") as f:
+        data = json.load(f)
+        if nick in data:
+            timestamp = data[nick]['timestamp']
+            channel = data[nick]['channel']
+            message = data[nick]['message']
 
         tz = get_timezone(bot.db, bot.config, None, trigger.nick,
                           trigger.sender)
@@ -52,6 +54,8 @@ def seen(bot, trigger):
 def note(bot, trigger):
     if trigger.sender.startswith("#"): # Only sees users that speak on public channels
         nick = Nick(trigger.nick)
-        seen_dict[nick]['timestamp'] = time.time()
-        seen_dict[nick]['channel'] = trigger.sender
-        seen_dict[nick]['message'] = trigger
+        with open(seen_dict, "r+") as f:
+            data = json.load(f)
+            data[nick]['timestamp'] = time.time()
+            data[nick]['channel'] = trigger.sender
+            data[nick]['message'] = trigger

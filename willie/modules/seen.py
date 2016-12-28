@@ -20,7 +20,7 @@ def seen(bot, trigger):
         else:
             bot.say(u"I last saw \x02%s\x02 right now on \x02%s\x02, saying \x1D%s\x0F" % (trigger.nick, trigger.sender, trigger.group(0)))
         return
-    name = str(trigger.nick)
+    name = str(trigger.group(2))
     with open(seen_dict, "r") as f:
         data = json.load(f)
     if name in data:

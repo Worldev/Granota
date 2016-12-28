@@ -20,10 +20,10 @@ def seen(bot, trigger):
         else:
             bot.say(u"I last saw \x02%s\x02 right now on \x02%s\x02, saying \x1D%s\x0F" % (trigger.nick, trigger.sender, trigger.group(0)))
         return
-    name = trigger.nick
+    name = str(trigger.nick)
     with open(seen_dict, "r") as f:
         data = json.load(f)
-    if str(name) in data:
+    if name in data:
         timestamp = data[name]['timestamp']
         channel = data[name]['channel']
         message = data[name]['message']

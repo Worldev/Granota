@@ -20,7 +20,7 @@ def seen(bot, trigger):
         else:
             bot.say(u"I last saw \x02%s\x02 right now on \x02%s\x02, saying \x1D%s\x0F" % (trigger.nick, trigger.sender, trigger.group(0)))
         return
-    nick = Nick(trigger.group(2).strip())
+    nick = trigger.nick
     with open(seen_dict, "r") as f:
         data = json.load(f)
     if nick in data:
@@ -54,7 +54,7 @@ def seen(bot, trigger):
 @unblockable # Also tracks ignored users
 def note(bot, trigger):
     if trigger.sender.startswith("#"): # Only sees users that speak on public channels
-        nick = Nick(trigger.nick)
+        nick = trigger.nick
         try:
             with open(seen_dict, "r+") as f:
                 data = json.load(f)

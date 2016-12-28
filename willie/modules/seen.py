@@ -54,7 +54,7 @@ def seen(bot, trigger):
 @unblockable # Also tracks ignored users
 def note(bot, trigger):
     if trigger.sender.startswith("#"): # Only sees users that speak on public channels
-        name = trigger.nick
+        name = str(trigger.nick)
         try:
             with open(seen_dict, "r+") as f:
                 data = json.load(f)
@@ -63,7 +63,7 @@ def note(bot, trigger):
                 data[name]['channel'] = trigger.sender
                 data[name]['message'] = trigger
                 f.seek(0)  # rewind
-                f.write(json.dumps(data))
+                f.dump(data, f)
                 f.truncate()                    
         except IOError:
             with open(seen_dict, "w+") as f:
@@ -73,6 +73,6 @@ def note(bot, trigger):
                 data[name]['channel'] = trigger.sender
                 data[name]['message'] = trigger
                 f.seek(0)  # rewind
-                f.write(json.dumps(data))
+                f.dump(data, f)
                 f.truncate()          
             

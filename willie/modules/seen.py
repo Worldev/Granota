@@ -58,7 +58,6 @@ def note(bot, trigger):
         try:
             with open(seen_dict, "r+") as f:
                 data = json.load(f)
-                data[name] = name
                 data[name]['timestamp'] = time.time()
                 data[name]['channel'] = trigger.sender
                 data[name]['message'] = trigger
@@ -68,7 +67,6 @@ def note(bot, trigger):
         except IOError:
             with open(seen_dict, "w+") as f:
                 data = json.load(f)
-                data[name] = name
                 data[name]['timestamp'] = time.time()
                 data[name]['channel'] = trigger.sender
                 data[name]['message'] = trigger

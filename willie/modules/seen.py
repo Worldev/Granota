@@ -72,7 +72,13 @@ def note(bot, trigger):
                 data[name]['timestamp'] = time.time()
                 data[name]['channel'] = trigger.sender
                 data[name]['message'] = trigger
-                f.seek(0)  # rewind
+                f.seek(0)
                 f.write(json.dumps(data))
                 f.truncate()          
-            
+        except ValueError:
+            with open(seen_dict, "w+") as f:
+                emptydict = {}
+                f.seek(0)
+                f.write(json.dumps(emptydict))
+                f.truncate()        
+                

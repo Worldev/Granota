@@ -61,11 +61,16 @@ def note(bot, trigger):
                 data[nick]['timestamp'] = time.time()
                 data[nick]['channel'] = trigger.sender
                 data[nick]['message'] = trigger
+                f.seek(0)  # rewind
+                f.write(json.dumps(data))
+                f.truncate()                    
         except IOError:
-            with open(seen_dict, "w") as f:
-                f.write("{}")
-            with open(seen_dict, "r+") as f:
+            with open(seen_dict, "w+") as f:
                 data = json.load(f)
                 data[nick]['timestamp'] = time.time()
                 data[nick]['channel'] = trigger.sender
                 data[nick]['message'] = trigger
+                f.seek(0)  # rewind
+                f.write(json.dumps(data))
+                f.truncate()          
+            

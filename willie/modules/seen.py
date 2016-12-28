@@ -22,10 +22,10 @@ def seen(bot, trigger):
     nick = Nick(trigger.group(2).strip())
     with open(seen_dict, "r") as f:
         data = json.load(f)
-        if nick in data:
-            timestamp = data[nick]['timestamp']
-            channel = data[nick]['channel']
-            message = data[nick]['message']
+    if nick in data:
+        timestamp = data[nick]['timestamp']
+        channel = data[nick]['channel']
+        message = data[nick]['message']
 
         tz = get_timezone(bot.db, bot.config, None, trigger.nick,
                           trigger.sender)

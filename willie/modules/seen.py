@@ -67,14 +67,10 @@ def note(bot, trigger):
                 f.truncate()                    
         except IOError:
             with open(seen_dict, "w+") as f:
-                data = json.load(f)
-                data[name] = {}
-                data[name]['timestamp'] = time.time()
-                data[name]['channel'] = trigger.sender
-                data[name]['message'] = trigger
+                emptydict = {}
                 f.seek(0)
-                f.write(json.dumps(data))
-                f.truncate()          
+                f.write(json.dumps(emptydict))
+                f.truncate()        
         except ValueError:
             with open(seen_dict, "w+") as f:
                 emptydict = {}

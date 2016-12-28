@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import datetime
 import json
 import time
-from willie.tools import Ddict, Nick, get_timezone, format_time
+from willie.tools import Ddict, get_timezone, format_time
 from willie.module import commands, rule, priority, unblockable
 
 seen_dict = "seen_dict.json"

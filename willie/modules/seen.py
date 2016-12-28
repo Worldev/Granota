@@ -63,7 +63,7 @@ def note(bot, trigger):
                 data[name]['channel'] = trigger.sender
                 data[name]['message'] = trigger
                 f.seek(0)  # rewind
-                f.dump(data, f)
+                f.write(json.dumps(data))
                 f.truncate()                    
         except IOError:
             with open(seen_dict, "w+") as f:
@@ -73,6 +73,6 @@ def note(bot, trigger):
                 data[name]['channel'] = trigger.sender
                 data[name]['message'] = trigger
                 f.seek(0)  # rewind
-                f.dump(data, f)
+                f.write(json.dumps(data))
                 f.truncate()          
             

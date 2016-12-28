@@ -51,8 +51,9 @@ def seen(bot, trigger):
 @unblockable # Also tracks ignored users
 def note(bot, trigger):
     if trigger.sender.startswith("#"): # Only sees users that speak on public channels
-        with open(seen_dict, "w") as f:
-            nick = Nick(trigger.nick)
-            seen_dict[nick]['timestamp'] = time.time()
-            seen_dict[nick]['channel'] = trigger.sender
-            seen_dict[nick]['message'] = trigger
+        nick = Nick(trigger.nick)
+        with open(seen_dict, "r+") as f:
+            data = json.load(f)
+            data[nick]['timestamp'] = time.time()
+            data[nick]['channel'] = trigger.sender
+            data[nick]['message'] = trigger

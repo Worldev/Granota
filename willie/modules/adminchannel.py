@@ -107,9 +107,20 @@ def kick(bot, trigger):
             bot.reply("Sorry, I don't have enough privileges to perform this operation")
         return
     if trigger.group(2).startswith('#'):
-        bot.write(('KICK', trigger.group(2) + ' :[%s]' % trigger.nick))
+        chan = trigger.group(2).split()[0]
+        nick = trigger.group(2).split()[1]
+        if len(trigger.group(2)) > 2:
+            reason = trigger.group(2).split()[2:]
+        else:
+            reason = ''
+        bot.write(('KICK', chan + nick + ' :' + reason + ' [%s]' % trigger.nick))
     else:
-        bot.write(('KICK', trigger.sender + ' :' + trigger.group(2) + ' [%s]' % trigger.nick))
+        nick = trigger.group(2).split()[1]
+        if len(trigger.group(2)) > 2:
+            reason = trigger.group(2).split()[2:]
+        else:
+            reason = ''        
+        bot.write(('KICK', trigger.sender + ' ' + nick + ' :' + reason + ' [%s]' % trigger.nick))
 
 def configureHostMask(mask):
     if mask == '*!*@*':

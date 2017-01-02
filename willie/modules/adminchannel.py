@@ -123,7 +123,7 @@ def kick(bot, trigger):
             reason = trigger.group(2).split()[1:]
         else:
             reason = ''        
-        bot.write(('KICK', trigger.sender + ' ' + nick + ' :' + ' '.join(reason) + ' [%s]' % trigger.nick))
+        bot.write(('RAW', 'KICK' + trigger.sender + ' ' + nick + ' :' + ' '.join(reason) + ' [%s]' % trigger.nick))
 
 def configureHostMask(mask):
     if mask == '*!*@*':

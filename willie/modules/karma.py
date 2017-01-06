@@ -59,7 +59,7 @@ def karma(bot, trigger):
 @willie.module.rule(r".*")
 def karmaman(bot, trigger):
     k = karmare.match(trigger.group(0))
-    if k != None:
+    if k != None && k.group(1).replace(" ", "") != "":
         if k.group(1).lower() == trigger.nick.lower():
             if bot.config.lang == 'ca':
                 return bot.notice(trigger.nick, "No pots donar-te karma a tu mateix.")

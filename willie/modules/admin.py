@@ -2,7 +2,7 @@
 
 import willie
 import willie.module
-from willie.module import commands, rule, event
+from willie.module import commands, rule, event, NOLIMIT
 from willie import module
 import sys
 

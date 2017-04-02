@@ -285,7 +285,7 @@ def pm_tell_owner(bot, trigger):
 @rule('(.*)')
 def add_chansection(bot, trigger):
     if trigger.nick == bot.nick:
-        bot.config.add_section(channel)
+        bot.config.add_section(trigger.channel)
         return NOLIMIT
     
 if __name__ == '__main__':

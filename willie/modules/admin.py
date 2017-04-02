@@ -216,7 +216,7 @@ def set_config(bot, trigger):
         # from being put on log files.
         if option.endswith("password") or option.endswith("pass"):
             if bot.config.lang == 'ca':
-                value = "(contrassenya censurda)"
+                value = "(contrasenya censurda)"
             elif bot.config.lang == 'es':
                 value = "(contraseña censurda)"
             else:

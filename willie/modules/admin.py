@@ -294,7 +294,7 @@ def add_chansection(bot, trigger):
             bot.reply(u"Use: .configchan #channel")
         return
     bot.say("blah")
-    bot.say(bot.config.add_section(trigger.group(2)))
+    bot.say(str(bot.config.add_section(trigger.group(2))))
     bot.say("Done")
     return NOLIMIT
     

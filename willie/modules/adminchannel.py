@@ -176,7 +176,10 @@ def ban(bot, trigger):
             return
         channel = opt
         banmask = text[2]
-    banmask = configureHostMask(banmask)
+    if banmask.startswith('$'):
+        banmask = banmask
+    else:
+        banmask = configureHostMask(banmask)
     if banmask == '':
         return
     bot.write(['MODE', channel, '+b', banmask])

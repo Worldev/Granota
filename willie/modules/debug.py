@@ -82,7 +82,7 @@ def version(bot, trigger):
             latestmsg = u"Estoy usando la última versión estable de Granota."
         else:
             latestmsg = u"I'm using the latest stable version of Granota."
-    if commit == '':
+    if commit == '' or commit = None:
         commitinfo = ''
     else:
         commitinfo = ' (commit %s)' % commit

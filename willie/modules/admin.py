@@ -281,13 +281,21 @@ def pm_tell_owner(bot, trigger):
         bot.msg(i, "<%s> %s" % (trigger.nick, trigger.group(0)))
     return
 
-@event('JOIN')
-@rule('(.*)')
+@commands('configchan')
 def add_chansection(bot, trigger):
-    if trigger.nick == bot.nick:
-        bot.config.add_section(trigger.channel)
-        bot.say(trigger.channel)
-        return NOLIMIT
+    if not trigger.admin:
+        return
+    if not trigger.group(2):
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ús: .configchan #canal")
+        elif bot.config.lang == 'es':
+            bot.reply(u"Uso: .configchan #canal")
+        else:
+            bot.reply(u"Use: .configchan #channel")
+        return
+    bot.config.add_section(trigger.group(2))
+    bot.say("Done")
+    return NOLIMIT
     
 if __name__ == '__main__':
     print __doc__.strip()

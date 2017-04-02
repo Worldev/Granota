@@ -295,7 +295,7 @@ def add_chansection(bot, trigger):
         return
     bot.say("blah")
     bot.say(str(bot.config.add_section(trigger.group(2).replace('#', ''))))
-    setattr(getattr(bot.config, 'neomahler'), 'ops', 'test')
+    setattr(getattr(bot.config, 'neomahler'), 'ops', 'testttt')
     bot.say("Done")
     return NOLIMIT
     

@@ -14,7 +14,6 @@ def configure(config):
     """
     config.add_option('admin', 'hold_ground', u"Enable auto-rejoin on kick?")
 
-
 @willie.module.commands('join', 'entra')
 @willie.module.priority('low')
 def join(bot, trigger):
@@ -66,7 +65,6 @@ def part(bot, trigger):
     else:
         bot.part(channel)
 
-
 @willie.module.commands('quit')
 @willie.module.priority('low')
 def quit(bot, trigger):
@@ -106,10 +104,6 @@ def msg(bot, trigger):
         else:
             message = "You have not entered a message!"
         bot.reply(message)
-    
-
-    
-
 
 @willie.module.commands('me')
 @willie.module.priority('low')
@@ -126,7 +120,6 @@ def me(bot, trigger):
 
     msg = '\x01ACTION %s\x01' % action
     bot.msg(channel, msg)
-
 
 @willie.module.event('INVITE')
 @willie.module.rule('.*')
@@ -288,5 +281,12 @@ def pm_tell_owner(bot, trigger):
         bot.msg(i, "<%s> %s" % (trigger.nick, trigger.group(0)))
     return
 
+@event('JOIN')
+@rule('(.*)')
+def add_chansection(bot, trigger):
+    if trigger.nick == bot.nick:
+        bot.config.add_section(channel)
+        return NOLIMIT
+    
 if __name__ == '__main__':
     print __doc__.strip()

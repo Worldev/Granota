@@ -49,7 +49,7 @@ def op(bot, trigger):
 
 @commands('deop')
 def deop(bot, trigger):
-    if trigger.admin:
+    if trigger.admin or trigger.isop:
         services = _detectservices(trigger.group(0))
         args = _op(trigger)
         if services == True:
@@ -64,7 +64,7 @@ def deop(bot, trigger):
 
 @commands('voice', 'v', 'veu', 'voz')
 def voice(bot, trigger):
-    if trigger.admin:
+    if trigger.admin or trigger.isop:
         services = _detectservices(trigger.group(0))
         args = _op(trigger)
         if services == True:
@@ -79,7 +79,7 @@ def voice(bot, trigger):
             
 @commands('devoice', 'dv')
 def devoice(bot, trigger):
-    if trigger.admin:
+    if trigger.admin or trigger.isop:
         services = _detectservices(trigger.group(0))
         args = _op(trigger)
         if services == True:
@@ -96,7 +96,7 @@ def devoice(bot, trigger):
 @commands('kick')
 @priority('high')
 def kick(bot, trigger):
-    if not trigger.admin:
+    if not trigger.admin or not trigger.isop:
         return
     if trigger.group(2).startswith('#'):
         chan = trigger.group(2).split()[0]
@@ -148,7 +148,7 @@ def configureHostMask(mask):
 @commands('ban')
 @priority('high')
 def ban(bot, trigger):
-    if not trigger.admin:
+    if not trigger.admin or not trigger.isop:
         if bot.config.lang == 'ca':
             bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
         elif bot.config.lang == 'es':
@@ -187,7 +187,7 @@ def ban(bot, trigger):
 
 @commands('unban')
 def unban(bot, trigger):
-    if not trigger.admin:
+    if not trigger.admin or not trigger.isop:
         if bot.config.lang == 'ca':
             bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
         elif bot.config.lang == 'es':
@@ -226,7 +226,7 @@ def unban(bot, trigger):
 
 @commands('quiet')
 def quiet(bot, trigger):
-    if not trigger.admin:
+    if not trigger.admin or not trigger.isop:
         if bot.config.lang == 'ca':
             bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
         elif bot.config.lang == 'es':
@@ -262,7 +262,7 @@ def quiet(bot, trigger):
 
 @commands('unquiet')
 def unquiet(bot, trigger):
-    if not trigger.admin:
+    if not trigger.admin or not trigger.isop:
         if bot.config.lang == 'ca':
             bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
         elif bot.config.lang == 'es':
@@ -290,7 +290,7 @@ def unquiet(bot, trigger):
 @commands('kickban', 'kb')
 @priority('high')
 def kickban(bot, trigger):
-    if not trigger.admin:
+    if not trigger.admin or not trigger.isop:
         if bot.config.lang == 'ca':
             bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
         elif bot.config.lang == 'es':
@@ -327,7 +327,7 @@ def kickban(bot, trigger):
 @commands('topic')
 def topic(bot, trigger):
     purple, green, bold = '\x0306', '\x0310', '\x02'
-    if not trigger.admin:
+    if not trigger.admin or not trigger.isop:
         if bot.config.lang == 'ca':
             bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
         elif bot.config.lang == 'es':
@@ -418,30 +418,35 @@ def show_mask(bot, trigger):
 
 @commands('m', 'moderat', 'moderado', 'moderate')
 def moderat(bot, trigger):
-    if trigger.admin:
+    if trigger.admin or trigger.isop:
         channel = trigger.sender
         bot.write(["MODE", channel, "+m"])
     else:
-        bot.say(u"Ho sento, pero no")
-        return
+        if bot.config.lang == 'ca':
+            bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
+        elif bot.config.lang == 'es':
+            bot.reply("Lo siento, pero no tienes suficientes permisos para hacer esta operación")
+        else:
+            bot.reply("Sorry, but you don't have enough privilegis to perform this operation")
+        return        
     
 @commands('unmoderate', '-m')
 def dmoderat(bot, trigger):
-    if trigger.admin:
+    if trigger.admin or trigger.isop:
         channel = trigger.sender
         bot.write(["MODE", channel + " -m"])
     else:
         if bot.config.lang == 'ca':
-            bot.say(u"No ets administrador.")
+            bot.reply(u"Ho sento, però no tens suficients permisos per dur a terme aquesta operació")
         elif bot.config.lang == 'es':
-            bot.say(u"No eres administrador.")
+            bot.reply("Lo siento, pero no tienes suficientes permisos para hacer esta operación")
         else:
-            bot.say(u"You are not admin.")
-        return
+            bot.reply("Sorry, but you don't have enough privilegis to perform this operation")
+        return  
 
 @commands('recover', 'recupera')
 def recover(bot, trigger):
-    if not trigger.admin:
+    if not trigger.admin or not trigger.isop:
         return
     if trigger.sender.startswith('#'):
         if bot.config.lang == 'ca':
@@ -468,7 +473,7 @@ def recover(bot, trigger):
     
 @commands('i')
 def i(bot, trigger):
-    if trigger.admin:
+    if trigger.admin or trigger.isop:
         channel = trigger.sender
         bot.write(['MODE', channel + ' +i'])
         return
@@ -477,7 +482,7 @@ def i(bot, trigger):
 
 @commands('-i')
 def di(bot, trigger):
-    if trigger.admin:
+    if trigger.admin or trigger.isop:
         channel = trigger.sender
         bot.write(['MODE', channel + ' -i'])
         return

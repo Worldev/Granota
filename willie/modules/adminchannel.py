@@ -34,7 +34,7 @@ def _op(trigger):
 
 @commands('op')
 def op(bot, trigger):
-    if trigger.admin:
+    if trigger.admin or trigger.isop:
         services = _detectservices(trigger.group(0))
         args = _op(trigger)
         if services == True:

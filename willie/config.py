@@ -305,7 +305,7 @@ class Config(object):
             print("\nOf course, the bot is useless if it doesn't connect to some IRC server. If you don't know the host " +
             u"of your server, contact the server administrators.\n")
             self.interactive_add('core', 'host', 'Enter the server to connect to',
-                                 'irc.lizardirc.org')
+                                 'irc.freenode.net')
             print("\nSome server support SSL connections. If your server supports it, it's recommended to " +
             u"use it. If you are in doubt, contact the server administrators.\n")
             self.add_option('core', 'use_ssl', 'Should the bot connect with SSL?')

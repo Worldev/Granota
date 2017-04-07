@@ -82,10 +82,16 @@ def version(bot, trigger):
             latestmsg = u"Estoy usando la última versión estable de Granota."
         else:
             latestmsg = u"I'm using the latest stable version of Granota."
-    if commit == '' or commit == None:
-        commitinfo = ''
+    if bot.config.lang == ('ca', 'es'):
+        unstable = 'inestable'
+        stable = 'estable'
     else:
-        commitinfo = ' (commit %s)' % commit
+        unstable = 'unstable'
+        stable = 'stable'
+    if commit == '' or commit == None:
+        commitinfo = ' (\x0303%s\x03)' % stable
+    else:
+        commitinfo = ' (\x0304%s\x03, commit %s)' % (unstable, commit)
         latestmsg = ''
     if bot.config.lang == 'ca':
         bot.say(u"Sóc \x02Granota %s\x02%s, en el sistema operatiu %s i utilitzant Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))

@@ -58,7 +58,7 @@ def get_latest_version():
 
 @commands('version', 'versio')
 def version(bot, trigger):
-    version = 'v2.7'
+    version = 'v2.8'
     if platform.system() == 'Linux':
         osver = ("%s %s" % (platform.linux_distribution()[0], platform.linux_distribution()[1]))
     elif platform.system() == 'Windows':
@@ -104,7 +104,7 @@ def version(bot, trigger):
         update_msg = u"Estic obsolet! La meva versió actual és la \x02%s\x02 però l'última versió estable és \x02%s\x02! " + \
         u"Descarregueu l'última versió amb alguns errors corregits i noves funcionalitats aquí: %s"
     elif bot.config.lang == 'es':
-        update_msg = "Estoy desfasado! Mi versión actual es la \x02%s\x02 per la última versión estable es \x02%s\x02! " + \
+        update_msg = "Estoy desfasado! Mi versión actual es la \x02%s\x02 pero la última versión estable es \x02%s\x02! " + \
         "Por favor, descarga la última versión con algunos errores corregidos y nuevas funcionalidades aquí: %s"   
     else:        
         update_msg = "I'm outdated! My current version is \x02%s\x02 but the latest stable version is \x02%s\x02! " + \

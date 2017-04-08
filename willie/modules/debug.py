@@ -100,8 +100,15 @@ def version(bot, trigger):
     else:
         bot.say(u"I'm \x02Granota %s\x02%s, on %s and using Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
     
-    update_msg = "I'm outdated! My current version is \x02%s\x02 but the latest stable version is \x02%s\x02! " + \
-    "Please download the last version here with some bugs fixed and nice features added: %s"
+    if bot.config.lang == 'ca':
+        update_msg = u"Estic obsolet! La meva versió actual és la \x02%s\x02 però l'última versió estable és \x02%s\x02! " + \
+        u"Descarregueu l'última versió amb alguns errors corregits i noves funcionalitats aquí: %s"
+    elif bot.config.lang == 'es':
+        update_msg = "Estoy desfasado! Mi versión actual es la \x02%s\x02 per la última versión estable es \x02%s\x02! " + \
+        "Por favor, descarga la última versión con algunos errores corregidos y nuevas funcionalidades aquí: %s"   
+    else:        
+        update_msg = "I'm outdated! My current version is \x02%s\x02 but the latest stable version is \x02%s\x02! " + \
+        "Please download the last version here with some bugs fixed and nice features added: %s"
     if latestver != version:
         bot.msg(bot.config.owner.split('@')[0], update_msg % (version, latestver, latesturl))
     

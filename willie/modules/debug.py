@@ -103,7 +103,7 @@ def version(bot, trigger):
     update_msg = "I'm outdated! My current version is \x02%s\x02 but the latest stable version is \x02%s\x02! " + \
     "Please download the last version here with some bugs fixed and nice features added: %s"
     if latestver != version:
-        bot.msg(bot.config.owner, update_msg % (version, latestver, latesturl))
+        bot.msg(bot.config.owner.split('@')[0], update_msg % (version, latestver, latesturl))
     
 @commands('debug_print')
 def debug_print(bot, trigger):

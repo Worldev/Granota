@@ -34,7 +34,7 @@ def help(bot, trigger):
     	    bot.reply(u'Type \x02{0}help <command>\x02 (for example \x02{0}help wiki\x02) to get help about a command, or \x02{0}commands\x02 to get a list of commands.'.format(bot.config.prefix.replace("\\", "")))
     
     else:
-        name = trigger.group(2).lower()
+        name = trigger.group(2).lower().replace(' ', '')
         l = bot.config.lang
         f = 'doc/alias.json'
         aliasfile = open(f, 'r')

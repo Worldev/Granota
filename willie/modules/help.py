@@ -56,12 +56,17 @@ def help(bot, trigger):
             else:
             	doc = "Sorry, but this command doesn't exist or doesn't have documentation yet."
         else:
+	    explanation = data[command][l]["help"]
+	    example = bot.config.prefix.replace("\\", "") + data[command][l]["example"]
+	    alias = ", ".join(datalias[command]["alias"])
+	    if alias == name:
+	        alias = '–'
 	    if bot.config.lang == 'ca':
-            	doc = "\x02%s\x02: %s | \x02Exemple\x02: %s | \x02Alies\x02 (oen altres idiomes): %s" % (command, data[command][l]["help"], bot.config.prefix.replace("\\", "") + data[command][l]["example"], ", ".join(datalias[command]["alias"]))
+            	doc = "\x02%s\x02: %s | \x02Exemple\x02: %s | \x02Alies\x02 (o en altres idiomes): %s" % (command, explanation, example, alias)
 	    elif bot.config.lang == 'es':
-		doc = "\x02%s\x02: %s | \x02Ejemplo\x02: %s | \x02Alias\x02 (o en otros idiomas): %s" % (command, data[command][l]["help"], bot.config.prefix.replace("\\", "") + data[command][l]["example"], ", ".join(datalias[command]["alias"]))
+		doc = "\x02%s\x02: %s | \x02Ejemplo\x02: %s | \x02Alias\x02 (o en otros idiomas): %s" % (command, explanation, example, alias)
 	    else:		
-		doc = "\x02%s\x02: %s | \x02Example\x02: %s | \x02Alias\x02 (or in other languages): %s" % (command, data[command][l]["help"], bot.config.prefix.replace("\\", "") + data[command][l]["example"], ", ".join(datalias[command]["alias"]))
+		doc = "\x02%s\x02: %s | \x02Example\x02: %s | \x02Alias\x02 (or in other languages): %s" % (command, explanation, example, alias)
         bot.say(doc)
         
 @commands('commands', 'ordres', 'o', 'comandos')

@@ -101,9 +101,9 @@ def version(bot, trigger):
         bot.say(u"I'm \x02Granota %s\x02%s, on %s and using Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
     
     update_msg = "I'm outdated! My current version is \x02%s\x02 but the latest stable version is \x02%s\x02! " + \
-    "Please download the last version here with some bugs fixed and nice features added: %s" % (version, latestver, latesturl)
+    "Please download the last version here with some bugs fixed and nice features added: %s"
     if latestver != version:
-        bot.msg(bot.config.owner, update_msg)
+        bot.msg(bot.config.owner, update_msg % (version, latestver, latesturl))
     
 @commands('debug_print')
 def debug_print(bot, trigger):

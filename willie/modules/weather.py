@@ -2,6 +2,7 @@
 
 from willie.module import commands
 import urllib2, urllib, json 
+from decimal import Decimal
 
 
 # TODO Translation
@@ -64,8 +65,8 @@ def convert_f2c(S):
     """(str): float
 
     Converts a Fahrenheit temperature represented as a string
-    to a Celsius temperature.
+    to a Celsius temperature with two decimals.
     """
     fahrenheit = float(S)
-    celsius = (fahrenheit - 32) * 5 / 9
-    return celsius
+    celsius = Decimal((fahrenheit - 32) * 5 / 9)
+    return round(celsius, 2)

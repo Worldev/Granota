@@ -257,4 +257,7 @@
 	"seen": {
 		"alias": ["seen", "vist", "visto"]
 	}
+	"weather": {
+		"alias": ["weather", "tiempo", "temps"]
+	}
 }

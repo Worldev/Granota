@@ -63,3 +63,20 @@ def convert_f2c(S):
     fahrenheit = float(S)
     celsius = Decimal((fahrenheit - 32) * 5 / 9)
     return round(celsius, 2)
+
+def translate(c):
+    conditions_ca = {
+        'tropical storm': 'tempesta tropical',
+        'hurricane': u'huracà',
+        'severe thunderstorms': 'temporal sever',
+        'thunderstorm': 'temporal',
+        'mixed rain and snow': 'barreja de pluja i neu',
+        'mixed rain and sleet': 'barreja de pluja i aiguaneu',
+        'mixed snow and sleet': 'barreja de neu i aiguaneu',
+        'freezing drizzle': 'plovisqueig gelat',
+        'drizzle': 'plovisqueig',
+        'freezing rain': 'pluja gelada',
+        'showers': 'plugim',
+        'snow flurries': 'ràfegues de neu',
+        'light snow showers': 'nevada suau'
+    }

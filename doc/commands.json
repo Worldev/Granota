@@ -1181,12 +1181,12 @@
 			"example": "weather Stuttgart, Germany"
 		},
 		"es": {
-			"help": "",
-			"example": "tiempo Stuttgart, Germany"
+			"help": "Informa de las condiciones meteorológicas actuales y la temperatura en el lugar especificado.",
+			"example": "tiempo Madrid, España"
 		},
 		"ca": {
-			"help": "",
-			"example": "temps Stuttgart, Germany"
+			"help": "Informa de les condicions meteorològiques actuals i la temperatura en el lloc especificat.",
+			"example": "temps Barcelona, Espanya"
 		}
 	}		
 }

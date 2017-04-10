@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from willie.module import commands, example
+from willie.module import commands, example, version
 import platform, sys, time
 from os import path
 import urllib, json
@@ -57,8 +57,8 @@ def get_latest_version():
     return n, url
 
 @commands('version', 'versio')
-def version(bot, trigger):
-    version = 'v2.8'
+def versioncheck(bot, trigger):
+    ver = version()
     if platform.system() == 'Linux':
         osver = ("%s %s" % (platform.linux_distribution()[0], platform.linux_distribution()[1]))
     elif platform.system() == 'Windows':
@@ -68,7 +68,7 @@ def version(bot, trigger):
     pyver = sys.version.split()[0]
     commit = git_info()
     latestver, latesturl = get_latest_version()
-    if latestver != version:
+    if latestver != ver:
         if bot.config.lang == 'ca':
             latestmsg = u"L'última versió estable disponible de Grantota és \x02%s\x02 (%s)." % (latestver, latesturl)
         elif bot.config.lang == 'es':
@@ -82,39 +82,20 @@ def version(bot, trigger):
             latestmsg = u"Estoy usando la última versión estable de Granota."
         else:
             latestmsg = u"I'm using the latest stable version of Granota."
-    if bot.config.lang == ('ca', 'es'):
-        unstable = 'inestable'
-        stable = 'estable'
+    if commit == '':
+        commitinfo = ''
     else:
-        unstable = 'unstable'
-        stable = 'stable'
-    if commit == '' or commit == None:
-        commitinfo = ' (\x0303%s\x03)' % stable
-    else:
-        commitinfo = ' (\x0304%s\x03, commit %s)' % (unstable, commit)
-        latestmsg = ''
+        commitinfo = ' (commit %s)' % commit
     if bot.config.lang == 'ca':
-        bot.say(u"Sóc \x02Granota %s\x02%s, en el sistema operatiu %s i utilitzant Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
+        bot.say(u"Sóc \x02Granota %s\x02%s, en el sistema operatiu %s i utilitzant Python %s. %s" % (ver, commitinfo, osver, pyver, latestmsg))
     elif bot.config.lang == 'es':
-        bot.say(u"Soy \x02Granota %s\x02%s, en el sistema operativo %s y usando Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
+        bot.say(u"Soy \x02Granota %s\x02%s, en el sistema operativo %s y usando Python %s. %s" % (ver, commitinfo, osver, pyver, latestmsg))
     else:
-        bot.say(u"I'm \x02Granota %s\x02%s, on %s and using Python %s. %s" % (version, commitinfo, osver, pyver, latestmsg))
-    
-    if bot.config.lang == 'ca':
-        update_msg = u"Estic obsolet! La meva versió actual és la \x02%s\x02 però l'última versió estable és \x02%s\x02! " + \
-        u"Descarregueu l'última versió amb alguns errors corregits i noves funcionalitats aquí: %s"
-    elif bot.config.lang == 'es':
-        update_msg = "Estoy desfasado! Mi versión actual es la \x02%s\x02 pero la última versión estable es \x02%s\x02! " + \
-        "Por favor, descarga la última versión con algunos errores corregidos y nuevas funcionalidades aquí: %s"   
-    else:        
-        update_msg = "I'm outdated! My current version is \x02%s\x02 but the latest stable version is \x02%s\x02! " + \
-        "Please download the last version here with some bugs fixed and nice features added: %s"
-    if latestver != version:
-        bot.msg(bot.config.owner.split('@')[0], update_msg % (version, latestver, latesturl))
-    
+        bot.say(u"I'm \x02Granota %s\x02%s, on %s and using Python %s. %s" % (ver, commitinfo, osver, pyver, latestmsg))
+
 @commands('debug_print')
 def debug_print(bot, trigger):
-    version(bot, trigger)
+    versioncheck(bot, trigger)
     admins(bot, trigger)
     privileges(bot, trigger)
 

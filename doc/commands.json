@@ -1174,5 +1174,19 @@
 			"help": "Informa de quan i on l'usuari especificat va ser vist pel bot.",
 			"example": "vist UnaPersona"
 		}
-	}	
+	},
+	"weather": {
+		"en": {
+			"help": "Returns the current weather conditions and temperature at the location specified.",
+			"example": "weather Stuttgart, Germany"
+		},
+		"es": {
+			"help": "Informa de las condiciones meteorológicas actuales y la temperatura en el lugar especificado.",
+			"example": "tiempo Madrid, España"
+		},
+		"ca": {
+			"help": "Informa de les condicions meteorològiques actuals i la temperatura en el lloc especificat.",
+			"example": "temps Barcelona, Espanya"
+		}
+	}		
 }

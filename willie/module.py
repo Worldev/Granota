@@ -12,6 +12,7 @@ willie.module.priority
 willie.module.event
 willie.module.rate
 willie.module.example
+willie.module.version
 
 willie/module.py - Willie IRC Bot (http://willie.dftba.net/)
 Copyright 2013, Ari Koivula, <ari@koivu.la>
@@ -324,3 +325,6 @@ class example(object):
         }
         func.example.append(record)
         return func
+
+def version():
+    return "v2.8"

@@ -75,6 +75,8 @@ def quit(bot, trigger):
     # Can only be done in privmsg by the owner
 
     quit_message = trigger.group(2)
+    if not quit_message:
+        quit_message == ''
     if bot.config.lang == 'es':
         bot.quit(quit_message + " [comando ejecutado por %s]" % trigger.nick)
     elif bot.config.lang == 'ca':

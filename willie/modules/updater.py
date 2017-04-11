@@ -11,7 +11,7 @@ import tarfile
 import os, shutil
 from distutils.dir_util import copy_tree
 
-@willie.module.commands('update-stable')
+@willie.module.commands('update-stable', 'actualiza', 'actualitza')
 @willie.module.priority('high')
 def update_stable(bot, trigger):
     if not trigger.owner:

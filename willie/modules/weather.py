@@ -40,10 +40,10 @@ def weather(bot, trigger):
             
             if text and temp:
                 if bot.config.lang == 'ca':
-                    text = translate(text, 'ca')
+                    text = translate(text.lower(), 'ca')
                     bot.reply(u'Actualment, %s a %s amb una temperatura de %s graus.' % (text.lower(), weatherLocation, str(temp).replace('.', ',')))
                 if bot.config.lang == 'es':
-                    text = translate(text, 'es')
+                    text = translate(text.lower(), 'es')
                     bot.reply(u'Actualmente, %s en %s con una temperatura de %s grados Celsius.' % (text.lower(), weatherLocation, str(temp).replace('.', ',')))
                 else:
                     bot.reply('It is currently %s in %s with a temperature of %s Celsius' % (text.lower(), weatherLocation, temp))

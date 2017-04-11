@@ -79,7 +79,7 @@ def translate(c, lang):
         'freezing rain': 'pluja gelada',
         'showers': 'plugim',
         'snow flurries': 'ràfegues de neu',
-        'light snow showers': 'nevada suau'.
+        'light snow showers': 'nevada suau',
         'blowing snow': 'torb',
         'snow': 'neva',
         'hail': 'calamarsa',

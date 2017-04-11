@@ -71,13 +71,13 @@ def versioncheck(bot, trigger):
     if latestver != ver:
         if bot.config.lang == 'ca':
             latestmsg = u"L'última versió estable disponible de Grantota és \x02%s\x02 (%s)." % (latestver, latesturl)
-            bot.msg(trigger.owner.split('@')[0], u"No estic actualitzat! Per actualitzar-me a l'última versió estable utilitza l'ordre %sactualitza. Només trigaré uns segons!" % bot.config.prefix.replace('\\', ''))
+            bot.say(u"No estic actualitzat! Per actualitzar-me a l'última versió estable utilitza l'ordre %sactualitza. Només trigaré uns segons!" % bot.config.prefix.replace('\\', ''))
         elif bot.config.lang == 'es':
             latestmsg = u"La última versión estable disponible de Granota es \x02%s\x02 (%s)." % (latestver, latesturl)
-            bot.msg(trigger.owner.split('@')[0], u"No estoy actualizado! Para actualizarme a la última versión estable usa el comando %sactualiza. Solo tardaré unos segundos!" % bot.config.prefix.replace('\\', ''))
+            bot.say(u"No estoy actualizado! Para actualizarme a la última versión estable usa el comando %sactualiza. Solo tardaré unos segundos!" % bot.config.prefix.replace('\\', ''))
         else:
             latestmsg = u"The lastest stable version of Granota available is \x02%s\x02 (%s)." % (latestver, latesturl)
-            bot.msg(trigger.owner.split('@')[0], "I'm not updated! To update me to the latest stable version, use the command %supdate-stable. It will only take a few seconds!" % bot.config.prefix.replace('\\', ''))
+            bot.say("I'm not updated! To update me to the latest stable version, use the command %supdate-stable. It will only take a few seconds!" % bot.config.prefix.replace('\\', ''))
     else:
         if bot.config.lang == 'ca':
             latestmsg = u"Estic utilitzant l'última versió estable de Granota."

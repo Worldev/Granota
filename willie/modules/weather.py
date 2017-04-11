@@ -124,7 +124,7 @@ def translate(c, lang):
         'freezing rain': 'lluvia helada',
         'showers': 'lluvias',
         'snow flurries': 'ráfagas de nieve',
-        'light snow showers': 'nevada suave'.
+        'light snow showers': 'nevada suave',
         'blowing snow': 'ventisca',
         'snow': 'nevada',
         'hail': 'calamarsa',

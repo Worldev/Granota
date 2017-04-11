@@ -1188,5 +1188,19 @@
 			"help": "Informa de les condicions meteorològiques actuals i la temperatura en el lloc especificat.",
 			"example": "temps Barcelona, Espanya"
 		}
-	}		
+	},
+	"update-stable": {
+		"en": {
+			"help": "Updates the bot to the latest stable version. A reload is required after the update, and a full restart could be necessary too.",
+			"example": "update-stable"
+		},
+		"es": {
+			"help": "Actualiza el bot a la última versión estable. Puede ser necesario recargar el bot, o reiniciarlo por completo después de la actualización.",
+			"example": "actualiza"
+		},
+		"ca": {
+			"help": "Actualitza el bot a l'última versió estable. Podria ser necessari recarregar el bot, o reiniciar-lo completament després de l'actualització.",
+			"example": "actualitza"
+		}
+	}
 }

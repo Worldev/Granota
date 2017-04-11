@@ -160,9 +160,9 @@ def translate(c, lang):
     }
     try:
         if lang == 'ca':
-            return conditions_ca['c']
+            return conditions_ca[c]
         elif lang == 'es':
-            return conditions_es['c']
+            return conditions_es[c]
         # No need for English here
     except KeyError:
         return "KeyError"

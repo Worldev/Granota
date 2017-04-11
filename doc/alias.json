@@ -259,5 +259,8 @@
 	},
 	"weather": {
 		"alias": ["weather", "tiempo", "temps"]
+	},
+	"update-stable": {
+		"alias": ["update-stable", "actualiza", "actualitza"]
 	}
 }

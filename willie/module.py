@@ -327,4 +327,4 @@ class example(object):
         return func
 
 def version():
-    return "v2.9"
+    return "v2.9.1"

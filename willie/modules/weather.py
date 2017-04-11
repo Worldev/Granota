@@ -165,4 +165,4 @@ def translate(c, lang):
             return conditions_es[c]
         # No need for English here
     except KeyError:
-        return "KeyError"
+        return c

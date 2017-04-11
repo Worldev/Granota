@@ -112,6 +112,7 @@ def translate(c, lang):
         'thundershowers': 'pluja amb tempesta elèctrica',
         'snow showers': 'nevada',
         'isolated thundershowers': 'plujes amb tempestes elèctriques aïllades',
+        'breezy': 'brisa'
     }
     conditions_es = {
         'tropical storm': 'tormenta tropical',
@@ -157,6 +158,7 @@ def translate(c, lang):
         'thundershowers': 'lluvia con tormenta eléctrica',
         'snow showers': 'nevada',
         'isolated thundershowers': 'lluvia con tormenta eléctrica aislada',
+        'breezy': 'brisa'
     }
     try:
         if lang == 'ca':

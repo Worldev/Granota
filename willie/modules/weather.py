@@ -64,7 +64,7 @@ def convert_f2c(S):
     celsius = Decimal((fahrenheit - 32) * 5 / 9)
     return round(celsius, 2)
 
-def translate(c):
+def translate(c, lang):
     # List of possible conditions: https://developer.yahoo.com/weather/documentation.html#codes
     conditions_ca = {
         'tropical storm': 'tempesta tropical',
@@ -156,3 +156,11 @@ def translate(c):
         'snow showers': 'nevada',
         'isolated thundershowers': 'lluvia con tormenta eléctrica aislada',
     }
+    try:
+        if lang == 'ca':
+            return conditions_ca['c']
+        elif lang == 'es':
+            return conditions_es['c']
+        # No need for English here
+    except KeyError:
+        return "KeyError"

@@ -97,9 +97,9 @@ def devoice(bot, trigger):
 @priority('high')
 def kick(bot, trigger):
     if trigger.group(2).startswith('#'):
-        chan = trigger.group(2).split()[0]
+        global chan = trigger.group(2).split()[0]
     else:
-        chan = trigger.sender    
+        global chan = trigger.sender    
     if bot.privileges[chan][bot.nick] < HALFOP:
         if bot.config.lang == 'ca':
             bot.reply(u"Ho sento, però no tinc suficients permisos per dur a terme aquesta operació")
